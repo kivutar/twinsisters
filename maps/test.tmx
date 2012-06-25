@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="simple" tilewidth="16" tileheight="16">
+  <image source="simpletileset.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="slant_nw"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="type" value="square"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="type" value="slant_ne"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="type" value="square"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="type" value="square"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="type" value="square"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="type" value="slant_sw"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="type" value="square"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="type" value="slant_se"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="grass" tilewidth="16" tileheight="16">
+  <image source="grass.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Ground" width="60" height="30">
+  <properties>
+   <property name="visible" value="false"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2MEKwCAMA1DHQNj///DuA9HMBkuagEetz3oQe2utFxtVYq927NWOvdqxVzv2xq+d6T1or3YivSfODq3p/mrHXmxelv8E9n6qebPFXntPnsc1qHOD60Q7Gd6R9Y+Z7d31z6wz87f+Q7BG9XfVivaZYd4NakXNrHudYdiLzX8BuecLrw==
+  </data>
+ </layer>
+ <layer name="Grass" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl8EKgzAMhvMK6km9DbwMvAh9/1ebHgIdLFvTLmkt/wc5CU0/TNOUCAAAAAAAtM5wxmgYk59KEvMZi2GsfiqA3uvXq9Zq5GTi+vWqtRo5QX/k3DWW50uznxxy7hrL86XZDwA94t1vHkKeTbFG3Ke0ePaby/Up5Nkp3TnuUxb8Y35j10P4Hkh29p4fS+e3X66M5Hyn+THVlfn2nz0ofZ9rXBl2rvHWL32fa12Z8GGt1mu5NV6YRxb6
+  </data>
+ </layer>
+ <objectgroup name="Collisions" width="60" height="30">
+  <object x="352" y="176">
+   <polygon points="0,0 368,0 368,32 0,32"/>
+  </object>
+  <object x="288" y="224">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object x="208" y="288">
+   <polygon points="0,0 192,0 192,32 0,32"/>
+  </object>
+  <object x="752" y="224">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object x="16" y="368">
+   <polygon points="0,0 128,0 128,80 384,80 464,0 544,0 624,80 688,80 688,112 -16,112 -16,-368 944,-368 944,112 768,112 768,64 736,32 736,0 768,0 768,-80 928,-80 928,-352 0,-352"/>
+  </object>
+  <object x="176" y="400">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object x="688" y="400">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+ </objectgroup>
+</map>
