@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="16" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="simple" tilewidth="16" tileheight="16">
+  <image source="simpletileset.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="17" name="grass" tilewidth="16" tileheight="16">
+  <image source="grass.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Ground" width="60" height="16">
+  <data encoding="base64" compression="zlib">
+   eJztksEKwCAMQwvCrtv/f+12DosUXIPTPMhBBNNHjTDGGLMDB0R9vxroq3DGviboZN0K57c+lTPz/dIf32Adyj1XkvX9qzPzwzPL+eSSTJqn989HfWf0zs5cldnnW8X3BlnhBOk=
+  </data>
+ </layer>
+ <layer name="Grass" width="60" height="16">
+  <data encoding="base64" compression="zlib">
+   eJztlUEOgCAMBPmCehL//0+4kDSbSjFQqtJJ9kB6IMtACMFxHGc9tpwdckycz+bMiZBLea7d+W1nrN1ZcmBB6TzCAfVp6VFilAPq09qjBl/x+QTaCfmjT9oJ3zk9A2ndCrdH7e5wf0BvCvjOIzO7W7fC7VG7O9wf0JtVSX4LDnw=
+  </data>
+ </layer>
+ <objectgroup name="Collisions" width="60" height="16">
+  <object x="576" y="96">
+   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
+  </object>
+  <object x="448" y="96">
+   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
+  </object>
+  <object x="320" y="96">
+   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
+  </object>
+  <object x="0" y="0">
+   <polyline points="0,0 960,0 960,192 928,192 928,224 608,224 608,288 480,288 480,224 400,224 336,192 272,128 208,128 208,224 176,224 176,160 144,160 144,224 112,224 112,192 80,192 80,224 0,224 0,-16"/>
+  </object>
+  <object x="704" y="96">
+   <polyline points="0,0 64,0 64,16 80,16 80,32 96,32 96,48 160,48 160,64 0,64 0,0"/>
+  </object>
+ </objectgroup>
+</map>

@@ -2,93 +2,92 @@
 <map version="1.0" orientation="orthogonal" width="90" height="60" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="plage" tilewidth="16" tileheight="16">
   <image source="plage.png" width="128" height="128"/>
-  <tile id="9">
-   <properties>
-    <property name="type" value="slant_nw"/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="type" value="slant_ne"/>
-   </properties>
-  </tile>
-  <tile id="17">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="19">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="type" value="slant_sw"/>
-   </properties>
-  </tile>
-  <tile id="26">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="27">
-   <properties>
-    <property name="type" value="slant_se"/>
-   </properties>
-  </tile>
   <tile id="55">
    <properties>
-    <property name="type" value="watertop"/>
+    <property name="animation" value="watertop"/>
    </properties>
   </tile>
  </tileset>
  <tileset firstgid="65" name="nuages" tilewidth="16" tileheight="16">
   <image source="nuages.png" width="128" height="128"/>
-  <tile id="9">
+ </tileset>
+ <tileset firstgid="129" name="sea" tilewidth="16" tileheight="16">
+  <image source="sea.png" width="128" height="128"/>
+  <tile id="7">
    <properties>
-    <property name="type" value="slant_ne"/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="type" value="square"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="type" value="slant_ne"/>
+    <property name="animation" value="watertop"/>
    </properties>
   </tile>
  </tileset>
- <layer name="Sky" width="90" height="60">
+ <layer name="Player" width="90" height="60">
   <data encoding="base64" compression="zlib">
-   eJztw8EJAAAMA6F7Zf+RO0dBwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVfPuVzfpE=
+   eJzt1jEKwCAMAEAf1W62/f+vqnsNDoJV7iBLICREh6QEAAAAAAAAAAAAAAAAANDnmT1Aw1/nGuEocX7k76CmZx9RfavnznKJa7Ge9Q13/vsAQHyzMZa7CgAAgNW9Hn8D+A==
   </data>
  </layer>
  <layer name="Sea" width="90" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt0DEKAzEQBMF9lsP5/6ucn6XjgpUtmSroRLAwqAoAAAAAAAAAAAAAAAAAzvPSbV2i27qt3ntqK6zaenK7SX3uu76lnhnd/ardpPbe9y9S/vkbMohemUSvTKJXJtEvgwAAAOj3BpxOWIE=
-  </data>
- </layer>
- <layer name="Fishes" width="90" height="60">
-  <data encoding="base64" compression="zlib">
-   eJzt0kEOgCAMBEA+Jv7/V55MyKaI3jTOXEprxFJpDQAAAAAAAAAAAAAAAABgbY840yPmuspz32rdI88+elE78y2+OeZVL28wniV7nJ2zeraqzeKqh3GGq39Xvf8lT+9y1q/mc3f+o7zPsxoAAAAAAPAfBwODDO8=
+   eJzt1LENACEMBEFaJ/uyqYCPsLHRjLQ5nBBjAAAAAAAAAAAAAAAAAEA/n347aWrbabfvU7UIt+9UsWqqn+8lNo7nPcfr8rd1Z+ccds5h5xx2BgAAyLMAQV6kOw==
   </data>
  </layer>
  <layer name="Ground" width="90" height="60">
   <data encoding="base64" compression="zlib">
-   eJztmrlSw0AQRNcYAoMJABMAJuAKIIM/4Aq4Aq6AKwBMABn8f8DIlsqyZc2uJEsz2upX9YrAydAlj3slGQMAAAAAAEB+TsjT0DPhWXzk2AwyviSvQq/NMO9zudFGaDLOknNyozlxYQYZf5P3oT9mmPeN3Gh9WuQ8ucDYJhelBnTklrwzw4zjPpCPcqP1WSKXyRXGDrkqNaAjT+Qz+RL6awYZ/5Gv5JvcaH3WyHVyg7FLbkoN6Mg7+UF+hkaZBxn3yC+50UbYYdwl9+RGy0WUeU96EFCIBjljkp0BTBeX/lCnHqEVl/5Qpx6hFZf+UKceURZp+zV+NgPFse3XttxoXmHbrx250bzCtl+7cqN5xRa5bfizWRroztWQpTujQ+cnS3dGh85Plu6MDp0f22735V4cqBbuTKcJbs46PBPkfvc1nedsc2rvIdzvkaZzBtdP6tBDuN8jTdiuB996iNSe5K4HH3uIxj3pY85l7Mlm7K/mzlMl096TLu8XaaOKa8F1TzZMcpeP72/X94s0Mem6kLwWWia5yyftb5f3i7QQ/C/7JnktHBj57108x7TMuHsaWkjLWEvW8R3D3feXhHvPN9CWsZastWN7vuCSMbK2k+VZQ5as074fhvlsUn+xfd/q4rRzjrLO8kwurb9kfban2TJyLmJ03svzbA+6eWRGe1nQ1w4VzOWT4xkj63JMuz+E/YGc6yhyrsa03u16HoXZLHIehRBCCCGEEPrhPw2so8E=
+   eJztmjlTwzAUhMUABUfD1TCUoYAO/gFXAYSCqwBCwVVAR/5/wfPEGosX63Ls6MmzO/M1Hk2ibJzNPiVKQRAEQRAEQVBznRJnJeeJ99JHnaiJx1fEdclQVX5fGGtSXnOh10vWpZp4/E3cl/yoyu8bY03Kay70esm6Je5U5bHJA/HI1qS65kKvl6wn4pl4KflVk72PiRHxytakuuZCr5esN+Kd+CgxX+sn8cXWpLrmQq/PSeZrhfJVaIfIpUdIVWiHyKVHSFVoh8ilR8xL5mwRotAOkUuP6Eo8X83ZIiRTQztErj2iLfF81XMknyGh2eTLV2RqO7LNj3yGtEnnDuSWbX7kM2SdYrozOvR/mZ77ZsiY7owO3Vwx3Rl531xmtpu5bjJW6NCzysx226wyUujQbco2q/TpnND1vS9Jrn3m0ENc3/vDhPvi8u1Teg9xneWMOnzewrOY9zHkt0vJcp3ldKnivY15H333Q996SKqcdN0PfewhEnNyQOwneN4u5crJ4jw0JnNDzjhy6BJdyPcbSEzmhpxxSOwSi4wu5PsNROfkgpq+X5eIZeOxQs44pHWJVWKNsZ5wPytq+n7lmVJ3xiH5TKPw+IDYYhyqtF7zjOGZUnfGIfVMw+axBK95xgwca1P+94nnLcfnsQSvcxDPW06Ix/Dar1APY732fU5scDV9HGm07bP22vc5sWF+Hur6Ta504fMsbBM7xAaxKWA/feSY2FOVdokjAfvqE9xjeN0NOi+4kB/wOUfg83yw9e7QeRTEeT3LPAoAAAAAAADoB3/+nU/A
   </data>
  </layer>
+ <objectgroup name="Collisions" width="90" height="60">
+  <object x="416" y="480">
+   <polyline points="0,0 16,16 96,16 112,0 96,-16 16,-16 0,0"/>
+  </object>
+  <object x="784" y="608">
+   <polyline points="0,0 16,-16 48,-16 64,0 48,16 16,16 0,0"/>
+  </object>
+  <object x="1088" y="480">
+   <polyline points="0,0 16,-16 96,-16 112,0 112,16 96,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="480" y="192">
+   <polyline points="0,0 32,0 48,16 64,16 96,-16 96,-32 80,-48 64,-48 48,-64 16,-64 -16,-32 -16,-16 0,0"/>
+  </object>
+  <object x="912" y="256">
+   <polyline points="0,0 16,-16 160,-16 176,0 176,16 160,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="896" y="384">
+   <polyline points="0,0 16,-16 192,-16 208,0 208,16 192,32 144,32 128,48 48,48 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="720" y="368">
+   <polyline points="0,0 32,0 64,-32 64,-48 48,-64 32,-64 16,-80 0,-80 -16,-64 -48,-64 -64,-48 -64,-32 -48,-16 -16,-16 0,0"/>
+  </object>
+  <object x="608" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="688" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="768" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="848" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="928" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="1008" y="160">
+   <polyline points="0,0 16,-16 32,-16 48,0 48,16 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="1088" y="160">
+   <polyline points="0,0 16,-16 144,-16 160,0 160,16 144,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="608" y="544">
+   <polyline points="0,0 16,-16 96,-16 128,16 112,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="912" y="576">
+   <polyline points="0,0 16,-16 128,-16 144,0 144,16 128,32 80,32 64,48 48,48 32,32 16,32 0,16 0,0"/>
+  </object>
+  <object x="880" y="496">
+   <polyline points="0,0 16,-16 32,0 16,16 0,0"/>
+  </object>
+  <object x="0" y="0">
+   <polyline points="0,0 0,656 128,656 192,592 256,592 352,688 576,688 592,704 592,720 560,752 560,800 576,816 640,816 656,800 656,752 624,720 624,704 640,688 1440,688 1440,0 0,0"/>
+  </object>
+ </objectgroup>
 </map>
