@@ -6,31 +6,49 @@
  <tileset firstgid="17" name="grass" tilewidth="16" tileheight="16">
   <image source="grass.png" width="128" height="128"/>
  </tileset>
- <layer name="Ground" width="60" height="16">
+ <tileset firstgid="81" name="plage" tilewidth="16" tileheight="16">
+  <image source="plage.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="145" name="sea" tilewidth="16" tileheight="16">
+  <image source="sea.png" width="128" height="128"/>
+  <tile id="7">
+   <properties>
+    <property name="animation" value="watertop"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="209" name="nuages" tilewidth="16" tileheight="16">
+  <image source="nuages.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="273" name="blocks" tilewidth="16" tileheight="16">
+  <image source="blocks.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Nuages" width="60" height="16" opacity="0.65">
   <data encoding="base64" compression="zlib">
-   eJztksEKwCAMQwvCrtv/f+12DosUXIPTPMhBBNNHjTDGGLMDB0R9vxroq3DGviboZN0K57c+lTPz/dIf32Adyj1XkvX9qzPzwzPL+eSSTJqn989HfWf0zs5cldnnW8X3BlnhBOk=
+   eJztlbsOwjAMRR3+/+soU2HhNfAaoDDQiRtVkYyU1ilquDx6pDPVsnwTtxXJwxKu4Bpu4LZHfcyUHkx2cA8P8AhPRq2uDzrXZJ04uwebM7zACl7hzajV9UF9XlaPb0fnH0mnUP4yPl8J58oFdaI86Jx3ef7G18S5PIUMu29tObUMYrsW9u3V3Nb/m5W36w5q6X7PptKcx6xHT2beMnEmnzuWOeTSz1Lv9d15Y3MNRdUik5x5P5F/yzvC4QE/wJXI
   </data>
  </layer>
- <layer name="Grass" width="60" height="16">
+ <layer name="Sea" width="60" height="16">
   <data encoding="base64" compression="zlib">
-   eJztlUEOgCAMBPmCehL//0+4kDSbSjFQqtJJ9kB6IMtACMFxHGc9tpwdckycz+bMiZBLea7d+W1nrN1ZcmBB6TzCAfVp6VFilAPq09qjBl/x+QTaCfmjT9oJ3zk9A2ndCrdH7e5wf0BvCvjOIzO7W7fC7VG7O9wf0JtVSX4LDnw=
+   eJztz7ENADAIwDD+37pxbk9gBIEt5YBEAADATFm0zSva5tov/T5aEg3R
+  </data>
+ </layer>
+ <layer name="Ground" width="60" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgY3ECSkYFBinGgXUE/oAj0q9Iw9S8biZja5lEDjzT/0hIHE8AD7T5q42gCeKDdR22cTAAPhJsA9koOlw==
   </data>
  </layer>
  <objectgroup name="Collisions" width="60" height="16">
-  <object x="576" y="96">
-   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
+  <object x="0" y="208">
+   <polyline points="0,0 176,0 176,-32 368,-32 368,16 496,16 496,-32 960,-32 960,48 0,48"/>
   </object>
-  <object x="448" y="96">
-   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
-  </object>
-  <object x="320" y="96">
-   <polyline points="0,0 64,0 64,16 0,16 0,0"/>
-  </object>
-  <object x="0" y="0">
-   <polyline points="0,0 960,0 960,192 928,192 928,224 608,224 608,288 480,288 480,224 400,224 336,192 272,128 208,128 208,224 176,224 176,160 144,160 144,224 112,224 112,192 80,192 80,224 0,224 0,-16"/>
-  </object>
-  <object x="704" y="96">
-   <polyline points="0,0 64,0 64,16 80,16 80,32 96,32 96,48 160,48 160,64 0,64 0,0"/>
+  <object x="256" y="176">
+   <polyline points="0,0 0,-32 32,-32 32,0"/>
   </object>
  </objectgroup>
+ <layer name="Grass" width="60" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJACAQxEBbUF9q/316JXgQUCED+e5nS5EkSdINNWrJOrxHdGpEM9mC94iov35B/SW9YAOcyAmh
+  </data>
+ </layer>
 </map>

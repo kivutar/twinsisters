@@ -1,18 +1,42 @@
 require 'class'
 require 'camera'
+HC = require 'HardonCollider'
 require 'anal'
 require 'TEsound'
 atl = require 'AdvTiledLoader.Loader'
 atl.path = 'maps/'
-map = atl.load 'test2.tmx'
+map = atl.load 'test3.tmx'
 map.drawObjects = false
 require 'player'
 require 'watertop'
 
+function setSolid(w)
+  for _, s in pairs(worlds[w]) do
+    Collider:setSolid(s)
+  end
+end
+
+function setGhost(w)
+  for _, s in pairs(worlds[w]) do
+    Collider:setGhost(s)
+  end
+end
+
+function addObject(o, w)
+  if o.type == 'Wall' then
+    s = Collider:addPolygon(unpack(o.polygon))
+    dx, dy = s:center()
+    s:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Spyke' then
+    s = Collider:addCircle(o.x+8, o.y-8, 8)
+  end
+  s.type = o.type
+  if w then table.insert(worlds[w], s) end
+end
+
 function love.load()
-  love.physics.setMeter(64) 
-  world = love.physics.newWorld(0, 9.81*64, true) 
-  world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+  Collider = HC(100, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(84, 200, 248)
   
@@ -35,17 +59,30 @@ function love.load()
   --  end
   --end 
 
-  for _,object in pairs(map.ol['Collisions'].objects) do
-    body = love.physics.newBody(world, object.x, object.y)
-    shape = love.physics.newChainShape(true, unpack(object.polyline))
-    fixture = love.physics.newFixture(body, shape)
-    fixture:setUserData('wall')
+  worlds = {}
+  worlds.oce = {}
+  worlds.lolo = {}
+
+  for _, o in pairs(map.ol['shared_objects'].objects) do
+    addObject(o)
   end
 
-  objects.oce  = Player:new('oce', 'oce', 64, 64, 1)
-  --objects.oce.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1 or love.keyboard.isDown('left')")
-  --objects.oce.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1 or love.keyboard.isDown('right')")
-  objects.oce.jump_btn = loadstring("return love.joystick.isDown(1, 2) or love.keyboard.isDown(' ')")
+  for _, w in pairs({'oce', 'lolo'}) do
+    for _, o in pairs(map.ol[w..'_objects'].objects) do
+      addObject(o, w)
+    end
+  end
+
+  current_world = 'oce'
+  switch_pressed = false
+  setSolid('oce')
+  setGhost('lolo')
+
+  objects.oce = Player:new('oce', 'oce', 64, 420, 6)
+  --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
+  --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
+  --objects.oce.jump_btn = loadstring("return love.keyboard.isDown(' ')")
+  --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('v')")
 
   --objects.lolo = Player:new('lolo', 'lolo', 336, 240)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(2,1) == -1 or love.keyboard.isDown('a')")
@@ -54,12 +91,11 @@ function love.load()
 end
 
 function love.update(dt)
-  world:update(dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit")  end
   if love.keyboard.isDown("r") then 
     --objects.lolo.body:setPosition(320, 240)
-    objects.oce.body:setPosition(64, 64)
+    objects.oce.x, objects.oce.y = 64, 420
   end
 
   for _,o in pairs(objects) do
@@ -72,51 +108,46 @@ function love.update(dt)
   --  ((-camera.x + (objects.lolo.body:getX()- 8 + objects.oce.body:getX()- 8) / 2 ) / 10.0),
   --  ((-camera.y + (objects.lolo.body:getY()-12 + objects.oce.body:getY()-12) / 2 ) / 10.0)
   --)
-  camera:move((-camera.x+objects.oce.body:getX()-8)/10, (-camera.y+objects.oce.body:getY()-12)/10)
-  camera:setScale(1.0/3.0, 1.0/3.0)
+  camera:move((-camera.x+objects.oce.x-8)/10, (-camera.y+objects.oce.y-12)/10)
+  camera:setScale(1.0/2.0, 1.0/2.0)
+
+  Collider:update(dt)
 end
 
 function love.draw()
   camera:set()
   map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 1, -100)
   map:_updateTileRange()
+
   for z,layer in pairs(map.drawList) do
     if type(layer) == "table" then
       layer.z = z
       objects[layer.name] = layer
+      if layer.name == 'shared_tiles' or layer.name == current_world..'_tiles' then
+        objects[layer.name].opacity = 1.0
+      else
+        objects[layer.name].opacity = 0.25
+      end
     end
   end
+
   for i=-10,10,1 do
     for _,o in pairs(objects) do 
+      if o.opacity == 0.25 then love.graphics.setColor(0,0,255) else love.graphics.setColor(255,255,255) end
       if o.z == i then o:draw() end
     end
   end
+
   camera:unset()
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 10, 10)
+  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 10, 10)
 end
 
-function beginContact(a, b, coll)
-  objects.oce.nx, objects.oce.ny = coll:getNormal()
-  --print(a:getUserData(), b:getUserData())
-  if a:getUserData() == 'wall' then
-    objects.oce.contacts = objects[b:getUserData()].contacts + 1
-  end
-  --print('begin', coll:getNormal())
+function onCollision(dt, shape_a, shape_b, dx, dy)
+  if shape_a == objects.oce.body then objects.oce:onCollision(dt, shape_b, dx, dy) end
+  if shape_b == objects.oce.body then objects.oce:onCollision(dt, shape_a, dx, dy) end
 end
 
-function endContact(a, b, coll)
-  --objects.oce.nx, objects.oce.ny = coll:getNormal()
-  --print('end', coll:getNormal())
-  if a:getUserData() == 'wall' and b:getUserData() == 'oce' then
-    objects.oce.contacts = objects.oce.contacts - 1
-  end
-end
-
-function preSolve(a, b, coll)
-  --print('pre', coll:getNormal())
-    
-end
-
-function postSolve(a, b, coll)
-  --print('post', coll:getNormal())
+function onCollisionStop(dt, shape_a, shape_b, dx, dy)
+  if shape_a == objects.oce.body then objects.oce:onCollisionStop(dt, shape_b, dx, dy) end
+  if shape_b == objects.oce.body then objects.oce:onCollisionStop(dt, shape_a, dx, dy) end
 end

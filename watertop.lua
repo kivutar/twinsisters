@@ -15,5 +15,5 @@ function Watertop:update(dt)
 end
 
 function Watertop:draw()
-  if math.abs(self.x-objects.oce.body:getX()) <= 250 then self.animation:draw(self.x, self.y) end
+  self.animation:draw(self.x, self.y)
 end

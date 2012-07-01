@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="blocks" tilewidth="16" tileheight="16">
+  <image source="blocks.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="plage" tilewidth="16" tileheight="16">
+  <image source="plage.png" width="128" height="128"/>
+ </tileset>
+ <layer name="shared_tiles" width="16" height="32">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzjZGBg4AJiTjJpQSAWooCGmUMqQLefGMAMxCxQNjn2cwMxDwX2CwOxCAX2IwNy7EcGtLSfEYrJtZ8RDZNqPzFgOIf/qP2j9o/aT5r9ziRidPu9ScTo9g9U/QsA0zUQPA==
+  </data>
+ </layer>
+ <layer name="oce_tiles" width="16" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxnIQjEjGh4FAwNGw394AuS8JUsExqd/FFAXjIYt7QAAm7gBTw==
+  </data>
+ </layer>
+ <layer name="lolo_tiles" width="16" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwEwouFRMLSALBXUEmMGITXo8sjpiVg3IquD6SfFf8j6RtPzwIHRsB8FhAAAIJgA9w==
+  </data>
+ </layer>
+ <objectgroup name="shared_objects" width="16" height="32">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <object type="Wall" x="0" y="0">
+   <polygon points="0,0 256,0 256,32 0,32"/>
+  </object>
+  <object type="Wall" x="224" y="32">
+   <polygon points="0,0 32,0 32,448 0,448"/>
+  </object>
+  <object type="Wall" x="0" y="32">
+   <polygon points="0,0 32,0 32,448 0,448"/>
+  </object>
+  <object type="Wall" x="0" y="480">
+   <polygon points="0,0 256,0 256,32 0,32"/>
+  </object>
+  <object type="Wall" x="32" y="464">
+   <polygon points="0,0 192,0 192,16 0,16"/>
+  </object>
+  <object type="Wall" x="80" y="144">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object type="Wall" x="112" y="160">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="oce_objects" width="16" height="32">
+  <object type="Wall" x="160" y="96">
+   <polygon points="0,0 64,0 64,16 0,16"/>
+  </object>
+  <object type="Wall" x="192" y="192">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object type="Wall" x="32" y="320">
+   <polygon points="0,0 48,0 48,32 0,32"/>
+  </object>
+  <object type="Wall" x="144" y="416">
+   <polygon points="0,0 48,0 48,16 0,16"/>
+  </object>
+  <object type="Spyke" gid="29" x="80" y="336"/>
+  <object type="Spyke" gid="29" x="96" y="336"/>
+  <object type="Spyke" gid="29" x="112" y="336"/>
+  <object type="Spyke" gid="29" x="128" y="336"/>
+  <object type="Spyke" gid="29" x="144" y="336"/>
+  <object type="Spyke" gid="29" x="160" y="336"/>
+  <object type="Spyke" gid="29" x="176" y="336"/>
+  <object type="Spyke" gid="29" x="192" y="336"/>
+  <object type="Spyke" gid="29" x="208" y="336"/>
+  <object type="Spyke" gid="29" x="128" y="112"/>
+  <object type="Spyke" gid="29" x="144" y="112"/>
+ </objectgroup>
+ <objectgroup name="lolo_objects" width="16" height="32">
+  <object type="Wall" x="112" y="368">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object type="Wall" x="32" y="96">
+   <polygon points="0,0 64,0 64,16 0,16"/>
+  </object>
+  <object type="Wall" x="128" y="240">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object type="Wall" x="96" y="272">
+   <polygon points="0,0 64,0 64,16 0,16"/>
+  </object>
+  <object type="Spyke" gid="29" x="32" y="224"/>
+  <object type="Spyke" gid="29" x="48" y="240"/>
+  <object type="Spyke" gid="29" x="64" y="256"/>
+  <object type="Spyke" gid="29" x="80" y="272"/>
+  <object type="Spyke" gid="29" x="160" y="272"/>
+  <object type="Spyke" gid="29" x="176" y="256"/>
+  <object type="Spyke" gid="29" x="192" y="240"/>
+  <object type="Spyke" gid="29" x="208" y="224"/>
+ </objectgroup>
+</map>
