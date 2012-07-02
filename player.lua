@@ -1,8 +1,9 @@
 class "Player" {}
 
-function Player:__init(id, skin, x, y, z)
+function Player:__init(id, skin, w, x, y, z)
   self.id = id
   self:setSkin(skin)
+  self.world = w
 
   self.animation = self.anim.stand.left
 
@@ -105,6 +106,7 @@ function Player:update(dt)
         setSolid('lolo')
         self:setSkin('lolo')
       end
+      self.world = current_world
     end
     self.switch_pressed = true
   else

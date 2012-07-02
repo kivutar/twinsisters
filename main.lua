@@ -9,6 +9,7 @@ map = atl.load 'test3.tmx'
 map.drawObjects = false
 require 'player'
 require 'watertop'
+require 'spike'
 
 function setSolid(w)
   for _, s in pairs(worlds[w]) do
@@ -27,11 +28,13 @@ function addObject(o, w)
     s = Collider:addPolygon(unpack(o.polygon))
     dx, dy = s:center()
     s:moveTo(o.x+dx, o.y+dy)
+    s.type = o.type
+    if w then table.insert(worlds[w], s) end
   elseif o.type == 'Spyke' then
-    s = Collider:addCircle(o.x+8, o.y-8, 8)
+    objects[o.type..'_'..o.x..'_'..o.y] = Spike:new(w, o.x+8, o.y-8, 1)
+    objects[o.type..'_'..o.x..'_'..o.y].body.type = o.type
+    if w then table.insert(worlds[w], objects[o.type..'_'..o.x..'_'..o.y].body) end
   end
-  s.type = o.type
-  if w then table.insert(worlds[w], s) end
 end
 
 function love.load()
@@ -78,16 +81,42 @@ function love.load()
   setSolid('oce')
   setGhost('lolo')
 
-  objects.oce = Player:new('oce', 'oce', 64, 420, 6)
+  objects.oce = Player:new('oce', 'oce', current_world, 64, 420, 6)
   --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
   --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
   --objects.oce.jump_btn = loadstring("return love.keyboard.isDown(' ')")
   --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('v')")
 
-  --objects.lolo = Player:new('lolo', 'lolo', 336, 240)
+  --objects.lolo = Player:new('lolo', 'lolo', current_world, 336, 240, 6)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(2,1) == -1 or love.keyboard.isDown('a')")
   --objects.lolo.right_btn = loadstring("return love.joystick.getAxis(2,1) == 1 or love.keyboard.isDown('d')")
   --objects.lolo.jump_btn = loadstring("return love.joystick.isDown(2, 2) or love.keyboard.isDown('w')")
+
+effect = love.graphics.newPixelEffect [[
+        
+        const float blurSize = 1.0/512.0; 
+        
+
+        vec4 effect(vec4 global_color, Image texture, vec2 texture_coords, vec2 pixel_coords)
+        {
+
+        vec4 sum = vec4(0.0);
+        float fade = 0.0001;
+ 
+       sum += (texture2D(texture, vec2(texture_coords.x - 4.0*blurSize, texture_coords.y)) * 0.05)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x - 3.0*blurSize, texture_coords.y)) * 0.09)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x - 2.0*blurSize, texture_coords.y)) * 0.12)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x - blurSize, texture_coords.y)) * 0.15)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x, texture_coords.y)) * 0.181)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x + blurSize, texture_coords.y)) * 0.15)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x + 2.0*blurSize, texture_coords.y)) * 0.12)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x + 3.0*blurSize, texture_coords.y)) * 0.09)-fade;
+       sum += (texture2D(texture, vec2(texture_coords.x + 4.0*blurSize, texture_coords.y)) * 0.05)-fade;
+        sum.a = 1;
+         
+         return sum ;
+        }
+    ]]
 end
 
 function love.update(dt)
@@ -109,7 +138,7 @@ function love.update(dt)
   --  ((-camera.y + (objects.lolo.body:getY()-12 + objects.oce.body:getY()-12) / 2 ) / 10.0)
   --)
   camera:move((-camera.x+objects.oce.x-8)/10, (-camera.y+objects.oce.y-12)/10)
-  camera:setScale(1.0/2.0, 1.0/2.0)
+  camera:setScale(1.0/3.0, 1.0/3.0)
 
   Collider:update(dt)
 end
@@ -122,18 +151,20 @@ function love.draw()
   for z,layer in pairs(map.drawList) do
     if type(layer) == "table" then
       layer.z = z
+      if layer.name == 'oce_tiles' then layer.world = 'oce' end
+      if layer.name == 'lolo_tiles' then layer.world = 'lolo' end
       objects[layer.name] = layer
-      if layer.name == 'shared_tiles' or layer.name == current_world..'_tiles' then
-        objects[layer.name].opacity = 1.0
-      else
-        objects[layer.name].opacity = 0.25
-      end
     end
   end
 
   for i=-10,10,1 do
     for _,o in pairs(objects) do 
-      if o.opacity == 0.25 then love.graphics.setColor(0,0,255) else love.graphics.setColor(255,255,255) end
+      print(o.world)
+      if o.world == current_world or not o.world then
+        love.graphics.setColor(255,255,255,255)
+      else
+        love.graphics.setColor(0,0,255,64)
+      end
       if o.z == i then o:draw() end
     end
   end

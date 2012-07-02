@@ -16,12 +16,12 @@
  </layer>
  <layer name="oce_tiles" width="16" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgxnIQjEjGh4FAwNGw394AuS8JUsExqd/FFAXjIYt7QAAm7gBTw==
+   eJxjYBgFQwEwouFRMDBgNPyHJ6A0b43mTdqB0bClHQAAP+QAEA==
   </data>
  </layer>
  <layer name="lolo_tiles" width="16" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgwEwouFRMLSALBXUEmMGITXo8sjpiVg3IquD6SfFf8j6RtPzwIHRsB8FhAAAIJgA9w==
+   eJxjYBgFgwEwouFRMAqoAShNT+TqH03PAw9Gw34UEAIARIwADw==
   </data>
  </layer>
  <objectgroup name="shared_objects" width="16" height="32">
