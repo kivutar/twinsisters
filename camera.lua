@@ -27,8 +27,8 @@ function camera:move(dx, dy)
   if self.x > map.width*16 - love.graphics.getWidth()/2*self.scaleX then self.x = map.width*16 - love.graphics.getWidth()/2*self.scaleX end
   if self.y < love.graphics.getHeight()/2*self.scaleY then self.y = love.graphics.getHeight()/2*self.scaleY end
   if self.y > map.height*16 - love.graphics.getHeight()/2*self.scaleY then self.y = map.height*16 - love.graphics.getHeight()/2*self.scaleY end
-  if map.width*16 < love.graphics.getWidth() then self.x = love.graphics.getWidth()/3*self.scaleX end
-  --if map.height*16 < love.graphics.getHeight() then self.y = love.graphics.getHeight()/3*self.scaleY end
+  if map.width*16 < love.graphics.getWidth()*self.scaleX then self.x = map.width*16 / 2 end
+  if map.height*16 < love.graphics.getHeight()*self.scaleY then self.y = map.height*16 / 2 end
 end
 
 function camera:rotate(dr)
