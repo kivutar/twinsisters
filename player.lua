@@ -3,7 +3,7 @@ class "Player" {}
 function Player:__init(id, skin, w, x, y, z)
   self.id = id
   self:setSkin(skin)
-  self.world = w
+  self.w = w
 
   self.animation = self.anim.stand.left
 
@@ -106,7 +106,7 @@ function Player:update(dt)
         setSolid('lolo')
         self:setSkin('lolo')
       end
-      self.world = current_world
+      self.w = current_world
     end
     self.switch_pressed = true
   else
@@ -131,9 +131,9 @@ function Player:draw()
 end
 
 function Player:onCollision(dt, other, dx, dy)
-  self.dx = dx
-  self.dy = dy
   if other.type == 'Wall' then
+    self.dx = dx
+    self.dy = dy
     if dx < -1 then
       self.x = self.x - dx - 0.5
       self.onleft = true

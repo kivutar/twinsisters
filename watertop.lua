@@ -1,19 +1,29 @@
 class "Watertop" {}
 
-function Watertop:__init(x, y, z)
-	self.x = x
-	self.y = y
-    self.z = z
-	--self.image = love.graphics.newImage('sprites/watertop.png')
-	--self.image:setFilter("nearest","nearest")
-	--self.animation = newAnimation(self.image, 16, 16, 0.1, 0)
-    self.animation = anim_watertop
+Watertop.instances = 0
+
+Watertop.img = love.graphics.newImage('sprites/watertop.png')
+Watertop.img:setFilter("nearest","nearest")
+Watertop.anim = newAnimation(Watertop.img, 16, 16, 0.1, 0)
+
+function Watertop:__init(w, x, y, z)
+  self.w = w
+  self.x = x
+  self.y = y
+  self.z = z
+
+  self.body = Collider:addCircle(self.x, self.y, 6)
+
+  Watertop.instances = Watertop.instances + 1
 end
 
 function Watertop:update(dt)
-	--self.animation:update(dt)
+  Watertop.anim:update(dt / Watertop.instances)
 end
 
 function Watertop:draw()
-  self.animation:draw(self.x, self.y)
+  Watertop.anim:draw(self.x-8, self.y-8)
+end
+
+function Watertop:onCollision(dt, other, dx, dy)
 end
