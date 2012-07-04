@@ -15,11 +15,17 @@
   </data>
  </layer>
  <layer name="oce_tiles" width="16" height="32">
+  <properties>
+   <property name="w" value="oce"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFQwEwouFRMDBgNPyHJ6A0b43mTdqB0bClHQAAP+QAEA==
   </data>
  </layer>
  <layer name="lolo_tiles" width="16" height="32">
+  <properties>
+   <property name="w" value="lolo"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFgwEwouFRMAqoAShNT+TqH03PAw9Gw34UEAIARIwADw==
   </data>
@@ -51,50 +57,56 @@
   </object>
  </objectgroup>
  <objectgroup name="oce_objects" width="16" height="32">
-  <object type="Wall" x="160" y="96">
-   <polygon points="0,0 64,0 64,16 0,16"/>
-  </object>
-  <object type="Wall" x="192" y="192">
-   <polygon points="0,0 32,0 32,16 0,16"/>
+  <properties>
+   <property name="w" value="oce"/>
+  </properties>
+  <object type="Wall" x="144" y="416">
+   <polygon points="0,0 48,0 48,16 0,16"/>
   </object>
   <object type="Wall" x="32" y="320">
    <polygon points="0,0 48,0 48,32 0,32"/>
   </object>
-  <object type="Wall" x="144" y="416">
-   <polygon points="0,0 48,0 48,16 0,16"/>
-  </object>
-  <object type="Spyke" gid="29" x="80" y="336"/>
-  <object type="Spyke" gid="29" x="96" y="336"/>
-  <object type="Spyke" gid="29" x="112" y="336"/>
-  <object type="Spyke" gid="29" x="128" y="336"/>
-  <object type="Spyke" gid="29" x="144" y="336"/>
-  <object type="Spyke" gid="29" x="160" y="336"/>
-  <object type="Spyke" gid="29" x="176" y="336"/>
-  <object type="Spyke" gid="29" x="192" y="336"/>
-  <object type="Spyke" gid="29" x="208" y="336"/>
-  <object type="Spyke" gid="29" x="128" y="112"/>
-  <object type="Spyke" gid="29" x="144" y="112"/>
- </objectgroup>
- <objectgroup name="lolo_objects" width="16" height="32">
-  <object type="Wall" x="112" y="368">
+  <object type="Wall" x="192" y="192">
    <polygon points="0,0 32,0 32,16 0,16"/>
   </object>
+  <object type="Wall" x="160" y="96">
+   <polygon points="0,0 64,0 64,16 0,16"/>
+  </object>
+  <object type="Spike" x="128" y="96" width="16" height="16"/>
+  <object type="Spike" x="144" y="96" width="16" height="16"/>
+  <object type="Spike" x="208" y="320" width="16" height="16"/>
+  <object type="Spike" x="80" y="320" width="16" height="16"/>
+  <object type="Spike" x="96" y="320" width="16" height="16"/>
+  <object type="Spike" x="112" y="320" width="16" height="16"/>
+  <object type="Spike" x="128" y="320" width="16" height="16"/>
+  <object type="Spike" x="144" y="320" width="16" height="16"/>
+  <object type="Spike" x="160" y="320" width="16" height="16"/>
+  <object type="Spike" x="176" y="320" width="16" height="16"/>
+  <object type="Spike" x="192" y="320" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="lolo_objects" width="16" height="32">
+  <properties>
+   <property name="w" value="lolo"/>
+  </properties>
   <object type="Wall" x="32" y="96">
    <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
   <object type="Wall" x="128" y="240">
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
+  <object type="Spike" x="80" y="256" width="16" height="16"/>
+  <object type="Spike" x="64" y="240" width="16" height="16"/>
+  <object type="Spike" x="48" y="224" width="16" height="16"/>
+  <object type="Spike" x="32" y="208" width="16" height="16"/>
   <object type="Wall" x="96" y="272">
    <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
-  <object type="Spyke" gid="29" x="32" y="224"/>
-  <object type="Spyke" gid="29" x="48" y="240"/>
-  <object type="Spyke" gid="29" x="64" y="256"/>
-  <object type="Spyke" gid="29" x="80" y="272"/>
-  <object type="Spyke" gid="29" x="160" y="272"/>
-  <object type="Spyke" gid="29" x="176" y="256"/>
-  <object type="Spyke" gid="29" x="192" y="240"/>
-  <object type="Spyke" gid="29" x="208" y="224"/>
+  <object type="Wall" x="112" y="368">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object type="Spike" x="160" y="256" width="16" height="16"/>
+  <object type="Spike" x="176" y="240" width="16" height="16"/>
+  <object type="Spike" x="192" y="224" width="16" height="16"/>
+  <object type="Spike" x="208" y="208" width="16" height="16"/>
  </objectgroup>
 </map>

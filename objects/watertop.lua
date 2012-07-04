@@ -13,6 +13,7 @@ function Watertop:__init(w, x, y, z)
   self.z = z
 
   self.body = Collider:addCircle(self.x, self.y, 6)
+  self.body.parent = self
 
   Watertop.instances = Watertop.instances + 1
 end

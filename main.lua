@@ -1,37 +1,28 @@
-require 'class'
-require 'camera'
-HC = require 'HardonCollider'
-require 'anal'
-require 'TEsound'
-atl = require 'AdvTiledLoader.Loader'
-atl.path = 'maps/'
-map = atl.load 'test4.tmx'
+require 'libs/class'
+require 'libs/anal'
+require 'libs/TEsound'
+require 'libs/camera'
+HC  = require 'libs/HardonCollider'
+ATL = require 'libs/AdvTiledLoader.Loader'
+
+require 'objects/player'
+require 'objects/watertop'
+require 'objects/spike'
+require 'objects/fish'
+require 'objects/wall'
+
+ATL.path = 'maps/'
+map = ATL.load 'test3.tmx'
 map.drawObjects = false
-require 'player'
-require 'watertop'
-require 'spike'
-require 'fish'
-require 'wall'
-
-function setSolid(w)
-  for _, o in pairs(objects) do
-    if o.w == w and _ ~= 'oce' and _ ~= 'lolo' then Collider:setSolid(o.body) end
-  end
-end
-
-function setGhost(w)
-  for _, o in pairs(objects) do
-    if o.w == w and _ ~= 'oce' and _ ~= 'lolo' then Collider:setGhost(o.body) end
-  end
-end
 
 function addObject(o, w)
   if o.type == 'Wall' then
     no = Wall:new(w, 0, 0, 1)
     no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Spyke' then
+  elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Fish' then
     no = Fish:new(w, o.x+8, o.y+8, 1)
@@ -60,14 +51,12 @@ function love.load()
 
   current_world = 'lolo'
   switch_pressed = false
-  setSolid('lolo')
-  setGhost('oce')
 
   objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 6)
   --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
   --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
-  --objects.oce.jump_btn = loadstring("return love.keyboard.isDown(' ')")
-  --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('v')")
+  --objects.oce.jump_btn = loadstring("return love.keyboard.isDown('up')")
+  --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('down')")
 
   --objects.lolo = Player:new('lolo', 'lolo', current_world, 336, 240, 6)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(2,1) == -1 or love.keyboard.isDown('a')")
@@ -81,6 +70,9 @@ function love.update(dt)
   if love.keyboard.isDown("r") then 
     --objects.lolo.body:setPosition(320, 240)
     objects.oce.x, objects.oce.y = 64, 420
+    objects.oce.onground = false
+    objects.oce.onleft = false
+    objects.oce.onright = false
   end
 
   for _,o in pairs(objects) do
