@@ -13,7 +13,7 @@ require 'objects/crab'
 require 'objects/wall'
 
 ATL.path = 'maps/'
-map = ATL.load 'test4.tmx'
+map = ATL.load 'test3.tmx'
 map.drawObjects = false
 
 function addObject(o, w)
@@ -55,7 +55,7 @@ function love.load()
   current_world = 'lolo'
   switch_pressed = false
 
-  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 6)
+  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 1)
   --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
   --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
   --objects.oce.jump_btn = loadstring("return love.keyboard.isDown('up')")

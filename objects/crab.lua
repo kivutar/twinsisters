@@ -45,19 +45,19 @@ function Crab:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
     if dx < -1 then
-      self.x = self.x - dx - 0.5
+      self.x = self.x - dx - 1
       self.onleft = true
-      self.direction = 'right'
-    elseif dx >  1 then
-      self.x = self.x - dx + 0.5
-      self.onright = true
       self.direction = 'left'
+    elseif dx >  1 then
+      self.x = self.x - dx + 1
+      self.onright = true
+      self.direction = 'right'
     end
     if dy < -1 then
-      self.y = self.y - dy - 0.5
+      self.y = self.y - dy - 1
       self.yspeed = 0
     elseif dy > 1 then
-      self.y = self.y - dy + 0.5
+      self.y = self.y - dy + 1
       self.onground = true
       self.yspeed = 0
     end

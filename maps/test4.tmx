@@ -9,20 +9,20 @@
  <tileset firstgid="129" name="sea" tilewidth="16" tileheight="16">
   <image source="sea.png" width="128" height="128"/>
  </tileset>
- <layer name="sea" width="16" height="16">
-  <properties>
-   <property name="" value=""/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BgQSOZeLDoH8oAAP7tFSs=
-  </data>
- </layer>
  <layer name="oce_tiles" width="16" height="16">
   <properties>
    <property name="w" value="oce"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4AywAnEXBToFwRiISrYT647YPZT6o6hCADJuACj
+  </data>
+ </layer>
+ <layer name="sea" width="16" height="16">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BgQSOZeLDoH8oAAP7tFSs=
   </data>
  </layer>
  <layer name="shared_tiles" width="16" height="16">
@@ -59,7 +59,6 @@
   </object>
   <object type="Watertop" x="48" y="144" width="16" height="16"/>
   <object type="Watertop" x="64" y="144" width="16" height="16"/>
-  <object type="Watertop" x="80" y="144" width="16" height="16"/>
   <object type="Watertop" x="112" y="144" width="16" height="16"/>
   <object type="Watertop" x="96" y="144" width="16" height="16"/>
   <object type="Watertop" x="128" y="144" width="16" height="16"/>
@@ -70,9 +69,11 @@
   <object type="Watertop" x="208" y="144" width="16" height="16"/>
   <object type="Watertop" x="224" y="144" width="16" height="16"/>
   <object type="Watertop" x="32" y="144" width="16" height="16"/>
+  <object x="32" y="144" height="16"/>
   <object type="Watertop" x="16" y="144" width="16" height="16"/>
+  <object type="Watertop" x="80" y="144" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="oce_objects" width="16" height="16">
+ <objectgroup name="oce_objects" width="16" height="16" visible="0">
   <properties>
    <property name="w" value="oce"/>
   </properties>
@@ -89,5 +90,6 @@
    <property name="w" value="lolo"/>
   </properties>
   <object type="Fish" x="128" y="160" width="16" height="16"/>
+  <object type="Crab" x="64" y="176" width="32" height="32"/>
  </objectgroup>
 </map>
