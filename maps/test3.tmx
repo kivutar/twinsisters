@@ -55,6 +55,7 @@
   <object type="Wall" x="112" y="160">
    <polygon points="0,0 32,0 32,16 0,16"/>
   </object>
+  <object type="Crab" x="160" y="432" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="oce_objects" width="16" height="32">
   <properties>
