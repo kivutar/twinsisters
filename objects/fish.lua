@@ -37,11 +37,11 @@ function Fish:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
     if dx < -1 then
-      self.direction = 'left'
-      self.x = self.x - 1
-    elseif dx > 1 then
       self.direction = 'right'
-      self.x = self.x + 1
+      self.x = self.x - dx
+    elseif dx > 1 then
+      self.direction = 'left'
+      self.x = self.x - dx
     end
   end
 end

@@ -124,12 +124,12 @@ end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)
   for _,o in pairs(objects) do
-    if shape_a == o.body then o:onCollision(dt, shape_b, dx, dy) end
-    if shape_b == o.body then o:onCollision(dt, shape_a, dx, dy) end
+    if shape_a == o.body then o:onCollision(dt, shape_b, -dx, -dy) end
+    if shape_b == o.body then o:onCollision(dt, shape_a,  dx,  dy) end
   end
 end
 
 function onCollisionStop(dt, shape_a, shape_b, dx, dy)
-  if shape_a == objects.oce.body then objects.oce:onCollisionStop(dt, shape_b, dx, dy) end
-  if shape_b == objects.oce.body then objects.oce:onCollisionStop(dt, shape_a, dx, dy) end
+  if shape_a == objects.oce.body then objects.oce:onCollisionStop(dt, shape_b, -dx, -dy) end
+  if shape_b == objects.oce.body then objects.oce:onCollisionStop(dt, shape_a,  dx,  dy) end
 end

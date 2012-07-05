@@ -18,7 +18,7 @@ function Crab:__init(w, x, y, z)
 
   self.gravity = 500
 
-  self.xspeed = 0.3
+  self.xspeed = 0.5
   self.yspeed = 0.0
 
   self.stance = 'stand'
@@ -26,8 +26,6 @@ function Crab:__init(w, x, y, z)
   self.animation = Crab.img[self.stance][self.direction]
 
   self.onground = false
-  self.onleft   = false
-  self.onright  = false
 end
 
 function Crab:update(dt)
@@ -45,19 +43,17 @@ function Crab:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
     if dx < -1 then
-      self.x = self.x - dx - 1
-      self.onleft = true
-      self.direction = 'left'
-    elseif dx >  1 then
-      self.x = self.x - dx + 1
-      self.onright = true
+      self.x = self.x - dx
       self.direction = 'right'
+    elseif dx >  1 then
+      self.x = self.x - dx
+      self.direction = 'left'
     end
     if dy < -1 then
-      self.y = self.y - dy - 1
+      self.y = self.y - dy
       self.yspeed = 0
     elseif dy > 1 then
-      self.y = self.y - dy + 1
+      self.y = self.y - dy
       self.onground = true
       self.yspeed = 0
     end
@@ -68,7 +64,5 @@ function Crab:onCollisionStop(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
     if dy >  0.01 then self.onground = false end
-    if dx >  0.01 then self.onright = false end
-    if dx < -0.01 then self.onleft = false end
   end
 end
