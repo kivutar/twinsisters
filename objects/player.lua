@@ -30,9 +30,9 @@ function Player:__init(id, skin, w, x, y, z)
   self.max_xspeed = 3.0
   self.yspeed = 0.0
   self.jumpspeed = 220
-  self.friction = 0.1
-  self.airfriction = 0.1
-  self.acceleration = 0.1
+  self.friction = 5
+  self.airfriction = 5
+  self.acceleration = 5
 
   self.stance = 'stand'
   self.direction = 'left'
@@ -57,18 +57,18 @@ function Player:update(dt)
   if self.right_btn() then
     self.direction = 'right'
     self.stance = 'run'
-    if self.xspeed < 0 then self.xspeed = 0.0 end
-    if math.abs(self.xspeed) <= self.max_xspeed and not self.onright then self.xspeed = self.xspeed + self.acceleration end
+    if self.xspeed < 0 then self.xspeed = 0 end
+    if math.abs(self.xspeed) <= self.max_xspeed and not self.onright then self.xspeed = self.xspeed + self.acceleration * dt end
   elseif self.left_btn() then
     self.direction = 'left'
     self.stance = 'run'
-    if self.xspeed > 0 then self.xspeed = 0.0 end
-    if math.abs(self.xspeed) <= self.max_xspeed and not self.onleft then self.xspeed = self.xspeed - self.acceleration end
+    if self.xspeed > 0 then self.xspeed = 0 end
+    if math.abs(self.xspeed) <= self.max_xspeed and not self.onleft then self.xspeed = self.xspeed - self.acceleration * dt end
   else
     f = 0
     if self.onground then f = self.friction else f = self.airfriction end
-    if self.xspeed >=  f then self.xspeed = self.xspeed - f end
-    if self.xspeed <= -f then self.xspeed = self.xspeed + f end
+    if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt end
+    if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
   self.x = self.x + self.xspeed
@@ -142,6 +142,10 @@ function Player:onCollision(dt, other, dx, dy)
   elseif other.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
+  elseif other.type == 'Crab' then
+    TEsound.play('sounds/hit.wav')
+    if dx < -1 then self.xspeed = 150*dt elseif dx > 1 then self.xspeed = -150*dt end
+    if dy >  1 then self.yspeed = -10000*dt end
   end
 end
 

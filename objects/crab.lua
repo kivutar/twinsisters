@@ -13,7 +13,7 @@ function Crab:__init(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.body = Collider:addCircle(x, y, 16)
+  self.body = Collider:addPolygon(0,16, 32,16, 32,32, 0,32)
   self.body.parent = self
 
   self.gravity = 500
@@ -36,7 +36,7 @@ function Crab:update(dt)
 end
 
 function Crab:draw()
-  love.graphics.draw(Crab.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 16, 16)
+  love.graphics.draw(Crab.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 16, 24)
 end
 
 function Crab:onCollision(dt, other, dx, dy)

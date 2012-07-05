@@ -28,7 +28,7 @@ function addObject(o, w)
   elseif o.type == 'Fish' then
     no = Fish:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Crab' then
-    no = Crab:new(w, o.x+16, o.y+16, 6)
+    no = Crab:new(w, o.x+16, o.y+32, 6)
   elseif o.type == 'Watertop' then
     no = Watertop:new(w, o.x+8, o.y+8, 1)
   end
