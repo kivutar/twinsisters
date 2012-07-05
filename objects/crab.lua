@@ -26,9 +26,13 @@ function Crab:__init(w, x, y, z)
   self.animation = Crab.img[self.stance][self.direction]
 
   self.onground = false
+
+  self.cron = require 'libs/cron'
 end
 
 function Crab:update(dt)
+  self.cron.update(dt)
+
   if self.direction == 'left'  then self.x = self.x - self.xspeed end
   if self.direction == 'right' then self.x = self.x + self.xspeed end
 
@@ -40,7 +44,7 @@ function Crab:draw()
 end
 
 function Crab:onCollision(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w then return end
+  if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
   if other.type == 'Wall' then
     if dx < -1 then
       self.x = self.x - dx
@@ -57,6 +61,10 @@ function Crab:onCollision(dt, other, dx, dy)
       self.onground = true
       self.yspeed = 0
     end
+  elseif other.type == 'Player' then
+    self.xspeed = 0
+    print(self.xspeed)
+    self.cron.after(1, function() self.xspeed = 0.5 end) 
   end
 end
 

@@ -21,8 +21,11 @@ function Player:__init(id, skin, w, x, y, z)
   self.y = y
   self.z = z
 
+  self.type = "Player"
+
   self.body = Collider:addCircle(x, y, 8)
   self.body.parent = self
+  self.body.type = "Player"
 
   self.gravity = 500
 
@@ -42,6 +45,8 @@ function Player:__init(id, skin, w, x, y, z)
   self.onleft   = false
   self.onright  = false
 
+  self.invincible = false
+
   self.jump_pressed = false
   self.switch_pressed = false
 
@@ -49,9 +54,12 @@ function Player:__init(id, skin, w, x, y, z)
   self.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1 or love.keyboard.isDown('right')")
   self.jump_btn = loadstring("return love.joystick.isDown(1,2) or love.keyboard.isDown(' ')")
   self.switch_btn = loadstring("return love.joystick.isDown(1,4) or love.keyboard.isDown('v')")
+
+  self.cron = require 'libs/cron'
 end
 
 function Player:update(dt)
+  self.cron.update(dt)
   
   -- Moving
   if self.right_btn() then
@@ -142,10 +150,12 @@ function Player:onCollision(dt, other, dx, dy)
   elseif other.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
-  elseif other.type == 'Crab' then
+  elseif other.type == 'Crab' and not self.invincible then
     TEsound.play('sounds/hit.wav')
-    if dx < -1 then self.xspeed = 150*dt elseif dx > 1 then self.xspeed = -150*dt end
-    if dy >  1 then self.yspeed = -10000*dt end
+    if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
+    if dy >  0.1 then self.yspeed = -150 end
+    self.invincible = true
+    self.cron.after(2, function() self.invincible = false end)
   end
 end
 
