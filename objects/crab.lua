@@ -7,6 +7,10 @@ Crab.img.stand.left:setFilter("nearest", "nearest")
 Crab.img.stand.right = love.graphics.newImage('sprites/crab_stand_right.png')
 Crab.img.stand.right:setFilter("nearest", "nearest")
 
+local function sign(x)
+  return x < 0 and -1 or (x > 0 and 1 or 0)
+end
+
 function Crab:__init(w, x, y, z)
   self.w = w
   self.x = x
@@ -25,8 +29,6 @@ function Crab:__init(w, x, y, z)
   self.direction = 'left'
   self.animation = Crab.img[self.stance][self.direction]
 
-  self.onground = false
-
   self.cron = require 'libs/cron'
 end
 
@@ -35,6 +37,9 @@ function Crab:update(dt)
 
   if self.direction == 'left'  then self.x = self.x - self.xspeed end
   if self.direction == 'right' then self.x = self.x + self.xspeed end
+
+  self.yspeed = self.yspeed + self.gravity * dt
+  self.y = self.y + self.yspeed * dt
 
   self.body:moveTo(self.x, self.y)
 end
@@ -46,24 +51,15 @@ end
 function Crab:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
   if other.type == 'Wall' then
-    if dx < -1 then
-      self.x = self.x - dx
+    if dx < 0 then
       self.direction = 'right'
-    elseif dx >  1 then
-      self.x = self.x - dx
+    elseif dx > 0 then
       self.direction = 'left'
     end
-    if dy < -1 then
-      self.y = self.y - dy
-      self.yspeed = 0
-    elseif dy > 1 then
-      self.y = self.y - dy
-      self.onground = true
-      self.yspeed = 0
-    end
+    if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
+    self.x, self.y = self.x - dx, self.y - dy
   elseif other.type == 'Player' then
     self.xspeed = 0
-    print(self.xspeed)
     self.cron.after(1, function() self.xspeed = 0.5 end) 
   end
 end

@@ -13,6 +13,18 @@ for _,skin in pairs({'lolo', 'oce'}) do
   end
 end
 
+local function sign(x)
+  return x < 0 and -1 or (x > 0 and 1 or 0)
+end
+
+Player.ondown = {}
+function Player:onDown()
+  for _,_ in pairs(Player.ondown) do
+    return true
+  end
+  return false
+end
+
 function Player:__init(id, skin, w, x, y, z)
   self.id = id
   self.skin = skin
@@ -23,7 +35,7 @@ function Player:__init(id, skin, w, x, y, z)
 
   self.type = "Player"
 
-  self.body = Collider:addCircle(x, y, 8)
+  self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
   self.body.parent = self
   self.body.type = "Player"
 
@@ -40,10 +52,6 @@ function Player:__init(id, skin, w, x, y, z)
   self.stance = 'stand'
   self.direction = 'left'
   self.animation = Player.anim[self.skin][self.stance][self.direction]
-
-  self.onground = false
-  self.onleft   = false
-  self.onright  = false
 
   self.invincible = false
 
@@ -62,30 +70,29 @@ function Player:update(dt)
   self.cron.update(dt)
   
   -- Moving
-  if self.right_btn() then
+  if self.right_btn() and not self.invincible then
     self.direction = 'right'
     self.stance = 'run'
     if self.xspeed < 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed and not self.onright then self.xspeed = self.xspeed + self.acceleration * dt end
-  elseif self.left_btn() then
+    if math.abs(self.xspeed) <= self.max_xspeed then self.xspeed = self.xspeed + self.acceleration * dt end
+  elseif self.left_btn() and not self.invincible then
     self.direction = 'left'
     self.stance = 'run'
     if self.xspeed > 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed and not self.onleft then self.xspeed = self.xspeed - self.acceleration * dt end
+    if math.abs(self.xspeed) <= self.max_xspeed then self.xspeed = self.xspeed - self.acceleration * dt end
   else
     f = 0
-    if self.onground then f = self.friction else f = self.airfriction end
+    if self:onDown() then f = self.friction else f = self.airfriction end
     if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt end
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
-  self.x = self.x + self.xspeed
+  if math.abs(self.xspeed) > 0.1 then self.x = self.x + self.xspeed end
 
   -- Jumping
   if self.jump_btn() then
-    if not self.jump_pressed and self.onground then
-      self.y = self.y - 1
-      self.yspeed = - self.jumpspeed - math.abs(self.xspeed*20)
+    if not self.jump_pressed and self:onDown() then
+      self.yspeed = - self.jumpspeed - math.abs(self.xspeed*30)
       TEsound.play('sounds/jump.wav')
     end
     self.jump_pressed = true
@@ -100,60 +107,40 @@ function Player:update(dt)
       if current_world == 'lolo' then current_world = 'oce' else current_world = 'lolo' end
       self.skin = current_world
       self.w = current_world
-      self.onground = false
-      self.onleft = false
-      self.onright = false
     end
     self.switch_pressed = true
   else
     self.switch_pressed = false
   end
 
-  -- Falling
-  if not self.onground then
-    self.y = self.y + self.yspeed * dt
-    self.yspeed = self.yspeed + self.gravity * dt
-  end
+  self.yspeed = self.yspeed + self.gravity * dt
+  self.y = self.y + self.yspeed * dt
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
 end
 
 function Player:draw()
-  if not self.onground and self.yspeed > 0 then self.stance = 'fall' end
-  if not self.onground and self.yspeed < 0 then self.stance = 'jump' end
+  if not self:onDown() and self.yspeed > 0 then self.stance = 'fall' end
+  if not self:onDown() and self.yspeed < 0 then self.stance = 'jump' end
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
-  self.animation:draw(self.x-16, self.y-24.5)
+  self.animation:draw(self.x-16, self.y-23.5)
 end
 
 function Player:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
-    if dx < -1 then
-      self.x = self.x - dx - 0.5
-      self.onleft = true
-      self.xspeed = 0
-    elseif dx >  1 then
-      self.x = self.x - dx + 0.5
-      self.onright = true
-      self.xspeed = 0
-    end
-    if dy < -1 then
-      self.y = self.y - dy - 0.5
-      self.yspeed = 0
-    elseif dy > 1 then
-      self.y = self.y - dy + 0.5
-      self.onground = true
-      self.yspeed = 0
-    end
+    if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+    if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
+    if dy > 0 then self.ondown[other] = true end
+    self.x, self.y = self.x - dx, self.y - dy
   elseif other.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
   elseif other.type == 'Crab' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
-    if dy >  0.1 then self.yspeed = -150 end
     self.invincible = true
     self.cron.after(2, function() self.invincible = false end)
   end
@@ -162,8 +149,6 @@ end
 function Player:onCollisionStop(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
-    if dy >  0.01 then self.onground = false end
-    if dx >  0.01 then self.onright = false end
-    if dx < -0.01 then self.onleft = false end
+    if dy > 0 then self.ondown[other] = nil end
   end
 end

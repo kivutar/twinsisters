@@ -14,7 +14,7 @@
    <property name="w" value="oce"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4AywAnEXBToFwRiISrYT647YPZT6o6hCADJuACj
+   eJxjYBgFo2AUjFQAAAQAAAE=
   </data>
  </layer>
  <layer name="sea" width="16" height="16">
@@ -30,7 +30,7 @@
    <property name="" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQQkwtG9Y/qHwz6ncnEMP3eZGKY/mAyMaX5FoQBDkwMiw==
+   eJxjZGBgYKQQkwtG9dNOPzFxBJNrJBNTSz+5gFr6ncnEMP3eZGKY/mAyMaX5FoQB5XQaqw==
   </data>
  </layer>
  <layer name="lolo_tiles" width="16" height="16">
@@ -57,39 +57,22 @@
   <object type="Wall" x="240" y="16">
    <polygon points="0,0 16,0 16,192 0,192"/>
   </object>
-  <object type="Watertop" x="48" y="144" width="16" height="16"/>
-  <object type="Watertop" x="64" y="144" width="16" height="16"/>
-  <object type="Watertop" x="112" y="144" width="16" height="16"/>
-  <object type="Watertop" x="96" y="144" width="16" height="16"/>
-  <object type="Watertop" x="128" y="144" width="16" height="16"/>
-  <object type="Watertop" x="144" y="144" width="16" height="16"/>
-  <object type="Watertop" x="160" y="144" width="16" height="16"/>
-  <object type="Watertop" x="176" y="144" width="16" height="16"/>
-  <object type="Watertop" x="192" y="144" width="16" height="16"/>
-  <object type="Watertop" x="208" y="144" width="16" height="16"/>
-  <object type="Watertop" x="224" y="144" width="16" height="16"/>
-  <object type="Watertop" x="32" y="144" width="16" height="16"/>
-  <object x="32" y="144" height="16"/>
-  <object type="Watertop" x="16" y="144" width="16" height="16"/>
-  <object type="Watertop" x="80" y="144" width="16" height="16"/>
+  <object type="Wall" x="96" y="112">
+   <polygon points="0,0 64,0 64,16 0,16"/>
+  </object>
+  <object type="Watertop" x="16" y="112" width="16" height="16"/>
+  <object type="Water" x="16" y="128">
+   <polygon points="0,0 224,0 224,96 0,96"/>
+  </object>
  </objectgroup>
- <objectgroup name="oce_objects" width="16" height="16" visible="0">
+ <objectgroup name="oce_objects" width="16" height="16">
   <properties>
    <property name="w" value="oce"/>
   </properties>
-  <object type="Fish" x="192" y="176" width="16" height="16"/>
-  <object type="Wall" x="16" y="144">
-   <polygon points="0,0 32,0 32,64 0,64"/>
-  </object>
-  <object type="Wall" x="48" y="176">
-   <polygon points="0,0 32,0 32,32 0,32"/>
-  </object>
  </objectgroup>
  <objectgroup name="lolo_objects" width="16" height="16">
   <properties>
    <property name="w" value="lolo"/>
   </properties>
-  <object type="Fish" x="128" y="160" width="16" height="16"/>
-  <object type="Crab" x="64" y="176" width="32" height="32"/>
  </objectgroup>
 </map>
