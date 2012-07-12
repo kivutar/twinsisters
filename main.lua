@@ -6,6 +6,7 @@ HC  = require 'libs/HardonCollider'
 ATL = require 'libs/AdvTiledLoader.Loader'
 
 require 'objects/player'
+require 'objects/water'
 require 'objects/watertop'
 require 'objects/spike'
 require 'objects/fish'
@@ -13,12 +14,18 @@ require 'objects/crab'
 require 'objects/wall'
 
 ATL.path = 'maps/'
-map = ATL.load 'test3.tmx'
+map = ATL.load 'test4.tmx'
 map.drawObjects = false
 
 function addObject(o, w)
   if o.type == 'Wall' then
     no = Wall:new(w, 0, 0, 1)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Water' then
+    no = Water:new(w, 0, 0, 1)
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()

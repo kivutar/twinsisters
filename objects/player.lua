@@ -25,6 +25,14 @@ function Player:onDown()
   return false
 end
 
+Player.inwater = {}
+function Player:inWater()
+  for _,_ in pairs(Player.inwater) do
+    return true
+  end
+  return false
+end
+
 function Player:__init(id, skin, w, x, y, z)
   self.id = id
   self.skin = skin
@@ -68,18 +76,23 @@ end
 
 function Player:update(dt)
   self.cron.update(dt)
+
+  local iw = 1
+  if self:inWater() then
+    iw = 0.75
+  end
   
   -- Moving
   if self.right_btn() and not self.invincible then
     self.direction = 'right'
     self.stance = 'run'
     if self.xspeed < 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed then self.xspeed = self.xspeed + self.acceleration * dt end
+    if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
   elseif self.left_btn() and not self.invincible then
     self.direction = 'left'
     self.stance = 'run'
     if self.xspeed > 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed then self.xspeed = self.xspeed - self.acceleration * dt end
+    if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
   else
     f = 0
     if self:onDown() then f = self.friction else f = self.airfriction end
@@ -92,8 +105,10 @@ function Player:update(dt)
   -- Jumping
   if self.jump_btn() then
     if not self.jump_pressed and self:onDown() then
-      self.yspeed = - self.jumpspeed - math.abs(self.xspeed*30)
+      self.yspeed = - self.jumpspeed * iw - math.abs(self.xspeed*30*iw)
       TEsound.play('sounds/jump.wav')
+    elseif not self.jump_pressed and self.inWater() then
+      self.yspeed = - self.jumpspeed * iw
     end
     self.jump_pressed = true
   else
@@ -113,8 +128,8 @@ function Player:update(dt)
     self.switch_pressed = false
   end
 
-  self.yspeed = self.yspeed + self.gravity * dt
-  self.y = self.y + self.yspeed * dt
+  self.yspeed = self.yspeed + self.gravity * dt * iw
+  self.y = self.y + self.yspeed * dt * iw
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
@@ -143,6 +158,8 @@ function Player:onCollision(dt, other, dx, dy)
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.invincible = true
     self.cron.after(2, function() self.invincible = false end)
+  elseif other.type == 'Water' then
+    self.inwater[other] = true
   end
 end
 
@@ -150,5 +167,7 @@ function Player:onCollisionStop(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
   if other.type == 'Wall' then
     if dy > 0 then self.ondown[other] = nil end
+  elseif other.type == 'Water' then
+    self.inwater[other] = nil
   end
 end

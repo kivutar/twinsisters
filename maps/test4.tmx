@@ -30,7 +30,7 @@
    <property name="" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQQkwtG9dNOPzFxBJNrJBNTSz+5gFr6ncnEMP3eZGKY/mAyMaX5FoQB5XQaqw==
+   eJxjZGBgYKQQkwtG9Q8O/Y0EMKH4J6SfkLmUup9S/c5kYph+bzIxTH8wmZjSfAvCAGahF6c=
   </data>
  </layer>
  <layer name="lolo_tiles" width="16" height="16">
@@ -57,13 +57,26 @@
   <object type="Wall" x="240" y="16">
    <polygon points="0,0 16,0 16,192 0,192"/>
   </object>
-  <object type="Wall" x="96" y="112">
-   <polygon points="0,0 64,0 64,16 0,16"/>
+  <object type="Wall" x="208" y="128">
+   <polygon points="-64,0 32,0 32,16 -64,16"/>
+  </object>
+  <object type="Water" x="16" y="128">
+   <polygon points="0,0 224,0 224,80 0,80"/>
   </object>
   <object type="Watertop" x="16" y="112" width="16" height="16"/>
-  <object type="Water" x="16" y="128">
-   <polygon points="0,0 224,0 224,96 0,96"/>
-  </object>
+  <object type="Watertop" x="32" y="112" width="16" height="16"/>
+  <object type="Watertop" x="48" y="112" width="16" height="16"/>
+  <object type="Watertop" x="64" y="112" width="16" height="16"/>
+  <object type="Watertop" x="80" y="112" width="16" height="16"/>
+  <object type="Watertop" x="160" y="112" width="16" height="16"/>
+  <object type="Watertop" x="176" y="112" width="16" height="16"/>
+  <object type="Watertop" x="192" y="112" width="16" height="16"/>
+  <object type="Watertop" x="208" y="112" width="16" height="16"/>
+  <object type="Watertop" x="224" y="112" width="16" height="16"/>
+  <object type="Watertop" x="96" y="112" width="16" height="16"/>
+  <object type="Watertop" x="112" y="112" width="16" height="16"/>
+  <object type="Watertop" x="128" y="112" width="16" height="16"/>
+  <object type="Watertop" x="144" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="oce_objects" width="16" height="16">
   <properties>
