@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="maison" tilewidth="16" tileheight="16">
+  <image source="maison.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="nuages" tilewidth="16" tileheight="16">
+  <image source="nuages.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="129" name="plage" tilewidth="16" tileheight="16">
+  <image source="plage.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="193" name="arbres" tilewidth="16" tileheight="16">
+  <image source="arbre.png" width="128" height="128"/>
+ </tileset>
+ <layer name="maison" width="30" height="30">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztljlOBDEQRYtVGjYJGJBYTzEXYAuGJYCBgC1gOwBnICTkwjwEJVnVrm57kGUCvvQy+5el+i57JCKjCtxW4qkSqj3YhwPDIRxJOQ3hGE4Mp3BWsO45XEiz/5dwVbDuNdxIs/93cF+w7gM8SrP/z/Dys8ZmwPZ+AiZhCqZhBmadeuqTkh+bAdv7HszBPCzAIiw5XuqjHm1nthmwvV+GFViFPqzBOgwiddVHPdrObDNge78Bm7AF27ADu05d9VEP78xfshkIe68aOFipj3p4Z06VVzdW+19/S11zI1epc6ZrbuR6ps6ZrrmR69l2Z0N1zY1cz9Q7mzI3cj3HVZi10n8TK/u2hO93Sb3Kd85E0v+TMeW832HWvH1t/8lQOe93mLWcfTGl3qvf7HuL4N2B2Npx971X4qMSn0xOiXI=
+  </data>
+ </layer>
+ <layer name="nuages" width="30" height="30">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlSkSwlAQRHM1NsEm2AQhKOACHAFQgAooQIUcNP1FDDXNTP0iinlVT/a060kSx3Gc/6AF27Cj2P1xbx8O4FBxRPIHeFQ8CbkJnMKZ4pz0nuFF8SrkljCFK8WM9Obwpngn2cBGcUtyD/hUfH3pjaWAb8WygV6nWSw70yNZ61ZJWnZmTHqtWyVp2ZkF6bVulaRlZ9akt96qmj25IWHZmR3JfpKRG44M+4OxOUs2wP5gbM6SDbA/GJuTshXvV2WO
+  </data>
+ </layer>
+ <layer name="arbres" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1ccKQkEMRuH7/m9lx44dO3ot2LFvPeusJkKCwhz41vOvMkkSi/1HGWSRQx4FFFEyfreMCqqooY4GmsbbWmijgy566GOg3KZtiBHGmGCKGebKbdoWWCLFCmtssFVu07bDHgccccIZF+U2bVfccMcDT7zwVm6zKGRbTJ+8E17JO+GVvBNeyTvhlbwTXsk74ZW8E5p++T+3yOLPDMnizwzJ4s8MKf6Z3/cB5pqWOw==
+  </data>
+ </layer>
+ <objectgroup name="Collisions" width="30" height="30">
+  <properties>
+   <property name="" value=""/>
+  </properties>
+  <object type="Wall" x="0" y="448">
+   <polygon points="0,0 480,0 480,32 0,32"/>
+  </object>
+  <object type="Wall" x="0" y="336">
+   <polygon points="0,0 128,0 144,16 144,32 128,48 0,48"/>
+  </object>
+  <object type="Wall" x="480" y="336">
+   <polygon points="0,0 -208,0 -224,16 -224,32 -192,64 -176,64 -160,48 0,48"/>
+  </object>
+  <object type="Wall" x="208" y="272">
+   <polygon points="0,0 32,0 48,16 48,32 32,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="48" y="208">
+   <polygon points="0,0 128,0 144,16 144,32 128,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="288" y="176">
+   <polygon points="0,0 128,0 144,16 144,32 128,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="208" y="128">
+   <polygon points="0,0 32,0 48,16 48,32 32,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="16" y="144">
+   <polygon points="0,0 16,0 32,16 32,32 16,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="64" y="64">
+   <polygon points="0,0 64,0 80,16 80,32 64,48 0,48 -16,32 -16,16"/>
+  </object>
+  <object type="Wall" x="0" y="0">
+   <polygon points="0,0 480,0 480,32 0,32"/>
+  </object>
+ </objectgroup>
+</map>

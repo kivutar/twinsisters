@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="maison" tilewidth="16" tileheight="16">
+  <image source="maison2.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="129" name="simpletileset" tilewidth="16" tileheight="16">
+  <image source="simpletileset.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="145" name="grass" tilewidth="16" tileheight="16">
+  <image source="grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="209" name="plage" tilewidth="16" tileheight="16">
+  <image source="plage.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="273" name="blocks" tilewidth="16" tileheight="16">
+  <image source="blocks.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="337" name="sea" tilewidth="16" tileheight="16">
+  <image source="sea.png" width="128" height="128"/>
+ </tileset>
+ <layer name="water" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzzENAAAIBDGQiH8zOGBi+rTJCbgqAAAAAACSTN+l8Zv9C/xb0TEHsQ==
+  </data>
+ </layer>
+ <layer name="sol" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzzEKgDAQRNHxCJba6VFzRUtLL2KC/bIuhITlP/idxB0JAAAAAAAAAHJaly/Pd0W+PO+NsNW79g57Z9zc7jlqZ6e90c1//xGp3XXJLrJ31tqWW3bZ9j6yy7bX0+g7M/YCiVWrsw==
+  </data>
+ </layer>
+ <layer name="maisons2" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztz8EJADAIBEGbTAP2X4QWERSSGdj/XQQAAAAAL8jubI8Y9ttfAIAbCnz+AQ0=
+  </data>
+ </layer>
+ <layer name="maisons" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1blOAzEUhWFDWEsIa8kOJTuUSVhCyT6U7PD+L8BvyVe6mjidPRbKPdKnkaaIfWdOPM5ZLBaLxWKxjE7GMI4WJtT96WAGswX2lStzmEcbC+HeJKawjBWsltlalqxhHRvYDNctbGMHu9grtrv02ccBDnEUrsc4wSnOcF5sd+nTQRc9XOAyuMI1+rjJsK7ulXSriV7d4g6PNU94RoWXDOsuRixFpE6peXWvhO9VX8ndqybPq2HPuVL890G+FalS8rzS8zo32Csf6XmqlDqv5P3W+yV0z/y8qXpW6v/rwrr1fgndMz9vqp7JvPd4cM3P69eK9Uv3zM+bqmeveMM7PvAZfOEbP/hNsE4sMm+sX/q5+3mrIb/xn6LnrfcrNm+unjUVmTfWL90zP2/OnlksFsuo5g+0Qz3q
+  </data>
+ </layer>
+ <layer name="herbe" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKwCAQRUHv35lUJpfVxiLdLgRFmIHXb/G3FAAAAACArzq6gt2bbvxTGz3B3k03nii6oWwrNpf5gVl0Q9lWbC7zAzPgXB0j0ThB
+  </data>
+ </layer>
+ <layer name="fenetres" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1LEVgCAMhGEmUCZQJkCWcQv3r6W8Im3MM/zfe9ekIcWRUgAAAADgH7aZXVJlVgP38nLMnJImsxa2lZ8+c0mGzIbju5k7ZMncIYt26A7e5ZGsgL+V2xf32UKvcovqFQCs6AWlCgfH
+  </data>
+ </layer>
+ <objectgroup name="Collisions" width="60" height="30">
+  <properties>
+   <property name="a" value=""/>
+  </properties>
+  <object type="Wall" x="0" y="400">
+   <polygon points="0,0 416,0 416,80 0,80"/>
+  </object>
+  <object type="Wall" x="544" y="352">
+   <polygon points="0,0 192,0 192,128 0,128"/>
+  </object>
+  <object type="Wall" x="736" y="400">
+   <polygon points="0,0 224,0 224,80 0,80"/>
+  </object>
+  <object type="Wall" x="416" y="416">
+   <polygon points="0,0 128,0 128,64 0,64"/>
+  </object>
+  <object type="Water" x="416" y="368">
+   <polygon points="0,0 128,0 128,48 0,48"/>
+  </object>
+  <object type="Wall" x="384" y="352">
+   <polygon points="0,0 32,0 32,48 0,48"/>
+  </object>
+  <object type="Wall" x="368" y="368">
+   <polygon points="0,0 16,0 16,32 0,32"/>
+  </object>
+  <object type="Wall" x="352" y="384">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object type="Wall" x="736" y="368">
+   <polygon points="0,0 16,0 16,32 0,32"/>
+  </object>
+  <object type="Wall" x="752" y="384">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object type="Watertop" x="416" y="352" width="16" height="16"/>
+  <object type="Watertop" x="432" y="352" width="16" height="16"/>
+  <object type="Watertop" x="448" y="352" width="16" height="16"/>
+  <object type="Watertop" x="464" y="352" width="16" height="16"/>
+  <object type="Watertop" x="480" y="352" width="16" height="16"/>
+  <object type="Watertop" x="496" y="352" width="16" height="16"/>
+  <object type="Watertop" x="512" y="352" width="16" height="16"/>
+  <object type="Watertop" x="528" y="352" width="16" height="16"/>
+  <object type="Bridge" x="128" y="304">
+   <polygon points="0,0 160,0 160,96 0,96"/>
+  </object>
+  <object type="Bridge" x="96" y="224">
+   <polygon points="0,0 128,0 128,176 0,176"/>
+  </object>
+  <object type="Bridge" x="576" y="256">
+   <polygon points="0,0 128,0 128,96 0,96"/>
+  </object>
+  <object type="Bridge" x="576" y="176">
+   <polygon points="0,0 128,0 128,80 0,80"/>
+  </object>
+ </objectgroup>
+</map>

@@ -12,14 +12,21 @@ require 'objects/spike'
 require 'objects/fish'
 require 'objects/crab'
 require 'objects/wall'
+require 'objects/bridge'
 
 ATL.path = 'maps/'
-map = ATL.load 'test4.tmx'
+map = ATL.load 'kivutaria.tmx'
 map.drawObjects = false
 
 function addObject(o, w)
   if o.type == 'Wall' then
     no = Wall:new(w, 0, 0, 1)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Bridge' then
+    no = Bridge:new(w, 0, 0, 1)
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()
@@ -62,7 +69,7 @@ function love.load()
   current_world = 'lolo'
   switch_pressed = false
 
-  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 1)
+  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 6)
   --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
   --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
   --objects.oce.jump_btn = loadstring("return love.keyboard.isDown('up')")

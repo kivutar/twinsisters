@@ -150,6 +150,12 @@ function Player:onCollision(dt, other, dx, dy)
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
     if dy > 0 then self.ondown[other] = true end
     self.x, self.y = self.x - dx, self.y - dy
+  elseif other.type == 'Bridge' then
+    if dy > 0 and self.yspeed > 0 then
+      self.yspeed = 0
+      self.ondown[other] = true
+      self.y = self.y - dy
+    end
   elseif other.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
@@ -165,7 +171,7 @@ end
 
 function Player:onCollisionStop(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
-  if other.type == 'Wall' then
+  if other.type == 'Wall' or other.type == 'Bridge' then
     if dy > 0 then self.ondown[other] = nil end
   elseif other.type == 'Water' then
     self.inwater[other] = nil
