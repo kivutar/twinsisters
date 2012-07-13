@@ -9,9 +9,11 @@ require 'objects/player'
 require 'objects/water'
 require 'objects/watertop'
 require 'objects/spike'
+require 'objects/arrow'
 require 'objects/fish'
 require 'objects/crab'
 require 'objects/wall'
+require 'objects/flyingwall'
 require 'objects/bridge'
 
 ATL.path = 'maps/'
@@ -31,6 +33,14 @@ function addObject(o, w)
     no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'FlyingWall' then
+    no = FlyingWall:new(w, o.x, o.y, 8)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.x = o.x+dx
+    no.y = o.y+dy
+    no.body:moveTo(no.x, no.y)
   elseif o.type == 'Water' then
     no = Water:new(w, 0, 0, 1)
     no.body = Collider:addPolygon(unpack(o.polygon))
@@ -39,6 +49,8 @@ function addObject(o, w)
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 1)
+  elseif o.type == 'Arrow' then
+    no = Arrow:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Fish' then
     no = Fish:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Crab' then
@@ -55,8 +67,10 @@ function love.load()
   Collider = HC(100, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(84, 200, 248)
+
+  love.mouse.setVisible(false)
   
-  TEsound.play('bgm/costadelsol.mp3')
+  TEsound.play('bgm/game.mp3')
 
   objects = {}
 
@@ -69,27 +83,22 @@ function love.load()
   current_world = 'lolo'
   switch_pressed = false
 
-  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 64, 6)
-  --objects.oce.left_btn = loadstring("return love.keyboard.isDown('left')")
-  --objects.oce.right_btn = loadstring("return love.keyboard.isDown('right')")
-  --objects.oce.jump_btn = loadstring("return love.keyboard.isDown('up')")
-  --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('down')")
+  objects.oce = Player:new('oce', 'oce', current_world, 64, 420, 8)
 
-  --objects.lolo = Player:new('lolo', 'lolo', current_world, 336, 240, 6)
-  --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(2,1) == -1 or love.keyboard.isDown('a')")
-  --objects.lolo.right_btn = loadstring("return love.joystick.getAxis(2,1) == 1 or love.keyboard.isDown('d')")
-  --objects.lolo.jump_btn = loadstring("return love.joystick.isDown(2, 2) or love.keyboard.isDown('w')")
+  objects.lolo = Player:new('lolo', 'lolo', current_world, 128, 420, 8)
+  objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
+  objects.lolo.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1")
+  objects.lolo.down_btn = loadstring("return love.joystick.getAxis(1,2) == 1")
+  objects.lolo.jump_btn = loadstring("return love.joystick.isDown(1,2)")
+  objects.lolo.switch_btn = loadstring("return love.joystick.isDown(1,4)")
 end
 
 function love.update(dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit")  end
   if love.keyboard.isDown("r") then 
-    --objects.lolo.body:setPosition(320, 240)
-    objects.oce.x, objects.oce.y = 64, 420
-    objects.oce.onground = false
-    objects.oce.onleft = false
-    objects.oce.onright = false
+    objects.oce.x, objects.oce.y = 64, 400
+    objects.lolo.x, objects.lolo.y = 32, 400
   end
 
   for _,o in pairs(objects) do
@@ -97,18 +106,18 @@ function love.update(dt)
   end
 
   --camera:move(
-  --  ((-camera.x + (objects.lolo.body:getX()- 8 + objects.oce.body:getX()- 8) / 2 ) / 10.0),
-  --  ((-camera.y + (objects.lolo.body:getY()-12 + objects.oce.body:getY()-12) / 2 ) / 10.0)
+  --  ((-camera.x + (objects.lolo.x- 8 + objects.oce.x- 8) / 2 ) / 10.0),
+  --  ((-camera.y + (objects.lolo.y-12 + objects.oce.y-12) / 2 ) / 10.0)
   --)
   camera:move((-camera.x+objects.oce.x-8)/10, (-camera.y+objects.oce.y-12)/10)
-  camera:setScale(1.0/2.0, 1.0/2.0)
+  camera:setScale(1/2, 1/2)
 
   Collider:update(dt)
 end
 
 function love.draw()
   camera:set()
-  map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 1, -100)
+  map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 0, -100)
   map:_updateTileRange()
 
   for z,layer in pairs(map.drawList) do
@@ -144,6 +153,8 @@ function onCollision(dt, shape_a, shape_b, dx, dy)
 end
 
 function onCollisionStop(dt, shape_a, shape_b, dx, dy)
-  if shape_a == objects.oce.body then objects.oce:onCollisionStop(dt, shape_b, -dx, -dy) end
-  if shape_b == objects.oce.body then objects.oce:onCollisionStop(dt, shape_a,  dx,  dy) end
+  for _,o in pairs(objects) do
+    if shape_a == o.body then o:onCollisionStop(dt, shape_b, -dx, -dy) end
+    if shape_b == o.body then o:onCollisionStop(dt, shape_a,  dx,  dy) end
+  end
 end

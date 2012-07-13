@@ -18,12 +18,18 @@
  <tileset firstgid="337" name="sea" tilewidth="16" tileheight="16">
   <image source="sea.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="401" name="nuages" tilewidth="16" tileheight="16">
+  <image source="nuages.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="465" name="feuilles" tilewidth="16" tileheight="16">
+  <image source="feuilles.png" width="128" height="128"/>
+ </tileset>
  <layer name="water" width="60" height="30">
   <properties>
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztzzENAAAIBDGQiH8zOGBi+rTJCbgqAAAAAACSTN+l8Zv9C/xb0TEHsQ==
+   eJzt0UEOgjAQRuHOETm6iotaXCAnQHTvGLsoE9OYmJK0vC95Cwgs/tY5AAAAAAAA1OQg6+ezfP+uNu9dR+0U6+WzzZt918r3pjsvWogN8V1rfLJzMoVG9to7tTvTZu2uLdpDexY6g07y/SN3p7atlNw76v+3H7a2shfAPrwACH0/kQ==
   </data>
  </layer>
  <layer name="sol" width="60" height="30">
@@ -31,7 +37,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztzzEKgDAQRNHxCJba6VFzRUtLL2KC/bIuhITlP/idxB0JAAAAAAAAAHJaly/Pd0W+PO+NsNW79g57Z9zc7jlqZ6e90c1//xGp3XXJLrJ31tqWW3bZ9j6yy7bX0+g7M/YCiVWrsw==
+   eJztzzEOQEAQRuFxBCUdR3VFpVKCCkcwG51iMnYJ2bwveZ1d+4sAAAAAAAAAQJ7K4szzXSe+PPdZJj0/a0viPVeV3le/sDd186pnN21/cG94T6O1L+2N3Xz3HzGFd/ViF7P3r4Utg9jltncUu9z2evr6nTl2AAh9sTs=
   </data>
  </layer>
  <layer name="maisons2" width="60" height="30">
@@ -47,7 +53,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1blOAzEUhWFDWEsIa8kOJTuUSVhCyT6U7PD+L8BvyVe6mjidPRbKPdKnkaaIfWdOPM5ZLBaLxWKxjE7GMI4WJtT96WAGswX2lStzmEcbC+HeJKawjBWsltlalqxhHRvYDNctbGMHu9grtrv02ccBDnEUrsc4wSnOcF5sd+nTQRc9XOAyuMI1+rjJsK7ulXSriV7d4g6PNU94RoWXDOsuRixFpE6peXWvhO9VX8ndqybPq2HPuVL890G+FalS8rzS8zo32Csf6XmqlDqv5P3W+yV0z/y8qXpW6v/rwrr1fgndMz9vqp7JvPd4cM3P69eK9Uv3zM+bqmeveMM7PvAZfOEbP/hNsE4sMm+sX/q5+3mrIb/xn6LnrfcrNm+unjUVmTfWL90zP2/OnlksFsuo5g+0Qz3q
+   eJzt1blOAzEUhWFDWELJDiU7lEBIoGQPJftQsoTl/V+A/0q2dDVyRGOPhXKP9GmkKWLfmROPcxaLxWKxWCyjkzGMo4UJdX/aa2OmwL5yZRZzmMeCvzeJKSxjBatltpYla1jHBjb9dQvb2MEu9ortLn32cYBDdPz1CF30cIyTYrtLn1Oc4RwXuPSucI0+bjKsq3sVutVEr25xh8eaJzyjwkuGdRcjliJSp9S8uleB9Kqv5O5Vk+fVsOdcKfJ9CN+KVCl5Xv3VK0noeaqUOq/C+633K9A9k3lT9azU/9f5dev9CnTPZN5UPQvz3uPBNT+vrBXrl+6ZzJuqZ694wzs+MPA+8YVv/CRYJ5Ywb6xf+rnLvNWQ3/hP0fPW+xWbN1fPmor0auDi/dI9k3lz9sxisVhGNb8Vmj5f
   </data>
  </layer>
  <layer name="herbe" width="60" height="30">
@@ -55,7 +61,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0zEKwCAQRUHv35lUJpfVxiLdLgRFmIHXb/G3FAAAAACArzq6gt2bbvxTGz3B3k03nii6oWwrNpf5gVl0Q9lWbC7zAzPgXB0j0ThB
+   eJzt070OgkAQReHl/SulEt9KoFFp/GkECkLovXRT7oTsGsn5klOzNxlCAAAAAAAA+G+XIoTa1Ki2+PWr0rlq2810V92O9z607Wl6qTd7kzqoo6Nyw7c+2tabBjVm3ntSlaPzhm9N2jablh3f8spzR7luLpb3P1jz3FGum4vl/Q+qDG8CkM4XH8FYkw==
   </data>
  </layer>
  <layer name="fenetres" width="60" height="30">
@@ -63,7 +69,12 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1LEVgCAMhGEmUCZQJkCWcQv3r6W8Im3MM/zfe9ekIcWRUgAAAADgH7aZXVJlVgP38nLMnJImsxa2lZ8+c0mGzIbju5k7ZMncIYt26A7e5ZGsgL+V2xf32UKvcovqFQCs6AWlCgfH
+   eJztlc0OATEUhTtrgj3BE+Bd8AQsvYy/BZ4KK8wGY8PsvIDTpI1GxmQmWjPifMm36Ka3J/e2FYIQQgghhBBCfpcSLMOKg73HcJLQqYP6kj7swp5a12EDNh3UWsBlQlcO6ktk3gEcqnULtmHHUb1/pQCLWR/ii1RhLetDgJGhDfaeEL5naTMH2HyfZdYrDGEALznMnfZ9XiPDBm4jssisN+/Z4zBneWci/fu8U3kORhazl3ejx3HouXL199vCV709f3hP9Vy5+vttoXv7mjWIyD6P2UfP1bvZyvrdk/WP8KTOoGdY39m83VVCCInjAaiEOqs=
+  </data>
+ </layer>
+ <layer name="nuages" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlrkOwjAQRJ3/ryBJkRAKriIBCq7/Y1zQjFyaXVjNk55WcWVrr6QkRCxWTUpr2JId7Bvv29VnwJtGuCEnuP3z93IuMzvEPTyQR3iq9F6vGuJcZmbEBZ7JC7xWuotXDXEuMzfEO3yQT/iqdBeLGirBubTCooZKcC6tsKghC7TL4uyyEl5zyAuvOZT5Ri/19N1R9JxD6iX1UiSi7HQhhBAx4X/Cz1npXAghfpU32D12vg==
   </data>
  </layer>
  <objectgroup name="Collisions" width="60" height="30">
@@ -107,18 +118,50 @@
   <object type="Watertop" x="480" y="352" width="16" height="16"/>
   <object type="Watertop" x="496" y="352" width="16" height="16"/>
   <object type="Watertop" x="512" y="352" width="16" height="16"/>
-  <object type="Watertop" x="528" y="352" width="16" height="16"/>
+  <object x="96" y="224">
+   <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
   <object type="Bridge" x="128" y="304">
-   <polygon points="0,0 160,0 160,96 0,96"/>
+   <polygon points="0,0 160,0 160,16 0,16"/>
   </object>
   <object type="Bridge" x="96" y="224">
-   <polygon points="0,0 128,0 128,176 0,176"/>
+   <polygon points="0,0 128,0 128,16 0,16"/>
   </object>
-  <object type="Bridge" x="576" y="256">
-   <polygon points="0,0 128,0 128,96 0,96"/>
+  <object type="Bridge" x="16" y="304">
+   <polygon points="0,0 48,0 64,16 -16,16"/>
+  </object>
+  <object type="Bridge" x="768" y="240">
+   <polygon points="0,0 16,-16 80,-16 96,0"/>
+  </object>
+  <object type="Bridge" x="432" y="112">
+   <polygon points="0,0 16,-16 80,-16 96,0"/>
+  </object>
+  <object type="Bridge" x="272" y="192">
+   <polygon points="0,0 16,-16 80,-16 96,0"/>
+  </object>
+  <object type="Bridge" x="32" y="80">
+   <polygon points="0,0 16,-16 80,-16 96,0"/>
+  </object>
+  <object type="Bridge" x="912" y="96">
+   <polygon points="0,0 16,-16 80,-16 96,0"/>
   </object>
   <object type="Bridge" x="576" y="176">
-   <polygon points="0,0 128,0 128,80 0,80"/>
+   <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
+  <object type="Bridge" x="576" y="256">
+   <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
+  <object type="Watertop" x="528" y="352" width="16" height="16"/>
+  <object type="Arrow" x="256" y="384" width="16" height="16"/>
+  <object type="Arrow" x="176" y="288" width="16" height="16"/>
+  <object type="Arrow" x="160" y="288" width="16" height="16"/>
+  <object type="Arrow" x="240" y="384" width="16" height="16"/>
+  <object type="Crab" x="480" y="400" width="16" height="16"/>
+  <object type="Bridge" x="80" y="240">
+   <polygon points="0,0 160,0 160,16 0,16"/>
+  </object>
+  <object type="FlyingWall" x="416" y="176">
+   <polygon points="0,0 64,0 80,16 -16,16"/>
   </object>
  </objectgroup>
 </map>

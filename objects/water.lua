@@ -13,5 +13,8 @@ end
 function Water:draw()
 end
 
-function Water:onCollision(dt, other, dx, dy)
+function Water:onCollision()
+end
+
+function Water:onCollisionStop()
 end

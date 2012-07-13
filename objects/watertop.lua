@@ -78,3 +78,6 @@ function Watertop:onCollision(dt, other, dx, dy)
     self.ps_bubble:start()
   end
 end
+
+function Watertop:onCollisionStop()
+end

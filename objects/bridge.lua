@@ -13,5 +13,8 @@ end
 function Bridge:draw()
 end
 
-function Bridge:onCollision(dt, other, dx, dy)
+function Bridge:onCollision()
+end
+
+function Bridge:onCollisionStop()
 end

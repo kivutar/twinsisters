@@ -15,3 +15,6 @@ end
 
 function Wall:onCollision(dt, other, dx, dy)
 end
+
+function Wall:onCollisionStop()
+end

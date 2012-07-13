@@ -23,3 +23,6 @@ end
 
 function Spike:onCollision()
 end
+
+function Spike:onCollisionStop()
+end
