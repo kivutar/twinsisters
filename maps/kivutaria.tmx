@@ -152,8 +152,6 @@
    <polygon points="0,0 128,0 128,16 0,16"/>
   </object>
   <object type="Watertop" x="528" y="352" width="16" height="16"/>
-  <object type="Arrow" x="256" y="384" width="16" height="16"/>
-  <object type="Arrow" x="176" y="288" width="16" height="16"/>
   <object type="Arrow" x="160" y="288" width="16" height="16"/>
   <object type="Arrow" x="240" y="384" width="16" height="16"/>
   <object type="Crab" x="480" y="400" width="16" height="16"/>

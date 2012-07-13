@@ -98,7 +98,11 @@ function love.update(dt)
   if love.keyboard.isDown("escape") then love.event.push("quit")  end
   if love.keyboard.isDown("r") then 
     objects.oce.x, objects.oce.y = 64, 400
+    objects.oce.ondown = {}
+    objects.oce.inwater = {}
     objects.lolo.x, objects.lolo.y = 32, 400
+    objects.lolo.ondown = {}
+    objects.lolo.inwater = {}
   end
 
   for _,o in pairs(objects) do
@@ -126,6 +130,17 @@ function love.draw()
       layer.w = layer.properties.w
       objects[layer.name] = layer
     end
+  end
+
+  bg = love.graphics.newImage('backgrounds/mountains.png')
+  bg:setFilter("nearest","nearest")
+  bg2 = love.graphics.newImage('backgrounds/mountains2.png')
+  bg2:setFilter("nearest","nearest")
+  for i=-10,10,1 do
+    love.graphics.draw(bg2, i*128 + (camera.x/5), love.graphics.getHeight()/2 - 64, 0, 1, 1, 0, 0)
+  end
+  for i=-10,10,1 do
+    love.graphics.draw(bg , i*128 + (camera.x/4), love.graphics.getHeight()/2 - 64, 0, 1, 1, 0, 0)
   end
 
   for i=-10,10,1 do
