@@ -24,12 +24,15 @@
  <tileset firstgid="465" name="feuilles" tilewidth="16" tileheight="16">
   <image source="feuilles.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="529" name="bridge" tilewidth="16" tileheight="16">
+  <image source="bridge.png" width="128" height="128"/>
+ </tileset>
  <layer name="water" width="60" height="30">
   <properties>
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0UEOgjAQRuHOETm6iotaXCAnQHTvGLsoE9OYmJK0vC95Cwgs/tY5AAAAAAAA1OQg6+ezfP+uNu9dR+0U6+WzzZt918r3pjsvWogN8V1rfLJzMoVG9to7tTvTZu2uLdpDexY6g07y/SN3p7atlNw76v+3H7a2shfAPrwACH0/kQ==
+   eJztkTkOwjAUBe3cInRAKNgKEDkIR2crQqAATsDW8yJcmC+UWMGOBLyRprBlW5pvpQghhBBCCCGEEELIN7HQr+uNfn+uLnGkVCvy+6YLRdcSroxr/WzLRN/ec28brR3YrTCBPQ9zsTu3MDfuzF5o+mgYwGGFIzj20JtZnSdh3kDvBA1Th44ZzqQ1e+Wfyk7bM7zAK7zBe6AZzHW5n1D2p9KmCNl7wP2jQ+uv9BJC/oMHSL1EdA==
   </data>
  </layer>
  <layer name="sol" width="60" height="30">
@@ -61,7 +64,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt070OgkAQReHl/SulEt9KoFFp/GkECkLovXRT7oTsGsn5klOzNxlCAAAAAAAA+G+XIoTa1Ki2+PWr0rlq2810V92O9z607Wl6qTd7kzqoo6Nyw7c+2tabBjVm3ntSlaPzhm9N2jablh3f8spzR7luLpb3P1jz3FGum4vl/Q+qDG8CkM4XH8FYkw==
+   eJzt070OgkAQReHd96/ECn0rlAahEWz8KYix99JNO5ssZMn5klMvNxlCAAAAAAAAKFsTQ7iYrqqNW39VPp223Uy9Gna8965to2lSD/ZmdVCVs2PiW09te5ne6rPy3lqdnJ0T35q17Wv67fiWF947yn1vHin/gfeOct+bR8p/AKBcf5txWb8=
   </data>
  </layer>
  <layer name="fenetres" width="60" height="30">
@@ -160,6 +163,9 @@
   </object>
   <object type="FlyingWall" x="416" y="176">
    <polygon points="0,0 64,0 80,16 -16,16"/>
+  </object>
+  <object type="Bridge" x="400" y="352">
+   <polygon points="0,0 16,-16 144,-16 160,0 160,16 144,0 16,0 0,16"/>
   </object>
  </objectgroup>
 </map>

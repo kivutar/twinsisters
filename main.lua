@@ -132,16 +132,15 @@ function love.draw()
     end
   end
 
-  bg = love.graphics.newImage('backgrounds/mountains.png')
-  bg:setFilter("nearest","nearest")
+  bg0 = love.graphics.newImage('backgrounds/mountains0.png')
+  bg0:setFilter("nearest","nearest")
+  bg1 = love.graphics.newImage('backgrounds/mountains1.png')
+  bg1:setFilter("nearest","nearest")
   bg2 = love.graphics.newImage('backgrounds/mountains2.png')
   bg2:setFilter("nearest","nearest")
-  for i=-10,10,1 do
-    love.graphics.draw(bg2, i*128 + (camera.x/5), love.graphics.getHeight()/2 - 64, 0, 1, 1, 0, 0)
-  end
-  for i=-10,10,1 do
-    love.graphics.draw(bg , i*128 + (camera.x/4), love.graphics.getHeight()/2 - 64, 0, 1, 1, 0, 0)
-  end
+  for i=-5,5,1 do love.graphics.draw(bg2, i*128 + camera.x/6, love.graphics.getHeight()/2 - 128 + camera.y/9, 0, 1, 1, 0, 0) end
+  for i=-5,5,1 do love.graphics.draw(bg1, i*128 + camera.x/4, love.graphics.getHeight()/2 - 128 + camera.y/6, 0, 1, 1, 0, 0) end
+  for i=-5,5,1 do love.graphics.draw(bg0, i*128 + camera.x/3, love.graphics.getHeight()/2 - 128 + camera.y/4, 0, 1, 1, 0, 0) end
 
   for i=-10,10,1 do
     for _,o in pairs(objects) do

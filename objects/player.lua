@@ -56,6 +56,7 @@ function Player:__init(id, skin, w, x, y, z)
   self.direction = 'left'
   self.animation = Player.anim[self.skin][self.stance][self.direction]
 
+  self.daft = false
   self.invincible = false
 
   self.jump_pressed = false
@@ -76,12 +77,12 @@ function Player:update(dt)
   local iw = count(self.inwater) and 0.75 or 1
   
   -- Moving
-  if self.right_btn() and not self.invincible then
+  if self.right_btn() and not self.daft then
     self.direction = 'right'
     self.stance = 'run'
     if self.xspeed < 0 then self.xspeed = 0 end
     if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
-  elseif self.left_btn() and not self.invincible then
+  elseif self.left_btn() and not self.daft then
     self.direction = 'left'
     self.stance = 'run'
     if self.xspeed > 0 then self.xspeed = 0 end
@@ -99,7 +100,7 @@ function Player:update(dt)
   if self.jump_btn() then
     if not self.jump_pressed then
       if count(self.ondown) and self.down_btn() then
-        self.y = self.y + 17
+        self.y = self.y + 20
         Player.ondown = {}
         TEsound.play('sounds/jump.wav')
       elseif count(self.ondown) and not self.down_btn() then
@@ -130,16 +131,24 @@ function Player:update(dt)
   self.yspeed = self.yspeed + self.gravity * dt * iw
   self.y = self.y + self.yspeed * dt * iw
 
+  if self.invincible then
+    if love.timer.getTime()*1000 % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
+  else
+    self.color = {255, 255, 255, 255}
+  end
+
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
 end
 
 function Player:draw()
-  if not count(self.ondown) and self.yspeed > 0 then self.stance = 'fall' end
-  if not count(self.ondown) and self.yspeed < 0 then self.stance = 'jump' end
+  love.graphics.setColor(unpack(self.color))
+  if self.yspeed > 0 then self.stance = 'fall' end
+  if self.yspeed < 0 then self.stance = 'jump' end
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
   self.animation:draw(self.x-16, self.y-23.5)
+  love.graphics.setColor(255, 255, 255, 255)
 end
 
 function Player:onCollision(dt, other, dx, dy)
@@ -168,7 +177,9 @@ function Player:onCollision(dt, other, dx, dy)
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.invincible = true
-    self.cron.after(2, function() self.invincible = false end)
+    self.daft = true
+    self.cron.after(2, function() self.daft = false end)
+    self.cron.after(4, function() self.invincible = false end)
   elseif other.type == 'Water' then
     self.inwater[other] = true
   end
