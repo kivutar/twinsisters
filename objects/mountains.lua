@@ -1,9 +1,9 @@
 class "Mountains" {}
 
 Mountains.paralax = {
-  { img=love.graphics.newImage('backgrounds/mountains2.png'), x=2, y=9 },
-  { img=love.graphics.newImage('backgrounds/mountains1.png'), x=3, y=6 },
-  { img=love.graphics.newImage('backgrounds/mountains0.png'), x=5, y=4 },
+  { img=love.graphics.newImage('backgrounds/mountains2.png'), x=99, y=99 },
+  { img=love.graphics.newImage('backgrounds/mountains1.png'), x=4, y=4 },
+  { img=love.graphics.newImage('backgrounds/mountains0.png'), x=2, y=2 },
 }
 for _,bg in pairs(Mountains.paralax) do bg.img:setFilter("nearest", "nearest") end
 
@@ -20,16 +20,18 @@ function Mountains:update(dt)
 end
 
 function Mountains:draw()
+  --love.graphics.setColor(0, 0, 255, 64)
   for _,bg in pairs(Mountains.paralax) do
-    for i=-6,6,1 do
+    for i=-2,4,1 do
       love.graphics.draw(
         bg.img,
-        i*128 + camera.x / bg.x,
-        -128 + (love.graphics.getHeight() / 2) + camera.y / bg.y,
+        i*128 + camera.x - camera.x/bg.x,
+        camera.y - 64 + ((400 - camera.y)/bg.y),
         0, 1, 1, 0, 0
       )
     end
   end
+  --love.graphics.setColor(255, 255, 255, 255)
 end
 
 function Mountains:onCollision()
