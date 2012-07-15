@@ -21,6 +21,8 @@ function Player:__init(id, skin, w, x, y, z)
   self.y = y
   self.z = z
 
+  self.persistant = true
+
   self.type = "Player"
 
   self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
@@ -109,17 +111,17 @@ function Player:update(dt)
   end
 
   -- Switching
-  if self.switch_btn() then
-    if not self.switch_pressed then
-      TEsound.play('sounds/switch.wav')
-      if current_world == 'lolo' then current_world = 'oce' else current_world = 'lolo' end
-      self.skin = current_world
-      self.w = current_world
-    end
-    self.switch_pressed = true
-  else
-    self.switch_pressed = false
-  end
+  --if self.switch_btn() then
+  --  if not self.switch_pressed then
+  --    TEsound.play('sounds/switch.wav')
+  --    if current_world == 'lolo' then current_world = 'oce' else current_world = 'lolo' end
+  --    self.skin = current_world
+  --    self.w = current_world
+  --  end
+  --  self.switch_pressed = true
+  --else
+  --  self.switch_pressed = false
+  --end
 
   -- Openning doors
   if self.up_btn() and count(self.doors) then
@@ -128,11 +130,14 @@ function Player:update(dt)
         map = ATL.load(body.parent.map..'.tmx')
         map.drawObjects = false
         Collider:clear()
-        oce = objects.oce
-        objects = {}
-        objects.oce = oce
+        for k,o in pairs(objects) do
+          if not o.persistant then
+            --if o.body then Collider:remove(o.body) end
+            objects[k] = nil
+          end
+        end
         self.x = body.parent.tx*16
-        self.y = body.parent.ty*16
+        self.y = body.parent.ty*16+8
         self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
         self.body.parent = self
         self.body.type = "Player"
