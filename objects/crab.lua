@@ -7,10 +7,6 @@ Crab.img.stand.left:setFilter("nearest", "nearest")
 Crab.img.stand.right = love.graphics.newImage('sprites/crab_stand_right.png')
 Crab.img.stand.right:setFilter("nearest", "nearest")
 
-local function sign(x)
-  return x < 0 and -1 or (x > 0 and 1 or 0)
-end
-
 function Crab:__init(w, x, y, z)
   self.w = w
   self.x = x
@@ -64,9 +60,5 @@ function Crab:onCollision(dt, other, dx, dy)
   end
 end
 
-function Crab:onCollisionStop(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w then return end
-  if other.type == 'Wall' then
-    if dy >  0.01 then self.onground = false end
-  end
+function Crab:onCollisionStop()
 end

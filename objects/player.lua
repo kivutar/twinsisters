@@ -13,17 +13,6 @@ for _,skin in pairs({'lolo', 'oce'}) do
   end
 end
 
-local function sign(x)
-  return x < 0 and -1 or (x > 0 and 1 or 0)
-end
-
-local function count(dict)
-  for _,_ in pairs(dict) do
-    return true
-  end
-  return false
-end
-
 function Player:__init(id, skin, w, x, y, z)
   self.id = id
   self.skin = skin

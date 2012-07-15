@@ -1,4 +1,5 @@
 require 'libs/class'
+require 'libs/utils'
 require 'libs/anal'
 require 'libs/TEsound'
 require 'libs/camera'
