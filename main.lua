@@ -15,6 +15,8 @@ require 'objects/crab'
 require 'objects/wall'
 require 'objects/flyingwall'
 require 'objects/bridge'
+require 'objects/mountains'
+require 'objects/door'
 
 ATL.path = 'maps/'
 map = ATL.load 'kivutaria.tmx'
@@ -22,13 +24,19 @@ map.drawObjects = false
 
 function addObject(o, w)
   if o.type == 'Wall' then
-    no = Wall:new(w, 0, 0, 1)
+    no = Wall:new(w, 0, 0, 10)
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Bridge' then
-    no = Bridge:new(w, 0, 0, 1)
+    no = Bridge:new(w, 0, 0, 10)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Door' then
+    no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty)
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()
@@ -57,9 +65,19 @@ function addObject(o, w)
     no = Crab:new(w, o.x+16, o.y+32, 6)
   elseif o.type == 'Watertop' then
     no = Watertop:new(w, o.x+8, o.y+8, 1)
+  elseif o.type == 'Mountains' then
+    no = Mountains:new(w, o.x, o.y, 0)
   end
   no.body.type = o.type
   objects[o.type..'_'..o.x..'_'..o.y] = no
+end
+
+function addObjects(mapol)
+  for k1, ol in pairs(mapol) do
+    for k2, o in pairs(ol.objects) do
+      if ol and ol.properties then addObject(o, ol.properties.w) else addObject(o) end
+    end
+  end
 end
 
 function love.load()
@@ -73,36 +91,30 @@ function love.load()
   TEsound.play('bgm/game.mp3')
 
   objects = {}
+  addObjects(map.ol)
 
-  for k1, ol in pairs(map.ol) do
-    for k2, o in pairs(ol.objects) do
-      addObject(o, ol.properties.w)
-    end
-  end
+  current_world = 'oce'
 
-  current_world = 'lolo'
-  switch_pressed = false
+  objects.oce = Player:new('oce', 'oce', current_world, 64, 300, 8)
 
-  objects.oce = Player:new('oce', 'oce', current_world, 64, 420, 8)
-
-  objects.lolo = Player:new('lolo', 'lolo', current_world, 128, 420, 8)
-  objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
-  objects.lolo.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1")
-  objects.lolo.down_btn = loadstring("return love.joystick.getAxis(1,2) == 1")
-  objects.lolo.jump_btn = loadstring("return love.joystick.isDown(1,2)")
-  objects.lolo.switch_btn = loadstring("return love.joystick.isDown(1,4)")
+  --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 400, 8)
+  --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
+  --objects.lolo.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1")
+  --objects.lolo.down_btn = loadstring("return love.joystick.getAxis(1,2) == 1")
+  --objects.lolo.jump_btn = loadstring("return love.joystick.isDown(1,2)")
+  --objects.lolo.switch_btn = loadstring("return love.joystick.isDown(1,4)")
 end
 
 function love.update(dt)
 
-  if love.keyboard.isDown("escape") then love.event.push("quit")  end
+  if love.keyboard.isDown("escape") then love.event.push("quit") end
   if love.keyboard.isDown("r") then 
     objects.oce.x, objects.oce.y = 64, 400
     objects.oce.ondown = {}
     objects.oce.inwater = {}
-    objects.lolo.x, objects.lolo.y = 32, 400
-    objects.lolo.ondown = {}
-    objects.lolo.inwater = {}
+    --objects.lolo.x, objects.lolo.y = 32, 400
+    --objects.lolo.ondown = {}
+    --objects.lolo.inwater = {}
   end
 
   for _,o in pairs(objects) do
@@ -127,20 +139,10 @@ function love.draw()
   for z,layer in pairs(map.drawList) do
     if type(layer) == "table" then
       layer.z = z
-      layer.w = layer.properties.w
+      layer.w = layer.properties and layer.properties.w or nil
       objects[layer.name] = layer
     end
   end
-
-  bg0 = love.graphics.newImage('backgrounds/mountains0.png')
-  bg0:setFilter("nearest","nearest")
-  bg1 = love.graphics.newImage('backgrounds/mountains1.png')
-  bg1:setFilter("nearest","nearest")
-  bg2 = love.graphics.newImage('backgrounds/mountains2.png')
-  bg2:setFilter("nearest","nearest")
-  for i=-5,5,1 do love.graphics.draw(bg2, i*128 + camera.x/6, love.graphics.getHeight()/2 - 128 + camera.y/9, 0, 1, 1, 0, 0) end
-  for i=-5,5,1 do love.graphics.draw(bg1, i*128 + camera.x/4, love.graphics.getHeight()/2 - 128 + camera.y/6, 0, 1, 1, 0, 0) end
-  for i=-5,5,1 do love.graphics.draw(bg0, i*128 + camera.x/3, love.graphics.getHeight()/2 - 128 + camera.y/4, 0, 1, 1, 0, 0) end
 
   for i=-10,10,1 do
     for _,o in pairs(objects) do
@@ -156,7 +158,7 @@ function love.draw()
   end
 
   camera:unset()
-  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 10, 10)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 10, 10)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)

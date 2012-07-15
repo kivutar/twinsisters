@@ -51,6 +51,7 @@ function Player:__init(id, skin, w, x, y, z)
 
   self.inwater = {}
   self.ondown = {}
+  self.doors = {}
 
   self.stance = 'stand'
   self.direction = 'left'
@@ -58,13 +59,16 @@ function Player:__init(id, skin, w, x, y, z)
 
   self.daft = false
   self.invincible = false
+  self.color = {255, 255, 255, 255}
 
   self.jump_pressed = false
   self.switch_pressed = false
+  self.open_pressed = true
 
   self.left_btn = loadstring("return love.keyboard.isDown('left')")
   self.right_btn = loadstring("return love.keyboard.isDown('right')")
   self.down_btn = loadstring("return love.keyboard.isDown('down')")
+  self.up_btn = loadstring("return love.keyboard.isDown('up')")
   self.jump_btn = loadstring("return love.keyboard.isDown(' ')")
   self.switch_btn = loadstring("return love.keyboard.isDown('v')")
 
@@ -128,9 +132,38 @@ function Player:update(dt)
     self.switch_pressed = false
   end
 
+  -- Openning doors
+  if self.up_btn() and count(self.doors) then
+    if not self.open_pressed then
+      for body,_ in pairs(self.doors) do
+        map = ATL.load(body.parent.map..'.tmx')
+        map.drawObjects = false
+        Collider:clear()
+        oce = objects.oce
+        objects = {}
+        objects.oce = oce
+        self.x = body.parent.tx*16
+        self.y = body.parent.ty*16
+        self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
+        self.body.parent = self
+        self.body.type = "Player"
+        self.inwater = {}
+        self.ondown = {}
+        self.doors = {}
+        addObjects(map.ol)
+        camera:move(-camera.x+objects.oce.x-8, -camera.y+objects.oce.y-12)
+      end
+    end
+      self.open_pressed = true
+    else
+      self.open_pressed = false
+  end
+
+  -- Falling
   self.yspeed = self.yspeed + self.gravity * dt * iw
   self.y = self.y + self.yspeed * dt * iw
 
+  -- Blinking
   if self.invincible then
     if love.timer.getTime()*1000 % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
   else
@@ -153,26 +186,40 @@ end
 
 function Player:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
+
+  -- Wall
   if other.type == 'Wall' or other.type == 'FlyingWall' then
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
     if dy > 0 then self.ondown[other] = true end
     self.x, self.y = self.x - dx, self.y - dy
+
+  -- Bridge
   elseif other.type == 'Bridge' then
     if dy > 0 and self.yspeed > 0 then
       self.yspeed = 0
       self.ondown[other] = true
       self.y = self.y - dy
     end
+
+  -- Door
+  elseif other.type == 'Door' then
+    self.doors[other] = true
+
+  -- Spike
   elseif other.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
+
+  -- Arrow
   elseif other.type == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
     if dy > 0 and self.yspeed > 0 then
       TEsound.play('sounds/arrow.wav')
       self.yspeed = - 1.75 * self.jumpspeed
     end
+
+  -- Crab
   elseif other.type == 'Crab' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
@@ -180,6 +227,8 @@ function Player:onCollision(dt, other, dx, dy)
     self.daft = true
     self.cron.after(2, function() self.daft = false end)
     self.cron.after(4, function() self.invincible = false end)
+
+  -- Water
   elseif other.type == 'Water' then
     self.inwater[other] = true
   end
@@ -187,9 +236,11 @@ end
 
 function Player:onCollisionStop(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w then return end
-  if other.type == 'Wall' or other.type == 'Bridge' then
+  if other.type == 'Wall' or other.type == 'FlyingWall' or other.type == 'Bridge' then
     if dy > 0 then self.ondown[other] = nil end
   elseif other.type == 'Water' then
     self.inwater[other] = nil
+  elseif other.type == 'Door' then
+    self.doors[other] = nil
   end
 end
