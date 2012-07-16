@@ -46,7 +46,7 @@ end
 
 function Crab:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
-  if other.type == 'Wall' then
+  if other.type == 'Wall' or other.type == 'FlyingWall' or other.type == 'Bridge' then
     if dx < 0 then
       self.direction = 'right'
     elseif dx > 0 then

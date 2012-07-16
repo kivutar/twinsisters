@@ -3,7 +3,7 @@ class "Player" {}
 Player.anim = {}
 for _,skin in pairs({'lolo', 'oce'}) do
   Player.anim[skin] = {}
-  for stance, speed in pairs({stand=1.0, run=0.2, jump=0.1, fall=0.1}) do
+  for stance, speed in pairs({stand=1, slap=1, run=0.2, jump=0.1, fall=0.1}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -50,18 +50,21 @@ function Player:__init(id, skin, w, x, y, z)
 
   self.daft = false
   self.invincible = false
+  self.attacking = false
   self.color = {255, 255, 255, 255}
 
   self.jump_pressed = false
   self.switch_pressed = false
   self.open_pressed = true
+  self.slap_pressed = true
 
-  self.left_btn = loadstring("return love.keyboard.isDown('left')")
-  self.right_btn = loadstring("return love.keyboard.isDown('right')")
-  self.down_btn = loadstring("return love.keyboard.isDown('down')")
-  self.up_btn = loadstring("return love.keyboard.isDown('up')")
-  self.jump_btn = loadstring("return love.keyboard.isDown(' ')")
+  self.left_btn   = loadstring("return love.keyboard.isDown('left')")
+  self.right_btn  = loadstring("return love.keyboard.isDown('right')")
+  self.down_btn   = loadstring("return love.keyboard.isDown('down')")
+  self.up_btn     = loadstring("return love.keyboard.isDown('up')")
+  self.jump_btn   = loadstring("return love.keyboard.isDown(' ')")
   self.switch_btn = loadstring("return love.keyboard.isDown('v')")
+  self.slap_btn   = loadstring("return love.keyboard.isDown('b')")
 
   self.cron = require 'libs/cron'
 end
@@ -73,15 +76,19 @@ function Player:update(dt)
   
   -- Moving
   if self.right_btn() and not self.daft then
-    self.direction = 'right'
-    self.stance = 'run'
-    if self.xspeed < 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
+    if not (self.direction == 'left' and self.attacking) then
+      self.direction = 'right'
+      self.stance = 'run'
+      if self.xspeed < 0 then self.xspeed = 0 end
+      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
+    end
   elseif self.left_btn() and not self.daft then
-    self.direction = 'left'
-    self.stance = 'run'
-    if self.xspeed > 0 then self.xspeed = 0 end
-    if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
+    if not (self.direction == 'right' and self.attacking) then
+      self.direction = 'left'
+      self.stance = 'run'
+      if self.xspeed > 0 then self.xspeed = 0 end
+      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
+    end
   else
     f = 0
     if count(self.ondown) then f = self.friction else f = self.airfriction end
@@ -89,18 +96,27 @@ function Player:update(dt)
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
+  if self.attacking and count(self.ondown) then
+    f = 0
+    if count(self.ondown) then f = self.friction else f = self.airfriction end
+    if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt * 2 end
+    if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt * 2 end
+  end
   if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + self.xspeed + self.groundspeed end
 
-  -- Jumping
+  -- Jumping and swimming
   if self.jump_btn() then
     if not self.jump_pressed then
+      -- Jump from bridge
       if count(self.ondown) and self.down_btn() then
         self.y = self.y + 20
         Player.ondown = {}
         TEsound.play('sounds/jump.wav')
-      elseif count(self.ondown) and not self.down_btn() then
+      -- Regular jump
+      elseif count(self.ondown) and not self.down_btn() and not self.attacking then
         self.yspeed = - self.jumpspeed * iw -- - math.abs(self.xspeed*30*iw)
         TEsound.play('sounds/jump.wav')
+      -- Swimming
       elseif count(self.inwater) then
         self.yspeed = - self.jumpspeed * iw
       end
@@ -108,6 +124,18 @@ function Player:update(dt)
     self.jump_pressed = true
   else
     self.jump_pressed = false
+  end
+
+  -- Free slaps
+  if self.slap_btn() then
+    if not self.slap_pressed then
+      self.attacking = true
+      TEsound.play('sounds/sword.wav')
+      self.cron.after(0.5, function() self.attacking = false end)
+    end
+    self.slap_pressed = true
+  else
+    self.slap_pressed = false
   end
 
   -- Switching
@@ -129,6 +157,8 @@ function Player:update(dt)
       for body,_ in pairs(self.doors) do
         map = ATL.load(body.parent.map..'.tmx')
         map.drawObjects = false
+        love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
+        camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
         Collider:clear()
         for k,o in pairs(objects) do
           if not o.persistant then
@@ -145,7 +175,7 @@ function Player:update(dt)
         self.ondown = {}
         self.doors = {}
         addObjects(map.ol)
-        camera:move(-camera.x+objects.oce.x-8, -camera.y+objects.oce.y-12)
+        camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
       end
     end
       self.open_pressed = true
@@ -170,8 +200,9 @@ end
 
 function Player:draw()
   love.graphics.setColor(unpack(self.color))
-  if self.yspeed > 0 then self.stance = 'fall' end
-  if self.yspeed < 0 then self.stance = 'jump' end
+  if self.yspeed > 0 and self.attacking ~= 'slap' then self.stance = 'fall' end
+  if self.yspeed < 0 and self.attacking ~= 'slap' then self.stance = 'jump' end
+  if self.attacking then self.stance = 'slap' end
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
   self.animation:draw(self.x-16, self.y-23.5)

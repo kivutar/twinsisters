@@ -9,7 +9,7 @@ function FlyingWall:__init(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.xspeed = 0.5
+  self.xspeed = 1
 end
 
 function FlyingWall:update(dt)
@@ -25,9 +25,9 @@ function FlyingWall:onCollision(dt, other, dx, dy)
   if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
   if other.type == 'Wall' or other.type == 'Bridge' then
     if dx < 0 then
-      self.xspeed =  0.5
+      self.xspeed =  1
     elseif dx > 0 then
-      self.xspeed = -0.5
+      self.xspeed = -1
     end
     self.x = self.x - dx
   elseif other.type == 'Player' then

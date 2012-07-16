@@ -70,7 +70,8 @@ function addObject(o, w)
     no = Mountains:new(w, o.x, o.y, 0)
   end
   no.body.type = o.type
-  objects[o.type..'_'..o.x..'_'..o.y] = no
+  name = no.name or o.type..'_'..o.x..'_'..o.y
+  objects[name] = no
 end
 
 function addObjects(mapol)
@@ -83,22 +84,22 @@ end
 
 function love.load()
 
-  Collider = HC(100, onCollision, onCollisionStop)
+  Collider = HC(30, onCollision, onCollisionStop)
 
-  love.graphics.setBackgroundColor(84, 200, 248)
+  love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
   love.mouse.setVisible(false)
   
-  TEsound.play('bgm/game.mp3')
+  --TEsound.play('bgm/game.mp3')
 
   objects = {}
   addObjects(map.ol)
 
   current_world = 'oce'
 
-  objects.oce = Player:new('oce', 'oce', current_world, 64, 300, 8)
+  objects.oce = Player:new('oce', 'oce', current_world, 64, 200, 8)
 
-  --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 400, 8)
+  --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 300, 8)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
   --objects.lolo.right_btn = loadstring("return love.joystick.getAxis(1,1) == 1")
   --objects.lolo.down_btn = loadstring("return love.joystick.getAxis(1,2) == 1")
@@ -110,7 +111,7 @@ function love.update(dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit") end
   if love.keyboard.isDown("r") then 
-    objects.oce.x, objects.oce.y = 64, 400
+    objects.oce.x, objects.oce.y = 64, 300
     objects.oce.ondown = {}
     objects.oce.inwater = {}
     --objects.lolo.x, objects.lolo.y = 32, 400
@@ -122,12 +123,22 @@ function love.update(dt)
     if o.update then o:update(dt) end
   end
 
-  --camera:move(
-  --  ((-camera.x + (objects.lolo.x- 8 + objects.oce.x- 8) / 2 ) / 10.0),
-  --  ((-camera.y + (objects.lolo.y-12 + objects.oce.y-12) / 2 ) / 10.0)
-  --)
-  camera:move((-camera.x+objects.oce.x-8)/10, (-camera.y+objects.oce.y-12)/10)
-  camera:setScale(1/2, 1/2)
+  tofollow = {}
+  tfx = 0
+  tfy = 0
+  if objects.oce  then table.insert(tofollow, objects.oce ) end
+  if objects.lolo then table.insert(tofollow, objects.lolo) end
+  for _,o in pairs(tofollow) do
+    tfx = tfx + o.x
+    tfy = tfy + o.y
+  end
+
+  camera:move(
+    (-camera.x+tfx/#tofollow)/10,
+    (-camera.y+tfy/#tofollow)/10
+  )
+
+  camera:setScale(1/(map.properties.zoom or 2), 1/(map.properties.zoom or 2))
 
   Collider:update(dt)
 end

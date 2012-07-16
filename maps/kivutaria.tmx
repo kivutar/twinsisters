@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="30" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="b" value="248"/>
+  <property name="g" value="200"/>
+  <property name="r" value="84"/>
+  <property name="zoom" value="2"/>
+ </properties>
  <tileset firstgid="1" name="maison" tilewidth="16" tileheight="16">
   <image source="maison2.png" width="256" height="128"/>
  </tileset>
@@ -48,7 +54,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztz8EJADAIBEGbTAP2X4QWERSSGdj/XQQAAAAAL8jubI8Y9ttfAIAbCnz+AQ0=
+   eJztzwENAAAEAEEl9a+ihLFxl+A/AgAAAIArcjtg2LdfAIAOBZNSAKs=
   </data>
  </layer>
  <layer name="maisons" width="60" height="30">
@@ -56,7 +62,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1blOAzEUhWFDWELJDiU7lEBIoGQPJftQsoTl/V+A/0q2dDVyRGOPhXKP9GmkKWLfmROPcxaLxWKxWCyjkzGMo4UJdX/aa2OmwL5yZRZzmMeCvzeJKSxjBatltpYla1jHBjb9dQvb2MEu9ortLn32cYBDdPz1CF30cIyTYrtLn1Oc4RwXuPSucI0+bjKsq3sVutVEr25xh8eaJzyjwkuGdRcjliJSp9S8uleB9Kqv5O5Vk+fVsOdcKfJ9CN+KVCl5Xv3VK0noeaqUOq/C+633K9A9k3lT9azU/9f5dev9CnTPZN5UPQvz3uPBNT+vrBXrl+6ZzJuqZ694wzs+MPA+8YVv/CRYJ5Ywb6xf+rnLvNWQ3/hP0fPW+xWbN1fPmor0auDi/dI9k3lz9sxisVhGNb8Vmj5f
+   eJzt1bdOA0EUheEhQ0mGkgwlYFJJNiV5KQkmvP8L8F9pRlytxt0EId8jfVprC8/c9fGscxaLxWKxWCyDkyEMYwSj6v6EN4mpCvvKlWnMYBZz/t4YxrGIJSzX2VqWrGAVa1j31w1sYgvb2Km2u/TZxR720fHXAxziCMc4qba79DnFGc5xgUvvCtfo4ibDurpXoVslenWLOzziHg/+8xOe0eAlw7rzEQsRqaPnfceHKzOv7lUgveoquXtV8rzSz1lrFHk/hHdFqtQ8r2Lz6l5JQs9TpdZ5FX7fdr8C3TOZN1XP+vUq9//X+XXb/Qp0z2TeVD0L8+qzueS8slasX7pnMm+qnr3izf2dzT3vE1/4xk+CdWIJ88b6pZ+7zNv0+Y7/FD1vu1+xeXP1rFSkVz0X75fumcybs2cWi8UyqPkFcNE+eQ==
   </data>
  </layer>
  <layer name="herbe" width="60" height="30">
@@ -72,7 +78,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlc0OATEUhTtrgj3BE+Bd8AQsvYy/BZ4KK8wGY8PsvIDTpI1GxmQmWjPifMm36Ka3J/e2FYIQQgghhBBCfpcSLMOKg73HcJLQqYP6kj7swp5a12EDNh3UWsBlQlcO6ktk3gEcqnULtmHHUb1/pQCLWR/ii1RhLetDgJGhDfaeEL5naTMH2HyfZdYrDGEALznMnfZ9XiPDBm4jssisN+/Z4zBneWci/fu8U3kORhazl3ejx3HouXL199vCV709f3hP9Vy5+vttoXv7mjWIyD6P2UfP1bvZyvrdk/WP8KTOoGdY39m83VVCCInjAaiEOqs=
+   eJztlc0OwUAUhadrgj3BE+DBvIy/BZ4KK3SD2tCdF3Am6cRERtPG3LbifMm3nTsn984dpQghhBBCCCHkd2nAJmwJnD2B04zOBOq76MIe7AucvYSrjK4F6rsYwCEcFVTvX6jBetmXKJA27JR9CTC29MEhUCoMPB0mgM/9rLPeYAwjeK1g7rz7eYMMW7hzZNFZ78Grx3HF8s5V/v28T/IcrSx2Lx9Wj9MwcyX19/siTHp7+fKdmrmS+vt9YXr7njVyZF+knGPm6tNslb33dP0TPCd3MDNs3mzV3iohhKTxBIeJOJM=
   </data>
  </layer>
  <layer name="nuages" width="60" height="30">
@@ -163,16 +169,13 @@
   <object type="FlyingWall" x="416" y="176">
    <polygon points="0,0 64,0 80,16 -16,16"/>
   </object>
-  <object type="Bridge" x="400" y="352">
-   <polygon points="0,0 16,-16 144,-16 160,0 160,16 144,0 16,0 0,16"/>
-  </object>
   <object type="Mountains" x="16" y="16"/>
   <object type="Crab" x="480" y="384" width="32" height="32"/>
   <object type="Door" x="592" y="320">
    <properties>
     <property name="map" value="house1"/>
     <property name="tx" value="7"/>
-    <property name="ty" value="13"/>
+    <property name="ty" value="14"/>
    </properties>
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
@@ -180,9 +183,12 @@
    <properties>
     <property name="map" value="house1"/>
     <property name="tx" value="7"/>
-    <property name="ty" value="6"/>
+    <property name="ty" value="7"/>
    </properties>
    <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object type="Bridge" x="400" y="352">
+   <polygon points="0,0 16,-16 144,-16 160,0"/>
   </object>
  </objectgroup>
 </map>

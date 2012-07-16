@@ -93,17 +93,8 @@
   <object type="Wall" x="0" y="16">
    <polygon points="0,0 16,0 16,352 0,352"/>
   </object>
-  <object type="Wall" x="480" y="368">
-   <polygon points="0,0 80,0 80,16 0,16"/>
-  </object>
   <object type="Wall" x="640" y="448">
    <polygon points="0,0 64,0 64,16 0,16"/>
-  </object>
-  <object type="Wall" x="400" y="448">
-   <polygon points="0,0 80,-80 80,-64 0,16"/>
-  </object>
-  <object type="Wall" x="560" y="368">
-   <polygon points="0,0 80,80 80,96 0,16"/>
   </object>
   <object type="Wall" x="0" y="0">
    <polygon points="0,0 960,0 960,16 0,16"/>
@@ -133,5 +124,10 @@
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
   <object type="Crab" x="512" y="144" width="32" height="32"/>
+  <object type="Arrow" x="512" y="352" width="16" height="16"/>
+  <object type="Arrow" x="768" y="352" width="16" height="16"/>
+  <object type="Bridge" x="400" y="448">
+   <polygon points="0,0 80,-80 160,-80 240,0 240,16 0,16"/>
+  </object>
  </objectgroup>
 </map>
