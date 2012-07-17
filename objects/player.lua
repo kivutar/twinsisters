@@ -1,14 +1,14 @@
 class "Player" {}
 
 Player.anim = {}
-for _,skin in pairs({'lolo', 'oce'}) do
+for _,skin in pairs({'oce'}) do
   Player.anim[skin] = {}
   for stance, speed in pairs({stand=1, slap=1, run=0.2, jump=0.1, fall=0.1}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
       img:setFilter("nearest", "nearest")
-      Player.anim[skin][stance][direction] = newAnimation(img , 32, 32, speed, 0)
+      Player.anim[skin][stance][direction] = newAnimation(img , 64, 64, speed, 0)
     end
   end
 end
@@ -131,7 +131,11 @@ function Player:update(dt)
     if not self.slap_pressed then
       self.attacking = true
       TEsound.play('sounds/sword.wav')
-      self.cron.after(0.5, function() self.attacking = false end)
+      objects['sword_'..self.id] = Sword:new(self)
+      self.cron.after(0.5, function()
+        self.attacking = false
+        objects['sword_'..self.id] = nil
+      end)
     end
     self.slap_pressed = true
   else
@@ -155,6 +159,7 @@ function Player:update(dt)
   if self.up_btn() and count(self.doors) then
     if not self.open_pressed then
       for body,_ in pairs(self.doors) do
+        TEsound.play('sounds/doorOpen01.wav')
         map = ATL.load(body.parent.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
@@ -200,12 +205,12 @@ end
 
 function Player:draw()
   love.graphics.setColor(unpack(self.color))
-  if self.yspeed > 0 and self.attacking ~= 'slap' then self.stance = 'fall' end
-  if self.yspeed < 0 and self.attacking ~= 'slap' then self.stance = 'jump' end
+  if self.yspeed > 0 then self.stance = 'fall' end
+  if self.yspeed < 0 then self.stance = 'jump' end
   if self.attacking then self.stance = 'slap' end
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
-  self.animation:draw(self.x-16, self.y-23.5)
+  self.animation:draw(self.x-16-16, self.y-23.5-32)
   love.graphics.setColor(255, 255, 255, 255)
 end
 

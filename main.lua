@@ -1,28 +1,3 @@
-require 'libs/class'
-require 'libs/utils'
-require 'libs/anal'
-require 'libs/TEsound'
-require 'libs/camera'
-HC  = require 'libs/HardonCollider'
-ATL = require 'libs/AdvTiledLoader.Loader'
-
-require 'objects/player'
-require 'objects/water'
-require 'objects/watertop'
-require 'objects/spike'
-require 'objects/arrow'
-require 'objects/fish'
-require 'objects/crab'
-require 'objects/wall'
-require 'objects/flyingwall'
-require 'objects/bridge'
-require 'objects/mountains'
-require 'objects/door'
-
-ATL.path = 'maps/'
-map = ATL.load 'kivutaria.tmx'
-map.drawObjects = false
-
 function addObject(o, w)
   if o.type == 'Wall' then
     no = Wall:new(w, 0, 0, 10)
@@ -83,6 +58,31 @@ function addObjects(mapol)
 end
 
 function love.load()
+  require 'libs/class'
+  require 'libs/utils'
+  require 'libs/anal'
+  require 'libs/TEsound'
+  require 'libs/camera'
+  HC  = require 'libs/HardonCollider'
+  ATL = require 'libs/AdvTiledLoader.Loader'
+
+  require 'objects/player'
+  require 'objects/water'
+  require 'objects/watertop'
+  require 'objects/spike'
+  require 'objects/arrow'
+  require 'objects/fish'
+  require 'objects/crab'
+  require 'objects/wall'
+  require 'objects/flyingwall'
+  require 'objects/bridge'
+  require 'objects/mountains'
+  require 'objects/door'
+  require 'objects/sword'
+
+  ATL.path = 'maps/'
+  map = ATL.load 'kivutaria.tmx'
+  map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 

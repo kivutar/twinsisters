@@ -22,7 +22,7 @@ end
 function Mountains:draw()
   --love.graphics.setColor(0, 0, 255, 64)
   for _,bg in pairs(Mountains.paralax) do
-    for i=-2,4,1 do
+    for i=-3,4,1 do
       love.graphics.draw(
         bg.img,
         i*128 + camera.x - camera.x/bg.x,

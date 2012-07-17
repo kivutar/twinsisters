@@ -71,11 +71,13 @@ function Watertop:draw()
 end
 
 function Watertop:onCollision(dt, other, dx, dy)
-  if math.abs(other.parent.yspeed) > 20 or math.abs(other.parent.xspeed) > 0.5 then
-    self.ps_drop:start()
-  end
-  if math.abs(other.parent.yspeed) > 20 then
-    self.ps_bubble:start()
+  if other.type == 'Player' then
+    if math.abs(other.parent.yspeed) > 20 or math.abs(other.parent.xspeed) > 0.5 then
+      self.ps_drop:start()
+    end
+    if math.abs(other.parent.yspeed) > 20 then
+      self.ps_bubble:start()
+    end
   end
 end
 
