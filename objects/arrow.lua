@@ -13,16 +13,6 @@ function Arrow:__init(w, x, y, z)
   self.body.parent = self
 end
 
-function Arrow:update(dt)
-
-end
-
 function Arrow:draw()
   love.graphics.draw(Arrow.image, self.x, self.y, 0, 1, 1, 8, 8)
-end
-
-function Arrow:onCollision()
-end
-
-function Arrow:onCollisionStop()
 end

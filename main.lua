@@ -44,7 +44,7 @@ function addObject(o, w)
   elseif o.type == 'Mountains' then
     no = Mountains:new(w, o.x, o.y, 0)
   end
-  no.body.type = o.type
+  no.type = o.type
   name = no.name or o.type..'_'..o.x..'_'..o.y
   objects[name] = no
 end
@@ -159,12 +159,12 @@ function love.draw()
   for i=-10,10,1 do
     for _,o in pairs(objects) do
       if o.z == i then
-        if o.w == current_world or o.w == 'shared' or not o.w then
-          love.graphics.setColor(255,255,255,255)
-        else
-          love.graphics.setColor(0,0,255,64)
-        end
-        o:draw()
+        --if o.w == current_world or o.w == 'shared' or not o.w then
+        --  love.graphics.setColor(255,255,255,255)
+        --else
+        --  love.graphics.setColor(0,0,255,64)
+        --end
+        if o.draw then o:draw() end
       end
     end
   end
@@ -175,14 +175,14 @@ end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)
   for _,o in pairs(objects) do
-    if shape_a == o.body then o:onCollision(dt, shape_b, -dx, -dy) end
-    if shape_b == o.body then o:onCollision(dt, shape_a,  dx,  dy) end
+    if shape_a == o.body and o.onCollision then o:onCollision(dt, shape_b, -dx, -dy) end
+    if shape_b == o.body and o.onCollision then o:onCollision(dt, shape_a,  dx,  dy) end
   end
 end
 
 function onCollisionStop(dt, shape_a, shape_b, dx, dy)
   for _,o in pairs(objects) do
-    if shape_a == o.body then o:onCollisionStop(dt, shape_b, -dx, -dy) end
-    if shape_b == o.body then o:onCollisionStop(dt, shape_a,  dx,  dy) end
+    if shape_a == o.body and o.onCollisionStop then o:onCollisionStop(dt, shape_b, -dx, -dy) end
+    if shape_b == o.body and o.onCollisionStop then o:onCollisionStop(dt, shape_a,  dx,  dy) end
   end
 end

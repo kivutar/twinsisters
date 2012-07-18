@@ -70,16 +70,21 @@ function Watertop:draw()
   love.graphics.draw(self.ps_bubble, 0, 0)
 end
 
-function Watertop:onCollision(dt, other, dx, dy)
-  if other.type == 'Player' then
-    if math.abs(other.parent.yspeed) > 20 or math.abs(other.parent.xspeed) > 0.5 then
+function Watertop:onCollision(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
+
+  -- Do nothing if the object belongs to another dimention
+  -- if o.w ~= nil and o.w ~= self.w then return end
+
+  -- Collision with Player
+  if o.type == 'Player' then
+    if math.abs(o.yspeed) > 20 or math.abs(o.xspeed) > 0.5 then
       self.ps_drop:start()
     end
-    if math.abs(other.parent.yspeed) > 20 then
+    if math.abs(o.yspeed) > 20 then
       self.ps_bubble:start()
     end
   end
-end
 
-function Watertop:onCollisionStop()
 end

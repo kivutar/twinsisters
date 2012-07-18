@@ -6,15 +6,3 @@ function Water:__init(w, x, y, z)
   self.y = y
   self.z = z
 end
-
-function Water:update(dt)
-end
-
-function Water:draw()
-end
-
-function Water:onCollision()
-end
-
-function Water:onCollisionStop()
-end

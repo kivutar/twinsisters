@@ -21,23 +21,38 @@ function FlyingWall:draw()
   love.graphics.draw(FlyingWall.img, self.x, self.y, 0, 1, 1, 64, 24)
 end
 
-function FlyingWall:onCollision(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
-  if other.type == 'Wall' or other.type == 'Bridge' then
+function FlyingWall:onCollision(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
+
+  -- Do nothing if the object belong to another dimention
+  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
+
+  -- Collision with Wall or Bridge
+  if o.type == 'Wall' or o.type == 'Bridge' then
     if dx < 0 then
       self.xspeed =  1
     elseif dx > 0 then
       self.xspeed = -1
     end
     self.x = self.x - dx
-  elseif other.type == 'Player' then
-  	other.parent.groundspeed = self.xspeed
+
+  -- Collision with Player
+  elseif o.type == 'Player' then
+  	o.groundspeed = self.xspeed
+
   end
 end
 
-function FlyingWall:onCollisionStop(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w and self.w ~= nil then return end
-  if other.type == 'Player' then
-    other.parent.groundspeed = 0
+function FlyingWall:onCollisionStop(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
+
+  -- Do nothing if the object belong to another dimention
+  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
+
+  -- Collision stop with Player
+  if o.type == 'Player' then
+    o.groundspeed = 0
   end
 end

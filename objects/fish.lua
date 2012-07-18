@@ -33,15 +33,21 @@ function Fish:draw()
   love.graphics.draw(Fish.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 8, 8)
 end
 
-function Fish:onCollision(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w then return end
-  if other.type == 'Wall' then
+function Fish:onCollision(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
+
+  -- Do nothing if the object belongs to another dimention
+  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
+
+  -- Collision with Wall
+  if o.type == 'Wall' then
     if dx < -1 then
       self.direction = 'right'
-      self.x = self.x - dx
     elseif dx > 1 then
       self.direction = 'left'
-      self.x = self.x - dx
     end
+    self.x = self.x - dx
+
   end
 end

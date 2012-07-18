@@ -27,7 +27,6 @@ function Player:__init(id, skin, w, x, y, z)
 
   self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
   self.body.parent = self
-  self.body.type = "Player"
 
   self.gravity = 500
 
@@ -126,14 +125,16 @@ function Player:update(dt)
     self.jump_pressed = false
   end
 
-  -- Free slaps
+  -- Attacking
   if self.slap_btn() then
     if not self.slap_pressed then
       self.attacking = true
       TEsound.play('sounds/sword.wav')
       objects['sword_'..self.id] = Sword:new(self)
+      objects['sword_'..self.id].type = 'Sword'
       self.cron.after(0.5, function()
         self.attacking = false
+        Collider:remove(objects['sword_'..self.id].body)
         objects['sword_'..self.id] = nil
       end)
     end
@@ -158,28 +159,24 @@ function Player:update(dt)
   -- Openning doors
   if self.up_btn() and count(self.doors) then
     if not self.open_pressed then
-      for body,_ in pairs(self.doors) do
+      for door,_ in pairs(self.doors) do
         TEsound.play('sounds/doorOpen01.wav')
-        map = ATL.load(body.parent.map..'.tmx')
+        map = ATL.load(door.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
-        camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
-        Collider:clear()
         for k,o in pairs(objects) do
           if not o.persistant then
-            --if o.body then Collider:remove(o.body) end
+            if o.body then Collider:remove(o.body) end
             objects[k] = nil
           end
         end
-        self.x = body.parent.tx*16
-        self.y = body.parent.ty*16+8
-        self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
-        self.body.parent = self
-        self.body.type = "Player"
+        self.x = door.tx*16
+        self.y = door.ty*16+8
         self.inwater = {}
         self.ondown = {}
         self.doors = {}
         addObjects(map.ol)
+        camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
         camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
       end
     end
@@ -205,52 +202,59 @@ end
 
 function Player:draw()
   love.graphics.setColor(unpack(self.color))
+  -- Choose the character stance to display
   if self.yspeed > 0 then self.stance = 'fall' end
   if self.yspeed < 0 then self.stance = 'jump' end
   if self.attacking then self.stance = 'slap' end
+  -- Set the new animation do display, but prevent animation self overriding
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
+  -- Draw the animation
   self.animation:draw(self.x-16-16, self.y-23.5-32)
   love.graphics.setColor(255, 255, 255, 255)
 end
 
-function Player:onCollision(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w then return end
+function Player:onCollision(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
 
-  -- Wall
-  if other.type == 'Wall' or other.type == 'FlyingWall' then
+  -- Do nothing if the object belongs to another dimention
+  if o.w ~= nil and o.w ~= self.w then return end
+
+  -- Collision with Wall or FlyingWall
+  if o.type == 'Wall' or o.type == 'FlyingWall' then
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
-    if dy > 0 then self.ondown[other] = true end
+    if dy > 0 then self.ondown[o] = true end
     self.x, self.y = self.x - dx, self.y - dy
 
-  -- Bridge
-  elseif other.type == 'Bridge' then
+  -- Collision with Bridge
+  elseif o.type == 'Bridge' then
     if dy > 0 and self.yspeed > 0 then
       self.yspeed = 0
-      self.ondown[other] = true
+      self.ondown[o] = true
       self.y = self.y - dy
     end
 
-  -- Door
-  elseif other.type == 'Door' then
-    self.doors[other] = true
+  -- Collision with Door
+  elseif o.type == 'Door' then
+    self.doors[o] = true
 
-  -- Spike
-  elseif other.type == 'Spike' then
+  -- Collision with Spike
+  elseif o.type == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
 
-  -- Arrow
-  elseif other.type == 'Arrow' then
+  -- Collision with Arrow
+  elseif o.type == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
     if dy > 0 and self.yspeed > 0 then
       TEsound.play('sounds/arrow.wav')
       self.yspeed = - 1.75 * self.jumpspeed
     end
 
-  -- Crab
-  elseif other.type == 'Crab' and not self.invincible then
+  -- Collision with Crab
+  elseif o.type == 'Crab' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.invincible = true
@@ -258,19 +262,30 @@ function Player:onCollision(dt, other, dx, dy)
     self.cron.after(2, function() self.daft = false end)
     self.cron.after(4, function() self.invincible = false end)
 
-  -- Water
-  elseif other.type == 'Water' then
-    self.inwater[other] = true
+  -- Collision with Water
+  elseif o.type == 'Water' then
+    self.inwater[o] = true
+
   end
 end
 
-function Player:onCollisionStop(dt, other, dx, dy)
-  if other.parent.w ~= nil and other.parent.w ~= self.w then return end
-  if other.type == 'Wall' or other.type == 'FlyingWall' or other.type == 'Bridge' then
-    if dy > 0 then self.ondown[other] = nil end
-  elseif other.type == 'Water' then
-    self.inwater[other] = nil
-  elseif other.type == 'Door' then
-    self.doors[other] = nil
+function Player:onCollisionStop(dt, shape, dx, dy)
+  -- Get the other shape parent (its game object)
+  local o = shape.parent
+
+  -- Do nothing if the object belongs to another dimention
+  if o.w ~= nil and o.w ~= self.w then return end
+
+  -- Collision stop with Wall, FlyingWall, Bridge
+  if o.type == 'Wall' or o.type == 'FlyingWall' or o.type == 'Bridge' then
+    if dy > 0 then self.ondown[o] = nil end
+
+  -- Collision stop with Water
+  elseif o.type == 'Water' then
+    self.inwater[o] = nil
+
+  -- Collision stop with Door
+  elseif o.type == 'Door' then
+    self.doors[o] = nil
   end
 end

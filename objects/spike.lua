@@ -13,16 +13,6 @@ function Spike:__init(w, x, y, z)
   self.body.parent = self
 end
 
-function Spike:update(dt)
-
-end
-
 function Spike:draw()
   love.graphics.draw(Spike.image, self.x, self.y, 0, 1, 1, 8, 8)
-end
-
-function Spike:onCollision()
-end
-
-function Spike:onCollisionStop()
 end

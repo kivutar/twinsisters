@@ -6,15 +6,3 @@ function Bridge:__init(w, x, y, z)
   self.y = y
   self.z = z
 end
-
-function Bridge:update(dt)
-end
-
-function Bridge:draw()
-end
-
-function Bridge:onCollision()
-end
-
-function Bridge:onCollisionStop()
-end
