@@ -73,7 +73,8 @@ function Player:update(dt)
 
   local iw = count(self.inwater) and 0.75 or 1
   
-  -- Moving
+  -- Moving on x axis
+  -- Moving right
   if self.right_btn() and not self.daft then
     if not (self.direction == 'left' and self.attacking) then
       self.direction = 'right'
@@ -81,6 +82,7 @@ function Player:update(dt)
       if self.xspeed < 0 then self.xspeed = 0 end
       if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
     end
+  -- Moving left
   elseif self.left_btn() and not self.daft then
     if not (self.direction == 'right' and self.attacking) then
       self.direction = 'left'
@@ -88,6 +90,7 @@ function Player:update(dt)
       if self.xspeed > 0 then self.xspeed = 0 end
       if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
     end
+  -- Stop moving
   else
     f = 0
     if count(self.ondown) then f = self.friction else f = self.airfriction end
@@ -95,12 +98,14 @@ function Player:update(dt)
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
+  -- Apply friction if the character is attacking and on ground
   if self.attacking and count(self.ondown) then
     f = 0
     if count(self.ondown) then f = self.friction else f = self.airfriction end
     if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt * 2 end
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt * 2 end
   end
+  -- Apply minimum xspeed, to prevent bugs
   if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + self.xspeed + self.groundspeed end
 
   -- Jumping and swimming
@@ -160,7 +165,7 @@ function Player:update(dt)
   if self.up_btn() and count(self.doors) then
     if not self.open_pressed then
       for door,_ in pairs(self.doors) do
-        TEsound.play('sounds/doorOpen01.wav')
+        TEsound.play('sounds/door.wav')
         map = ATL.load(door.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
