@@ -49,6 +49,7 @@ function addObject(o, w)
   objects[name] = no
 end
 
+-- Loop over tiled map object layers and instantiate game objects
 function addObjects(mapol)
   for k1, ol in pairs(mapol) do
     for k2, o in pairs(ol.objects) do
@@ -123,22 +124,8 @@ function love.update(dt)
     if o.update then o:update(dt) end
   end
 
-  tofollow = {}
-  tfx = 0
-  tfy = 0
-  if objects.oce  then table.insert(tofollow, objects.oce ) end
-  if objects.lolo then table.insert(tofollow, objects.lolo) end
-  for _,o in pairs(tofollow) do
-    tfx = tfx + o.x
-    tfy = tfy + o.y
-  end
-
-  camera:move(
-    (-camera.x+tfx/#tofollow)/10,
-    (-camera.y+tfy/#tofollow)/10
-  )
-
-  camera:setScale(1/(map.properties.zoom or 2), 1/(map.properties.zoom or 2))
+  camera:follow({objects.oce, objects.lolo}, 10)
+  camera:setScale(1 / (map.properties.zoom or 2))
 
   Collider:update(dt)
 end
