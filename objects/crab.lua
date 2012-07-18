@@ -6,6 +6,11 @@ Crab.img.stand.left = love.graphics.newImage('sprites/crab_stand_left.png')
 Crab.img.stand.left:setFilter("nearest", "nearest")
 Crab.img.stand.right = love.graphics.newImage('sprites/crab_stand_right.png')
 Crab.img.stand.right:setFilter("nearest", "nearest")
+Crab.img.hit = {}
+Crab.img.hit.left = love.graphics.newImage('sprites/crab_hit_left.png')
+Crab.img.hit.left:setFilter("nearest", "nearest")
+Crab.img.hit.right = love.graphics.newImage('sprites/crab_hit_right.png')
+Crab.img.hit.right:setFilter("nearest", "nearest")
 
 function Crab:__init(w, x, y, z)
   self.w = w
@@ -84,8 +89,12 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.xspeed = 0
     self.yspeed = 200*dt
     self.invincible = true
-    self.cron.after(2, function() self.xspeed = 0.5 end)
-    self.cron.after(4, function() self.invincible = false end)
+    self.stance = 'hit'
+    self.cron.after(3, function()
+      self.xspeed = 0.5
+      self.invincible = false
+      self.stance = 'stand'
+    end)
 
   end
 end
