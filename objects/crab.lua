@@ -1,16 +1,15 @@
 class "Crab" {}
 
-Crab.img = {}
-Crab.img.stand = {}
-Crab.img.stand.left = love.graphics.newImage('sprites/crab_stand_left.png')
-Crab.img.stand.left:setFilter("nearest", "nearest")
-Crab.img.stand.right = love.graphics.newImage('sprites/crab_stand_right.png')
-Crab.img.stand.right:setFilter("nearest", "nearest")
-Crab.img.hit = {}
-Crab.img.hit.left = love.graphics.newImage('sprites/crab_hit_left.png')
-Crab.img.hit.left:setFilter("nearest", "nearest")
-Crab.img.hit.right = love.graphics.newImage('sprites/crab_hit_right.png')
-Crab.img.hit.right:setFilter("nearest", "nearest")
+
+Crab.anim = {}
+for stance, speed in pairs({stand=1, hit=1, run=0.2}) do
+  Crab.anim[stance] = {}
+  for _,direction in pairs({'left', 'right'}) do
+    img = love.graphics.newImage('sprites/crab_'..stance..'_'..direction..'.png')
+    img:setFilter("nearest", "nearest")
+    Crab.anim[stance][direction] = newAnimation(img , 32, 32, speed, 0)
+  end
+end
 
 function Crab:__init(w, x, y, z)
   self.w = w
@@ -26,9 +25,9 @@ function Crab:__init(w, x, y, z)
   self.xspeed = 0.5
   self.yspeed = 0.0
 
-  self.stance = 'stand'
+  self.stance = 'run'
   self.direction = 'left'
-  self.animation = Crab.img[self.stance][self.direction]
+  self.animation = Crab.anim[self.stance][self.direction]
 
   self.invincible = false
   self.color = {255, 255, 255, 255}
@@ -53,11 +52,16 @@ function Crab:update(dt)
   end
 
   self.body:moveTo(self.x, self.y)
+  self.animation:update(dt)
 end
 
 function Crab:draw()
   love.graphics.setColor(unpack(self.color))
-  love.graphics.draw(Crab.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 16, 24)
+  -- Set the new animation do display, but prevent animation self overriding
+  self.nextanim = Crab.anim[self.stance][self.direction]
+  if self.animation ~= self.nextanim then self.animation = self.nextanim end
+  -- Draw the animation
+  self.animation:draw(self.x-16, self.y-24)
   love.graphics.setColor(255, 255, 255, 255)
 end
 
@@ -93,7 +97,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.cron.after(3, function()
       self.xspeed = 0.5
       self.invincible = false
-      self.stance = 'stand'
+      self.stance = 'run'
     end)
 
   end
