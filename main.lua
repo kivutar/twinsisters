@@ -43,6 +43,8 @@ function addObject(o, w)
     no = Watertop:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Mountains' then
     no = Mountains:new(w, o.x, o.y, 0)
+  elseif o.type == 'Cave' then
+    no = Cave:new(w, o.x, o.y, 0)
   end
   no.type = o.type
   name = no.name or o.type..'_'..o.x..'_'..o.y
@@ -51,8 +53,8 @@ end
 
 -- Loop over tiled map object layers and instantiate game objects
 function addObjects(mapol)
-  for k1, ol in pairs(mapol) do
-    for k2, o in pairs(ol.objects) do
+  for _, ol in pairs(mapol) do
+    for _, o in pairs(ol.objects) do
       if ol and ol.properties then addObject(o, ol.properties.w) else addObject(o) end
     end
   end
@@ -80,6 +82,7 @@ function love.load()
   require 'objects/mountains'
   require 'objects/door'
   require 'objects/sword'
+  require 'objects/cave'
 
   ATL.path = 'maps/'
   map = ATL.load 'kivutaria.tmx'
@@ -109,6 +112,7 @@ function love.load()
 end
 
 function love.update(dt)
+  dt = math.min(0.07, dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit") end
   if love.keyboard.isDown("r") then 
