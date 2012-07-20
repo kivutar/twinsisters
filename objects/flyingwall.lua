@@ -1,9 +1,9 @@
-class "FlyingWall" {}
+FlyingWall = class('FlyingWall')
 
 FlyingWall.img = love.graphics.newImage('sprites/cloud.png')
 FlyingWall.img:setFilter("nearest", "nearest")
 
-function FlyingWall:__init(w, x, y, z)
+function FlyingWall:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y
@@ -29,7 +29,7 @@ function FlyingWall:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall or Bridge
-  if o.type == 'Wall' or o.type == 'Bridge' then
+  if o.class.name == 'Wall' or o.class.name == 'Bridge' then
     if dx < 0 then
       self.xspeed =  1
     elseif dx > 0 then
@@ -38,7 +38,7 @@ function FlyingWall:onCollision(dt, shape, dx, dy)
     self.x = self.x - dx
 
   -- Collision with Player
-  elseif o.type == 'Player' then
+  elseif o.class.name == 'Player' then
   	o.groundspeed = self.xspeed
 
   end
@@ -52,7 +52,7 @@ function FlyingWall:onCollisionStop(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision stop with Player
-  if o.type == 'Player' then
+  if o.class.name == 'Player' then
     o.groundspeed = 0
   end
 end

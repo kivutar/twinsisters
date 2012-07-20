@@ -1,4 +1,4 @@
-class "Player" {}
+Player = class('Player')
 
 Player.anim = {}
 for _,skin in pairs({'oce'}) do
@@ -13,7 +13,7 @@ for _,skin in pairs({'oce'}) do
   end
 end
 
-function Player:__init(id, skin, w, x, y, z)
+function Player:initialize(id, skin, w, x, y, z)
   self.id = id
   self.skin = skin
   self.w = w
@@ -139,8 +139,10 @@ function Player:update(dt)
       objects['sword_'..self.id].type = 'Sword'
       self.cron.after(0.5, function()
         self.attacking = false
-        Collider:remove(objects['sword_'..self.id].body)
-        objects['sword_'..self.id] = nil
+        if objects['sword_'..self.id] then
+          Collider:remove(objects['sword_'..self.id].body)
+          objects['sword_'..self.id] = nil
+        end
       end)
     end
     self.slap_pressed = true
@@ -226,14 +228,14 @@ function Player:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w then return end
 
   -- Collision with Wall or FlyingWall
-  if o.type == 'Wall' or o.type == 'FlyingWall' then
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' then
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
     if dy > 0 then self.ondown[o] = true end
     self.x, self.y = self.x - dx, self.y - dy
 
   -- Collision with Bridge
-  elseif o.type == 'Bridge' then
+  elseif o.class.name == 'Bridge' then
     if dy > 0 and self.yspeed > 0 then
       self.yspeed = 0
       self.ondown[o] = true
@@ -241,16 +243,16 @@ function Player:onCollision(dt, shape, dx, dy)
     end
 
   -- Collision with Door
-  elseif o.type == 'Door' then
+  elseif o.class.name == 'Door' then
     self.doors[o] = true
 
   -- Collision with Spike
-  elseif o.type == 'Spike' then
+  elseif o.class.name == 'Spike' then
     TEsound.play('sounds/hit.wav')
     self.x, self.y = 64, 420
 
   -- Collision with Arrow
-  elseif o.type == 'Arrow' then
+  elseif o.class.name == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
     if dy > 0 and self.yspeed > 0 then
       TEsound.play('sounds/arrow.wav')
@@ -258,7 +260,7 @@ function Player:onCollision(dt, shape, dx, dy)
     end
 
   -- Collision with Crab
-  elseif o.type == 'Crab' and not self.invincible then
+  elseif o.class.name == 'Crab' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.invincible = true
@@ -267,7 +269,7 @@ function Player:onCollision(dt, shape, dx, dy)
     self.cron.after(4, function() self.invincible = false end)
 
   -- Collision with Water
-  elseif o.type == 'Water' then
+  elseif o.class.name == 'Water' then
     self.inwater[o] = true
 
   end
@@ -281,15 +283,15 @@ function Player:onCollisionStop(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w then return end
 
   -- Collision stop with Wall, FlyingWall, Bridge
-  if o.type == 'Wall' or o.type == 'FlyingWall' or o.type == 'Bridge' then
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' then
     if dy > 0 then self.ondown[o] = nil end
 
   -- Collision stop with Water
-  elseif o.type == 'Water' then
+  elseif o.class.name == 'Water' then
     self.inwater[o] = nil
 
   -- Collision stop with Door
-  elseif o.type == 'Door' then
+  elseif o.class.name == 'Door' then
     self.doors[o] = nil
   end
 end

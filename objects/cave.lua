@@ -1,4 +1,4 @@
-class "Cave" {}
+Cave = class('Cave')
 
 Cave.paralax = {
   { img=love.graphics.newImage('backgrounds/cave2.png'), x=99, y=99 },
@@ -7,7 +7,7 @@ Cave.paralax = {
 }
 for _,bg in pairs(Cave.paralax) do bg.img:setFilter("nearest", "nearest") end
 
-function Cave:__init(w, x, y, z)
+function Cave:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

@@ -1,6 +1,6 @@
-class "Water" {}
+Water = class('Water')
 
-function Water:__init(w, x, y, z)
+function Water:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

@@ -46,7 +46,6 @@ function addObject(o, w)
   elseif o.type == 'Cave' then
     no = Cave:new(w, o.x, o.y, 0)
   end
-  no.type = o.type
   name = no.name or o.type..'_'..o.x..'_'..o.y
   objects[name] = no
 end
@@ -61,7 +60,7 @@ function addObjects(mapol)
 end
 
 function love.load()
-  require 'libs/class'
+  require 'libs/middleclass'
   require 'libs/utils'
   require 'libs/anal'
   require 'libs/TEsound'

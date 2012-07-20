@@ -1,6 +1,4 @@
-class "Watertop" {}
-
-Watertop.instances = 0
+Watertop = class('Watertop')
 
 Watertop.img = love.graphics.newImage('sprites/watertop.png')
 Watertop.img:setFilter("nearest","nearest")
@@ -12,7 +10,9 @@ Watertop.img_drop:setFilter("nearest","nearest")
 Watertop.img_bubble = love.graphics.newImage('sprites/bubble.png')
 Watertop.img_bubble:setFilter("nearest","nearest")
 
-function Watertop:__init(w, x, y, z)
+Watertop.instances = 0
+
+function Watertop:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y
@@ -78,7 +78,7 @@ function Watertop:onCollision(dt, shape, dx, dy)
   -- if o.w ~= nil and o.w ~= self.w then return end
 
   -- Collision with Player
-  if o.type == 'Player' then
+  if o.class.name == 'Player' then
     if math.abs(o.yspeed) > 20 or math.abs(o.xspeed) > 0.5 then
       self.ps_drop:start()
     end

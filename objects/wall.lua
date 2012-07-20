@@ -1,6 +1,6 @@
-class "Wall" {}
+Wall = class('Wall')
 
-function Wall:__init(w, x, y, z)
+function Wall:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

@@ -1,5 +1,4 @@
-class "Crab" {}
-
+Crab = class('Crab')
 
 Crab.anim = {}
 for stance, speed in pairs({stand=1, hit=1, run=0.2}) do
@@ -11,7 +10,7 @@ for stance, speed in pairs({stand=1, hit=1, run=0.2}) do
   end
 end
 
-function Crab:__init(w, x, y, z)
+function Crab:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y
@@ -73,7 +72,7 @@ function Crab:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall, FlyingWall or Bridge
-  if o.type == 'Wall' or o.type == 'FlyingWall' or o.type == 'Bridge' then
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' then
     if dx < 0 then
       self.direction = 'right'
     elseif dx > 0 then
@@ -83,12 +82,12 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.x, self.y = self.x - dx, self.y - dy
 
   -- Collision with Player
-  elseif o.type == 'Player' then
+  elseif o.class.name == 'Player' then
     self.xspeed = 0
     self.cron.after(1, function() self.xspeed = 0.5 end)
 
   -- Collision with Sword
-  elseif o.type == 'Sword' and not self.invincible then
+  elseif o.class.name == 'Sword' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     self.xspeed = 0
     self.yspeed = 200*dt

@@ -1,6 +1,6 @@
-class "Door" {}
+Door = class('Door')
 
-function Door:__init(w, x, y, z, map, tx, ty)
+function Door:initialize(w, x, y, z, map, tx, ty)
   self.w = w
   self.x = x
   self.y = y

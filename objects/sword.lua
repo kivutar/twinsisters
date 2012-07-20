@@ -1,6 +1,6 @@
-class "Sword" {}
+Sword = class('Sword')
 
-function Sword:__init(player)
+function Sword:initialize(player)
   self.player = player
   self.direction = self.player.direction
   self.w = self.player.w

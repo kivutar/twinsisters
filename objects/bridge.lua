@@ -1,6 +1,6 @@
-class "Bridge" {}
+Bridge = class('Bridge')
 
-function Bridge:__init(w, x, y, z)
+function Bridge:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

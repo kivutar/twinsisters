@@ -1,4 +1,4 @@
-class "Mountains" {}
+Mountains = class('Mountains')
 
 Mountains.paralax = {
   { img=love.graphics.newImage('backgrounds/mountains2.png'), x=99, y=99 },
@@ -7,7 +7,7 @@ Mountains.paralax = {
 }
 for _,bg in pairs(Mountains.paralax) do bg.img:setFilter("nearest", "nearest") end
 
-function Mountains:__init(w, x, y, z)
+function Mountains:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

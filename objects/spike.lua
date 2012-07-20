@@ -1,9 +1,9 @@
-class "Spike" {}
+Spike = class('Spike')
 
 Spike.image = love.graphics.newImage('sprites/spike.png')
 Spike.image:setFilter("nearest", "nearest")
 
-function Spike:__init(w, x, y, z)
+function Spike:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y

@@ -1,4 +1,4 @@
-class "Fish" {}
+Fish = class('Fish')
 
 Fish.img = {}
 Fish.img.swim = {}
@@ -7,7 +7,7 @@ Fish.img.swim.left:setFilter("nearest","nearest")
 Fish.img.swim.right = love.graphics.newImage('sprites/fish_swim_right.png')
 Fish.img.swim.right:setFilter("nearest","nearest")
 
-function Fish:__init(w, x, y, z)
+function Fish:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y
@@ -41,7 +41,7 @@ function Fish:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall
-  if o.type == 'Wall' then
+  if o.class.name == 'Wall' then
     if dx < -1 then
       self.direction = 'right'
     elseif dx > 1 then

@@ -1,9 +1,9 @@
-class "Arrow" {}
+Arrow = class('Arrow')
 
 Arrow.image = love.graphics.newImage('sprites/arrow.png')
 Arrow.image:setFilter("nearest", "nearest")
 
-function Arrow:__init(w, x, y, z)
+function Arrow:initialize(w, x, y, z)
   self.w = w
   self.x = x
   self.y = y
