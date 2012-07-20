@@ -8,8 +8,8 @@ camera.rotation = 0
 function camera:set()
   love.graphics.push()
   love.graphics.scale(1 / self.scaleX, 1 / self.scaleY)
-  ftx = math.floor(-self.x + love.graphics.getWidth()  / 2 * self.scaleX)
-  fty = math.floor(-self.y + love.graphics.getHeight() / 2 * self.scaleY)
+  ftx = -self.x + love.graphics.getWidth()  / 2 * self.scaleX
+  fty = -self.y + love.graphics.getHeight() / 2 * self.scaleY
   love.graphics.translate(ftx,fty)
 end
 
@@ -46,7 +46,7 @@ function camera:follow(tofollow, latency)
   end
 
   camera:move(
-    (-camera.x + tfx / #tofollow) / latency,
-    (-camera.y + tfy / #tofollow) / latency
+    math.floor((-camera.x + tfx / #tofollow) / latency),
+    math.floor((-camera.y + tfy / #tofollow) / latency)
   )
 end
