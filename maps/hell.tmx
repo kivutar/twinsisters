@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="25" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="zoom" value="3"/>
+ </properties>
+ <tileset firstgid="1" name="ash" tilewidth="16" tileheight="16">
+  <image source="ash.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Lave" width="100" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt0UENAEAIBDEk3BP/Sk/E8iCkTUbBVAEAAAAAAABwUQ9H5g1Hzot9fABSHzjsBTE=
+  </data>
+ </layer>
+ <layer name="Sol" width="100" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztmbtSAzEMRcWjIaSBQEGgCYQCqMj/fxxOoRmNsSXZsmUv7Jm51RbR6kqyvNkBwG7VonQKek7oe4LYNHHOGm9KXPyol6C3hPYTveOJiZPGO8ojqVZQXPyoY9A7/OYu6N4551zNaOA8aulNHKtUKygLXn7gu3HvZCH2psYXKf9HY4waPPygc8iDEl+oByPyn6LXGUJ7YgS58ybXA6Pyn6K1J949wSGdqzPSYm7Fvb9iQ+oRad+jvf+fuVJIA9cjmrvBX+Yi6BJ0ub5VaKv83XgvGX0mz8JN0AZ0udbM9k/Qe0L3klnO5NH0uBeUeHIGffiyvYoZzYyomc8l9LqnlXoyGu2MqJ3PWp5AvsugSj15CHpsHK+FXI2fvfgAW9216pdD0Cvovl8t1Q/Mea7Ga72gntB+6TXLYmrjpDH2nL0p0Adrzmu96UmLGOPZy3lD9/DriueWOdTKm56eeNfSxvDc+/8WyZMeM2FJtTS6N7i64/bnVJ/n8KolC9Z9ydMbaYZL8ogXd7Kau5n32T3Cr9LvJZ7xtN5bV62y6Ad6fXUn
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="100" height="25">
+  <object type="Bridge" x="448" y="320">
+   <polygon points="0,0 16,-16 48,-16 64,0"/>
+  </object>
+  <object type="Bridge" x="576" y="320">
+   <polygon points="0,0 16,-16 48,-16 64,0"/>
+  </object>
+  <object type="Wall" x="0" y="48">
+   <polygon points="0,0 144,0 160,-16 240,-16 256,0 256,48 288,80 288,96 304,112 304,128 320,144 336,144 352,160 368,160 384,144 400,144 432,112 464,112 464,-80 0,-80"/>
+  </object>
+  <object type="Wall" x="464" y="160">
+   <polygon points="0,0 80,0 96,-16 128,-16 160,-48 176,-48 208,-80 224,-80 240,-96 336,-96 368,-128 480,-128 480,-192 0,-192"/>
+  </object>
+  <object type="Bridge" x="0" y="176">
+   <polygon points="0,0 144,0 208,64 208,96 224,96 240,112 320,112 336,128 368,128 416,176 416,192 640,192 656,176 672,176 704,144 704,128 736,96 752,96 768,80 864,80 896,48 1104,48 1104,272 0,272"/>
+  </object>
+  <object type="Wall" x="208" y="240">
+   <polygon points="0,0 -16,0 -16,32 0,32"/>
+  </object>
+  <object type="Wall" x="400" y="352">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object type="Wall" x="704" y="304">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object type="Bridge" x="1104" y="224">
+   <polygon points="0,0 32,32 64,32 80,48 112,48 160,96 192,96 208,112 320,112 336,128 496,128 496,224 0,224"/>
+  </object>
+  <object type="Bridge" x="1440" y="192">
+   <polygon points="0,0 16,-16 160,-16 160,48 16,48 0,32"/>
+  </object>
+  <object type="Wall" x="1440" y="208">
+   <polygon points="0,0 160,0 160,32 16,32 0,16"/>
+  </object>
+  <object type="Cave" x="16" y="-96"/>
+ </objectgroup>
+</map>
