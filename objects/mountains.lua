@@ -13,7 +13,7 @@ function Mountains:__init(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.color = {255, 255, 255, 255}
+  self.color = {0, 0, 255, 64}
 end
 
 function Mountains:draw()

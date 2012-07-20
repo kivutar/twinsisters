@@ -4,7 +4,7 @@
   <property name="b" value="248"/>
   <property name="g" value="200"/>
   <property name="r" value="84"/>
-  <property name="zoom" value="2"/>
+  <property name="zoom" value="3"/>
  </properties>
  <tileset firstgid="1" name="maison" tilewidth="16" tileheight="16">
   <image source="maison2.png" width="256" height="128"/>
@@ -78,7 +78,7 @@
    <property name="a" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlc0OwUAUhadrgj3BE+DBvIy/BZ4KK3SD2tCdF3Am6cRERtPG3LbifMm3nTsn984dpQghhBBCCCHkd2nAJmwJnD2B04zOBOq76MIe7AucvYSrjK4F6rsYwCEcFVTvX6jBetmXKJA27JR9CTC29MEhUCoMPB0mgM/9rLPeYAwjeK1g7rz7eYMMW7hzZNFZ78Grx3HF8s5V/v28T/IcrSx2Lx9Wj9MwcyX19/siTHp7+fKdmrmS+vt9YXr7njVyZF+knGPm6tNslb33dP0TPCd3MDNs3mzV3iohhKTxBIeJOJM=
+   eJztlDkOwkAMRScX4EKsPWvPegAuw1YApwIqIA0QGkjHBfiREjFCo2SKGCbSf9LriM2XPVaKEEIIIYQQQopLGVZgVaD2DM4tXQj0N9GELdgWqL2GG0u3Av1N9OEADoX7SO6Ri0jukYv8ao+ymGrmwclTyvdyKiZADdZhI4daUdYHDGEA7w7m7sAu7Fn+focMe3gwZImyPr3PjEPH8i7hCI7hxPKbY5znrGXRZ/nSZpxGSRXjZvvxbG85vNMi3Oxktt9ZA0P2VUattJv977sX9b/Aa/wfkh1O3qxrb5UQQtJ4A5wzP3w=
   </data>
  </layer>
  <layer name="nuages" width="60" height="30">
@@ -174,7 +174,7 @@
   <object type="Door" x="592" y="320">
    <properties>
     <property name="map" value="house1"/>
-    <property name="tx" value="7"/>
+    <property name="tx" value="8"/>
     <property name="ty" value="14"/>
    </properties>
    <polygon points="0,0 32,0 32,32 0,32"/>
@@ -182,13 +182,13 @@
   <object type="Door" x="608" y="224">
    <properties>
     <property name="map" value="house1"/>
-    <property name="tx" value="7"/>
+    <property name="tx" value="16"/>
     <property name="ty" value="7"/>
    </properties>
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
-  <object type="Bridge" x="400" y="352">
-   <polygon points="0,0 16,-16 144,-16 160,0"/>
+  <object type="Bridge" x="384" y="368">
+   <polygon points="0,0 32,-32 160,-32 192,0 160,-16 32,-16"/>
   </object>
  </objectgroup>
 </map>
