@@ -57,13 +57,13 @@ function Player:__init(id, skin, w, x, y, z)
   self.open_pressed = true
   self.slap_pressed = true
 
-  self.left_btn   = loadstring("return love.keyboard.isDown('left')")
-  self.right_btn  = loadstring("return love.keyboard.isDown('right')")
-  self.down_btn   = loadstring("return love.keyboard.isDown('down')")
-  self.up_btn     = loadstring("return love.keyboard.isDown('up')")
-  self.jump_btn   = loadstring("return love.keyboard.isDown(' ')")
-  self.switch_btn = loadstring("return love.keyboard.isDown('v')")
-  self.slap_btn   = loadstring("return love.keyboard.isDown('b')")
+  self.left_btn   = loadstring("return love.keyboard.isDown('left')  or love.joystick.getAxis(1,1) == -1")
+  self.right_btn  = loadstring("return love.keyboard.isDown('right') or love.joystick.getAxis(1,1) ==  1")
+  self.down_btn   = loadstring("return love.keyboard.isDown('down')  or love.joystick.getAxis(1,2) ==  1")
+  self.up_btn     = loadstring("return love.keyboard.isDown('up')    or love.joystick.getAxis(1,2) == -1")
+  self.jump_btn   = loadstring("return love.keyboard.isDown(' ')     or love.joystick.isDown(1,2)")
+  self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
+  self.slap_btn   = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
 
   self.cron = require 'libs/cron'
 end
@@ -179,7 +179,6 @@ function Player:update(dt)
         self.y = door.ty*16+8
         self.inwater = {}
         self.ondown = {}
-        self.doors = {}
         addObjects(map.ol)
         camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
         camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
