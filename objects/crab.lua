@@ -72,7 +72,7 @@ function Crab:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall, FlyingWall or Bridge
-  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' then
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' or o.class.name == 'Slant' then
     if dx < 0 then
       self.direction = 'right'
     elseif dx > 0 then
