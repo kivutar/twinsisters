@@ -3,7 +3,7 @@ Player = class('Player')
 Player.anim = {}
 for _,skin in pairs({'oce'}) do
   Player.anim[skin] = {}
-  for stance, speed in pairs({stand=1, slap=1, run=0.2, jump=0.1, fall=0.1}) do
+  for stance, speed in pairs({stand=1, slap=(0.5/8), run=0.2, jump=0.1, fall=0.1}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -36,7 +36,7 @@ function Player:initialize(id, skin, w, x, y, z)
   self.jumpspeed = 200
   self.friction = 10
   self.airfriction = 10
-  self.acceleration = 10
+  self.acceleration = 5
   self.groundspeed = 0
 
   self.inwater = {}
@@ -65,6 +65,7 @@ function Player:initialize(id, skin, w, x, y, z)
   self.jump_btn   = loadstring("return love.keyboard.isDown(' ')     or love.joystick.isDown(1,2)")
   self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
   self.slap_btn   = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
+  self.run_btn    = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
 
   self.cron = require 'libs/cron'
 end
@@ -90,6 +91,8 @@ function Player:update(dt)
   self.cron.update(dt)
 
   local iw = count(self.inwater) and 0.75 or 1
+
+  --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
   
   -- Moving on x axis
   -- Moving right
@@ -150,17 +153,19 @@ function Player:update(dt)
   -- Attacking
   if self.slap_btn() then
     if not self.slap_pressed then
-      self.attacking = true
-      TEsound.play('sounds/sword.wav')
-      objects['sword_'..self.id] = Sword:new(self)
-      objects['sword_'..self.id].type = 'Sword'
-      self.cron.after(0.5, function()
-        self.attacking = false
-        if objects['sword_'..self.id] then
-          Collider:remove(objects['sword_'..self.id].body)
-          objects['sword_'..self.id] = nil
-        end
-      end)
+      if not self.attacking then
+        self.attacking = true
+        TEsound.play('sounds/sword2.wav')
+        objects['sword_'..self.id] = Sword:new(self)
+        objects['sword_'..self.id].type = 'Sword'
+        self.cron.after(0.5, function()
+          self.attacking = false
+          if objects['sword_'..self.id] then
+            Collider:remove(objects['sword_'..self.id].body)
+            objects['sword_'..self.id] = nil
+          end
+        end)
+      end
     end
     self.slap_pressed = true
   else
@@ -230,7 +235,10 @@ function Player:draw()
   if self.attacking then self.stance = 'slap' end
   -- Set the new animation do display, but prevent animation self overriding
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
-  if self.animation ~= self.nextanim then self.animation = self.nextanim end
+  if self.animation ~= self.nextanim then
+    self.animation = self.nextanim
+    self.animation:seek(1)
+  end
   -- Draw the animation
   self.animation:draw(self.x-32, self.y-23.5-32)
   love.graphics.setColor(255, 255, 255, 255)
