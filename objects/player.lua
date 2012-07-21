@@ -31,7 +31,7 @@ function Player:initialize(id, skin, w, x, y, z)
   self.gravity = 500
 
   self.xspeed = 0.0
-  self.max_xspeed = 2.0
+  self.max_xspeed = 2
   self.yspeed = 0.0
   self.jumpspeed = 200
   self.friction = 10
@@ -40,8 +40,9 @@ function Player:initialize(id, skin, w, x, y, z)
   self.groundspeed = 0
 
   self.inwater = {}
-  self.ondown = {}
   self.doors = {}
+  self.onground = false
+  self.onbridge = false
 
   self.stance = 'stand'
   self.direction = 'left'
@@ -69,6 +70,23 @@ function Player:initialize(id, skin, w, x, y, z)
 end
 
 function Player:update(dt)
+  self.onground = false
+  self.onbridge = false
+  for n in self.body:neighbors() do
+    collides, dx, dy = self.body:collidesWith(n)
+    if collides and dy < 0 then
+      if n.parent.class.name == 'Wall'
+      or n.parent.class.name == 'Bridge'
+      or n.parent.class.name == 'Slant'
+      or n.parent.class.name == 'FlyingWall' then
+        self.onground = true
+      end
+      if n.parent.class.name == 'Bridge' then
+        self.onbridge = true
+      end
+    end
+  end
+
   self.cron.update(dt)
 
   local iw = count(self.inwater) and 0.75 or 1
@@ -93,15 +111,15 @@ function Player:update(dt)
   -- Stop moving
   else
     f = 0
-    if count(self.ondown) then f = self.friction else f = self.airfriction end
+    if self.onground then f = self.friction else f = self.airfriction end
     if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt end
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
   -- Apply friction if the character is attacking and on ground
-  if self.attacking and count(self.ondown) then
+  if self.attacking and self.onground then
     f = 0
-    if count(self.ondown) then f = self.friction else f = self.airfriction end
+    if self.onground then f = self.friction else f = self.airfriction end
     if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt * 2 end
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt * 2 end
   end
@@ -112,12 +130,11 @@ function Player:update(dt)
   if self.jump_btn() then
     if not self.jump_pressed then
       -- Jump from bridge
-      if count(self.ondown) and self.down_btn() then
+      if self.onbridge and self.down_btn() then
         self.y = self.y + 20
-        Player.ondown = {}
         TEsound.play('sounds/jump.wav')
       -- Regular jump
-      elseif count(self.ondown) and not self.down_btn() and not self.attacking then
+      elseif self.onground and not self.down_btn() and not self.attacking then
         self.yspeed = - self.jumpspeed * iw -- - math.abs(self.xspeed*30*iw)
         TEsound.play('sounds/jump.wav')
       -- Swimming
@@ -180,7 +197,6 @@ function Player:update(dt)
         self.x = door.tx*16
         self.y = door.ty*16+8
         self.inwater = {}
-        self.ondown = {}
         addObjects(map.ol)
         camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
         camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
@@ -216,7 +232,7 @@ function Player:draw()
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
   -- Draw the animation
-  self.animation:draw(self.x-16-16, self.y-23.5-32)
+  self.animation:draw(self.x-32, self.y-23.5-32)
   love.graphics.setColor(255, 255, 255, 255)
 end
 
@@ -231,15 +247,25 @@ function Player:onCollision(dt, shape, dx, dy)
   if o.class.name == 'Wall' or o.class.name == 'FlyingWall' then
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
-    if dy > 0 then self.ondown[o] = true end
     self.x, self.y = self.x - dx, self.y - dy
+
+  -- Collision with Slant
+  elseif o.class.name == 'Slant' then
+    if dy > 0 and self.yspeed > 0 then
+      self.yspeed = 0
+      self.y = self.y - dy
+    end
+    if dx ~= 0 then
+      self.x = self.x - dx
+      --if (dx < 1 or dx > 1) and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+    end
 
   -- Collision with Bridge
   elseif o.class.name == 'Bridge' then
     if dy > 0 and self.yspeed > 0 then
       self.yspeed = 0
-      self.ondown[o] = true
-      self.y = self.y - dy
+      self.y = self.y - dy - math.abs(dx)
+      self.x = self.x - dx
     end
 
   -- Collision with Door
@@ -282,12 +308,8 @@ function Player:onCollisionStop(dt, shape, dx, dy)
   -- Do nothing if the object belongs to another dimention
   if o.w ~= nil and o.w ~= self.w then return end
 
-  -- Collision stop with Wall, FlyingWall, Bridge
-  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' then
-    if dy > 0 then self.ondown[o] = nil end
-
   -- Collision stop with Water
-  elseif o.class.name == 'Water' then
+  if o.class.name == 'Water' then
     self.inwater[o] = nil
 
   -- Collision stop with Door

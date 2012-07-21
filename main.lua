@@ -11,6 +11,12 @@ function addObject(o, w)
     no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Slant' then
+    no = Slant:new(w, 0, 0, 10)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Door' then
     no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty)
     no.body = Collider:addPolygon(unpack(o.polygon))
@@ -78,6 +84,7 @@ function love.load()
   require 'objects/wall'
   require 'objects/flyingwall'
   require 'objects/bridge'
+  require 'objects/slant'
   require 'objects/mountains'
   require 'objects/door'
   require 'objects/sword'

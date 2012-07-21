@@ -62,35 +62,20 @@
    </properties>
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
-  <object type="Wall" x="16" y="240">
-   <polygon points="0,0 288,0 288,16 0,16"/>
-  </object>
   <object type="Bridge" x="160" y="112">
-   <polygon points="0,0 64,0 68,5 -4,5"/>
+   <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
   <object type="Bridge" x="160" y="64">
-   <polygon points="0,0 64,0 67,5 -4,5"/>
+   <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
-  <object type="Wall" x="288" y="16">
-   <polygon points="0,16 16,16 16,224 0,224"/>
+  <object type="Bridge" x="288" y="144">
+   <polygon points="0,0 -176,0 -208,32 -224,32 -176,-16 0,-16"/>
   </object>
-  <object type="Wall" x="16" y="16">
-   <polygon points="0,16 16,16 16,224 0,224"/>
+  <object type="Wall" x="176" y="16">
+   <polygon points="0,0 -144,0 -144,16 -160,16 -160,240 128,240 128,16 112,16 112,0 32,0 32,16 96,16 96,32 112,32 112,224 -144,224 -144,32 -128,32 -128,16 0,16"/>
   </object>
-  <object type="Wall" x="32" y="16">
-   <polygon points="0,0 144,0 144,16 0,16"/>
-  </object>
-  <object type="Bridge" x="32" y="240">
-   <polygon points="0,4 0,-64 24,-64 92,4"/>
-  </object>
-  <object type="Bridge" x="112" y="144">
-   <polygon points="-4,-10 177,-11 176,-16 -7,-16 -57,33 -54,37"/>
-  </object>
-  <object type="Wall" x="208" y="16">
-   <polygon points="0,0 80,0 80,16 0,16"/>
-  </object>
-  <object type="Bridge" x="176" y="16">
-   <polygon points="0,0 32,0 32,16 0,16"/>
+  <object type="Bridge" x="32" y="176">
+   <polygon points="0,0 16,0 80,64 64,64"/>
   </object>
  </objectgroup>
 </map>
