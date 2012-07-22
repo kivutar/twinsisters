@@ -71,6 +71,7 @@ function love.load()
   require 'libs/anal'
   require 'libs/TEsound'
   require 'libs/camera'
+  CRON = require 'libs/cron'
   HC  = require 'libs/HardonCollider'
   ATL = require 'libs/AdvTiledLoader.Loader'
 
@@ -100,7 +101,17 @@ function love.load()
 
   love.mouse.setVisible(false)
   
-  --TEsound.play('bgm/game.mp3')
+  TEsound.play('bgm/game.mp3', 'bgm')
+
+  gamestate = 'play'
+  pausepressed = false
+  imgfont = love.graphics.newImage("fonts/test.png")
+  imgfont:setFilter("nearest", "nearest")
+  font = love.graphics.newImageFont(imgfont,
+  " abcdefghijklmnopqrstuvwxyz" ..
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
+  "123456789.,!?-+/():;%&`'*#=[]\"")
+  love.graphics.setFont(font)
 
   objects = {}
   addObjects(map.ol)
@@ -129,20 +140,37 @@ function love.update(dt)
     --objects.lolo.ondown = {}
     --objects.lolo.inwater = {}
   end
-
-  for _,o in pairs(objects) do
-    if o.update then o:update(dt) end
+  if love.keyboard.isDown("p") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
+    if not pausepressed then
+      if     gamestate == 'play'  then
+        gamestate = 'pause'
+        TEsound.pause('bgm')
+        TEsound.play('sounds/pause.wav')
+      elseif gamestate == 'pause' then
+        gamestate = 'play'
+        TEsound.resume('bgm')
+      end
+    end
+    pausepressed = true
+  else
+    pausepressed = false
   end
 
-  camera:follow({objects.oce, objects.lolo}, 10)
-  camera:setScale(1 / (map.properties.zoom or 2))
+  if gamestate == 'play' then
+    for _,o in pairs(objects) do
+      if o.update then o:update(dt) end
+    end
 
-  --local physics_dt = dt
-  --while physics_dt > 0 do
-  --  Collider:update(math.min(0.1, physics_dt))
-  --  physics_dt = physics_dt - 0.1
-  --end
-  Collider:update(dt)
+    camera:follow({objects.oce, objects.lolo}, 10)
+    camera:setScale(1 / (map.properties.zoom or 2))
+
+    --local physics_dt = dt
+    --while physics_dt > 0 do
+    --  Collider:update(math.min(0.1, physics_dt))
+    --  physics_dt = physics_dt - 0.1
+    --end
+    Collider:update(dt)
+  end
 end
 
 function love.draw()
@@ -169,6 +197,14 @@ function love.draw()
         if o.draw then o:draw() end
       end
     end
+  end
+
+  if gamestate == 'pause' then
+    love.graphics.setColor(0, 0, 0, 255*3/4)
+    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+    if math.floor(love.timer.getTime()) % 2 == 0 then love.graphics.setColor(255, 255, 0, 255) else love.graphics.setColor(255, 255, 255, 255) end
+    love.graphics.printf("Pause", camera.x - love.graphics.getWidth() / 2 * camera.scaleX, camera.y, love.graphics.getWidth() * camera.scaleX, 'center')
+    love.graphics.setColor(255, 255, 255, 255)
   end
 
   camera:unset()
