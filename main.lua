@@ -44,7 +44,7 @@ function addObject(o, w)
   elseif o.type == 'Fish' then
     no = Fish:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Crab' then
-    no = Crab:new(w, o.x+16, o.y+16, 6)
+    no = Crab:new(w, o.x+16, o.y+24, 6)
   elseif o.type == 'Watertop' then
     no = Watertop:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Mountains' then
@@ -137,6 +137,11 @@ function love.update(dt)
   camera:follow({objects.oce, objects.lolo}, 10)
   camera:setScale(1 / (map.properties.zoom or 2))
 
+  --local physics_dt = dt
+  --while physics_dt > 0 do
+  --  Collider:update(math.min(0.1, physics_dt))
+  --  physics_dt = physics_dt - 0.1
+  --end
   Collider:update(dt)
 end
 
