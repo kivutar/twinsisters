@@ -3,7 +3,7 @@ Player = class('Player')
 Player.anim = {}
 for _,skin in pairs({'oce','lolo'}) do
   Player.anim[skin] = {}
-  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1}) do
+  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -39,17 +39,17 @@ function Player:initialize(id, skin, w, x, y, z)
   self.acceleration = 5
   self.groundspeed = 0
 
-  self.inwater = {}
-  self.doors = {}
-  self.onground = false
-  self.onbridge = false
-
   self.stance = 'stand'
   self.direction = 'left'
   self.animation = Player.anim[self.skin][self.stance][self.direction]
 
+  self.doors = {}
+  self.onground = false
+  self.onbridge = false
+  self.inwater = false
   self.daft = false
   self.invincible = false
+  self.swimming = false
   self.attacking = false
   self.color = {255, 255, 255, 255}
 
@@ -73,6 +73,7 @@ end
 function Player:update(dt)
   self.onground = false
   self.onbridge = false
+  self.inwater  = false
   for n in self.body:neighbors() do
     collides, dx, dy = self.body:collidesWith(n)
     if collides and dy < 0 then
@@ -81,16 +82,21 @@ function Player:update(dt)
       or n.parent.class.name == 'Slant'
       or n.parent.class.name == 'FlyingWall' then
         self.onground = true
+        self.swimming = false
       end
       if n.parent.class.name == 'Bridge' then
         self.onbridge = true
+        self.swimming = false
       end
+    end
+    if n.parent.class.name == 'Water' then
+      self.inwater = true
     end
   end
 
   self.cron.update(dt)
 
-  local iw = count(self.inwater) and 0.75 or 1
+  local iw = self.inwater and 0.5 or 1
 
   --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
   
@@ -138,10 +144,11 @@ function Player:update(dt)
         TEsound.play('sounds/jump.wav')
       -- Regular jump
       elseif self.onground and not self.down_btn() and not self.attacking then
-        self.yspeed = - self.jumpspeed * iw -- - math.abs(self.xspeed*30*iw)
+        self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*iw)
         TEsound.play('sounds/jump.wav')
       -- Swimming
-      elseif count(self.inwater) then
+      elseif self.inwater then
+        self.swimming = true
         self.yspeed = - self.jumpspeed * iw
       end
     end
@@ -201,7 +208,6 @@ function Player:update(dt)
         end
         self.x = door.tx*16
         self.y = door.ty*16+8
-        self.inwater = {}
         addObjects(map.ol)
         camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
         camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
@@ -232,6 +238,7 @@ function Player:draw()
   -- Choose the character stance to display
   if self.yspeed > 0 then self.stance = 'fall' end
   if self.yspeed < 0 then self.stance = 'jump' end
+  if self.inwater and not self.onground and self.swimming then self.stance = 'swim' end
   if self.attacking then self.stance = 'sword' end
   -- Set the new animation do display, but prevent animation self overriding
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
@@ -302,10 +309,6 @@ function Player:onCollision(dt, shape, dx, dy)
     self.cron.after(2, function() self.daft = false end)
     self.cron.after(4, function() self.invincible = false end)
 
-  -- Collision with Water
-  elseif o.class.name == 'Water' then
-    self.inwater[o] = true
-
   end
 end
 
@@ -316,12 +319,8 @@ function Player:onCollisionStop(dt, shape, dx, dy)
   -- Do nothing if the object belongs to another dimention
   if o.w ~= nil and o.w ~= self.w then return end
 
-  -- Collision stop with Water
-  if o.class.name == 'Water' then
-    self.inwater[o] = nil
-
   -- Collision stop with Door
-  elseif o.class.name == 'Door' then
+  if o.class.name == 'Door' then
     self.doors[o] = nil
   end
 end

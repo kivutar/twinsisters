@@ -92,7 +92,7 @@ function love.load()
   require 'objects/cave'
 
   ATL.path = 'maps/'
-  map = ATL.load 'kivutaria.tmx'
+  map = ATL.load 'test4.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)

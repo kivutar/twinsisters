@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="16" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="zoom" value="3"/>
+ </properties>
  <tileset firstgid="1" name="blocks" tilewidth="16" tileheight="16">
   <image source="blocks.png" width="128" height="128"/>
  </tileset>
@@ -30,7 +33,7 @@
    <property name="" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQQkwtG9Q8O/Y0EMKH4J6SfkLmUup9S/c5kYph+bzIxTH8wmZjSfAvCAGahF6c=
+   eJxjZGBgYKQQkwtG9ZOm3xkNk6LfC4i90TBMfyMBTCj+CeknZC65gFr60cOVWAzTjx6uxGKY/mAyMaX5FoQB0+waKQ==
   </data>
  </layer>
  <layer name="lolo_tiles" width="16" height="16">
@@ -77,6 +80,9 @@
   <object type="Watertop" x="112" y="112" width="16" height="16"/>
   <object type="Watertop" x="128" y="112" width="16" height="16"/>
   <object type="Watertop" x="144" y="112" width="16" height="16"/>
+  <object type="Slant" x="160" y="128">
+   <polygon points="0,0 16,-16 80,-16 80,0"/>
+  </object>
  </objectgroup>
  <objectgroup name="oce_objects" width="16" height="16">
   <properties>
