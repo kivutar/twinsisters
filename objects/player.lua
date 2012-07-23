@@ -66,8 +66,6 @@ function Player:initialize(id, skin, w, x, y, z)
   self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
   self.sword_btn   = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
   self.run_btn    = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
-
-  self.cron = require 'libs/cron'
 end
 
 function Player:update(dt)
@@ -93,8 +91,6 @@ function Player:update(dt)
       self.inwater = true
     end
   end
-
-  self.cron.update(dt)
 
   local iw = self.inwater and 0.5 or 1
 
@@ -165,7 +161,7 @@ function Player:update(dt)
         TEsound.play('sounds/sword2.wav')
         objects['sword_'..self.id] = Sword:new(self)
         objects['sword_'..self.id].type = 'Sword'
-        self.cron.after(0.5, function()
+        CRON.after(0.25, function()
           self.attacking = false
           if objects['sword_'..self.id] then
             Collider:remove(objects['sword_'..self.id].body)
@@ -306,8 +302,8 @@ function Player:onCollision(dt, shape, dx, dy)
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.invincible = true
     self.daft = true
-    self.cron.after(2, function() self.daft = false end)
-    self.cron.after(4, function() self.invincible = false end)
+    CRON.after(2, function() self.daft = false end)
+    CRON.after(4, function() self.invincible = false end)
 
   end
 end

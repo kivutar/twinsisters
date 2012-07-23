@@ -99,6 +99,8 @@ function love.load()
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
+  camera:setScale(1 / (map.properties.zoom or 2))
+
   love.mouse.setVisible(false)
   
   TEsound.play('bgm/game.mp3', 'bgm')
@@ -118,7 +120,7 @@ function love.load()
 
   current_world = 'oce'
 
-  objects.oce = Player:new('oce', 'oce', current_world, 64, 200, 8)
+  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 200, 8)
 
   --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 300, 8)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
@@ -162,7 +164,6 @@ function love.update(dt)
     end
 
     camera:follow({objects.oce, objects.lolo}, 10)
-    camera:setScale(1 / (map.properties.zoom or 2))
 
     --local physics_dt = dt
     --while physics_dt > 0 do
@@ -170,6 +171,7 @@ function love.update(dt)
     --  physics_dt = physics_dt - 0.1
     --end
     Collider:update(dt)
+    CRON.update(dt)
   end
 end
 

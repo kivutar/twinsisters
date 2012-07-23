@@ -30,13 +30,9 @@ function Crab:initialize(w, x, y, z)
 
   self.invincible = false
   self.color = {255, 255, 255, 255}
-
-  self.cron = require 'libs/cron'
 end
 
 function Crab:update(dt)
-  self.cron.update(dt)
-
   if self.direction == 'left'  then self.x = self.x - self.xspeed end
   if self.direction == 'right' then self.x = self.x + self.xspeed end
 
@@ -84,7 +80,7 @@ function Crab:onCollision(dt, shape, dx, dy)
   -- Collision with Player
   elseif o.class.name == 'Player' then
     self.xspeed = 0
-    self.cron.after(1, function() self.xspeed = 0.5 end)
+    CRON.after(1, function() self.xspeed = 0.5 end)
 
   -- Collision with Sword
   elseif o.class.name == 'Sword' and not self.invincible then
@@ -93,7 +89,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.yspeed = 200*dt
     self.invincible = true
     self.stance = 'hit'
-    self.cron.after(3, function()
+    CRON.after(3, function()
       self.xspeed = 0.5
       self.invincible = false
       self.stance = 'run'
