@@ -16,7 +16,7 @@
  </layer>
  <layer name="blue" width="32" height="33">
   <data encoding="base64" compression="zlib">
-   eJwLZGBgCKQhZgRiFyyYEU0NLTEx9mNTQ0s8av+o/cTkEVriwe7/UftHjv1DofxnJJEeSuE/av/gi//R8n/U/pFi/0CX/7iAK538jwu4DbD9o/4f+umfUPk/kBgA1nTdSg==
+   eJwLZGBgCKQhZgRiFyyYEU0NLTEx9mNTQ0s8av+o/cTkEVriwe7/UftHjv1DofxnJJEeSuE/av/gi//R8n/U/pFiPzFYkgRMavmPC7jSyf+4gNsA2z9Y/Y8tzunlf3zpbjCmf0Ll/0BiAIoS3VY=
   </data>
  </layer>
  <layer name="meubles" width="32" height="33">
@@ -26,7 +26,7 @@
  </layer>
  <layer name="ombres" width="32" height="33" opacity="0.37">
   <data encoding="base64" compression="zlib">
-   eJxjYKA9CKGDHZTaHwTEwTTCoVRyIy3BqP2j9qODMAba5Qli7KcnGLV/+IJwItQQU/7D1BFLU7v8D4OaRSxNChjo+B8q9oeTSFPbflqB0fJ/1P7hCqhV/o+2/0ftHwXUBQD+dTOW
+   eJxjYKA9CKGDHZTaHwTEwTTCoVRyIy3BqP2j9qODMAba5Qli7KcnGOn2BwJx+AC7gVaAGH8RU/7D1BFLU7v8D4OaRSxNChjo9DdU7A8nkaa2/bQCo+X/yLZ/tPwfbf+P2j8K6A0A4sg0Pg==
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="32" height="33">
@@ -35,12 +35,6 @@
   </object>
   <object type="Wall" x="480" y="0">
    <polygon points="0,0 16,0 16,512 0,512"/>
-  </object>
-  <object type="Wall" x="32" y="496">
-   <polygon points="0,0 448,0 448,16 0,16"/>
-  </object>
-  <object type="Wall" x="32" y="400">
-   <polygon points="0,0 368,0 368,16 0,16"/>
   </object>
   <object type="Wall" x="112" y="304">
    <polygon points="0,0 368,0 368,16 0,16"/>
@@ -104,5 +98,30 @@
   <object type="UpDownSpike" x="256" y="256" width="16" height="16"/>
   <object type="UpDownSpike" x="288" y="272" width="16" height="16"/>
   <object type="UpDownSpike" x="320" y="288" width="16" height="16"/>
+  <object type="Ice" x="176" y="400">
+   <polygon points="0,0 176,0 176,16 0,16"/>
+  </object>
+  <object type="Spike" x="160" y="384" width="16" height="16"/>
+  <object type="Spike" x="352" y="384" width="16" height="16"/>
+  <object type="Spike" x="144" y="384" width="16" height="16"/>
+  <object type="Spike" x="128" y="384" width="16" height="16"/>
+  <object type="Spike" x="48" y="384" width="16" height="16"/>
+  <object type="Spike" x="64" y="384" width="16" height="16"/>
+  <object type="Spike" x="112" y="384" width="16" height="16"/>
+  <object type="Ice" x="176" y="496">
+   <polygon points="0,0 32,0 32,-16 48,-16 48,-32 128,-32 128,-16 144,-16 144,0 176,0 176,16 0,16"/>
+  </object>
+  <object type="Wall" x="352" y="400">
+   <polygon points="0,0 48,0 48,16 0,16"/>
+  </object>
+  <object type="Wall" x="32" y="400">
+   <polygon points="0,0 144,0 144,16 0,16"/>
+  </object>
+  <object type="Wall" x="32" y="496">
+   <polygon points="0,0 144,0 144,16 0,16"/>
+  </object>
+  <object type="Wall" x="352" y="496">
+   <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
  </objectgroup>
 </map>

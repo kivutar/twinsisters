@@ -35,7 +35,7 @@ function Player:initialize(id, skin, w, x, y, z)
   self.yspeed = 0.0
   self.jumpspeed = 200
   self.friction = 10
-  self.airfriction = 10
+  self.airfriction = 1
   self.acceleration = 5
   self.groundspeed = 0
 
@@ -46,6 +46,7 @@ function Player:initialize(id, skin, w, x, y, z)
   self.doors = {}
   self.onground = false
   self.onbridge = false
+  self.onice = false
   self.inwater = false
   self.daft = false
   self.invincible = false
@@ -72,12 +73,14 @@ function Player:update(dt)
   self.onground = false
   self.onbridge = false
   self.inwater  = false
+  self.onice = false
   for n in self.body:neighbors() do
     collides, dx, dy = self.body:collidesWith(n)
     if collides and dy < 0 then
       if n.parent.class.name == 'Wall'
       or n.parent.class.name == 'Bridge'
       or n.parent.class.name == 'Slant'
+      or n.parent.class.name == 'Ice'
       or n.parent.class.name == 'FlyingWall' then
         self.onground = true
         self.swimming = false
@@ -86,13 +89,26 @@ function Player:update(dt)
         self.onbridge = true
         self.swimming = false
       end
+      if n.parent.class.name == 'Ice' then
+        self.onice = true
+        self.swimming = false
+      end
     end
     if n.parent.class.name == 'Water' then
       self.inwater = true
     end
+
   end
 
   local iw = self.inwater and 0.5 or 1
+
+  if self.onice then
+    self.friction = -0.1
+    self.max_xspeed = 4
+  else
+    self.friction = 10
+    self.max_xspeed = 2
+  end
 
   --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
   
@@ -102,7 +118,7 @@ function Player:update(dt)
     if not (self.direction == 'left' and self.attacking) then
       self.direction = 'right'
       self.stance = 'run'
-      if self.xspeed < 0 then self.xspeed = 0 end
+      if self.xspeed < 0 and not self.onice then self.xspeed = 0 end
       if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
     end
   -- Moving left
@@ -110,7 +126,7 @@ function Player:update(dt)
     if not (self.direction == 'right' and self.attacking) then
       self.direction = 'left'
       self.stance = 'run'
-      if self.xspeed > 0 then self.xspeed = 0 end
+      if self.xspeed > 0 and not self.onice then self.xspeed = 0 end
       if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
     end
   -- Stop moving
@@ -254,8 +270,8 @@ function Player:onCollision(dt, shape, dx, dy)
   -- Do nothing if the object belongs to another dimention
   if o.w ~= nil and o.w ~= self.w then return end
 
-  -- Collision with Wall or FlyingWall
-  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' then
+  -- Collision with Wall or FlyingWall or Ice
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Ice' then
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
     self.x, self.y = self.x - dx, self.y - dy
@@ -283,11 +299,6 @@ function Player:onCollision(dt, shape, dx, dy)
   elseif o.class.name == 'Door' then
     self.doors[o] = true
 
-  -- Collision with Spike
-  elseif o.class.name == 'Spike' then
-    TEsound.play('sounds/hit.wav')
-    self.x, self.y = 64, 420
-
   -- Collision with Arrow
   elseif o.class.name == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
@@ -297,7 +308,7 @@ function Player:onCollision(dt, shape, dx, dy)
     end
 
   -- Collision with Crab
-  elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike') and not self.invincible then
+  elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike' or o.class.name == 'Spike') and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
     self.yspeed = -50

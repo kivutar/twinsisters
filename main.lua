@@ -17,6 +17,12 @@ function addObject(o, w)
     no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
+  elseif o.type == 'Ice' then
+    no = Ice:new(w, 0, 0, 10)
+    no.body = Collider:addPolygon(unpack(o.polygon))
+    no.body.parent = no
+    dx, dy = no.body:center()
+    no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Door' then
     no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty)
     no.body = Collider:addPolygon(unpack(o.polygon))
@@ -38,7 +44,7 @@ function addObject(o, w)
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
-    no = Spike:new(w, o.x+8, o.y+8, 1)
+    no = Spike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
@@ -89,6 +95,7 @@ function love.load()
   require 'objects/flyingwall'
   require 'objects/bridge'
   require 'objects/slant'
+  require 'objects/ice'
   require 'objects/mountains'
   require 'objects/door'
   require 'objects/sword'
