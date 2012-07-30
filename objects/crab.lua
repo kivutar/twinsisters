@@ -1,7 +1,7 @@
 Crab = class('Crab')
 
 Crab.anim = {}
-for stance, speed in pairs({stand=1, hit=1, run=0.2}) do
+for stance, speed in pairs({stand=1, hit=1, run=0.05}) do
   Crab.anim[stance] = {}
   for _,direction in pairs({'left', 'right'}) do
     img = love.graphics.newImage('sprites/crab_'..stance..'_'..direction..'.png')
@@ -21,7 +21,7 @@ function Crab:initialize(w, x, y, z)
 
   self.gravity = 500
 
-  self.xspeed = 0.5
+  self.xspeed = 1.0
   self.yspeed = 0.0
 
   self.stance = 'run'
@@ -41,7 +41,7 @@ function Crab:update(dt)
 
   -- Blinking
   if self.invincible then
-    if love.timer.getTime()*1000 % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
+    if math.floor(love.timer.getTime() * 100) % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
   else
     self.color = {255, 255, 255, 255}
   end
@@ -78,19 +78,19 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.x, self.y = self.x - dx, self.y - dy
 
   -- Collision with Player
-  elseif o.class.name == 'Player' then
-    self.xspeed = 0
-    CRON.after(1, function() self.xspeed = 0.5 end)
+  --elseif o.class.name == 'Player' then
+  --  self.xspeed = 0
+  --  CRON.after(1, function() self.xspeed = 1.0 end)
 
   -- Collision with Sword
   elseif o.class.name == 'Sword' and not self.invincible then
     TEsound.play('sounds/hit.wav')
     self.xspeed = 0
-    self.yspeed = 200*dt
+    self.yspeed = -100
     self.invincible = true
     self.stance = 'hit'
     CRON.after(3, function()
-      self.xspeed = 0.5
+      self.xspeed = 1.0
       self.invincible = false
       self.stance = 'run'
     end)

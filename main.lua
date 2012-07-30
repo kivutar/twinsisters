@@ -39,6 +39,8 @@ function addObject(o, w)
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 1)
+  elseif o.type == 'UpDownSpike' then
+    no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
     no = Arrow:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Fish' then
@@ -79,6 +81,7 @@ function love.load()
   require 'objects/water'
   require 'objects/watertop'
   require 'objects/spike'
+  require 'objects/updownspike'
   require 'objects/arrow'
   require 'objects/fish'
   require 'objects/crab'
@@ -92,7 +95,7 @@ function love.load()
   require 'objects/cave'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test4.tmx'
+  map = ATL.load 'test5.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -103,7 +106,7 @@ function love.load()
 
   love.mouse.setVisible(false)
   
-  TEsound.play('bgm/game.mp3', 'bgm')
+  --TEsound.play('bgm/game.mp3', 'bgm')
 
   gamestate = 'play'
   pausepressed = false

@@ -220,7 +220,7 @@ function Player:update(dt)
 
   -- Blinking
   if self.invincible then
-    if love.timer.getTime()*1000 % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
+    if math.floor(love.timer.getTime() * 100) % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
   else
     self.color = {255, 255, 255, 255}
   end
@@ -297,13 +297,14 @@ function Player:onCollision(dt, shape, dx, dy)
     end
 
   -- Collision with Crab
-  elseif o.class.name == 'Crab' and not self.invincible then
+  elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike') and not self.invincible then
     TEsound.play('sounds/hit.wav')
     if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
+    self.yspeed = -50
     self.invincible = true
     self.daft = true
-    CRON.after(2, function() self.daft = false end)
-    CRON.after(4, function() self.invincible = false end)
+    CRON.after(0.5, function() self.daft       = false end)
+    CRON.after(2  , function() self.invincible = false end)
 
   end
 end
