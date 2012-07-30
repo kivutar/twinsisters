@@ -130,7 +130,7 @@ function love.load()
 
   current_world = 'oce'
 
-  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 200, 8)
+  objects.oce = Player:new('oce', 'oce', current_world, 64, 200, 8)
 
   --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 300, 8)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")

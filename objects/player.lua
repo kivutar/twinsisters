@@ -3,7 +3,7 @@ Player = class('Player')
 Player.anim = {}
 for _,skin in pairs({'oce','lolo'}) do
   Player.anim[skin] = {}
-  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2}) do
+  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2, hit=1}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -252,6 +252,7 @@ function Player:draw()
   if self.yspeed < 0 then self.stance = 'jump' end
   if self.inwater and not self.onground and self.swimming then self.stance = 'swim' end
   if self.attacking then self.stance = 'sword' end
+  if self.daft then self.stance = 'hit' end
   -- Set the new animation do display, but prevent animation self overriding
   self.nextanim = Player.anim[self.skin][self.stance][self.direction]
   if self.animation ~= self.nextanim then
@@ -314,7 +315,7 @@ function Player:onCollision(dt, shape, dx, dy)
     self.yspeed = -50
     self.invincible = true
     self.daft = true
-    CRON.after(0.5, function() self.daft       = false end)
+    CRON.after(0.5, function() self.daft = false end)
     CRON.after(2  , function() self.invincible = false end)
 
   end
