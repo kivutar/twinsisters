@@ -45,6 +45,8 @@ function addObject(o, w)
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 8)
+  elseif o.type == 'Generator' then
+    no = Generator:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
@@ -100,6 +102,7 @@ function love.load()
   require 'objects/door'
   require 'objects/sword'
   require 'objects/cave'
+  require 'objects/generator'
 
   ATL.path = 'maps/'
   map = ATL.load 'test5.tmx'
@@ -109,7 +112,7 @@ function love.load()
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1 / (map.properties.zoom or 2))
+  camera:setScale(1 / 2)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -130,7 +133,7 @@ function love.load()
 
   current_world = 'oce'
 
-  objects.oce = Player:new('oce', 'oce', current_world, 64, 200, 8)
+  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 200, 8)
 
   --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 300, 8)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
@@ -144,14 +147,14 @@ function love.update(dt)
   dt = math.min(0.07, dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit") end
-  if love.keyboard.isDown("r") then 
-    objects.oce.x, objects.oce.y = 64, 300
-    objects.oce.ondown = {}
-    objects.oce.inwater = {}
-    --objects.lolo.x, objects.lolo.y = 32, 400
-    --objects.lolo.ondown = {}
-    --objects.lolo.inwater = {}
-  end
+  --if love.keyboard.isDown("r") then 
+  --  objects.oce.x, objects.oce.y = 64, 300
+  --  objects.oce.ondown = {}
+  --  objects.oce.inwater = {}
+  --  --objects.lolo.x, objects.lolo.y = 32, 400
+  --  --objects.lolo.ondown = {}
+  --  --objects.lolo.inwater = {}
+  --end
   if love.keyboard.isDown("p") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
     if not pausepressed then
       if     gamestate == 'play'  then

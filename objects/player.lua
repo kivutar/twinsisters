@@ -1,9 +1,9 @@
 Player = class('Player')
 
 Player.anim = {}
-for _,skin in pairs({'oce','lolo'}) do
+for _,skin in pairs({'lolo'}) do
   Player.anim[skin] = {}
-  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2, hit=1}) do
+  for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2, hit=1, surf=1}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -250,6 +250,7 @@ function Player:draw()
   -- Choose the character stance to display
   if self.yspeed > 0 then self.stance = 'fall' end
   if self.yspeed < 0 then self.stance = 'jump' end
+  if not self.right_btn() and not self.left_btn() and self.xspeed ~= 0 and self.onice then self.stance = 'surf' end
   if self.inwater and not self.onground and self.swimming then self.stance = 'swim' end
   if self.attacking then self.stance = 'sword' end
   if self.daft then self.stance = 'hit' end

@@ -1,7 +1,7 @@
 Crab = class('Crab')
 
 Crab.anim = {}
-for stance, speed in pairs({stand=1, hit=1, run=0.05}) do
+for stance, speed in pairs({stand=1, hit=1, run=0.1}) do
   Crab.anim[stance] = {}
   for _,direction in pairs({'left', 'right'}) do
     img = love.graphics.newImage('sprites/crab_'..stance..'_'..direction..'.png')
@@ -21,7 +21,7 @@ function Crab:initialize(w, x, y, z)
 
   self.gravity = 500
 
-  self.xspeed = 1.0
+  self.xspeed = 0.5
   self.yspeed = 0.0
 
   self.stance = 'run'
@@ -80,7 +80,7 @@ function Crab:onCollision(dt, shape, dx, dy)
   -- Collision with Player
   --elseif o.class.name == 'Player' then
   --  self.xspeed = 0
-  --  CRON.after(1, function() self.xspeed = 1.0 end)
+  --  CRON.after(1, function() self.xspeed = 0.5 end)
 
   -- Collision with Sword
   elseif o.class.name == 'Sword' and not self.invincible then
@@ -90,7 +90,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.invincible = true
     self.stance = 'hit'
     CRON.after(3, function()
-      self.xspeed = 1.0
+      self.xspeed = 0.5
       self.invincible = false
       self.stance = 'run'
     end)

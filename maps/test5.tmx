@@ -16,7 +16,7 @@
  </layer>
  <layer name="blue" width="32" height="33">
   <data encoding="base64" compression="zlib">
-   eJwLZGBgCKQhZgRiFyyYEU0NLTEx9mNTQ0s8av+o/cTkEVriwe7/UftHjv1DofxnJJEeSuE/av/gi//R8n/U/pFiPzFYkgRMavmPC7jSyf+4gNsA2z9Y/Y8tzunlf3zpbjCmf0Ll/0BiAIoS3VY=
+   eJwLZGBgCKQhZgRiFyyYEU0NLTEx9mNTQ0s8av+o/cTkEVriwe7/UftHjv1DofxnJJEeSuE/av/gi39a5YHR8n/U/sFmPzFYkgRMavmPC7jSyf+4gNsA2z8Y/Y8v3oeq/8ltx+AznxCmZb+fWAwA+S/gzw==
   </data>
  </layer>
  <layer name="meubles" width="32" height="33">
@@ -26,7 +26,7 @@
  </layer>
  <layer name="ombres" width="32" height="33" opacity="0.37">
   <data encoding="base64" compression="zlib">
-   eJxjYKA9CKGDHZTaHwTEwTTCoVRyIy3BqP2j9qODMAba5Qli7KcnGOn2BwJx+AC7gVaAGH8RU/7D1BFLU7v8D4OaRSxNChjo9DdU7A8nkaa2/bQCo+X/yLZ/tPwfbf+P2j8K6A0A4sg0Pg==
+   eJztlksKwCAMRHPFftT736Qu2o2bjjYTKc6DkI34IuigGZ8zwPHVv9c6SJWcZmQiv/wt2XhvAvFHsrp/q1Umz8ACOReS/886tHvnf773QnsPs+/fX/yls3v7R3mbh53/qdkX8Ueyul/5r/+//CKaC08JM/Q=
   </data>
  </layer>
  <objectgroup name="Calque d'objets 1" width="32" height="33">
@@ -37,7 +37,7 @@
    <polygon points="0,0 16,0 16,512 0,512"/>
   </object>
   <object type="Wall" x="112" y="304">
-   <polygon points="0,0 368,0 368,16 0,16"/>
+   <polygon points="0,0 304,0 304,16 0,16"/>
   </object>
   <object type="Wall" x="32" y="208">
    <polygon points="0,0 368,0 368,16 0,16"/>
@@ -56,7 +56,6 @@
   <object type="Arrow" x="464" y="288" width="16" height="16"/>
   <object type="Arrow" x="32" y="192" width="16" height="16"/>
   <object type="Arrow" x="464" y="96" width="16" height="16"/>
-  <object type="Crab" x="416" y="16" width="32" height="32"/>
   <object type="Wall" x="176" y="224">
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
@@ -108,9 +107,6 @@
   <object type="Spike" x="48" y="384" width="16" height="16"/>
   <object type="Spike" x="64" y="384" width="16" height="16"/>
   <object type="Spike" x="112" y="384" width="16" height="16"/>
-  <object type="Ice" x="176" y="496">
-   <polygon points="0,0 32,0 32,-16 48,-16 48,-32 128,-32 128,-16 144,-16 144,0 176,0 176,16 0,16"/>
-  </object>
   <object type="Wall" x="352" y="400">
    <polygon points="0,0 48,0 48,16 0,16"/>
   </object>
@@ -122,6 +118,10 @@
   </object>
   <object type="Wall" x="352" y="496">
    <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
+  <object type="Generator" x="432" y="-48" width="16" height="16"/>
+  <object type="Ice" x="224" y="464">
+   <polygon points="-16,0 96,0 96,16 -16,16"/>
   </object>
  </objectgroup>
 </map>
