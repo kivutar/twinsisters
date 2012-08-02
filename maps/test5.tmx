@@ -119,7 +119,11 @@
   <object type="Wall" x="352" y="496">
    <polygon points="0,0 128,0 128,16 0,16"/>
   </object>
-  <object type="Generator" x="432" y="-48" width="16" height="16"/>
+  <object type="Generator" x="432" y="-48" width="16" height="16">
+   <properties>
+    <property name="max" value="2"/>
+   </properties>
+  </object>
   <object type="Ice" x="224" y="464">
    <polygon points="-16,0 96,0 96,16 -16,16"/>
   </object>

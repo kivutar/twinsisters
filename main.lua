@@ -46,7 +46,7 @@ function addObject(o, w)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Generator' then
-    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period)
+    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period, o.properties.max)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
