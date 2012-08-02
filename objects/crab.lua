@@ -28,7 +28,7 @@ function Crab:initialize(w, x, y, z)
   self.yspeed = 0
   self.friction = 10
   self.airfriction = 1
-  self.acceleration = 1
+  self.acceleration = 5
   self.groundspeed = 0
 
   self.want_to_go = 'left'
@@ -45,7 +45,45 @@ function Crab:initialize(w, x, y, z)
   Crab.instances = Crab.instances + 1
 end
 
+function solidAt(x, y)
+  for k,v in pairs(Collider:shapesAt(x, y)) do
+    if v.parent.class.name == 'Wall' then
+      return true
+    end
+  end
+  return false
+end
+
 function Crab:update(dt)
+  self.onground = false
+  self.onbridge = false
+  self.inwater  = false
+  self.onice = false
+  for n in self.body:neighbors() do
+    collides, dx, dy = self.body:collidesWith(n)
+    if collides and dy < 0 then
+      if n.parent.class.name == 'Wall'
+      or n.parent.class.name == 'Bridge'
+      or n.parent.class.name == 'Slant'
+      or n.parent.class.name == 'Ice'
+      or n.parent.class.name == 'FlyingWall' then
+        self.onground = true
+        self.swimming = false
+      end
+      if n.parent.class.name == 'Bridge' then
+        self.onbridge = true
+        self.swimming = false
+      end
+      if n.parent.class.name == 'Ice' then
+        self.onice = true
+        self.swimming = false
+      end
+    end
+    if n.parent.class.name == 'Water' then
+      self.inwater = true
+    end
+  end
+
   local iw = self.inwater and 0.5 or 1
 
   if self.onice then
@@ -55,6 +93,9 @@ function Crab:update(dt)
     self.friction = 10
     self.max_xspeed = 0.5
   end
+
+  if self.onground and not solidAt(self.x-16, self.y+10) and self.want_to_go == 'left'  then self.want_to_go = 'right' end
+  if self.onground and not solidAt(self.x+16, self.y+10) and self.want_to_go == 'right' then self.want_to_go = 'left'  end
 
   -- Moving on x axis
   -- Moving right

@@ -105,7 +105,7 @@ function love.load()
   require 'objects/generator'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test2.tmx'
+  map = ATL.load 'test5.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)

@@ -97,7 +97,6 @@ function Player:update(dt)
     if n.parent.class.name == 'Water' then
       self.inwater = true
     end
-
   end
 
   local iw = self.inwater and 0.5 or 1

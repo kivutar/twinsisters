@@ -55,12 +55,7 @@
    <polygon points="0,0 0,-48 176,-48 176,-80 256,-80 256,-112 288,-112 288,-80 368,-80 368,-32 496,-32 496,-80 656,-80 720,-112 784,-112 848,-80 960,-80 960,0"/>
   </object>
   <object type="Mountains" x="32" y="-32"/>
-  <object type="Generator" x="736" y="48">
-   <properties>
-    <property name="period" value="2"/>
-    <property name="type" value="Crab"/>
-   </properties>
-  </object>
+  <object type="Crab" x="304" y="144" width="32" height="32"/>
  </objectgroup>
  <layer name="Grass" width="60" height="16">
   <data encoding="base64" compression="zlib">
