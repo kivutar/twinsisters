@@ -10,6 +10,8 @@ for stance, speed in pairs({stand=1, hit=1, run=0.1}) do
   end
 end
 
+Crab.instances = 0
+
 function Crab:initialize(w, x, y, z)
   self.w = w
   self.x = x
@@ -30,6 +32,8 @@ function Crab:initialize(w, x, y, z)
 
   self.invincible = false
   self.color = {255, 255, 255, 255}
+
+  Crab.instances = Crab.instances + 1
 end
 
 function Crab:update(dt)
@@ -47,7 +51,7 @@ function Crab:update(dt)
   end
 
   self.body:moveTo(self.x, self.y)
-  self.animation:update(dt)
+  self.animation:update(dt / Crab.instances)
 end
 
 function Crab:draw()
