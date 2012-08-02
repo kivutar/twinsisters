@@ -46,7 +46,7 @@ function addObject(o, w)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Generator' then
-    no = Generator:new(w, o.x+8, o.y+8, 8)
+    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
@@ -62,7 +62,7 @@ function addObject(o, w)
   elseif o.type == 'Cave' then
     no = Cave:new(w, o.x, o.y, 0)
   end
-  name = no.name or o.type..'_'..o.x..'_'..o.y
+  name = no.name or o.type..'_'..o.x..'_'..o.y..'_'..love.timer.getTime()
   objects[name] = no
 end
 
@@ -105,7 +105,7 @@ function love.load()
   require 'objects/generator'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test5.tmx'
+  map = ATL.load 'test2.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
