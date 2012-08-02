@@ -35,7 +35,7 @@
  </layer>
  <layer name="Ground" width="60" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgY3ECSkYFBinGgXUE/oAj0q9Iw9S8biZja5lEDjzT/0hIHE8AD7T5q42gCeKDdR22cTAAPhJsA9koOlw==
+   eJztzysSgDAMhOEtoo6HLQ6uhERy/zs0BlOzJm2YYf+Zz7ZZQCmllFLq25UE7GnMX7NZzNRYzTbmBBy29ey8992ZCe/d7L+W93se/ra3p4uIvs/bTUTf5+0hIm6qfmYPQw==
   </data>
  </layer>
  <objectgroup name="Collisions" width="60" height="16">
@@ -51,21 +51,10 @@
   <object type="Water" x="368" y="192">
    <polygon points="0,0 128,0 128,32 0,32"/>
   </object>
-  <object type="Wall" x="0" y="208">
-   <polygon points="0,0 368,0 368,48 0,48"/>
+  <object type="Wall" x="0" y="256">
+   <polygon points="0,0 0,-48 176,-48 176,-80 256,-80 256,-112 288,-112 288,-80 368,-80 368,-32 496,-32 496,-80 656,-80 720,-112 784,-112 848,-80 960,-80 960,0"/>
   </object>
-  <object type="Wall" x="176" y="176">
-   <polygon points="0,0 192,0 192,32 0,32"/>
-  </object>
-  <object type="Wall" x="368" y="224">
-   <polygon points="0,0 128,0 128,32 0,32"/>
-  </object>
-  <object type="Wall" x="496" y="176">
-   <polygon points="0,0 464,0 464,80 0,80"/>
-  </object>
-  <object type="Wall" x="256" y="144">
-   <polygon points="0,0 32,0 32,32 0,32"/>
-  </object>
+  <object type="Mountains" x="32" y="-32"/>
  </objectgroup>
  <layer name="Grass" width="60" height="16">
   <data encoding="base64" compression="zlib">
