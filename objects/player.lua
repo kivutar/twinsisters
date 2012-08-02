@@ -103,7 +103,7 @@ function Player:update(dt)
   local iw = self.inwater and 0.5 or 1
 
   if self.onice then
-    self.friction = -0.1
+    self.friction = 0
     self.max_xspeed = 4
   else
     self.friction = 10
