@@ -112,7 +112,7 @@ function love.load()
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1 / 2)--(map.properties.zoom or 2))
+  camera:setScale(1 / (map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   

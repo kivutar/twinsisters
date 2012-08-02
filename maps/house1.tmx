@@ -4,7 +4,7 @@
   <property name="b" value="0"/>
   <property name="g" value="0"/>
   <property name="r" value="0"/>
-  <property name="zoom" value="4"/>
+  <property name="zoom" value="3"/>
  </properties>
  <tileset firstgid="1" name="blocks" tilewidth="16" tileheight="16">
   <image source="blocks.png" width="128" height="128"/>
