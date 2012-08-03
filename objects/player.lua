@@ -308,15 +308,17 @@ function Player:onCollision(dt, shape, dx, dy)
       self.yspeed = - 1.75 * self.jumpspeed
     end
 
-  -- Collision with Crab
+  -- Collision with an enemy
   elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike' or o.class.name == 'Spike') and not self.invincible then
-    TEsound.play('sounds/hit.wav')
-    if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
-    self.yspeed = -50
-    self.invincible = true
-    self.daft = true
-    CRON.after(0.5, function() self.daft = false end)
-    CRON.after(2  , function() self.invincible = false end)
+    if not o.HP or o.HP > 0 then
+      TEsound.play('sounds/hit.wav')
+      if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
+      self.yspeed = -50
+      self.invincible = true
+      self.daft = true
+      CRON.after(0.5, function() self.daft = false end)
+      CRON.after(2  , function() self.invincible = false end)
+    end
 
   end
 end

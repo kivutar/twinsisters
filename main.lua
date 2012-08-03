@@ -62,8 +62,8 @@ function addObject(o, w)
   elseif o.type == 'Cave' then
     no = Cave:new(w, o.x, o.y, 0)
   end
-  name = no.name or o.type..'_'..o.x..'_'..o.y..'_'..love.timer.getTime()
-  objects[name] = no
+  no.name = no.name or o.type..'_'..o.x..'_'..o.y..'_'..love.timer.getTime()
+  objects[no.name] = no
 end
 
 -- Loop over tiled map object layers and instantiate game objects

@@ -37,10 +37,11 @@ function Crab:initialize(w, x, y, z)
   self.direction = self.want_to_go
   self.animation = Crab.anim[self.stance][self.direction]
 
-  self.daft = false
   self.onice = false
   self.invincible = false
   self.color = {255, 255, 255, 255}
+
+  self.HP = 3
 
   Crab.instances = Crab.instances + 1
 end
@@ -189,17 +190,30 @@ function Crab:onCollision(dt, shape, dx, dy)
 
   -- Collision with Sword
   elseif o.class.name == 'Sword' and not self.invincible then
-    TEsound.play('sounds/hit.wav')
-    self.want_to_go = nil
-    self.xspeed = o.direction == 'right' and 1 or -1
-    self.yspeed = -100
-    self.invincible = true
-    self.stance = 'hit'
-    CRON.after(1, function()
-      self.want_to_go = math.random(2) == 2 and 'left' or 'right'
-      self.invincible = false
-      self.stance = 'run'
-    end)
+    self.HP = self.HP - 1
+    if self.HP <= 0 then
+      TEsound.play('sounds/die.wav')
+      self.want_to_go = nil
+      self.invincible = true
+      self.stance = 'hit'
+      CRON.after(1, function()
+        objects[self.name] = nil
+        Collider:remove(self.body)
+        Crab.instances = Crab.instances - 1
+      end)
+    else
+      TEsound.play('sounds/hit.wav')
+      self.want_to_go = nil
+      self.xspeed = o.direction == 'right' and 1 or -1
+      self.yspeed = -100
+      self.invincible = true
+      self.stance = 'hit'
+      CRON.after(1, function()
+        self.want_to_go = math.random(2) == 2 and 'left' or 'right'
+        self.invincible = false
+        self.stance = 'run'
+      end)
+    end
 
   end
 end
