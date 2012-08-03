@@ -13,8 +13,8 @@ for _,skin in pairs({'lolo'}) do
   end
 end
 
-function Player:initialize(id, skin, w, x, y, z)
-  self.id = id
+function Player:initialize(name, skin, w, x, y, z)
+  self.name = name
   self.skin = skin
   self.w = w
   self.x = x
@@ -58,6 +58,9 @@ function Player:initialize(id, skin, w, x, y, z)
   self.switch_pressed = false
   self.open_pressed = true
   self.sword_pressed = true
+
+  self.maxHP = 5
+  self.HP = self.maxHP
 
   self.left_btn   = loadstring("return love.keyboard.isDown('left')  or love.joystick.getAxis(1,1) == -1")
   self.right_btn  = loadstring("return love.keyboard.isDown('right') or love.joystick.getAxis(1,1) ==  1")
@@ -147,7 +150,7 @@ function Player:update(dt)
   if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + self.xspeed + self.groundspeed end
 
   -- Jumping and swimming
-  if self.jump_btn() then
+  if self.jump_btn() and not self.daft then
     if not self.jump_pressed then
       -- Jump from bridge
       if self.onbridge and self.down_btn() then
@@ -169,18 +172,18 @@ function Player:update(dt)
   end
 
   -- Attacking
-  if self.sword_btn() then
+  if self.sword_btn() and not self.daft then
     if not self.sword_pressed then
       if not self.attacking then
         self.attacking = true
         TEsound.play('sounds/sword2.wav')
-        objects['sword_'..self.id] = Sword:new(self)
-        objects['sword_'..self.id].type = 'Sword'
+        objects['sword_'..self.name] = Sword:new(self)
+        objects['sword_'..self.name].type = 'Sword'
         CRON.after(0.25, function()
           self.attacking = false
-          if objects['sword_'..self.id] then
-            Collider:remove(objects['sword_'..self.id].body)
-            objects['sword_'..self.id] = nil
+          if objects['sword_'..self.name] then
+            Collider:remove(objects['sword_'..self.name].body)
+            objects['sword_'..self.name] = nil
           end
         end)
       end
@@ -191,7 +194,7 @@ function Player:update(dt)
   end
 
   -- Switching
-  --if self.switch_btn() then
+  --if self.switch_btn() and not self.daft then
   --  if not self.switch_pressed then
   --    TEsound.play('sounds/switch.wav')
   --    if current_world == 'lolo' then current_world = 'oce' else current_world = 'lolo' end
@@ -204,7 +207,7 @@ function Player:update(dt)
   --end
 
   -- Openning doors
-  if self.up_btn() and count(self.doors) then
+  if self.up_btn() and count(self.doors) and not self.daft then
     if not self.open_pressed then
       for door,_ in pairs(self.doors) do
         TEsound.play('sounds/door.wav')
@@ -311,13 +314,26 @@ function Player:onCollision(dt, shape, dx, dy)
   -- Collision with an enemy
   elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike' or o.class.name == 'Spike') and not self.invincible then
     if not o.HP or o.HP > 0 then
-      TEsound.play('sounds/hit.wav')
-      if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
-      self.yspeed = -50
-      self.invincible = true
-      self.daft = true
-      CRON.after(0.5, function() self.daft = false end)
-      CRON.after(2  , function() self.invincible = false end)
+      self.HP = self.HP - 1
+      if self.HP <= 0 then
+        TEsound.play('sounds/die.wav')
+        self.daft = true
+        self.invincible = true
+        self.stance = 'hit'
+        CRON.after(1, function()
+          --objects[self.name] = nil
+          --Collider:remove(self.body)
+          --Player.instances = Player.instances - 1
+        end)
+      else
+        TEsound.play('sounds/hit.wav')
+        if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
+        self.yspeed = -50
+        self.invincible = true
+        self.daft = true
+        CRON.after(0.5, function() self.daft = false end)
+        CRON.after(2  , function() self.invincible = false end)
+      end
     end
 
   end

@@ -133,7 +133,7 @@ function love.load()
 
   current_world = 'oce'
 
-  objects.oce = Player:new('lolo', 'lolo', current_world, 64, 200, 8)
+  objects.lolo = Player:new('lolo', 'lolo', current_world, 64, 200, 8)
 
   --objects.lolo = Player:new('lolo', 'lolo', current_world, 32, 300, 8)
   --objects.lolo.left_btn = loadstring("return love.joystick.getAxis(1,1) == -1")
@@ -176,7 +176,7 @@ function love.update(dt)
       if o.update then o:update(dt) end
     end
 
-    camera:follow({objects.oce, objects.lolo}, 10)
+    camera:follow({objects.lolo}, 10)
 
     --local physics_dt = dt
     --while physics_dt > 0 do
