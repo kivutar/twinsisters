@@ -38,7 +38,7 @@ function UpDownSpike:onCollision(dt, shape, dx, dy)
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall, FlyingWall or Bridge
-  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' or o.class.name == 'Slant' then
+  if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' or o.class.name == 'Slant' or o.class.name == 'Spike' then
     if dy < 0 then
       self.direction = 'down'
     elseif dy > 0 then
