@@ -211,7 +211,7 @@ function Player:update(dt)
   --end
 
   -- Openning doors
-  if self.up_btn() and self.ondoor and not self.daft then
+  if self.up_btn() and self.ondoor and self.onground and not self.daft then
     if not self.open_pressed then
       if self.ondoor.locked then
         objects.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
