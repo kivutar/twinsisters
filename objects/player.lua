@@ -43,7 +43,7 @@ function Player:initialize(name, skin, w, x, y, z)
   self.direction = 'left'
   self.animation = Player.anim[self.skin][self.stance][self.direction]
 
-  self.doors = {}
+  self.ondoor = false
   self.onground = false
   self.onbridge = false
   self.onice = false
@@ -59,7 +59,7 @@ function Player:initialize(name, skin, w, x, y, z)
   self.open_pressed = true
   self.sword_pressed = true
 
-  self.maxHP = 5
+  self.maxHP = 6*4
   self.HP = self.maxHP
 
   self.left_btn   = loadstring("return love.keyboard.isDown('left')  or love.joystick.getAxis(1,1) == -1")
@@ -73,6 +73,7 @@ function Player:initialize(name, skin, w, x, y, z)
 end
 
 function Player:update(dt)
+  self.ondoor = false
   self.onground = false
   self.onbridge = false
   self.inwater  = false
@@ -99,6 +100,9 @@ function Player:update(dt)
     end
     if n.parent.class.name == 'Water' then
       self.inwater = true
+    end
+    if n.parent.class.name == 'Door' then
+      self.ondoor = n.parent
     end
   end
 
@@ -207,25 +211,23 @@ function Player:update(dt)
   --end
 
   -- Openning doors
-  if self.up_btn() and count(self.doors) and not self.daft then
+  if self.up_btn() and self.ondoor and not self.daft then
     if not self.open_pressed then
-      for door,_ in pairs(self.doors) do
-        TEsound.play('sounds/door.wav')
-        map = ATL.load(door.map..'.tmx')
-        map.drawObjects = false
-        love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
-        for k,o in pairs(objects) do
-          if not o.persistant then
-            if o.body then Collider:remove(o.body) end
-            objects[k] = nil
-          end
+      TEsound.play('sounds/door.wav')
+      map = ATL.load(self.ondoor.map..'.tmx')
+      map.drawObjects = false
+      love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
+      for k,o in pairs(objects) do
+        if not o.persistant then
+          if o.body then Collider:remove(o.body) end
+          objects[k] = nil
         end
-        self.x = door.tx*16
-        self.y = door.ty*16+8
-        addObjects(map.ol)
-        camera:setScale(1/map.properties.zoom, 1/map.properties.zoom)
-        camera:move(-camera.x+objects.oce.x, -camera.y+objects.oce.y)
       end
+      self.x = self.ondoor.tx*16
+      self.y = self.ondoor.ty*16+8
+      addObjects(map.ol)
+      camera:setScale(1 / 3)--(map.properties.zoom or 2))
+      camera:move(-camera.x+self.x, -camera.y+self.y)
     end
       self.open_pressed = true
     else
@@ -299,10 +301,6 @@ function Player:onCollision(dt, shape, dx, dy)
       self.x = self.x - dx
     end
 
-  -- Collision with Door
-  elseif o.class.name == 'Door' then
-    self.doors[o] = true
-
   -- Collision with Arrow
   elseif o.class.name == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
@@ -336,18 +334,5 @@ function Player:onCollision(dt, shape, dx, dy)
       end
     end
 
-  end
-end
-
-function Player:onCollisionStop(dt, shape, dx, dy)
-  -- Get the other shape parent (its game object)
-  local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w then return end
-
-  -- Collision stop with Door
-  if o.class.name == 'Door' then
-    self.doors[o] = nil
   end
 end
