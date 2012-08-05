@@ -197,6 +197,7 @@ function Crab:onCollision(dt, shape, dx, dy)
       self.invincible = true
       self.stance = 'hit'
       CRON.after(1, function()
+        addObject( { type='Heart', x=self.x, y=self.y, z=self.z }, self.w )
         objects[self.name] = nil
         Collider:remove(self.body)
         Crab.instances = Crab.instances - 1

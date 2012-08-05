@@ -64,7 +64,7 @@ function DialogBox:draw()
   love.graphics.setFont(font2)
 
   love.graphics.setColor(37, 82, 113, 255)
-  love.graphics.printf("Lauriane:", uix + 90, uiy + 192-16, 180, 'left')
+  love.graphics.printf("LAURIANE:", uix + 90, uiy + 192-16, 180, 'left')
 
   love.graphics.setColor(0, 0, 0, 255)
   local message = string.sub(self.message, 1, math.floor(self.display_len))
