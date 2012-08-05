@@ -24,7 +24,7 @@ function addObject(o, w)
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Door' then
-    no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty)
+    no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty, o.properties.locked)
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()
@@ -103,16 +103,17 @@ function love.load()
   require 'objects/sword'
   require 'objects/cave'
   require 'objects/generator'
+  require 'objects/dialogbox'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test5.tmx'
+  map = ATL.load 'kivutaria.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1 / (map.properties.zoom or 2))
+  camera:setScale(1 / 3)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -120,12 +121,21 @@ function love.load()
 
   gamestate = 'play'
   pausepressed = false
+
   imgfont = love.graphics.newImage("fonts/test.png")
   imgfont:setFilter("nearest", "nearest")
   font = love.graphics.newImageFont(imgfont,
   " abcdefghijklmnopqrstuvwxyz" ..
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
   "123456789.,!?-+/():;%&`'*#=[]\"")
+
+  imgfont2 = love.graphics.newImage("fonts/test2.png")
+  imgfont2:setFilter("nearest", "nearest")
+  font2 = love.graphics.newImageFont(imgfont2,
+  " abcdefghijklmnopqrstuvwxyz" ..
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
+  "123456789.,!?-+/():;%&`'*#=[]\"")
+
   love.graphics.setFont(font)
 
   objects = {}
@@ -157,7 +167,7 @@ function love.update(dt)
   --end
   if love.keyboard.isDown("p") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
     if not pausepressed then
-      if     gamestate == 'play'  then
+      if gamestate == 'play' then
         gamestate = 'pause'
         TEsound.pause('bgm')
         TEsound.play('sounds/pause.wav')
@@ -185,6 +195,8 @@ function love.update(dt)
     --end
     Collider:update(dt)
     CRON.update(dt)
+  elseif gamestate == 'dialog' then
+    objects.dialog:update(dt)
   end
 end
 
@@ -214,16 +226,41 @@ function love.draw()
     end
   end
 
+  local uix = camera.x - love.graphics.getWidth()  / 2 * camera.scaleX
+  local uiy = camera.y - love.graphics.getHeight() / 2 * camera.scaleY
+
   if gamestate == 'pause' then
     love.graphics.setColor(0, 0, 0, 255*3/4)
-    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.rectangle('fill', uix, uiy, love.graphics.getWidth(), love.graphics.getHeight())
     if math.floor(love.timer.getTime()) % 2 == 0 then love.graphics.setColor(255, 255, 0, 255) else love.graphics.setColor(255, 255, 255, 255) end
-    love.graphics.printf("Pause", camera.x - love.graphics.getWidth() / 2 * camera.scaleX, camera.y, love.graphics.getWidth() * camera.scaleX, 'center')
+    love.graphics.printf("Pause", uix, camera.y, love.graphics.getWidth() * camera.scaleX, 'center')
     love.graphics.setColor(255, 255, 255, 255)
   end
 
+  ui = love.graphics.newImage('sprites/ui.png')
+  ui:setFilter("nearest", "nearest")
+  love.graphics.draw(ui, uix, uiy, 0, 1, 1, 0, 0)
+  heart = {}
+  for i=0, 4 do
+    heart[i] = love.graphics.newImage('sprites/heart_'..i..'.png')
+    heart[i]:setFilter("nearest", "nearest")
+  end
+
+  local hp = objects.lolo.HP
+
+  for i=1,objects.lolo.maxHP,4 do
+
+    hp2 = (hp >= 4) and 4 or hp
+    hp2 = (hp >= 0) and hp2 or 0
+
+    hp = hp - 4
+
+    love.graphics.draw(heart[hp2], (i/4)*16 + 36 + (uix), 16 + (uiy), 0, 1, 1, 0, 0)
+
+  end
+
   camera:unset()
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 10, 10)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)

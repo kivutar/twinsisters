@@ -54,8 +54,8 @@ function Player:initialize(name, skin, w, x, y, z)
   self.attacking = false
   self.color = {255, 255, 255, 255}
 
-  self.jump_pressed = false
-  self.switch_pressed = false
+  self.jump_pressed = true
+  self.switch_pressed = true
   self.open_pressed = true
   self.sword_pressed = true
 
@@ -213,21 +213,27 @@ function Player:update(dt)
   -- Openning doors
   if self.up_btn() and self.ondoor and not self.daft then
     if not self.open_pressed then
-      TEsound.play('sounds/door.wav')
-      map = ATL.load(self.ondoor.map..'.tmx')
-      map.drawObjects = false
-      love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
-      for k,o in pairs(objects) do
-        if not o.persistant then
-          if o.body then Collider:remove(o.body) end
-          objects[k] = nil
+      if self.ondoor.locked then
+        objects.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
+          objects.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
+        end)
+      else
+        TEsound.play('sounds/door.wav')
+        map = ATL.load(self.ondoor.map..'.tmx')
+        map.drawObjects = false
+        love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
+        for k,o in pairs(objects) do
+          if not o.persistant then
+            if o.body then Collider:remove(o.body) end
+            objects[k] = nil
+          end
         end
+        self.x = self.ondoor.tx*16
+        self.y = self.ondoor.ty*16+8
+        addObjects(map.ol)
+        camera:setScale(1 / 3)--(map.properties.zoom or 2))
+        camera:move(-camera.x+self.x, -camera.y+self.y)
       end
-      self.x = self.ondoor.tx*16
-      self.y = self.ondoor.ty*16+8
-      addObjects(map.ol)
-      camera:setScale(1 / 3)--(map.properties.zoom or 2))
-      camera:move(-camera.x+self.x, -camera.y+self.y)
     end
       self.open_pressed = true
     else

@@ -166,5 +166,14 @@
   <object type="Bridge" x="400" y="352">
    <polygon points="0,0 16,-16 144,-16 160,0"/>
   </object>
+  <object type="Door" x="144" y="368">
+   <properties>
+    <property name="locked" value="true"/>
+    <property name="map" value="house1"/>
+    <property name="tx" value="8"/>
+    <property name="ty" value="14"/>
+   </properties>
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
  </objectgroup>
 </map>

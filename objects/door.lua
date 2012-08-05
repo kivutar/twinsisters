@@ -1,6 +1,6 @@
 Door = class('Door')
 
-function Door:initialize(w, x, y, z, map, tx, ty)
+function Door:initialize(w, x, y, z, map, tx, ty, locked)
   self.w = w
   self.x = x
   self.y = y
@@ -8,4 +8,5 @@ function Door:initialize(w, x, y, z, map, tx, ty)
   self.map = map
   self.tx = tx
   self.ty = ty
+  self.locked = locked
 end
