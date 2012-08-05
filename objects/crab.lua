@@ -48,7 +48,11 @@ end
 
 function solidAt(x, y)
   for k,v in pairs(Collider:shapesAt(x, y)) do
-    if v.parent.class.name == 'Wall' then
+    if v.parent.class.name == 'Wall'
+    or v.parent.class.name == 'Bridge'
+    or v.parent.class.name == 'Slant'
+    or v.parent.class.name == 'Ice'
+    or v.parent.class.name == 'FlyingWall' then
       return true
     end
   end
@@ -173,6 +177,8 @@ function Crab:onCollision(dt, shape, dx, dy)
   or o.class.name == 'FlyingWall'
   or o.class.name == 'Bridge'
   or o.class.name == 'Arrow'
+  or o.class.name == 'Ice'
+  or o.class.name == 'Spike'
   or o.class.name == 'Slant' then
     if dx < 0 then
       self.want_to_go = 'right'
