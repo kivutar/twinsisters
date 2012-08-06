@@ -316,7 +316,11 @@ function Player:onCollision(dt, shape, dx, dy)
     end
 
   -- Collision with an enemy
-  elseif (o.class.name == 'Crab' or o.class.name == 'UpDownSpike' or o.class.name == 'Spike') and not self.invincible then
+  elseif (o.class.name == 'Crab'
+       or o.class.name == 'UpDownSpike'
+       or o.class.name == 'Spike'
+       or o.class.name == 'AcidDrop')
+  and not self.invincible then
     if not o.HP or o.HP > 0 then
       self.HP = self.HP - 1
       if self.HP <= 0 then
