@@ -1,4 +1,6 @@
 Player = class('Player')
+Player:include(Gravity)
+Player:include(Blinking)
 
 Player.anim = {}
 for _,skin in pairs({'lolo'}) do
@@ -28,16 +30,15 @@ function Player:initialize(name, skin, w, x, y, z)
   self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
   self.body.parent = self
 
-  self.gravity = 500
-
-  self.xspeed = 0.0
+  self.xspeed = 0
   self.max_xspeed = 2
-  self.yspeed = 0.0
+  self.yspeed = 0
   self.jumpspeed = 200
   self.friction = 10
   self.airfriction = 1
   self.acceleration = 5
   self.groundspeed = 0
+  self.iwf = 1
 
   self.stance = 'stand'
   self.direction = 'left'
@@ -52,7 +53,6 @@ function Player:initialize(name, skin, w, x, y, z)
   self.invincible = false
   self.swimming = false
   self.attacking = false
-  self.color = {255, 255, 255, 255}
 
   self.jump_pressed = true
   self.switch_pressed = true
@@ -106,7 +106,7 @@ function Player:update(dt)
     end
   end
 
-  local iw = self.inwater and 0.5 or 1
+  self.iwf = self.inwater and 0.5 or 1
 
   if self.onice then
     self.friction = 0
@@ -125,7 +125,7 @@ function Player:update(dt)
       self.direction = 'right'
       self.stance = 'run'
       if self.xspeed < 0 and not self.onice then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
+      self.xspeed = self.xspeed + self.acceleration * dt * self.iwf
     end
   -- Moving left
   elseif self.left_btn() and not self.daft then
@@ -133,7 +133,7 @@ function Player:update(dt)
       self.direction = 'left'
       self.stance = 'run'
       if self.xspeed > 0 and not self.onice then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
+      self.xspeed = self.xspeed - self.acceleration * dt * self.iwf
     end
   -- Stop moving
   else
@@ -150,8 +150,10 @@ function Player:update(dt)
     if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt * 2 end
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt * 2 end
   end
+  -- Apply maximum xspeed
+  if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + self.xspeed + self.groundspeed end
+  if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + (self.xspeed + self.groundspeed) end
 
   -- Jumping and swimming
   if self.jump_btn() and not self.daft then
@@ -162,12 +164,12 @@ function Player:update(dt)
         TEsound.play('sounds/jump.wav')
       -- Regular jump
       elseif self.onground and not self.down_btn() and not self.attacking then
-        self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*iw)
+        self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
         TEsound.play('sounds/jump.wav')
       -- Swimming
       elseif self.inwater then
         self.swimming = true
-        self.yspeed = - self.jumpspeed * iw
+        self.yspeed = - self.jumpspeed * self.iwf
       end
     end
     self.jump_pressed = true
@@ -240,23 +242,16 @@ function Player:update(dt)
       self.open_pressed = false
   end
 
-  -- Falling
-  self.yspeed = self.yspeed + self.gravity * dt * iw
-  self.y = self.y + self.yspeed * dt * iw
+  self:applyGravity(dt)
 
-  -- Blinking
-  if self.invincible then
-    if math.floor(love.timer.getTime() * 100) % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
-  else
-    self.color = {255, 255, 255, 255}
-  end
+  self:applyBlinking()
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
 end
 
 function Player:draw()
-  love.graphics.setColor(unpack(self.color))
+  self:blinkingPreDraw()
   -- Choose the character stance to display
   if self.yspeed > 0 then self.stance = 'fall' end
   if self.yspeed < 0 then self.stance = 'jump' end
@@ -272,7 +267,7 @@ function Player:draw()
   end
   -- Draw the animation
   self.animation:draw(self.x-32, self.y-23.5-32)
-  love.graphics.setColor(255, 255, 255, 255)
+  self:blinkingPostDraw()
 end
 
 function Player:onCollision(dt, shape, dx, dy)

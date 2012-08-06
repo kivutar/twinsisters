@@ -89,6 +89,9 @@ function love.load()
   HC  = require 'libs/HardonCollider'
   ATL = require 'libs/AdvTiledLoader.Loader'
 
+  require 'mixins/gravity'
+  require 'mixins/blinking'
+
   require 'objects/player'
   require 'objects/water'
   require 'objects/watertop'
@@ -112,7 +115,7 @@ function love.load()
   require 'objects/aciddrop'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test6.tmx'
+  map = ATL.load 'test4.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)

@@ -1,4 +1,6 @@
 Crab = class('Crab')
+Crab:include(Gravity)
+Crab:include(Blinking)
 
 Crab.anim = {}
 for stance, speed in pairs({stand=1, hit=1, run=0.1}) do
@@ -21,8 +23,6 @@ function Crab:initialize(w, x, y, z)
   self.body = Collider:addPolygon(0,16, 32,16, 32,32, 0,32)
   self.body.parent = self
 
-  self.gravity = 500
-
   self.xspeed = 0
   self.max_xspeed = 0.5
   self.yspeed = 0
@@ -39,7 +39,6 @@ function Crab:initialize(w, x, y, z)
 
   self.onice = false
   self.invincible = false
-  self.color = {255, 255, 255, 255}
 
   self.HP = 3
 
@@ -80,7 +79,7 @@ function Crab:update(dt)
         self.swimming = false
       end
       if n.parent.class.name == 'Ice' then
-        --self.onice = true
+        self.onice = true
         self.swimming = false
       end
     end
@@ -89,15 +88,7 @@ function Crab:update(dt)
     end
   end
 
-  local iw = self.inwater and 0.5 or 1
-
-  if self.onice then
-    self.friction = 0
-    self.max_xspeed = 1
-  else
-    self.friction = 10
-    self.max_xspeed = 0.5
-  end
+  self.iwf = self.inwater and 0.5 or 1
 
   if self.onground and not solidAt(self.x-16, self.y+10) and self.want_to_go == 'left'  then self.want_to_go = 'right' end
   if self.onground and not solidAt(self.x+16, self.y+10) and self.want_to_go == 'right' then self.want_to_go = 'left'  end
@@ -108,16 +99,16 @@ function Crab:update(dt)
     if not (self.direction == 'left' and self.attacking) then
       self.direction = 'right'
       self.stance = 'run'
-      if self.xspeed < 0 and not self.onice then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed + self.acceleration * dt * iw end
+      if self.xspeed < 0 then self.xspeed = 0 end
+      if math.abs(self.xspeed) <= self.max_xspeed * self.iwf then self.xspeed = self.xspeed + self.acceleration * dt * self.iwf end
     end
   -- Moving left
   elseif self.want_to_go == 'left' then
     if not (self.direction == 'right' and self.attacking) then
       self.direction = 'left'
       self.stance = 'run'
-      if self.xspeed > 0 and not self.onice then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * iw then self.xspeed = self.xspeed - self.acceleration * dt * iw end
+      if self.xspeed > 0 then self.xspeed = 0 end
+      if math.abs(self.xspeed) <= self.max_xspeed * self.iwf then self.xspeed = self.xspeed - self.acceleration * dt * self.iwf end
     end
   -- Stop moving
   else
@@ -127,8 +118,11 @@ function Crab:update(dt)
     if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
     self.stance = 'stand'
   end
+  -- Apply maximum xspeed
+  if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + self.xspeed + self.groundspeed end
+  if math.abs(self.xspeed + self.groundspeed) * self.iwf > 0.2 then self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf end
+
 
   -- AI
   if self.want_to_go and math.random(10000) == 10000 then
@@ -139,9 +133,7 @@ function Crab:update(dt)
     end
   end
 
-  -- Falling
-  self.yspeed = self.yspeed + self.gravity * dt
-  self.y = self.y + self.yspeed * dt
+  self:applyGravity(dt)
 
   -- Blinking
   if self.invincible then
@@ -155,14 +147,14 @@ function Crab:update(dt)
 end
 
 function Crab:draw()
-  love.graphics.setColor(unpack(self.color))
+  self:blinkingPreDraw()
   if self.invincible then self.stance = 'hit' end
   -- Set the new animation do display, but prevent animation self overriding
   self.nextanim = Crab.anim[self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
   -- Draw the animation
   self.animation:draw(self.x-16, self.y-24)
-  love.graphics.setColor(255, 255, 255, 255)
+  self:blinkingPostDraw()
 end
 
 function Crab:onCollision(dt, shape, dx, dy)
@@ -188,11 +180,6 @@ function Crab:onCollision(dt, shape, dx, dy)
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
     if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
     self.x, self.y = self.x - dx, self.y - dy
-
-  -- Collision with Player
-  --elseif o.class.name == 'Player' then
-  --  self.xspeed = 0
-  --  CRON.after(1, function() self.xspeed = 0.5 end)
 
   -- Collision with Sword
   elseif o.class.name == 'Sword' and not self.invincible then

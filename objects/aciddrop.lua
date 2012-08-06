@@ -1,4 +1,5 @@
 AcidDrop = class('AcidDrop')
+AcidDrop:include(Gravity)
 
 AcidDrop.image = love.graphics.newImage('sprites/acid_drop.png')
 AcidDrop.image:setFilter("nearest", "nearest")
@@ -14,8 +15,8 @@ function AcidDrop:initialize(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.gravity = 500
   self.yspeed = 0
+  self.max_yspeed = 75
 
   self.body = Collider:addCircle(self.x, self.y, 6)
   self.body.parent = self
@@ -41,12 +42,8 @@ function AcidDrop:initialize(w, x, y, z)
 end
 
 function AcidDrop:update(dt)
-  -- Falling
-  if self.yspeed <= 75 then self.yspeed = self.yspeed + self.gravity * dt end
-  self.y = self.y + self.yspeed * dt
-
+  self:applyGravity(dt)
   self.ps:update(dt)
-
   self.ps:setPosition(self.x, self.y)
   self.body:moveTo(self.x, self.y)
 end
@@ -63,7 +60,7 @@ function AcidDrop:onCollision(dt, shape, dx, dy)
   -- Do nothing if the object belongs to another dimention
   if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
-  -- Collision with Player
+  -- Collision with most objects
   if o.class.name == 'Wall'
   or o.class.name == 'FlyingWall'
   or o.class.name == 'Player'
@@ -71,6 +68,7 @@ function AcidDrop:onCollision(dt, shape, dx, dy)
   or o.class.name == 'Arrow'
   or o.class.name == 'Ice'
   or o.class.name == 'Spike'
+  or o.class.name == 'Sword'
   or o.class.name == 'Slant' then
   	self.yspeed = 0
   	self.y = self.y - dy

@@ -1,4 +1,5 @@
 Heart = class('Heart')
+Heart:include(Blinking)
 
 Heart.image = love.graphics.newImage('sprites/heart.png')
 Heart.image:setFilter("nearest", "nearest")
@@ -12,26 +13,18 @@ function Heart:initialize(w, x, y, z)
   self.body = Collider:addCircle(self.x, self.y, 4)
   self.body.parent = self
 
-  self.blinking = false
-  self.color = {255, 255, 255, 255}
-
   CRON.after(10, function() self.blinking = true end)
-  CRON.after(15, function() Heart.destroy(self) end)
+  CRON.after(13, function() Heart.destroy(self) end)
 end
 
 function Heart:update(dt)
-  -- Blinking
-  if self.blinking then
-    if math.floor(love.timer.getTime() * 100) % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
-  else
-    self.color = {255, 255, 255, 255}
-  end
+  self:applyBlinking()
 end
 
 function Heart:draw()
-  love.graphics.setColor(unpack(self.color))
+  self:blinkingPreDraw()
   love.graphics.draw(Heart.image, self.x, self.y, 0, 1, 1, 4, 4)
-  love.graphics.setColor(255, 255, 255, 255)
+  self:blinkingPostDraw()
 end
 
 function Heart:destroy()
