@@ -80,7 +80,7 @@ function Crab:update(dt)
         self.swimming = false
       end
       if n.parent.class.name == 'Ice' then
-        self.onice = true
+        --self.onice = true
         self.swimming = false
       end
     end
