@@ -45,10 +45,12 @@ function addObject(o, w)
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 8)
+  elseif o.type == 'AcidDrop' then
+    no = AcidDrop:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Heart' then
     no = Heart:new(w, o.x+4, o.y+4, 8)
   elseif o.type == 'Generator' then
-    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period, o.properties.max)
+    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period, o.properties.max, o.properties.offset)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
@@ -107,9 +109,10 @@ function love.load()
   require 'objects/generator'
   require 'objects/dialogbox'
   require 'objects/heart'
+  require 'objects/aciddrop'
 
   ATL.path = 'maps/'
-  map = ATL.load 'kivutaria.tmx'
+  map = ATL.load 'test6.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
