@@ -182,7 +182,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     self.x, self.y = self.x - dx, self.y - dy
 
   -- Collision with Sword
-  elseif o.class.name == 'Sword' and not self.invincible then
+  elseif (o.class.name == 'Sword' or o.class.name == 'FireBall') and not self.invincible then
     self.HP = self.HP - 1
     if self.HP <= 0 then
       TEsound.play('sounds/die.wav')

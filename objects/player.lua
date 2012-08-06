@@ -58,6 +58,7 @@ function Player:initialize(name, skin, w, x, y, z)
   self.switch_pressed = true
   self.open_pressed = true
   self.sword_pressed = true
+  self.fire_pressed = true
 
   self.maxHP = 6*4
   self.HP = self.maxHP
@@ -69,7 +70,7 @@ function Player:initialize(name, skin, w, x, y, z)
   self.jump_btn   = loadstring("return love.keyboard.isDown(' ')     or love.joystick.isDown(1,2)")
   self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
   self.sword_btn   = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
-  self.run_btn    = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
+  self.fire_btn    = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
 end
 
 function Player:update(dt)
@@ -188,7 +189,7 @@ function Player:update(dt)
         CRON.after(0.25, function()
           self.attacking = false
           if objects['sword_'..self.name] then
-            Collider:remove(objects['sword_'..self.name].body)
+            --Collider:remove(objects['sword_'..self.name].body)
             objects['sword_'..self.name] = nil
           end
         end)
@@ -197,6 +198,23 @@ function Player:update(dt)
     self.sword_pressed = true
   else
     self.sword_pressed = false
+  end
+
+  -- Fire
+  if self.fire_btn() and not self.daft then
+    if not self.fire_pressed then
+      if not self.attacking then
+        self.attacking = true
+        TEsound.play('sounds/fire.wav')
+        objects['FireBall_'..self.name] = FireBall:new(self)
+        objects['FireBall_'..self.name].type = 'FireBall'
+        objects['FireBall_'..self.name].name = 'FireBall_'..self.name
+        CRON.after(0.25, function() self.attacking = false end)
+      end
+    end
+    self.fire_pressed = true
+  else
+    self.fire_pressed = false
   end
 
   -- Switching

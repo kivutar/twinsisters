@@ -45,6 +45,8 @@ function addObject(o, w)
     no.body:moveTo(o.x+dx, o.y+dy)
   elseif o.type == 'Spike' then
     no = Spike:new(w, o.x+8, o.y+8, 8)
+  elseif o.type == 'FireBall' then
+    no = FireBall:new(w, o.x+16, o.y+16, 8)
   elseif o.type == 'AcidDrop' then
     no = AcidDrop:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Heart' then
@@ -113,9 +115,10 @@ function love.load()
   require 'objects/dialogbox'
   require 'objects/heart'
   require 'objects/aciddrop'
+  require 'objects/fireball'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test4.tmx'
+  map = ATL.load 'test6.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)

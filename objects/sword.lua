@@ -12,6 +12,8 @@ function Sword:initialize(player)
   self.body.parent = self
 end
 
+function Sword:draw() self.body:draw() end
+
 function Sword:update(dt)
   self.direction = self.player.direction
   self.w = self.player.w

@@ -21,36 +21,36 @@ function AcidDrop:initialize(w, x, y, z)
   self.body = Collider:addCircle(self.x, self.y, 6)
   self.body.parent = self
 
-  self.ps = love.graphics.newParticleSystem(AcidDrop.image_particle, 4)
-  self.ps:setEmissionRate          (10)
-  self.ps:setLifetime              (0.1)
-  self.ps:setParticleLife          (1.5)
-  self.ps:setDirection             (math.pi*1/2)
-  self.ps:setSpread                (0.4)
-  self.ps:setSpeed                 (-50,-70)
-  self.ps:setGravity               (150)
-  self.ps:setRadialAcceleration    (0)
-  self.ps:setTangentialAcceleration(0)
-  self.ps:setSizeVariation         (0)
-  self.ps:setRotation              (0)
-  self.ps:setSpin                  (0)
-  self.ps:setSpinVariation         (0)
-  self.ps:setPosition(x, y)
-  self.ps:stop()
+  --self.ps = love.graphics.newParticleSystem(AcidDrop.image_particle, 4)
+  --self.ps:setEmissionRate          (10)
+  --self.ps:setLifetime              (0.1)
+  --self.ps:setParticleLife          (1.5)
+  --self.ps:setDirection             (math.pi*1/2)
+  --self.ps:setSpread                (0.4)
+  --self.ps:setSpeed                 (-50,-70)
+  --self.ps:setGravity               (150)
+  --self.ps:setRadialAcceleration    (0)
+  --self.ps:setTangentialAcceleration(0)
+  --self.ps:setSizeVariation         (0)
+  --self.ps:setRotation              (0)
+  --self.ps:setSpin                  (0)
+  --self.ps:setSpinVariation         (0)
+  --self.ps:setPosition(x, y)
+  --self.ps:stop()
 
   AcidDrop.instances = AcidDrop.instances + 1
 end
 
 function AcidDrop:update(dt)
   self:applyGravity(dt)
-  self.ps:update(dt)
-  self.ps:setPosition(self.x, self.y)
+  --self.ps:update(dt)
+  --self.ps:setPosition(self.x, self.y)
   self.body:moveTo(self.x, self.y)
 end
 
 function AcidDrop:draw()
   love.graphics.draw(AcidDrop.image, self.x, self.y, 0, 1, 1, 8, 8)
-  love.graphics.draw(self.ps, 0, 0)
+  --love.graphics.draw(self.ps, 0, 0)
 end
 
 function AcidDrop:onCollision(dt, shape, dx, dy)
@@ -69,10 +69,11 @@ function AcidDrop:onCollision(dt, shape, dx, dy)
   or o.class.name == 'Ice'
   or o.class.name == 'Spike'
   or o.class.name == 'Sword'
+  or o.class.name == 'FireBall'
   or o.class.name == 'Slant' then
   	self.yspeed = 0
   	self.y = self.y - dy
-  	self.ps:start()
+  	--self.ps:start()
   	self:destroy()
 
   end

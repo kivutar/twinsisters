@@ -19,7 +19,7 @@
  </layer>
  <layer name="Ground" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt1zEOgkAQBVAstdPOC3kJC+0ttPdUeAM9mdOQGLKrf2BmHOD/5CfLJvhC2LBr0ywzq6CWXO/QpUuXLl26U3XRe779Tja3P295tuB5g+5n9oVGuJaxdJGzuYerSaQ7t/8pmvWe7Xlr7wJdr0Nd7yDusTL2di+V8Vzde2Xcz1q6Aect19VWugPnM6/nXzlJz4prK/cqvSmu/+Va7UdZn7e0N0W4pXi4yFnTw0Vi4Q45S2f7Xh2A0p2+2+3ZY91W+lC43Z491n1KX4Ab0aXmDXlgJjQ=
+   eJzt1zEOgkAQBVAspdPOC3kJCu0ttPdUeAM9mdOQELJr/rCzwyD/Jz9ZNtEXIrpj02wzO6em3NqhS5cuXbp01+qir/n1PtHc6b7lbMF5g+44p0Q9XMtYushsXsPVxNP9t/8pmuc92v3mPgv0eZ3rjtNl1iVB3FtmTXcZdy9twX3EfWbW0xykR3A/2vdXk4v0qri2cu/Sh+J6KdfqPIp6v6mzycNNpYaLzJo1XCQW7pxZOtrv1Rko3fW7w5ld6vbSl8IdzuxS9y39AK5Ht5ovlPYn4A==
   </data>
  </layer>
  <layer name="Shadows" width="30" height="60" opacity="0.43">
@@ -79,12 +79,8 @@
   </object>
   <object type="Arrow" x="112" y="624" width="16" height="16"/>
   <object type="Arrow" x="128" y="624" width="16" height="16"/>
-  <object type="Spike" x="96" y="624" width="16" height="16"/>
-  <object type="Spike" x="144" y="624" width="16" height="16"/>
   <object x="112" y="624" width="32"/>
   <object type="UpDownSpike" x="144" y="560" width="16" height="16"/>
-  <object type="Spike" x="144" y="544" width="16" height="16"/>
-  <object type="Spike" x="96" y="544" width="16" height="16"/>
   <object type="Wall" x="48" y="528">
    <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
