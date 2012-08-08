@@ -14,6 +14,12 @@ end
 
 Crab.instances = 0
 
+Crab.blood_particle = love.graphics.newImage('sprites/blood_particle.png')
+Crab.blood_particle:setFilter("nearest","nearest")
+
+Crab.smoke_particle = love.graphics.newImage('sprites/smoke_particle.png')
+Crab.smoke_particle:setFilter("nearest","nearest")
+
 function Crab:initialize(w, x, y, z)
   self.w = w
   self.x = x
@@ -43,6 +49,39 @@ function Crab:initialize(w, x, y, z)
   self.HP = 3
 
   Crab.instances = Crab.instances + 1
+
+  self.blood = love.graphics.newParticleSystem(Crab.blood_particle, 99)
+  self.blood:setEmissionRate          (99)
+  self.blood:setLifetime              (0.15)
+  self.blood:setParticleLife          (0.05, 0.15)
+  self.blood:setDirection             (math.pi/2)
+  self.blood:setSpread                (math.pi*2)
+  self.blood:setSpeed                 (200)
+  self.blood:setGravity               (300)
+  self.blood:setRadialAcceleration    (0)
+  self.blood:setTangentialAcceleration(100)
+  self.blood:setSizeVariation         (0)
+  self.blood:setRotation              (0)
+  self.blood:setSpin                  (0)
+  self.blood:setSpinVariation         (0)
+  self.blood:stop()
+
+  self.smoke = love.graphics.newParticleSystem(Crab.smoke_particle, 99)
+  self.smoke:setEmissionRate          (99)
+  self.smoke:setLifetime              (0.3)
+  self.smoke:setParticleLife          (0.1, 0.3)
+  self.smoke:setDirection             (math.pi/2)
+  self.smoke:setSpread                (math.pi*2)
+  self.smoke:setSpeed                 (75)
+  self.smoke:setGravity               (-400)
+  self.smoke:setRadialAcceleration    (0)
+  self.smoke:setTangentialAcceleration(100)
+  self.smoke:setSizeVariation         (2)
+  self.smoke:setRotation              (0)
+  self.smoke:setSpin                  (0)
+  self.smoke:setSpinVariation         (0)
+  self.smoke:stop()
+
 end
 
 function solidAt(x, y)
@@ -100,7 +139,7 @@ function Crab:update(dt)
       self.direction = 'right'
       self.stance = 'run'
       if self.xspeed < 0 then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * self.iwf then self.xspeed = self.xspeed + self.acceleration * dt * self.iwf end
+      self.xspeed = self.xspeed + self.acceleration * dt * self.iwf
     end
   -- Moving left
   elseif self.want_to_go == 'left' then
@@ -108,7 +147,7 @@ function Crab:update(dt)
       self.direction = 'left'
       self.stance = 'run'
       if self.xspeed > 0 then self.xspeed = 0 end
-      if math.abs(self.xspeed) <= self.max_xspeed * self.iwf then self.xspeed = self.xspeed - self.acceleration * dt * self.iwf end
+      self.xspeed = self.xspeed - self.acceleration * dt * self.iwf
     end
   -- Stop moving
   else
@@ -135,12 +174,13 @@ function Crab:update(dt)
 
   self:applyGravity(dt)
 
-  -- Blinking
-  if self.invincible then
-    if math.floor(love.timer.getTime() * 100) % 2 == 0 then self.color = {255, 255, 255, 255} else self.color = {0, 0, 0, 0} end
-  else
-    self.color = {255, 255, 255, 255}
-  end
+  self:applyBlinking()
+
+  self.blood:update(dt)
+  self.blood:setPosition(self.x, self.y)
+
+  self.smoke:update(dt)
+  self.smoke:setPosition(self.x, self.y)
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt / Crab.instances)
@@ -155,6 +195,8 @@ function Crab:draw()
   -- Draw the animation
   self.animation:draw(self.x-16, self.y-24)
   self:blinkingPostDraw()
+  love.graphics.draw(self.blood, 0, 0)
+  love.graphics.draw(self.smoke, 0, 0)
 end
 
 function Crab:onCollision(dt, shape, dx, dy)
@@ -187,8 +229,10 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play('sounds/die.wav')
       self.want_to_go = nil
+      self.xspeed = o.direction == 'right' and 5 or -5
       self.invincible = true
       self.stance = 'hit'
+      self.smoke:start()
       CRON.after(1, function()
         addObject( { type='Heart', x=self.x, y=self.y, z=self.z }, self.w )
         objects[self.name] = nil
@@ -198,10 +242,11 @@ function Crab:onCollision(dt, shape, dx, dy)
     else
       TEsound.play('sounds/hit.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 1 or -1
+      self.xspeed = o.direction == 'right' and 5 or -5
       self.yspeed = -100
       self.invincible = true
       self.stance = 'hit'
+      self.blood:start()
       CRON.after(1, function()
         self.want_to_go = math.random(2) == 2 and 'left' or 'right'
         self.invincible = false

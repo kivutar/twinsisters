@@ -12,8 +12,6 @@ function Sword:initialize(player)
   self.body.parent = self
 end
 
-function Sword:draw() self.body:draw() end
-
 function Sword:update(dt)
   self.direction = self.player.direction
   self.w = self.player.w
@@ -21,4 +19,9 @@ function Sword:update(dt)
   self.y = self.player.y
   self.z = self.player.z
   self.body:moveTo(self.x, self.y)
+end
+
+function Sword:destroy()
+  Collider:remove(self.body)
+  objects[self.name] = nil
 end

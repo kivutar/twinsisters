@@ -118,7 +118,7 @@ function love.load()
   require 'objects/fireball'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test6.tmx'
+  map = ATL.load 'test5.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)

@@ -184,14 +184,13 @@ function Player:update(dt)
       if not self.attacking then
         self.attacking = true
         TEsound.play('sounds/sword2.wav')
-        objects['sword_'..self.name] = Sword:new(self)
-        objects['sword_'..self.name].type = 'Sword'
+        local name = 'sword_'..self.name
+        objects[name] = Sword:new(self)
+        objects[name].type = 'Sword'
+        objects[name].name = name
         CRON.after(0.25, function()
           self.attacking = false
-          if objects['sword_'..self.name] then
-            --Collider:remove(objects['sword_'..self.name].body)
-            objects['sword_'..self.name] = nil
-          end
+          objects[name]:destroy()
         end)
       end
     end
@@ -205,10 +204,11 @@ function Player:update(dt)
     if not self.fire_pressed then
       if not self.attacking then
         self.attacking = true
-        TEsound.play('sounds/fire.wav')
-        objects['FireBall_'..self.name] = FireBall:new(self)
-        objects['FireBall_'..self.name].type = 'FireBall'
-        objects['FireBall_'..self.name].name = 'FireBall_'..self.name
+        TEsound.play('sounds/shoot.wav')
+        local name = 'FireBall_'..self.name..'_'..love.timer.getTime()
+        objects[name] = FireBall:new(self)
+        objects[name].type = 'FireBall'
+        objects[name].name = name
         CRON.after(0.25, function() self.attacking = false end)
       end
     end
