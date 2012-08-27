@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="190" height="90" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="bridge" tilewidth="16" tileheight="16">
+  <image source="bridge.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="simpletileset" tilewidth="16" tileheight="16">
+  <image source="simpletileset.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="81" name="maison2" tilewidth="16" tileheight="16">
+  <image source="maison2.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="209" name="grass" tilewidth="16" tileheight="16">
+  <image source="grass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="273" name="feuilles" tilewidth="16" tileheight="16">
+  <image source="feuilles.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="337" name="maison" tilewidth="16" tileheight="16">
+  <image source="maison.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="401" name="sea" tilewidth="16" tileheight="16">
+  <image source="sea.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="465" name="blocks" tilewidth="16" tileheight="16">
+  <image source="blocks.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="529" name="insidehouse" tilewidth="16" tileheight="16">
+  <image source="insidehouse.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="657" name="plage" tilewidth="16" tileheight="16">
+  <image source="plage.png" width="128" height="128"/>
+ </tileset>
+ <layer name="eau" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2EsOgzAMQEF6c67AjSt1VSEECTiE4BnJOz6bRwhMEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMD7LZ/fzH8zlQ6MSve8RU2vuuctNlpez96xumdIJd1vjO4ZWkH3tc+E7nk83ZOR7sno5P6+euBJSro/OFfrDOfKWq17RhW1j2k1EG3VWO1evuSbYO+axfeDSBe632u99HxrPl1c7P7K/kX3dBPccovnQ/eE0z0Z6Z6MdE9GDbufl3P/eXRPczes90fvgcN7QrTO3Re9DyCa7slohO61TzTdk5HuyerG1k8PROvdtO7JRM8AAAAAAAAAAAAAAAAAAAAAAH18ATk9Ytk=
+  </data>
+ </layer>
+ <layer name="portes" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt0tENABAUBMHL65gOqJwmkMhMBfuxCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKe1Snq9roC7xn5++h4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MQCO5oB7w==
+  </data>
+ </layer>
+ <layer name="plage" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2rtOw0AURdFo/r8BKiANjwZCQ6iI4N8wBVJkOXYYhhxs1pJu5XZb47nyagUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQxkWZHlia6zI9sDR3ZXoAAJbirfu2efd9A7B4dpj8J5+dX/V2mGu7fBZmv+ev3l97O8zdwHvQkrsEp7bfc7/3Q7P7hfbhlI7pfGjuR7o/656dH/Hvw3cGWtqUunkaafFy4I7w04GWXkrdjLnpnt9WniP+k2CuHrpOHyvPkUMDf91z1+m28hypOV8AAIBxLXfv9vfMRcvdu/09c9Fy925/z1ykO9c9CenOdU9CunPdk5DuXPckpDvXPQnpznVPQrpz3ZOQ7lz3JKQ71z0J6c51T0K6c92TkO5c9ySkO9c9AAAAAAAAMOYDCqn+fQ==
+  </data>
+ </layer>
+ <layer name="terre" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2sFOwkAUhlF8NDVo0Adw6dL3fwNl4YYAZcq0/9B7TnJ34pTM5yBNdzsAAAAAAAAAAAAAAAAAAAAAAAAAAABG8PWUvgJY37fuKehH9wCb8jYx77lLg8Xonoqmutc+W3RL99pna27tfuT297t13kfrOmsN7T5mzGfkSs+b06LueWRzO9Q9j+pcg9c+o3TPozvX31TL+4afbVl3hGH7LrU31fJhd//3E93X1rL/Pe8BXVt3jXtNuq9rzfsnLWvrnqXcs+/3djm1tu5ZQo89X/L75NTvfv6blwvzeuPr0n3rfl09z7k57ffofu7/SKOe8bq/T3K/bvkbaOnu0nk+dVbrvp70nvWe3s9dHK68rmV0P5Z0pz1npOeGTi35uUG7dKu9ZtRnRf/pfizpXnvNyGf9ke7Hku61x4x+1h/pfizpZnWv+4R0s7rXfUK6Wd3rPiHdrO51n5BuVve6T0g3q3vdJ6Sb1b3uE9LN6l73Celmda/7hHSzutc926V7KtqnLwACdE9Fuqci3VOR7qlI91SkeyrSPRXpnop0T0W6pyLdU5HuqUj3VKR7KtI9AAAAAAAAcOoXfkgfNQ==
+  </data>
+ </layer>
+ <layer name="maisons" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt0jduVVEARdHvITpjopwxySJDSYaSDCUZSjLMjj2Jp4u+1pJ2f4ozmwEAAAAAAAAAAAAAAAAAAAAAAAAAADDC4sJstlTLtVKrtVbrC6OXwXQ2+vfROlbH60SdrFN+zxzb7N9btV07tVt7te/3zLGD/n2mzta5Ol8X6tDvAQBg7i3WUi3XSq3WWq3XkdoYNw0ms1lbtV07tVt7tV+n62DcNJjMxbpUl+tKXa1rdb1u1M1x02Ayt+p23am7da/u14N6WI/GTYPJPK4n9bSe1fN6US/rVb0eNw0m86be1rt6Xx/qY32qz/Vl3DSYzNf6Vt/rR/2sX/W7/tTfcdMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP5L/wAqcCtY
+  </data>
+ </layer>
+ <layer name="fenetres" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJztzrERgCAUBUH6VysAK1B75FVgyCfYnbn8WgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgH9HOtNVPQIL9TTSXT0CCz3pTV/1CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAhiY0HAV9
+  </data>
+ </layer>
+ <layer name="tronc" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2isOgDAQQEF6BHBcgI/gJ7j/1SBBEBwGCN2ZpFlb8dKKtigAAAAAAAAAAAAAAAAAAAAAAAAAeFqZzlmlb/cCb6nTdQKQp/7GOT+4C8jMcqPpVfdkqtnbbvfVaZxgJs0TkO6JSPdEpHuiGdPR/ax9AAAAAAAA4Af83SUib/sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/MEGMAwD/A==
+  </data>
+ </layer>
+ <layer name="herbe" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2s0OATEUgFG8j4WEt+cl2PEyiDQZRNT8uOWek3RhLKaLbybams0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGC4fcU4hM0OpnGsGKew2UGcffQEIMD1na99MtJ+3Vro1eB3lfZbW+vWrFEex7fuM+R+tKO1ta6myEbzZKN5stE8EWr2LKbay9A8Ea4df7qXMVb7midCaf5T9v75Fcv5/ee+zRdD2/euZ0yr+fO19eXapnN9aPNF3/Y1z9hqztjH7K575uu3D1Eiztgf17zfeuagFf7XAgAAAAAAAAAAAAAAAAAA09gubmO3iJ4J9KNfMtI9GemejHRPRronI92Tke7JSPf8g3Km9O777tA9AAAAAAAAAACtOwN4aZve
+  </data>
+ </layer>
+ <layer name="feuilles" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2rcNQzEQREH+EuQCuUAukAvk+m9NWwDB6AMSiBng5RdcuKUAAAAAAAAAAAAAAAAAAAAAAAAAAIxnMpQyTbNG87QYfn0pjGeZf16ldaNN2vp7OrLLP+/TodExnfw9HTnnny/p2uiW7v6ejjzyz8/0avROH38PAAAAAAAAAD9V2/Da7NK72obXZpfe1Ta8Nrv0rrbhtdmld7UNr80uAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMD/+ALVNAyp
+  </data>
+ </layer>
+ <layer name="pont" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJztzjsOgkAARVFaEQtUCgUK+ex/i74NWEwyyVick9z+dh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv1xSn64FDenWYhYqGdM9PQp6pqnFLFTySu80F7SktcUsVPJJW9oLOtLZYhYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7AF7tEBWU=
+  </data>
+ </layer>
+ <layer name="fleur" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2bEJADAIRUH338990qQSJEUKLe7g4wwPIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4F/eAQAAbFD7pOsVHQMAAAAAAAAAs/z0YU6WCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwdzcgHfg==
+  </data>
+ </layer>
+ <layer name="blocks" width="190" height="90">
+  <data encoding="base64" compression="zlib">
+   eJztwYEAAAAAw6D5U9/gBFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDAs/AAE=
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="190" height="90" visible="0">
+  <object type="Wall" x="0" y="768">
+   <polygon points="0,0 144,0 144,-16 160,-16 160,-32 176,-32 176,-48 192,-48 192,-64 208,-64 208,-80 400,-80 400,-64 416,-64 416,-48 432,-48 432,-32 448,-32 448,-16 464,-16 464,0 512,0 512,32 0,32"/>
+  </object>
+  <object type="Bridge" x="992" y="592">
+   <polygon points="0,0 16,-16 192,-16 208,0"/>
+  </object>
+  <object type="Water" x="816" y="656">
+   <polygon points="0,0 112,0 112,32 176,32 176,-64 384,-64 384,80 112,80 112,112 0,112"/>
+  </object>
+ </objectgroup>
+</map>
