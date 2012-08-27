@@ -31,12 +31,12 @@ function Player:initialize(name, skin, w, x, y, z)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 2
+  self.max_xspeed = 150
   self.yspeed = 0
   self.jumpspeed = 200
-  self.friction = 10
-  self.airfriction = 1
-  self.acceleration = 5
+  self.friction = 750
+  self.airfriction = 75
+  self.acceleration = 375
   self.groundspeed = 0
   self.iwf = 1
 
@@ -111,10 +111,10 @@ function Player:update(dt)
 
   if self.onice then
     self.friction = 0
-    self.max_xspeed = 4
+    self.max_xspeed = 300
   else
-    self.friction = 10
-    self.max_xspeed = 2
+    self.friction = 750
+    self.max_xspeed = 150
   end
 
   --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
@@ -154,7 +154,7 @@ function Player:update(dt)
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) > 0.2 then self.x = self.x + (self.xspeed + self.groundspeed) end
+  if math.abs(self.xspeed + self.groundspeed) > 15 then self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf end
 
   -- Jumping and swimming
   if self.jump_btn() and not self.daft then
