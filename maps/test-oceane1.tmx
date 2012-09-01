@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="190" height="90" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="b" value="86"/>
+  <property name="g" value="173"/>
+  <property name="r" value="255"/>
+ </properties>
  <tileset firstgid="1" name="bridge" tilewidth="16" tileheight="16">
   <image source="bridge.png" width="128" height="128"/>
  </tileset>
@@ -32,27 +37,27 @@
  </tileset>
  <layer name="eau" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2EsOgzAMQEF6c67AjSt1VSEECTiE4BnJOz6bRwhMEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMD7LZ/fzH8zlQ6MSve8RU2vuuctNlpez96xumdIJd1vjO4ZWkH3tc+E7nk83ZOR7sno5P6+euBJSro/OFfrDOfKWq17RhW1j2k1EG3VWO1evuSbYO+axfeDSBe632u99HxrPl1c7P7K/kX3dBPccovnQ/eE0z0Z6Z6MdE9GDbufl3P/eXRPczes90fvgcN7QrTO3Re9DyCa7slohO61TzTdk5HuyerG1k8PROvdtO7JRM8AAAAAAAAAAAAAAAAAAAAAAH18ATk9Ytk=
+   eJztlAlq5DAQALM/1xfy44WFNRNFUt+2bFdBkyEjtfsoz9cXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwDP4/lMS7SM+/3ecgXuw2KcYO2OpP+E9CM8kY6bCOznd7Rt5u/dJv/9p3gdzvNp7i69P915zZvAuaOdQ4r03H97/crmP1dnXeL+4q50F3m+ExnvNDp/gvSG0cyrx3lr35C7er723vhO3m5fD+9k7sKX3i3pUdd5ljxbwPux5/1ft2cl1W/u73R4t4L3KWa33qzx4vxEK71PmuTOOXmczeor3t9yjBY33wt3bz+jp3hvvvsl7l78P9F7r/vD3wfo7GqwZ7wNY5ndFnDSD/7v+3Plq/5d7n9DzrI/He295z5W77+cmubOF+533o3dA07+1r1bf2bJnvLd7b5pVxPmTve/fgSrvG95fR9B7i+d39X5Vp8f7H7nrO1v2jPc5Lle8H2d639eq9V7b568zV7Koedn3E8D7Yw5R712zuBK8x3uF223RU+vOPsH7y3ZxBng/nIPXe6nf3bx37ewJFHo/8gXvN3II70u817wXqmdeMAeP95rZ7eh9mwTe13mv8uWCOeA93uO93XvtHNs53S17xvtNvT9j1gHvNe/FNG99Z2LPeI/3Z3jfPu8Z6pNqsMy9rz2aMz2qWcykOka+7DIHqc7RZ00fozNa97IcrchJFMUNvNfE6Kw2d0UN3pyW5+0Ud627qhdpx+0b77NnfkWIdZ+B5TnFO5B2XOGc1b2KGrJy3iFU/eyG0M+qJ02/0v0K56zuVdSQlTPk2kmhqmU3HDNsg349e2jfeO+dlSdHVaxqOb7bCecM+x1k7TLLOat7FTVk5RzNynO/Mlb1HN/tRGAPK788u8x0Trq/emakr4qco1lF95Udq3qO73YiaY7RXWY7Z3WvogZvTulexr6yQ1XTTijcS+vbeC/inNW9ihq8OaV73llXh1jTTiS5591FxrNXc1/l9pyz1ODNKc3DO+vqEGvaCaFe7Yy9u1jdiziXdbaiBulM5bwrQ6xnJ4R627duxhV7qHDOevbqnGfkOS12Qphf6/56duDdT9S5z9pHMTqvOWetIZIzaz5XxlHnTggz7N3x7ECz6wrnrLkraojm9Pa8Uxx17oQwwzb57PVOcybLOWvuaA2jec3mZ8175zh63Qlhv9pdab3TnMlwzpM7WkN/tr+vneXT4uh1J4T9ane/OqPxKNu5f//bbK5v9b4yIjNdObb6TvJulEN6Th+e/o94qfezWXrmuntEZjo7P5qTNnd/pw0+a3YV6uOm3kdnMbsv5dLcuzJcDhjvzp6pySHVPastsuthXrx/RFgc0MzXMivtvjR7G+WI9js8/zDvoy5Yn3FlRPuL9K/ZkXWPljo8vfz43wber3rN3JV1btmuWXdr6SHaq6Weqr4r9jA72/D+tMh+rrbXjKjqb/SMPk9kf7OzeI/3ljmtzq36W93pn9Xnie5w2MfG3me4YJlFdWQ/09KrJ7Q5NP1Znqd9dmjuF3vvcuQvgYGzgQ==
   </data>
  </layer>
  <layer name="portes" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt0tENABAUBMHL65gOqJwmkMhMBfuxCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKe1Snq9roC7xn5++h4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MQCO5oB7w==
+   eJzt27ENwCAQBMETHeMO7MqhBgthrJ+p4INPLtgEAAAAAAAAAAAAAAAAAAAAgD/oLbna11fAXvf8+cffAwC8ZkdQkR0BAAAAAAAAAAAAAAAAnEz7R0XaPwAAAAAAAAAAAAAAAIA1dIpUpFMEAAAAAAAAAAAAAAAAAAAAAABONABDqAe5
   </data>
  </layer>
  <layer name="plage" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2rtOw0AURdFo/r8BKiANjwZCQ6iI4N8wBVJkOXYYhhxs1pJu5XZb47nyagUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQxkWZHlia6zI9sDR3ZXoAAJbirfu2efd9A7B4dpj8J5+dX/V2mGu7fBZmv+ev3l97O8zdwHvQkrsEp7bfc7/3Q7P7hfbhlI7pfGjuR7o/656dH/Hvw3cGWtqUunkaafFy4I7w04GWXkrdjLnpnt9WniP+k2CuHrpOHyvPkUMDf91z1+m28hypOV8AAIBxLXfv9vfMRcvdu/09c9Fy925/z1ykO9c9CenOdU9CunPdk5DuXPckpDvXPQnpznVPQrpz3ZOQ7lz3JKQ71z0J6c51T0K6c92TkO5c9ySkO9c9AAAAAAAAMOYDCqn+fQ==
+   eJzt3ctKw0AUBuAw77/xslG78bbQulFXFn03U0QowZa0M1M7c74P/gco/JDkZE46DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7TlPw3CRkcv0378A9nc99vYmIwu9p0F3Y2/vM/Kg9zToeeztMiMvek+D3vQWALoyZz4HvZkzn4PezJnPAQD04nO8t/lyfwPQPTNMIln3fHomcWGWT2c2+/zb94/JDHNV+aytZwmObbPP075vy8o5cxpX45z5WcrfW3JOgppqnDO/+uMZITdQ0ns6LLvcpvy9JeckaM1Tyt9bmgZO3Wv62Vs69Fqy7/UFAADYrvTsvVR8i4yaSs/eS8U7YmqpMXsvlfU74kfdpwK9JyK9JyK9JyK9JyK9JyK9JyK9JyK9JyK9JyK9JyK9JyK9J6JT7z3UUnonvFT8Rya1ldwJt1cOAAAAAMAxfQPTXI3g
   </data>
  </layer>
  <layer name="terre" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2sFOwkAUhlF8NDVo0Adw6dL3fwNl4YYAZcq0/9B7TnJ34pTM5yBNdzsAAAAAAAAAAAAAAAAAAAAAAAAAAABG8PWUvgJY37fuKehH9wCb8jYx77lLg8Xonoqmutc+W3RL99pna27tfuT297t13kfrOmsN7T5mzGfkSs+b06LueWRzO9Q9j+pcg9c+o3TPozvX31TL+4afbVl3hGH7LrU31fJhd//3E93X1rL/Pe8BXVt3jXtNuq9rzfsnLWvrnqXcs+/3djm1tu5ZQo89X/L75NTvfv6blwvzeuPr0n3rfl09z7k57ffofu7/SKOe8bq/T3K/bvkbaOnu0nk+dVbrvp70nvWe3s9dHK68rmV0P5Z0pz1npOeGTi35uUG7dKu9ZtRnRf/pfizpXnvNyGf9ke7Hku61x4x+1h/pfizpZnWv+4R0s7rXfUK6Wd3rPiHdrO51n5BuVve6T0g3q3vdJ6Sb1b3uE9LN6l73Celmda/7hHSzutc926V7KtqnLwACdE9Fuqci3VOR7qlI91SkeyrSPRXpnop0T0W6pyLdU5HuqUj3VKR7KtI9AAAAAAAAcOoXfkgfNQ==
+   eJzt3U1u1EAQgFHnaAQFFDgAS5acGXZwkkRCbJA9dk+3XdVT70m9S+IuzZdO5ieTZQEAAAAAAAAAAAAAAAAAAAAAALL4+bQsv56idwHX+v3e/B/dU4zznoqc9wDHfHNWUtB33VPQD90DPJRPO+tz3NbgNLqnor3utT+O59LyONK99sfwXFoeR7vP3P7Lcs0crde5ekU5c49nzfzljvW143qj3dOi7sfq3e+MM0e6t0PdjzViv7PNHGWtwVs/o3R/ntH7nWHmCGv97bX80vCxLdfNtKLo/nxb7e21/Lr03z/R/bqr9h09c8vtP/IxoFvXveKxJt2vm3XfLa58/KTl2rqPM+u+j+q53Xu73Lu27uPMuu8jRtzmZ96f3PvaH97X88b6ePDzorvO2s+s+94z8py7p/0R3d/7O1L2Mz5DP1fte+TMkbfTke+Blu62zvO9s1r3fXQfv0a/7uL1xue1LN3nmjm605Er0+uG/nfFz40ouo9bWV8r+o/uc80c3euotXbWZ/o7D93nmjm61xFr66zP9Hceus81c3SzZ3afie5zzRzdrO7jG+il+8ftvve+gu5zzRzd7Czd995X0H2umaObnaX7XrrPNXN0s7qPb6CX7nW/Rfe5Zo5uVvfxDfTSve636D7XzNHN6j6+gV4zds8Ye4/v6/6xZuavTK8FupruqUj3VKR7KtI9FemeinQPAAB13Hpv0tb3K4VZXPX/JiGT1vdazPy+dwBALZ63oiLdU5HuqUj3VKR7KtI9FemeinRPRbqnIt1T0YzdvwGh0qay
   </data>
  </layer>
  <layer name="maisons" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt0jduVVEARdHvITpjopwxySJDSYaSDCUZSjLMjj2Jp4u+1pJ2f4ozmwEAAAAAAAAAAAAAAAAAAAAAAAAAADDC4sJstlTLtVKrtVbrC6OXwXQ2+vfROlbH60SdrFN+zxzb7N9btV07tVt7te/3zLGD/n2mzta5Ol8X6tDvAQBg7i3WUi3XSq3WWq3XkdoYNw0ms1lbtV07tVt7tV+n62DcNJjMxbpUl+tKXa1rdb1u1M1x02Ayt+p23am7da/u14N6WI/GTYPJPK4n9bSe1fN6US/rVb0eNw0m86be1rt6Xx/qY32qz/Vl3DSYzNf6Vt/rR/2sX/W7/tTfcdMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP5L/wAqcCtY
+   eJzt28lO01EYxuHSOywUEAcMlEFEMWVmCSro0hmXKuMScIC7870C0pA0h9M+T/Lbv0m/zUn+bTQAAAAAAAAAAAAAAKhJa6TRGE1jqZ3G00SaHCm9DPpnKvf9MD1Kj9OTNJ2eunsG2EzuezZ10lyaTwtp0d0zwJZy38/TcnqRXqaV9MrdM8C6ue/VtJbW00baTFvuHgAAAAAAAIaG7wIZRr4LZBj5LpBh5LtAoKSa31o1b6esmt9aNW+nrJrfWjVv70Urjaax1E7jaSJNpgdpqty06tX81qp5ey9m0mzqpLk0nxbSYnqWlspNq17N/8GqeXsvumk1raX1tJE201baTjvlpnGLbjO/W7P0inrtpr30Or1Jb9N+Okjv0vty07jFbm5+z93f2Yf0MX1Kn9OX9DV9S4fpe7lp0Dc/0s/0Kx2l43SSTtNZOi83DfrmIl2mq/Q7/Ul/0790nW7KTQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuJf+AxTEVrM=
   </data>
  </layer>
  <layer name="fenetres" width="190" height="90">
@@ -62,12 +67,12 @@
  </layer>
  <layer name="tronc" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2isOgDAQQEF6BHBcgI/gJ7j/1SBBEBwGCN2ZpFlb8dKKtigAAAAAAAAAAAAAAAAAAAAAAAAAeFqZzlmlb/cCb6nTdQKQp/7GOT+4C8jMcqPpVfdkqtnbbvfVaZxgJs0TkO6JSPdEpHuiGdPR/ax9AAAAAAAA4Af83SUib/sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/MEGMAwD/A==
+   eJzt2tlOwlAUQNH2E0B8QDFxQBFFccAh0f//Lo9RNBok0F6ubVgrOelLoSXZNC2XogAAAAAAAAAAAAAAAACAzeqURdGN2Uk4vZjd8r8/GfytH33uxewnnEHMge5psKPo8zjmJOEMY051T4ONo8+LmMuEM4m50j0tN1qz4Vns/6B7Wm4aDZ/rmC0z1TxbaN37HPitU35vuy3pyfWeuvrlz21KddafekvOR/c0WZ31p8GStkeea6lpvEI/VX/7rrP+NHS9Z4NuV2io6m/fddafJrong7My/f3DXbzX/ecsOtbhgmPN95/pnkxy9XS95Dv2Un7Mq+7JJHf3NxWPp3tSyt19VbonpVw91X2W0D2pvF+DpzXuPXIdK+d5QkqP0exTxW7nr33WPQAAAAAAwJdN/HcXms6aOQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABt8AYvgyEs
   </data>
  </layer>
  <layer name="herbe" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2s0OATEUgFG8j4WEt+cl2PEyiDQZRNT8uOWek3RhLKaLbybams0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGC4fcU4hM0OpnGsGKew2UGcffQEIMD1na99MtJ+3Vro1eB3lfZbW+vWrFEex7fuM+R+tKO1ta6myEbzZKN5stE8EWr2LKbay9A8Ea4df7qXMVb7midCaf5T9v75Fcv5/ee+zRdD2/euZ0yr+fO19eXapnN9aPNF3/Y1z9hqztjH7K575uu3D1Eiztgf17zfeuagFf7XAgAAAAAAAAAAAAAAAAAA09gubmO3iJ4J9KNfMtI9GemejHRPRronI92Tke7JSPf8g3Km9O777tA9AAAAAAAAAACtOwN4aZve
+   eJzt2s0OATEUgFG8j4WEt+cl2PEyiDQZLNT83XLPSbowFjrxmeh0FgsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABjuWDFOYbODaZwrxiVsdhDnGD0BCHC/5mufjLRftxaKHFGmnGML51zab22tW7NGeR1zfc6cI8qUc2zlnFtb60Z+3xBB82SjebLRPBFq1tZTrbk1T4R7x9/eZxirfc0ToTT/Lff++RXr5fPrvs0XQ9t3rWdMm+X7se3t2K5zfGjzRd/2Nc/YavaWx+yuu+frvw9RIva/X9e8c/3moBWtPH8BAAAAAAAAAAAAAAAAAAD/Zr96jMMqeibQj37JSPdkpHsy0j0Z6Z6MdE9Guicj3fMPyp7Sp/e7Q/cAAAAAAAAAALTuCk6G5W4=
   </data>
  </layer>
  <layer name="feuilles" width="190" height="90">
@@ -82,23 +87,75 @@
  </layer>
  <layer name="fleur" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJzt2bEJADAIRUH338990qQSJEUKLe7g4wwPIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4F/eAQAAbFD7pOsVHQMAAAAAAAAAs/z0YU6WCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwdzcgHfg==
+   eJzt2rEJACAMBMDsv1/2sQ+IoGgs7ppUP8DziQAAAAAAAAAAAAAAAACAt/Iws5MHAAAAAAAAAAAA7svw5wcAAPyj9pNZX9FjAAAAAAAAAKCXTR/6ZLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADA2gCJ/gn9
   </data>
  </layer>
  <layer name="blocks" width="190" height="90">
   <data encoding="base64" compression="zlib">
-   eJztwYEAAAAAw6D5U9/gBFUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDAs/AAE=
+   eJzt0iECABAQRUF7/xPSOIlI0bEz6YcfXykAAAAAAAAAAAAAAAAAAAAAAMANaqzd4vyDn3Tdk5DuyWjvfugeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeNQEkEoG9Q==
   </data>
  </layer>
- <objectgroup name="Calque d'objets 1" width="190" height="90" visible="0">
+ <objectgroup name="Calque d'objets 1" width="190" height="90">
   <object type="Wall" x="0" y="768">
    <polygon points="0,0 144,0 144,-16 160,-16 160,-32 176,-32 176,-48 192,-48 192,-64 208,-64 208,-80 400,-80 400,-64 416,-64 416,-48 432,-48 432,-32 448,-32 448,-16 464,-16 464,0 512,0 512,32 0,32"/>
   </object>
   <object type="Bridge" x="992" y="592">
    <polygon points="0,0 16,-16 192,-16 208,0"/>
   </object>
-  <object type="Water" x="816" y="656">
-   <polygon points="0,0 112,0 112,32 176,32 176,-64 384,-64 384,80 112,80 112,112 0,112"/>
+  <object type="Wall" x="0" y="528">
+   <polygon points="0,0 144,0 144,32 160,32 160,48 176,48 176,64 192,64 192,80 208,80 224,80 208,96 0,96"/>
+  </object>
+  <object type="Wall" x="512" y="784">
+   <polygon points="0,0 128,0 128,32 0,32"/>
+  </object>
+  <object type="Wall" x="640" y="816">
+   <polygon points="0,0 0,-48 16,-48 16,-80 32,-80 32,-96 48,-96 48,-128 64,-128 64,-144 80,-144 80,-160 96,-160 96,-176 112,-176 112,-192 128,-192 128,-208 144,-208 144,-224 176,-224 176,0"/>
+  </object>
+  <object type="Wall" x="816" y="592">
+   <polygon points="0,0 176,0 176,80 160,96 128,96 112,80 112,64 0,64"/>
+  </object>
+  <object type="Wall" x="816" y="768">
+   <polygon points="0,0 112,0 112,-16 128,-32 224,-32 240,-16 240,16 224,32 16,32 0,48"/>
+  </object>
+  <object type="Water" x="800" y="608">
+   <polygon points="0,0 656,0 656,464 0,464"/>
+  </object>
+  <object type="Wall" x="800" y="896">
+   <polygon points="0,0 32,0 48,-16 64,-16 80,-32 80,-64 112,-64 112,-32 128,-32 144,-16 192,-16 224,16 224,32 208,48 0,48"/>
+  </object>
+  <object type="Wall" x="1440" y="928">
+   <polygon points="0,0 -224,0 -224,-32 -256,-32 -256,0 -288,0 -304,16 -304,32 -288,48 0,48"/>
+  </object>
+  <object type="Wall" x="1200" y="592">
+   <polygon points="0,0 640,0 640,448 240,448 240,208 -32,208 -48,192 -48,160 -32,144 0,144"/>
+  </object>
+  <object type="Wall" x="1456" y="560">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object type="Wall" x="864" y="1072">
+   <polygon points="0,0 16,-16 608,-16 624,0 624,224 608,240 16,240 0,224"/>
+  </object>
+  <object type="Wall" x="1312" y="1024">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object type="Wall" x="1872" y="656">
+   <polygon points="0,0 16,-16 256,-16 272,0 272,16 256,32 16,32 0,16"/>
+  </object>
+  <object type="Watertop" x="992" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1008" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1024" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1072" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1088" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1056" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1040" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1136" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1120" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1104" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1168" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1152" y="592" width="16" height="16"/>
+  <object type="Watertop" x="1184" y="592" width="16" height="16"/>
+  <object type="Wall" x="816" y="752">
+   <polygon points="0,0 112,0 112,16 0,16"/>
   </object>
  </objectgroup>
 </map>
