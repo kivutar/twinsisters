@@ -35,7 +35,7 @@
  </layer>
  <layer name="Ground" width="60" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwSgY3ECSkYFBipE+dvECMR8Qs6FhfiAWoI8TGBSBflWisX9x+ZPW/iZkHzqmtnnUwCPNv7TEwQTwQLuP2jiaAB5o91EbJxPAA+EmANvGD1M=
+   eJztzysSgDAMhOEtoo6HLQ6uhERy/zs0BlOzJm2YYf+Zz7ZZQCmllFLq25UE7GnMX7NZzNRYzTbmBBy29ey8992ZCe/d7L+W93se/ra3p4uIvs/bTUTf5+0hIm6qfmYPQw==
   </data>
  </layer>
  <objectgroup name="Collisions" width="60" height="16">
@@ -59,7 +59,7 @@
  </objectgroup>
  <layer name="Grass" width="60" height="16">
   <data encoding="base64" compression="zlib">
-   eJzt0cEOQEAQA9D+Ak74GsKB8P+/YxIRshszDj0gfUmv3XQWEBEREYmVSf6qs/SWJslgGclvFcjvGqUi9R07J8t807fi3O11PVUjv2uUltTn7bxasO/2ulj/9RWs/xJ5gw0aOAxl
+   eJzt0cEJACAQxEBbUF9q/316JXgQUCED+e5nS5EkSdINNWrJOrxHdGpEM9mC94iov35B/SW9YAOcyAmh
   </data>
  </layer>
 </map>

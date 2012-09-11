@@ -17,13 +17,13 @@ function Mountains:initialize(w, x, y, z)
 end
 
 function Mountains:draw()
-  love.graphics.setColor(unpack(self.color))
+  --love.graphics.setColor(unpack(self.color))
   for _,bg in pairs(Mountains.paralax) do
-    for i=-3,4,1 do
+    for i=-5,6,1 do
       love.graphics.draw(
         bg.img,
-        i*128 + camera.x - camera.x/bg.x,
-        camera.y - 64 + ((400 - camera.y)/bg.y),
+        i*128*4 + camera.x - camera.x/bg.x,
+        camera.y - 64*4 + ((400*4 - camera.y)/bg.y),
         0, 1, 1, 0, 0
       )
     end

@@ -22,12 +22,12 @@ function camera:move(dx, dy)
   self.y = self.y + (dy or 0)
   -- Prevent the camera to go out of the map
   if self.x < love.graphics.getWidth()/2*self.scaleX then self.x = love.graphics.getWidth()/2*self.scaleX end
-  if self.x > map.width*16 - love.graphics.getWidth()/2*self.scaleX then self.x = map.width*16 - love.graphics.getWidth()/2*self.scaleX end
+  if self.x > map.width*map.tileWidth - love.graphics.getWidth()/2*self.scaleX then self.x = map.width*map.tileWidth - love.graphics.getWidth()/2*self.scaleX end
   if self.y < love.graphics.getHeight()/2*self.scaleY then self.y = love.graphics.getHeight()/2*self.scaleY end
-  if self.y > map.height*16 - love.graphics.getHeight()/2*self.scaleY then self.y = map.height*16 - love.graphics.getHeight()/2*self.scaleY end
+  if self.y > map.height*map.tileWidth - love.graphics.getHeight()/2*self.scaleY then self.y = map.height*map.tileWidth - love.graphics.getHeight()/2*self.scaleY end
   -- Center the map if smaller than screen
-  if map.width  * 16 < love.graphics.getWidth()  * self.scaleX then self.x = map.width  * 16 / 2 end
-  if map.height * 16 < love.graphics.getHeight() * self.scaleY then self.y = map.height * 16 / 2 end
+  if map.width  * map.tileWidth < love.graphics.getWidth()  * self.scaleX then self.x = map.width  * map.tileWidth / 2 end
+  if map.height * map.tileWidth < love.graphics.getHeight() * self.scaleY then self.y = map.height * map.tileWidth / 2 end
 end
 
 function camera:setScale(sx, sy)

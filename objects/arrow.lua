@@ -9,10 +9,10 @@ function Arrow:initialize(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.body = Collider:addCircle(self.x, self.y, 8)
+  self.body = Collider:addCircle(self.x, self.y, 32)
   self.body.parent = self
 end
 
 function Arrow:draw()
-  love.graphics.draw(Arrow.image, self.x, self.y, 0, 1, 1, 8, 8)
+  love.graphics.draw(Arrow.image, self.x, self.y, 0, 1, 1, 32, 32)
 end

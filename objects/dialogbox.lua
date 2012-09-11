@@ -64,16 +64,16 @@ function DialogBox:draw()
   love.graphics.setFont(font2)
 
   love.graphics.setColor(37, 82, 113, 255)
-  love.graphics.printf("LAURIANE:", uix + 90, uiy + 192-16, 180, 'left')
+  love.graphics.printf("LAURIANE:", uix + 90*4, uiy + (192-16-40)*4, 180*4, 'left')
 
   love.graphics.setColor(0, 0, 0, 255)
   local message = string.sub(self.message, 1, math.floor(self.display_len))
-  love.graphics.printf(message, uix + 90, uiy + 192   , 180, 'left')
+  love.graphics.printf(message, uix + 90*4, uiy + (192-40)*4, 180*4, 'left')
   
   love.graphics.setColor(255, 255, 255, 255)
 
   if self.finished then
-    love.graphics.draw(DialogBox.press_button, uix + 16*16, uiy+16*13, 0, 1, 1, 0, 0)
+    love.graphics.draw(DialogBox.press_button, uix + 16*16*4, uiy+(16*13-40)*4, 0, 1, 1, 0, 0)
   end
 end
 

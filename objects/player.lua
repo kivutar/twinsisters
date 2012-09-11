@@ -10,7 +10,7 @@ for _,skin in pairs({'lolo'}) do
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
       img:setFilter("nearest", "nearest")
-      Player.anim[skin][stance][direction] = newAnimation(img , 64, 64, speed, 0)
+      Player.anim[skin][stance][direction] = newAnimation(img , 256, 256, speed, 0)
     end
   end
 end
@@ -27,16 +27,16 @@ function Player:initialize(name, skin, w, x, y, z)
 
   self.type = "Player"
 
-  self.body = Collider:addPolygon(0,0, 0,12, 4,16, 12,16, 16,12, 16,0)
+  self.body = Collider:addPolygon(0,0, 0,12*4, 4*4,16*4, 12*4,16*4, 16*4,12*4, 16*4,0)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 150
+  self.max_xspeed = 150*4
   self.yspeed = 0
-  self.jumpspeed = 200
-  self.friction = 750
-  self.airfriction = 75
-  self.acceleration = 375
+  self.jumpspeed = 200*4
+  self.friction = 750*4
+  self.airfriction = 75*4
+  self.acceleration = 375*4
   self.groundspeed = 0
   self.iwf = 1
 
@@ -111,10 +111,10 @@ function Player:update(dt)
 
   if self.onice then
     self.friction = 0
-    self.max_xspeed = 300
+    self.max_xspeed = 300*4
   else
-    self.friction = 750
-    self.max_xspeed = 150
+    self.friction = 750*4
+    self.max_xspeed = 150*4
   end
 
   --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
@@ -154,14 +154,14 @@ function Player:update(dt)
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) > 15 then self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf end
+  if math.abs(self.xspeed + self.groundspeed) > 15*4 then self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf end
 
   -- Jumping and swimming
   if self.jump_btn() and not self.daft then
     if not self.jump_pressed then
       -- Jump from bridge
       if self.onbridge and self.down_btn() then
-        self.y = self.y + 20
+        self.y = self.y + 20*4
         TEsound.play('sounds/jump.wav')
       -- Regular jump
       elseif self.onground and not self.down_btn() and not self.attacking then
@@ -284,7 +284,7 @@ function Player:draw()
     self.animation:seek(1)
   end
   -- Draw the animation
-  self.animation:draw(self.x-32, self.y-23.5-32)
+  self.animation:draw(self.x-32*4, self.y-23.5*4-32*4)
   self:blinkingPostDraw()
 end
 

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="90" height="30" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="b" value="248"/>
+  <property name="g" value="200"/>
+  <property name="r" value="84"/>
+ </properties>
+ <tileset firstgid="1" name="hdground" tilewidth="64" tileheight="64">
+  <image source="hdground.png" width="640" height="320"/>
+ </tileset>
+ <tileset firstgid="51" name="hdgrass" tilewidth="64" tileheight="64">
+  <image source="hdgrass.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="115" name="hdwater" tilewidth="64" tileheight="64">
+  <image source="hdwater.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="116" name="hdbeach" tilewidth="64" tileheight="64">
+  <image source="hdbeach.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="180" name="hdblock" tilewidth="64" tileheight="64">
+  <image source="hdblock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="181" name="hdtree" tilewidth="64" tileheight="64">
+  <image source="hdtree.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="245" name="hdhouse" tilewidth="64" tileheight="64">
+  <image source="hdhouse.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="373" name="hdbrick" tilewidth="64" tileheight="64">
+  <image source="hdbrick.png" width="128" height="128"/>
+ </tileset>
+ <layer name="water" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJAAAIxDB3dn9wBUG5VwJdoFUAAAAAAAAAAJDRx9jxOcPnDJ/hxwBCmBzB
+  </data>
+ </layer>
+ <layer name="beach" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw6ENAEAIBDCmRiJ/7l+B5AyiTVoFAAAAAAAAAAAAN3WYnQmz88KJD6pIF6E=
+  </data>
+ </layer>
+ <layer name="bricks" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKxCAQRUE9dMc5frKYkOwnvwNDFbiXh7Q6BgAAAPyu5hjrWJ/59k7+U33blr5Ra16LHI17nJ03rePcf3nmcw+NezjPfe6tzemMbV5/Qe+OnDIzWpjPfXTOc57zSuO4e2OdAZ6zA7/QF2Q=
+  </data>
+ </layer>
+ <layer name="ground" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztl8sKwkAMReNr5Wvla6/oStFv7weaLgbsEHQySacP74ELUihMDrdpJQIAAAAAAAAAAEAfqT6Sch3YkDwDf6roNzy3A/pchrjD8NwO6HMZsJ/LgD6XwdLhJWemyNZ62AFjcXzlrBW5kI/rKjF9QtrPv84aHD85L84hIXfOg/xcD41v/7slzzmOx+ha+8xI388htdMpNXdsrmPJdepen3MWipliJsIcmkjkeJbuD55X1NyxFsex69S9viFb/6U5NPF+v8c9rrt7I5tTjxw5J+UsNaHH1jm8OxD32KO7XXouMceZdDsw3sF96LHV846zL3A+zQ703sH/5Hks6drzG7mPV50=
+  </data>
+ </layer>
+ <layer name="buissons" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0lEJADAMQ8H4FzX2V1tz0VF6pyA8kgAAAAAAAADAPPf3gCUqWneoaM0+Jz4P0OkBMikGFA==
+  </data>
+ </layer>
+ <layer name="houses" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1TtPAkEYRuGdQhLtBW+UIqKWKgqWXAQs8e4P8Pb/I5Un2UyyoZ1MSDbnJE92y8nXvEVhZmZmZpanP6w2/YiathWKohHK/22+O2Gz76lru9y1ib2KfRzgEEdoe/vkjrlhB92KU/RwhnNceOfkLrnhFfq4qbjFAEPceeekRqE0xv2aGeZY4ME7J7UMpUe8rHnFG97x4Z2TihvYcgezFjfwxB3MWtzAa3cwa3EDJ5i6g9mKG/iEZ3fQzMwsuc9Q+sI3fvDrjpqZmVmN+wc1jB0G
+  </data>
+ </layer>
+ <layer name="windows" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1cEJgDAQBMBLB3aiVqBWEO2/Gc8KhEAUdAb2v+xnIwAAAIC/GEvElJnL202+bcl918xm565q7rtnDjsDjfziM65fHPxid34RAAAAuHMCp/IEYw==
+  </data>
+ </layer>
+ <layer name="grass" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKgzAQBdDcSbuy3v9a0kWoCwXna0HsezDrkJ/PpDUAAAAAAADubAyGmk9m72BkfVzPOCHrY85k3Mn6a2jb+/Vsxl3PujKv4Jy9e9zlT5na9n69UnW3z8EZe/eo/ilXd2D9/kl/nugXHVi/f9Kff5TuJj2uSXeTHsNzLY5EJME=
+  </data>
+ </layer>
+ <layer name="grass2" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1EsKgCAUQFH3FNVA2v+2woEgQvSxIvKckQ6eyBUMAQAAAAAAgK8aivW8sU6maj8+c51fSo1jON8szS0X5npUNl5Ozsag9REtjTOt97U2Ls/JrUv1X17/9T1pbZzFm855Q8/vDQC8YwXgSwhJ
+  </data>
+ </layer>
+ <layer name="flowers" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0aENADAIRcFOBftvVltRUoFA9E69BPMT1gIAAAAAAAAAbvLoGFvRl497FM0MP+BnWTQAfRs2ZQG1
+  </data>
+ </layer>
+ <layer name="tree" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzsENgCAUBUH6L1I4KSewBF8X35CZZO/bGgAAAAAAAAD8w5V6GsUfp7vTk2b1yOFW2umtHgEAiA8hVwgg
+  </data>
+ </layer>
+ <layer name="leafs" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1T0OgkAUReHZ/378oVCGApQC0ULA3XAnxGToR55Mzpec/uY1zzkAAAAAAABsobAekJmL9QAA+JGDOqqTOhtvSWVSH+sRkXDj8EeuqlTeLbfmV6f1vfEtyqvKcFOOatW49Z3vqrUclaFOPVQf9VQvy1EZeqtBjVH/9kMAAACAPZsBDSchbg==
+  </data>
+ </layer>
+ <layer name="leafs2" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0LEJgEAQRcHrvx8xUytQE7UdV7hYzJY7Z+DDho8tBQAAAADaM2QHAPDqiJ3ZER+M2QE/MMXm2JLc0bs1ttV7zwzp3PPnq/gxAADQphtNWQo3
+  </data>
+ </layer>
+ <layer name="leafs3" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzgEJAAAMA6D1D/VsjzEGmsAEAAAAAAAAWHXtAAAAABMevkYAvw==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="90" height="30">
+  <object type="Wall" x="0" y="1600">
+   <polygon points="0,0 576,0 576,128 1408,128 1408,0 1536,0 1536,-128 1856,-128 1856,-192 1920,-192 1920,-256 1984,-256 1984,-320 2048,-320 2048,-384 2880,-384 2880,-320 2944,-320 2944,-256 3008,-256 3008,-192 3072,-192 3072,-128 3840,-128 3840,320 0,320"/>
+  </object>
+  <object type="Mountains" x="64" y="64"/>
+  <object type="Water" x="3840" y="1600">
+   <polygon points="0,-64 896,-64 896,192 0,192"/>
+  </object>
+  <object type="Wall" x="3840" y="1792">
+   <polygon points="0,0 896,0 896,-320 1920,-320 1920,128 0,128"/>
+  </object>
+  <object type="Watertop" x="3840" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="3904" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="3968" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4032" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4096" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4160" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4288" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4224" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4352" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4416" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4480" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4544" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4608" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="4672" y="1472" width="64" height="64"/>
+  <object type="Wall" x="320" y="1472">
+   <polygon points="0,0 128,0 128,128 0,128"/>
+  </object>
+  <object type="Bridge" x="3968" y="1280">
+   <polygon points="0,0 640,0 640,64 0,64"/>
+  </object>
+  <object type="Crab" x="4224" y="1024" width="128" height="128"/>
+  <object type="Watertop" x="4736" y="1472" width="64" height="64"/>
+  <object type="Watertop" x="3776" y="1472" width="64" height="64"/>
+  <object type="Wall" x="4608" y="1600">
+   <polygon points="0,0 128,0 128,320 0,320"/>
+  </object>
+  <object type="Arrow" x="832" y="1664" width="64" height="64"/>
+  <object type="Door" x="2240" y="1088">
+   <properties>
+    <property name="locked" value="true"/>
+   </properties>
+   <polygon points="0,0 128,0 128,128 0,128"/>
+  </object>
+  <object type="Wall" x="1088" y="1600">
+   <polygon points="0,0 0,-832 64,-832 64,-640 128,-640 128,-576 64,-576 64,-384 128,-384 128,-320 64,-320 64,-128 128,-128 128,-64 64,-64 64,0"/>
+  </object>
+  <object type="Wall" x="1280" y="1728">
+   <polygon points="0,0 0,-128 64,-128 64,-320 0,-320 0,-384 320,-384 320,-256 256,-256 256,-128 128,-128 128,0"/>
+  </object>
+  <object type="Wall" x="960" y="704">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Wall" x="1344" y="704">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Wall" x="1344" y="768">
+   <polygon points="0,0 64,0 64,448 0,448 0,384 -64,384 -64,320 0,320 0,128 -64,128 -64,64 0,64"/>
+  </object>
+ </objectgroup>
+</map>

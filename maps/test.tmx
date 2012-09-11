@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="30" tilewidth="16" tileheight="16">
- <properties>
-  <property name="b" value="125"/>
-  <property name="g" value="110"/>
-  <property name="r" value="200"/>
- </properties>
  <tileset firstgid="1" name="simple" tilewidth="16" tileheight="16">
   <image source="simpletileset.png" width="64" height="64"/>
   <tile id="0">
@@ -56,68 +51,50 @@
  <tileset firstgid="17" name="grass" tilewidth="16" tileheight="16">
   <image source="grass.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="81" name="feuilles" tilewidth="16" tileheight="16">
-  <image source="feuilles.png" width="128" height="128"/>
- </tileset>
- <layer name="Buissons" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJzt1bsNgDAQBFH3SAYk/PpvgXOw0hVwyIs1T9rUcnTTGgAAmN2SNrs1tqXtY7/zqSN2xq60O/aM/BQAGKrsn2tL1Xl1sILecmtp7586r/4B+Ld+b9xuDQBU49bBzQt01wvR
-  </data>
- </layer>
  <layer name="Ground" width="60" height="30">
   <properties>
    <property name="" value=""/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlssOhDAIRTETaxzj4/+/dtqFszDWQOn1gdzkbgunQEsgou9LHKI7eo9acl7Lcl7bcl7bcl7bct66ZweANfkieXvC7MCDIqfavCujJidkLJ/fZ4pb6yf3c4ms1JerUl7JX3PGfaLzkfw1Z/R2Td67z2TS3foNLee9Zl/d0xg9ZWLN0YvgLNSOnvwpR/yrqRwLyautM5f1iHn7dvZAXk2NpaySeEhmaY2PZpVrzkwj+/pK5+7befP+AV6YDnk=
+   eJzt2MEKwCAMA1DHQNj///DuA9HMBkuagEetz3oQe2utFxtVYq927NWOvdqxVzv2xq+d6T1or3YivSfODq3p/mrHXmxelv8E9n6qebPFXntPnsc1qHOD60Q7Gd6R9Y+Z7d31z6wz87f+Q7BG9XfVivaZYd4NakXNrHudYdiLzX8BuecLrw==
   </data>
  </layer>
- <layer name="Grass" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztlrEKAkEMRPcXTiu1sxQrsdFO0ULR//8ds2hwWW7PZDGzh+bBdEeGMExuQ3Acx3Ecx3HGTkeaGGqKW0XEjDQ31AK3SpE8U8sMkF4l8kwtM0B6RTrj+RpaZd3KF511a19rav41yNs1JOm8lJp/DfJ2DekTY7j7SH61k/8G+t7sCz4a0q5pQd2bJelAOhZ8TqSzcFbatW8TZ67DO+eavOOuK9KFdC18cyPdX1456Nu5DfU5864bhVe+c4vbmWYsYReeXdXsyvTtjIYzlr5nuKvaXVM/7nSrN4DmXTXUVSncaX8D1PEAnBYcJQ==
-  </data>
- </layer>
- <layer name="Flowers" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJzt1cENACEIBEBrMNp/q1ZgTEQxd5l58QH2QygFAIAv6oHediwFAH+z+i+R/7Njti87B5Av486jO25lrJfmAvn6pIbXBnZbAPk=
-  </data>
- </layer>
- <layer name="Troncs" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJzt1qENACAMRUGmBRSwv6IjoGgCd8nzXzUtBQDgTzVqUc8ecsmIZrSyhwAAcMzPCrzOnYMcGwOOB4c=
-  </data>
- </layer>
- <layer name="Feuillages" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztmDEOglAQRLmiiAUIBYKFKAUo93cI2WQO4HeT/fOS1882k8kWhRBC/IYTLOGZrODFM1RCatjAK9nCzjNUQnp4gwM5wrtnqITkdu8DTvBJvuDsGSohC1zhm/zAzTOUEEKIv2CblXdr9M26w7s18ma1jZ7LhtNm1WYVB/yPiNzpBv8jIne6wV0XueOM3O7lbo/c6QZ3uzpdePMFgWorqw==
-  </data>
- </layer>
- <layer name="Feuillage2" width="60" height="30">
-  <data encoding="base64" compression="zlib">
-   eJzt17EKgDAMBNBMgvXz3Kpf0Lr1/8EeVuggIkgMmHtwi9PdolGEiIjeWGvmlr/LNbFmaVlt66grcuzFTmzfbOuoSy3YWYy7EJFIuMjwMMGgr4ZR7vfj2WTWTl+//887Sd95z3hx3jOeYHMWHzcrYG/pQuRVtC7wof5/1YMovr7feJcn6xJEDu1wthAD
-  </data>
- </layer>
- <objectgroup name="Objects" width="60" height="30">
+ <objectgroup name="Collisions" width="60" height="30">
   <properties>
    <property name="" value=""/>
   </properties>
+  <object type="Wall" x="352" y="176">
+   <polygon points="0,0 368,0 368,32 0,32"/>
+  </object>
+  <object type="Wall" x="288" y="224">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
   <object type="Wall" x="208" y="288">
    <polygon points="0,0 192,0 192,32 0,32"/>
   </object>
-  <object type="Bridge" x="688" y="400">
-   <polygon points="0,0 48,0 32,16 16,16"/>
+  <object type="Wall" x="752" y="224">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object type="Wall" x="176" y="400">
+   <polygon points="0,0 32,0 32,16 0,16"/>
+  </object>
+  <object type="Wall" x="688" y="400">
+   <polygon points="0,0 32,0 32,16 0,16"/>
   </object>
   <object type="Wall" x="16" y="368">
    <polygon points="0,0 128,0 128,16 0,16"/>
   </object>
   <object type="Wall" x="144" y="448">
-   <polygon points="48,0 224,0 224,16 48,16"/>
+   <polygon points="0,0 256,0 256,16 0,16"/>
+  </object>
+  <object type="Wall" x="128" y="384">
+   <polygon points="0,0 16,0 16,64 0,64"/>
   </object>
   <object type="Wall" x="0" y="16">
    <polygon points="0,0 16,0 16,352 0,352"/>
   </object>
   <object type="Wall" x="640" y="448">
-   <polygon points="32,0 64,0 64,16 32,16"/>
+   <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
   <object type="Wall" x="0" y="0">
    <polygon points="0,0 960,0 960,16 0,16"/>
@@ -149,32 +126,8 @@
   <object type="Crab" x="512" y="144" width="32" height="32"/>
   <object type="Arrow" x="512" y="352" width="16" height="16"/>
   <object type="Arrow" x="768" y="352" width="16" height="16"/>
-  <object type="Crab" x="256" y="256" width="32" height="32"/>
-  <object type="Crab" x="48" y="336" width="32" height="32"/>
-  <object type="Crab" x="848" y="256" width="32" height="32"/>
-  <object type="Slant" x="144" y="384">
-   <polygon points="0,0 16,0 32,16 32,32 48,48 48,64 0,64"/>
-  </object>
-  <object type="Slant" x="368" y="448">
-   <polygon points="0,0 32,-16 80,-64 112,-80 192,-80 224,-64 272,-16 304,0 304,16 0,16"/>
-  </object>
-  <object type="Bridge" x="736" y="208">
-   <polygon points="0,0 48,0 32,16 16,16"/>
-  </object>
-  <object type="Bridge" x="784" y="240">
-   <polygon points="0,0 48,0 32,16 16,16"/>
-  </object>
-  <object type="Bridge" x="304" y="256">
-   <polygon points="0,0 48,0 32,16 16,16"/>
-  </object>
-  <object type="Bridge" x="304" y="208">
-   <polygon points="0,0 48,0 32,16 16,16"/>
-  </object>
-  <object type="Wall" x="352" y="176">
-   <polygon points="0,0 368,0 368,16 352,32 304,32 288,48 272,48 256,64 224,64 208,48 160,48 144,32 16,32 0,16"/>
-  </object>
-  <object type="Bridge" x="128" y="320">
-   <polygon points="0,0 48,0 32,16 16,16"/>
+  <object type="Bridge" x="400" y="448">
+   <polygon points="0,0 80,-80 160,-80 240,0 240,16 0,16"/>
   </object>
  </objectgroup>
 </map>

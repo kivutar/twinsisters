@@ -56,13 +56,13 @@ function addObject(o, w)
   elseif o.type == 'UpDownSpike' then
     no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
   elseif o.type == 'Arrow' then
-    no = Arrow:new(w, o.x+8, o.y+8, 8)
+    no = Arrow:new(w, o.x+32, o.y+32, 8)
   elseif o.type == 'Fish' then
     no = Fish:new(w, o.x+8, o.y+8, 1)
   elseif o.type == 'Crab' then
     no = Crab:new(w, o.x+16, o.y+24, 6)
   elseif o.type == 'Watertop' then
-    no = Watertop:new(w, o.x+8, o.y+8, 1)
+    no = Watertop:new(w, o.x+32, o.y+32, 1)
   elseif o.type == 'Mountains' then
     no = Mountains:new(w, o.x, o.y, 0)
   elseif o.type == 'Cave' then
@@ -118,14 +118,14 @@ function love.load()
   require 'objects/fireball'
 
   ATL.path = 'maps/'
-  map = ATL.load 'test5.tmx'
+  map = ATL.load 'testhd.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1 / 3)--(map.properties.zoom or 2))
+  camera:setScale(1)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -163,6 +163,15 @@ function love.load()
   --objects.lolo.down_btn = loadstring("return love.joystick.getAxis(1,2) == 1")
   --objects.lolo.jump_btn = loadstring("return love.joystick.isDown(1,2)")
   --objects.lolo.switch_btn = loadstring("return love.joystick.isDown(1,4)")
+
+  ui = love.graphics.newImage('sprites/ui.png')
+  ui:setFilter("nearest", "nearest")
+
+  heart = {}
+  for i=0, 4 do
+    heart[i] = love.graphics.newImage('sprites/heart_'..i..'.png')
+    heart[i]:setFilter("nearest", "nearest")
+  end
 end
 
 function love.update(dt)
@@ -214,7 +223,7 @@ end
 
 function love.draw()
   camera:set()
-  map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 0, -100)
+  map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 1, 50)
   map:_updateTileRange()
 
   for z,layer in pairs(map.drawList) do
@@ -225,7 +234,7 @@ function love.draw()
     end
   end
 
-  for i=-10,10,1 do
+  for i=-15,15,1 do
     for _,o in pairs(objects) do
       if o.z == i then
         --if o.w == current_world or o.w == 'shared' or not o.w then
@@ -249,14 +258,7 @@ function love.draw()
     love.graphics.setColor(255, 255, 255, 255)
   end
 
-  ui = love.graphics.newImage('sprites/ui.png')
-  ui:setFilter("nearest", "nearest")
   love.graphics.draw(ui, uix, uiy, 0, 1, 1, 0, 0)
-  heart = {}
-  for i=0, 4 do
-    heart[i] = love.graphics.newImage('sprites/heart_'..i..'.png')
-    heart[i]:setFilter("nearest", "nearest")
-  end
 
   local hp = objects.lolo.HP
 
@@ -267,7 +269,7 @@ function love.draw()
 
     hp = hp - 4
 
-    love.graphics.draw(heart[hp2], (i/4)*16 + 36 + (uix), 16 + (uiy), 0, 1, 1, 0, 0)
+    love.graphics.draw(heart[hp2], (i/4)*16*4 + 36*4 + (uix), 16*4 + (uiy), 0, 1, 1, 0, 0)
 
   end
 

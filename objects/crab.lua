@@ -8,7 +8,7 @@ for stance, speed in pairs({stand=1, hit=1, run=0.1}) do
   for _,direction in pairs({'left', 'right'}) do
     img = love.graphics.newImage('sprites/crab_'..stance..'_'..direction..'.png')
     img:setFilter("nearest", "nearest")
-    Crab.anim[stance][direction] = newAnimation(img , 32, 32, speed, 0)
+    Crab.anim[stance][direction] = newAnimation(img , 32*4, 32*4, speed, 0)
   end
 end
 
@@ -26,15 +26,15 @@ function Crab:initialize(w, x, y, z)
   self.y = y
   self.z = z
 
-  self.body = Collider:addPolygon(0,16, 32,16, 32,32, 0,32)
+  self.body = Collider:addPolygon(0,16*4, 32*4,16*4, 32*4,32*4, 0,32*4)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 0.5
+  self.max_xspeed = 0.5*4
   self.yspeed = 0
-  self.friction = 10
-  self.airfriction = 1
-  self.acceleration = 5
+  self.friction = 10*4
+  self.airfriction = 1*4
+  self.acceleration = 5*4
   self.groundspeed = 0
 
   self.want_to_go = 'left'
@@ -56,10 +56,10 @@ function Crab:initialize(w, x, y, z)
   self.blood:setParticleLife          (0.05, 0.15)
   self.blood:setDirection             (math.pi/2)
   self.blood:setSpread                (math.pi*2)
-  self.blood:setSpeed                 (200)
-  self.blood:setGravity               (300)
+  self.blood:setSpeed                 (200*4)
+  self.blood:setGravity               (300*4)
   self.blood:setRadialAcceleration    (0)
-  self.blood:setTangentialAcceleration(100)
+  self.blood:setTangentialAcceleration(100*4)
   self.blood:setSizeVariation         (0)
   self.blood:setRotation              (0)
   self.blood:setSpin                  (0)
@@ -72,11 +72,11 @@ function Crab:initialize(w, x, y, z)
   self.smoke:setParticleLife          (0.1, 0.3)
   self.smoke:setDirection             (math.pi/2)
   self.smoke:setSpread                (math.pi*2)
-  self.smoke:setSpeed                 (75)
-  self.smoke:setGravity               (-400)
+  self.smoke:setSpeed                 (75*4)
+  self.smoke:setGravity               (-400*4)
   self.smoke:setRadialAcceleration    (0)
-  self.smoke:setTangentialAcceleration(100)
-  self.smoke:setSizeVariation         (2)
+  self.smoke:setTangentialAcceleration(100*4)
+  self.smoke:setSizeVariation         (2*4)
   self.smoke:setRotation              (0)
   self.smoke:setSpin                  (0)
   self.smoke:setSpinVariation         (0)
@@ -129,8 +129,8 @@ function Crab:update(dt)
 
   self.iwf = self.inwater and 0.5 or 1
 
-  if self.onground and not solidAt(self.x-16, self.y+10) and self.want_to_go == 'left'  then self.want_to_go = 'right' end
-  if self.onground and not solidAt(self.x+16, self.y+10) and self.want_to_go == 'right' then self.want_to_go = 'left'  end
+  if self.onground and not solidAt(self.x-16*4, self.y+10*4) and self.want_to_go == 'left'  then self.want_to_go = 'right' end
+  if self.onground and not solidAt(self.x+16*4, self.y+10*4) and self.want_to_go == 'right' then self.want_to_go = 'left'  end
 
   -- Moving on x axis
   -- Moving right
@@ -160,7 +160,7 @@ function Crab:update(dt)
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) * self.iwf > 0.2 then self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf end
+  if math.abs(self.xspeed + self.groundspeed) * self.iwf > 0.2*4 then self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf end
 
 
   -- AI
@@ -193,7 +193,7 @@ function Crab:draw()
   self.nextanim = Crab.anim[self.stance][self.direction]
   if self.animation ~= self.nextanim then self.animation = self.nextanim end
   -- Draw the animation
-  self.animation:draw(self.x-16, self.y-24)
+  self.animation:draw(self.x-16*4, self.y-24*4)
   self:blinkingPostDraw()
   love.graphics.draw(self.blood, 0, 0)
   love.graphics.draw(self.smoke, 0, 0)
@@ -229,7 +229,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play('sounds/die.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 5 or -5
+      self.xspeed = o.direction == 'right' and 5*4 or -5*4
       self.invincible = true
       self.stance = 'hit'
       self.smoke:start()
@@ -242,8 +242,8 @@ function Crab:onCollision(dt, shape, dx, dy)
     else
       TEsound.play('sounds/hit.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 5 or -5
-      self.yspeed = -100
+      self.xspeed = o.direction == 'right' and 5*4 or -5*4
+      self.yspeed = -100*4
       self.invincible = true
       self.stance = 'hit'
       self.blood:start()
