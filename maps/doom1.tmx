@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="20" tilewidth="64" tileheight="64">
+ <properties>
+  <property name="b" value="80"/>
+  <property name="g" value="18"/>
+  <property name="r" value="62"/>
+ </properties>
+ <tileset firstgid="1" name="hdground" tilewidth="64" tileheight="64">
+  <image source="hdground.png" width="640" height="320"/>
+ </tileset>
+ <tileset firstgid="51" name="hdbrick" tilewidth="64" tileheight="64">
+  <image source="hdbrick.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="55" name="hdtreeblack" tilewidth="64" tileheight="64">
+  <image source="hdtreeblack.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="119" name="ronces" tilewidth="64" tileheight="64">
+  <image source="ronces.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="1143" name="hdhouse" tilewidth="64" tileheight="64">
+  <image source="hdhouse.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="tombs2" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEOACAIBEEKfi+PNhTEWFjYaMLtJNezBWYAAADL8N8XvJOtNRVKrUmtN5r11n926zpR6y0KveH7ANyb52kKFw==
+  </data>
+ </layer>
+ <layer name="tombs" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztz7EJACAMAMEU2V6HTiFC+mAjd/ADfAQAAAC8t/K0Wz+7v8BcAZmtA+0=
+  </data>
+ </layer>
+ <layer name="ronces3" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt08dOFVEcB+AZO6IivoGKXVHcqEsLYm8bdakIVkRdCTsb0ttKeAO6sLG8gRV0Y3kDFesT+CV4k4nckBsW5HDhl3yZe+YmJ//f5JwomrrEcRTNYS7zmM8CFrIonsJBJkgd9TTQSBPNtNBKG+0Z7rVSp1WspoA1rGUd6wPp20U3PfTSRz8DPGaQoQz32q3THvayj2L2U8KBQPq+4CWveM0b3jLMCO94n+Fe53Q6TykXKKOci1wKpO8XvvKNUb7zg5/84jd/Mtzrjk53ucd9HlDDQ2oD6ZtjjsXksoSlLCOP5eSzIpBZJ5MOOhPrDbpsZBOb2UIhW9lGEduncd9nPE+sD+pyiMMc4SjHOM4JTnIqTd8qqhPPkHLbvFVU88n6c+K/y95d4SrXqOA6ldzgJrfS9E2dk//PSwh5ZN4OOtPMXeddPQ000kQzLbTSRns89s2SecLTaPx5CT1denTTQy999DPwr9+g51Ca7/SBj9H48xJ6kmd9JmSisz6b6ZPUfZvN5LNrhtz9HfrtjMf6ZtvdT3ZL5bTfZzibRT1TyeZu2ZC/rHFbRw==
+  </data>
+ </layer>
+ <layer name="ronces2" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1jtSQjEUxvHAJsQlAIrgLlBEYRfyEmwECqUFRNCGxw54qw3iRgQ2gnb+Le4MTcY0N0MC38yvumeYJPdwT4TQG79HiACCOMIxQjhBGBGcejQvysVE2csZzhHDBeK4xBUSSFq032v2kkIaGWSRww3yKOAWRZRQNnzvVdZfQx2PaOAJTbTwjBd00EXP5f3eoYgSyi78fp/1DzDECGNMMMUr3vCu8Z220UEXPUmN22eiMzN8YI5PSY3KmZiSLyywxEpSo3ImNuW/M1nz//vGj+HfVif3eEBF8vzAK4QPh159a9pnn13M5ixVqTF93qrMUpvmrcostWneqtwvNmuc3v6L6b2tEqe3bbtTyOL09q7cKVT6f5vzC8ybUPY=
+  </data>
+ </layer>
+ <layer name="ronces" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1cdRXFEQQNEZnMgBK2HTwJMGwuYgjPDkgCS8yQHvyUF44XLAHq1Y/cUrZpji179VZ/OqF/1WnUolJb01zAijjDHOBJNM5XCvkH7QzwCDDPEzYnaOeRZYZIllVljN9qIZappf/OYPM8xGzO6wyx77HHDIEcfZXjRDrbHOBptssR0xe8kV/7jmhlvuuM/2ohnqLyeccsY5FxGz6XQqlUc+BRRSxBeK0x+08Dt74JEnnnn5/xix+1fv36iimhpqqaP+k/y3xJ6llFFOBZURuzd4b6SJZlpopY32T/LfkDr86TuddNFND730xfC/cSvkFsehkFsch0JucRwKucVxKOQWx6GQW5yUlJTbXgGt8Ukb
+  </data>
+ </layer>
+ <layer name="feuillage" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlt0OwiAMhftWxitRL/y7Ua9k7/8g0gAJNt1W3OjQ8SUnSza2nJN2BQAdHkFXpyd5dk+eU+H6m5LHORnyf3I6Q8uLor3wK4zVi+vpElkvjHLXjwmRZLDwmbcEOVnpeu79obySfzHWWaOPox9ufnKkNZDklWR4ga9zJ7OcTeordxbG/ku/00ctc2fqfLDMvZr3EMxogfe9FjZLG1BmF67boDVgnPZBh2WtFANracDno3sKzXxUdTYv2L8GfC379tCaZ+43SM5J/9rXlJzzZqPR0OMNomkzAg==
+  </data>
+ </layer>
+ <layer name="feuillage2" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlssOgjAQRe9f+VqIupDHhroC//9DnIZOnAw1QRLaWnuSuyklnTPTBBoATYCkQgjX4huPf/PV1PDX22J93Uvfu7vz4c7rVp73DfY844lvTks9UppvrdJTRk/Ym+ff4nMfoNZS8u1VBrf+VPvY2+6xng+8758R+9hf9yYVBk8s2lfuH8VzdpYzN5j3JiekF98Di+5NLuTqVciDKnYBP8aOsqccKEfKKW45m3PGdEculCvlFrWa7dHf5BD/wSGoMM1PI31zgZ1S+lcszHkBGWJA3Q==
+  </data>
+ </layer>
+ <layer name="ground" width="60" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztksEKwjAQRLe2nmz06A8o9WSp//9xjpSFJbiJgcRSmAfvVFp2ZipCCCGEEEII2TMdPMAeDvC47TnNOcERBniGl23PaYbuOsEHvMIbvEu9nfuM//yXdNcFvmTN+4Sz1Ns5ZPx0a/OX9txJvlPV7hqrO8fvlN7z7duqdmvzez17uSbJd6raXX+5JSR68EzlLenZy5XKUEOvB89a32+dq0RL/OwNkRESQw==
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="60" height="20">
+  <object type="Wall" x="3584" y="1280">
+   <polygon points="0,0 0,-192 256,-192 256,0"/>
+  </object>
+  <object type="Wall" x="0" y="960">
+   <polygon points="0,0 576,0 576,64 896,64 896,192 1152,192 1152,128 1536,128 1536,64 2240,64 2240,-64 2368,-64 2368,-192 2688,-192 2688,-64 2816,-64 2816,64 3200,64 3200,128 3392,128 3392,320 0,320"/>
+  </object>
+  <object type="Moon" x="64" y="64"/>
+ </objectgroup>
+</map>

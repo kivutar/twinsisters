@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="hdground" tilewidth="64" tileheight="64">
+  <image source="hdground.png" width="640" height="320"/>
+ </tileset>
+ <tileset firstgid="51" name="hdbrick" tilewidth="64" tileheight="64">
+  <image source="hdbrick.png" width="128" height="128"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoGJzAlQNPKHFM8mFR7STWHUjvJNWew2UsOTWk4UxOP2jtqLz4sjoRH7R188Ss+wjAAgPI9Rg==
+  </data>
+ </layer>
+ <layer name="Calque 2" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw7EJAAAIA7CCs/+/6xl1SCAJAADAL1O6pS0HjY8B4Q==
+  </data>
+ </layer>
+</map>
