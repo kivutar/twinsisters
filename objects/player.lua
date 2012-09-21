@@ -3,7 +3,7 @@ Player:include(Gravity)
 Player:include(Blinking)
 
 Player.anim = {}
-for _,skin in pairs({'lolo'}) do
+for _,skin in pairs({'lolo', 'oce'}) do
   Player.anim[skin] = {}
   for stance, speed in pairs({stand=1, sword=(0.5/8), run=0.2, jump=0.1, fall=0.1, swim=0.2, hit=1, surf=1}) do
     Player.anim[skin][stance] = {}
@@ -69,8 +69,8 @@ function Player:initialize(name, skin, w, x, y, z)
   self.up_btn     = loadstring("return love.keyboard.isDown('up')    or love.joystick.getAxis(1,2) == -1")
   self.jump_btn   = loadstring("return love.keyboard.isDown(' ')     or love.joystick.isDown(1,2)")
   self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
-  self.sword_btn   = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
-  self.fire_btn    = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
+  self.sword_btn  = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
+  self.fire_btn   = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
 end
 
 function Player:update(dt)
