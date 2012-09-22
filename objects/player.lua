@@ -241,17 +241,17 @@ function Player:update(dt)
         TEsound.play('sounds/door.wav')
         map = ATL.load(self.ondoor.map..'.tmx')
         map.drawObjects = false
-        love.graphics.setBackgroundColor(map.properties.r, map.properties.g, map.properties.b)
+        love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
         for k,o in pairs(objects) do
           if not o.persistant then
             if o.body then Collider:remove(o.body) end
             objects[k] = nil
           end
         end
-        self.x = self.ondoor.tx*16
-        self.y = self.ondoor.ty*16+8
+        self.x = self.ondoor.tx*16*4
+        self.y = self.ondoor.ty*16*4+8*4
         addObjects(map.ol)
-        camera:setScale(1 / 3)--(map.properties.zoom or 2))
+        camera:setScale(1)
         camera:move(-camera.x+self.x, -camera.y+self.y)
       end
     end

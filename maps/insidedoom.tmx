@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="15" height="10" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="hdblock" tilewidth="64" tileheight="64">
+  <image source="hdblock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="2" name="hdhouse" tilewidth="64" tileheight="64">
+  <image source="hdhouse.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="130" name="hdbrick" tilewidth="64" tileheight="64">
+  <image source="hdbrick.png" width="128" height="128"/>
+ </tileset>
+ <layer name="background" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxrYWBgaBnFo5jKGABFfU1Z
+  </data>
+ </layer>
+ <layer name="ground" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQAkwOGs15yw4rccCY3jiiJc2IwAEikAEk=
+  </data>
+ </layer>
+ <layer name="doors" width="15" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjeIASIQ8nUmwLEqVR0C6VgKPkFALZ2AuU=
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="15" height="10">
+  <object type="Wall" x="64" y="576">
+   <polygon points="0,0 320,0 320,-64 384,-64 384,-128 448,-128 448,-192 512,-192 512,-256 832,-256 832,-576 896,-576 896,64 -64,64 -64,-576 832,-576 832,-512 0,-512"/>
+  </object>
+  <object type="Door" x="704" y="192">
+   <properties>
+    <property name="map" value="doom1"/>
+    <property name="tx" value="63"/>
+    <property name="ty" value="12"/>
+   </properties>
+   <polygon points="0,0 128,0 128,128 0,128"/>
+  </object>
+  <object type="Door" x="128" y="448">
+   <properties>
+    <property name="map" value="doom1"/>
+    <property name="tx" value="57"/>
+    <property name="ty" value="16"/>
+   </properties>
+   <polygon points="0,0 128,0 128,128 0,128"/>
+  </object>
+ </objectgroup>
+</map>
