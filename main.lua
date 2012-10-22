@@ -1,3 +1,20 @@
+require 'libs/middleclass'
+require 'libs/utils'
+require 'libs/anal'
+require 'libs/TEsound'
+require 'libs/camera'
+CRON = require 'libs/cron'
+HC  = require 'libs/HardonCollider'
+ATL = require 'libs/AdvTiledLoader.Loader'
+
+require 'mixins/gravity'
+require 'mixins/blinking'
+
+-- Load game objects
+for _,v in pairs(love.filesystem.enumerate('objects')) do
+  require('objects/'..string.gsub(v, '.lua', ''))
+end
+
 function addObject(o, w)
   if o.type == 'Wall' then
     no = Wall:new(w, 0, 0, 10)
@@ -84,44 +101,9 @@ function addObjects(mapol)
 end
 
 function love.load()
-  require 'libs/middleclass'
-  require 'libs/utils'
-  require 'libs/anal'
-  require 'libs/TEsound'
-  require 'libs/camera'
-  CRON = require 'libs/cron'
-  HC  = require 'libs/HardonCollider'
-  ATL = require 'libs/AdvTiledLoader.Loader'
-
-  require 'mixins/gravity'
-  require 'mixins/blinking'
-
-  require 'objects/player'
-  require 'objects/water'
-  require 'objects/watertop'
-  require 'objects/spike'
-  require 'objects/updownspike'
-  require 'objects/arrow'
-  require 'objects/fish'
-  require 'objects/crab'
-  require 'objects/wall'
-  require 'objects/flyingwall'
-  require 'objects/bridge'
-  require 'objects/slant'
-  require 'objects/ice'
-  require 'objects/mountains'
-  require 'objects/moon'
-  require 'objects/door'
-  require 'objects/sword'
-  require 'objects/cave'
-  require 'objects/generator'
-  require 'objects/dialogbox'
-  require 'objects/heart'
-  require 'objects/aciddrop'
-  require 'objects/fireball'
 
   ATL.path = 'maps/'
-  map = ATL.load 'doom1.tmx'
+  map = ATL.load 'testhd.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
