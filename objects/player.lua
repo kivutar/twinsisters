@@ -250,7 +250,7 @@ function Player:update(dt)
         end
         self.x = self.ondoor.tx*16*4
         self.y = self.ondoor.ty*16*4+8*4
-        addObjects(map.ol)
+        addObjectsFromTiled(map.ol)
         camera:setScale(1)
         camera:move(-camera.x+self.x, -camera.y+self.y)
       end

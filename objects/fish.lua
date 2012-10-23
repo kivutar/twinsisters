@@ -9,11 +9,11 @@ Fish.img.swim.right:setFilter("nearest","nearest")
 
 function Fish:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 32
+  self.y = y + 32
+  self.z = 10
 
-  self.body = Collider:addCircle(self.x, self.y, 6)
+  self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self
 
   self.xspeed = 0.1
@@ -30,7 +30,7 @@ function Fish:update(dt)
 end
 
 function Fish:draw()
-  love.graphics.draw(Fish.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 8, 8)
+  love.graphics.draw(Fish.img[self.stance][self.direction], self.x, self.y, 0, 1, 1, 32, 32)
 end
 
 function Fish:onCollision(dt, shape, dx, dy)

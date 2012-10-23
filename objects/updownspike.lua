@@ -5,16 +5,16 @@ UpDownSpike.image:setFilter("nearest", "nearest")
 
 function UpDownSpike:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 32
+  self.y = y + 32
+  self.z = 10
 
   self.r = 0
 
-  self.yspeed = 0.5
+  self.yspeed = 2.0
   self.direction = 'down'
 
-  self.body = Collider:addCircle(self.x, self.y, 6)
+  self.body = Collider:addCircle(self.x, self.y, 32)
   self.body.parent = self
 end
 
@@ -26,7 +26,7 @@ function UpDownSpike:update(dt)
 end
 
 function UpDownSpike:draw()
-  love.graphics.draw(UpDownSpike.image, self.x, self.y, self.r, 1, 1, 8, 8)
+  love.graphics.draw(UpDownSpike.image, self.x, self.y, self.r, 1, 1, 32, 32)
   self.r = self.r + 0.1
 end
 

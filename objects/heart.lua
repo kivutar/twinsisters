@@ -6,9 +6,9 @@ Heart.image:setFilter("nearest", "nearest")
 
 function Heart:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 4
+  self.y = y + 4
+  self.z = 8
 
   self.body = Collider:addCircle(self.x, self.y, 4)
   self.body.parent = self

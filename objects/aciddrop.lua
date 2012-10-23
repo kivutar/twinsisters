@@ -11,9 +11,9 @@ AcidDrop.instances = 0
 
 function AcidDrop:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 8
+  self.y = y + 8
+  self.z = 8
 
   self.yspeed = 0
   self.max_yspeed = 75

@@ -14,11 +14,11 @@ Watertop.instances = 0
 
 function Watertop:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 32
+  self.y = y + 32
+  self.z = 1
 
-  self.body = Collider:addCircle(x, y, 6)
+  self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self
 
   self.ps_drop = love.graphics.newParticleSystem(Watertop.img_drop, 50)

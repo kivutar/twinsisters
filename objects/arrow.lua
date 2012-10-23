@@ -5,9 +5,9 @@ Arrow.image:setFilter("nearest", "nearest")
 
 function Arrow:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 32
+  self.y = y + 32
+  self.z = 8
 
   self.body = Collider:addCircle(self.x, self.y, 32)
   self.body.parent = self

@@ -1,98 +1,37 @@
-require 'libs/middleclass'
-require 'libs/utils'
-require 'libs/anal'
-require 'libs/TEsound'
-require 'libs/camera'
-CRON = require 'libs/cron'
-HC  = require 'libs/HardonCollider'
-ATL = require 'libs/AdvTiledLoader.Loader'
+-- Require libraries
+require 'libs/middleclass' -- POO
+require 'libs/utils' -- Various utilities
+require 'libs/anal' -- Sprite animations
+require 'libs/TEsound' -- Play sounds
+require 'libs/camera' -- Camera to follow game objects
+CRON = require 'libs/cron' -- Scheduler
+HC  = require 'libs/HardonCollider' -- Collision detection
+ATL = require 'libs/AdvTiledLoader.Loader' -- Tiled map loader
 
+-- Require mixins
 require 'mixins/gravity'
 require 'mixins/blinking'
 
--- Load game objects
+-- Require game objects
 for _,v in pairs(love.filesystem.enumerate('objects')) do
   require('objects/'..string.gsub(v, '.lua', ''))
 end
 
+-- Instanciate a game object
 function addObject(o, w)
-  if o.type == 'Wall' then
-    no = Wall:new(w, 0, 0, 10)
+  no = _G[o.type]:new(w, o.x, o.y, 0, o.properties)
+  if o.polygon then
     no.body = Collider:addPolygon(unpack(o.polygon))
     no.body.parent = no
     dx, dy = no.body:center()
     no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Bridge' then
-    no = Bridge:new(w, 0, 0, 10)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Slant' then
-    no = Slant:new(w, 0, 0, 10)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Ice' then
-    no = Ice:new(w, 0, 0, 10)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Door' then
-    no = Door:new(w, 0, 0, 10, o.properties.map, o.properties.tx, o.properties.ty, o.properties.locked)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'FlyingWall' then
-    no = FlyingWall:new(w, o.x, o.y, 8)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.x = o.x+dx
-    no.y = o.y+dy
-    no.body:moveTo(no.x, no.y)
-  elseif o.type == 'Water' then
-    no = Water:new(w, 0, 0, 1)
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  elseif o.type == 'Spike' then
-    no = Spike:new(w, o.x+8, o.y+8, 8)
-  elseif o.type == 'FireBall' then
-    no = FireBall:new(w, o.x+16, o.y+16, 8)
-  elseif o.type == 'AcidDrop' then
-    no = AcidDrop:new(w, o.x+8, o.y+8, 8)
-  elseif o.type == 'Heart' then
-    no = Heart:new(w, o.x+4, o.y+4, 8)
-  elseif o.type == 'Generator' then
-    no = Generator:new(w, o.x, o.y, 8, o.properties.type, o.properties.period, o.properties.max, o.properties.offset)
-  elseif o.type == 'UpDownSpike' then
-    no = UpDownSpike:new(w, o.x+8, o.y+8, 8)
-  elseif o.type == 'Arrow' then
-    no = Arrow:new(w, o.x+32, o.y+32, 8)
-  elseif o.type == 'Fish' then
-    no = Fish:new(w, o.x+8, o.y+8, 1)
-  elseif o.type == 'Crab' then
-    no = Crab:new(w, o.x+16, o.y+24, 10)
-  elseif o.type == 'Watertop' then
-    no = Watertop:new(w, o.x+32, o.y+32, 1)
-  elseif o.type == 'Mountains' then
-    no = Mountains:new(w, o.x, o.y, 0)
-  elseif o.type == 'Moon' then
-    no = Moon:new(w, o.x, o.y, 0)
-  elseif o.type == 'Cave' then
-    no = Cave:new(w, o.x, o.y, 0)
   end
   no.name = no.name or o.type..'_'..o.x..'_'..o.y..'_'..love.timer.getTime()
   objects[no.name] = no
 end
 
--- Loop over tiled map object layers and instantiate game objects
-function addObjects(mapol)
+-- Loop over tiled map object layers and instanciate game objects
+function addObjectsFromTiled(mapol)
   for _, ol in pairs(mapol) do
     for _, o in pairs(ol.objects) do
       if ol and ol.properties then addObject(o, ol.properties.w) else addObject(o) end
@@ -103,7 +42,7 @@ end
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'testhd.tmx'
+  map = ATL.load 'doom1.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -136,7 +75,7 @@ function love.load()
   love.graphics.setFont(font)
 
   objects = {}
-  addObjects(map.ol)
+  addObjectsFromTiled(map.ol)
 
   current_world = 'oce'
 

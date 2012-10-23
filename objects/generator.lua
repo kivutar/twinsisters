@@ -1,14 +1,14 @@
 Generator = class('Generator')
 
-function Generator:initialize(w, x, y, z, type, period, max, offset)
+function Generator:initialize(w, x, y, z, properties)
   self.w = w
   self.x = x
   self.y = y
   self.z = z
-  self.type = type or 'Crab'
-  self.period = period or 5
-  self.max = max or -1
-  self.offset = offset or 1
+  self.type = properties.type or 'Crab'
+  self.period = properties.period or 5
+  self.max = properties.max or -1
+  self.offset = properties.offset or 1
 
   CRON.after(self.offset, function()
     CRON.every(self.period, function()

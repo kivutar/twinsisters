@@ -22,9 +22,9 @@ Crab.smoke_particle:setFilter("nearest","nearest")
 
 function Crab:initialize(w, x, y, z)
   self.w = w
-  self.x = x
-  self.y = y
-  self.z = z
+  self.x = x + 16
+  self.y = y + 24
+  self.z = 10
 
   self.body = Collider:addPolygon(0,16*4, 32*4,16*4, 32*4,32*4, 0,32*4)
   self.body.parent = self
@@ -81,6 +81,8 @@ function Crab:initialize(w, x, y, z)
   self.smoke:setSpin                  (0)
   self.smoke:setSpinVariation         (0)
   self.smoke:stop()
+  
+  self.color = {255, 255, 255, 255} -- TODO debug the mixin
 
 end
 
