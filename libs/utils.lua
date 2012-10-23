@@ -11,6 +11,8 @@ end
 
 function requiredir(dir)
   for _,v in pairs(love.filesystem.enumerate(dir)) do
-    require(dir..'/'..string.gsub(v, '.lua', ''))
+    if (string.find(v, ".lua")) then
+      require(dir..'/'..string.gsub(v, '.lua', ''))
+    end
   end
 end
