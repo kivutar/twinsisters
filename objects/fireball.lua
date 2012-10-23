@@ -18,7 +18,6 @@ FireBall.instances = 0
 function FireBall:initialize(player)
   self.player = player
   self.direction = self.player.direction
-  self.w = self.player.w
   self.x = self.direction == 'left' and self.player.x - 15*4 or self.player.x + 15*4
   self.y = self.player.y
   self.z = self.player.z
@@ -73,9 +72,6 @@ end
 function FireBall:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with most objects
   if (o.class.name == 'Wall'

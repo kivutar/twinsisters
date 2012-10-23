@@ -7,8 +7,7 @@ Fish.img.swim.left:setFilter("nearest","nearest")
 Fish.img.swim.right = love.graphics.newImage('sprites/fish_swim_right.png')
 Fish.img.swim.right:setFilter("nearest","nearest")
 
-function Fish:initialize(w, x, y, z)
-  self.w = w
+function Fish:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
   self.z = 10
@@ -36,9 +35,6 @@ end
 function Fish:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall
   if o.class.name == 'Wall' then

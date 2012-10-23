@@ -20,8 +20,7 @@ Crab.blood_particle:setFilter("nearest","nearest")
 Crab.smoke_particle = love.graphics.newImage('sprites/smoke_particle.png')
 Crab.smoke_particle:setFilter("nearest","nearest")
 
-function Crab:initialize(w, x, y, z)
-  self.w = w
+function Crab:initialize(x, y, z)
   self.x = x + 16
   self.y = y + 24
   self.z = 10
@@ -205,9 +204,6 @@ function Crab:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
 
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
-
   -- Collision with Wall, FlyingWall or Bridge
   if o.class.name == 'Wall'
   or o.class.name == 'FlyingWall'
@@ -236,7 +232,7 @@ function Crab:onCollision(dt, shape, dx, dy)
       self.stance = 'hit'
       self.smoke:start()
       CRON.after(1, function()
-        addObject( { type='Heart', x=self.x, y=self.y, z=self.z }, self.w )
+        addObject( { type='Heart', x=self.x, y=self.y, z=self.z } )
         objects[self.name] = nil
         Collider:remove(self.body)
         Crab.instances = Crab.instances - 1

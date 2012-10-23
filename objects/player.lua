@@ -15,10 +15,9 @@ for _,skin in pairs({'lolo', 'oce'}) do
   end
 end
 
-function Player:initialize(name, skin, w, x, y, z)
+function Player:initialize(name, skin, x, y, z)
   self.name = name
   self.skin = skin
-  self.w = w
   self.x = x
   self.y = y
   self.z = z
@@ -206,9 +205,9 @@ function Player:update(dt)
         self.attacking = true
         TEsound.play('sounds/shoot.wav')
         local name = 'FireBall_'..self.name..'_'..love.timer.getTime()
-        objects[name] = FireBall:new(self)
-        objects[name].type = 'FireBall'
-        objects[name].name = name
+        gameobjects.list[name] = FireBall:new(self)
+        gameobjects.list[name].type = 'FireBall'
+        gameobjects.list[name].name = name
         CRON.after(0.25, function() self.attacking = false end)
       end
     end
@@ -217,40 +216,27 @@ function Player:update(dt)
     self.fire_pressed = false
   end
 
-  -- Switching
-  --if self.switch_btn() and not self.daft then
-  --  if not self.switch_pressed then
-  --    TEsound.play('sounds/switch.wav')
-  --    if current_world == 'lolo' then current_world = 'oce' else current_world = 'lolo' end
-  --    self.skin = current_world
-  --    self.w = current_world
-  --  end
-  --  self.switch_pressed = true
-  --else
-  --  self.switch_pressed = false
-  --end
-
   -- Openning doors
   if self.up_btn() and self.ondoor and self.onground and not self.daft then
     if not self.open_pressed then
       if self.ondoor.locked then
-        objects.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
-          objects.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
+        gameobjects.list.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
+          gameobjects.list.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
         end)
       else
         TEsound.play('sounds/door.wav')
         map = ATL.load(self.ondoor.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
-        for k,o in pairs(objects) do
+        for k,o in pairs(gameobjects.list) do
           if not o.persistant then
             if o.body then Collider:remove(o.body) end
-            objects[k] = nil
+            gameobjects.list[k] = nil
           end
         end
         self.x = self.ondoor.tx*16*4
         self.y = self.ondoor.ty*16*4+8*4
-        addObjectsFromTiled(map.ol)
+        gameobjects.addObjectsFromTiled(map.ol)
         camera:setScale(1)
         camera:move(-camera.x+self.x, -camera.y+self.y)
       end
@@ -291,9 +277,6 @@ end
 function Player:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w then return end
 
   -- Collision with Wall or FlyingWall or Ice
   if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Ice' then
@@ -342,7 +325,7 @@ function Player:onCollision(dt, shape, dx, dy)
         self.invincible = true
         self.stance = 'hit'
         CRON.after(1, function()
-          --objects[self.name] = nil
+          --gameobjects.list[self.name] = nil
           --Collider:remove(self.body)
           --Player.instances = Player.instances - 1
         end)

@@ -1,7 +1,6 @@
 Generator = class('Generator')
 
-function Generator:initialize(w, x, y, z, properties)
-  self.w = w
+function Generator:initialize(x, y, z, properties)
   self.x = x
   self.y = y
   self.z = z
@@ -13,7 +12,7 @@ function Generator:initialize(w, x, y, z, properties)
   CRON.after(self.offset, function()
     CRON.every(self.period, function()
       if self.max < 0 or loadstring("return "..self.type..".instances < "..self.max)() then
-        addObject( { type=self.type, x=self.x, y=self.y, z=self.z }, self.w )
+        addObject( { type=self.type, x=self.x, y=self.y, z=self.z } )
       end
     end)
   end)

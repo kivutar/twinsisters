@@ -3,7 +3,6 @@ Sword = class('Sword')
 function Sword:initialize(player)
   self.player = player
   self.direction = self.player.direction
-  self.w = self.player.w
   self.x = self.direction == 'left' and self.player.x - 15*4 or self.player.x + 15*4
   self.y = self.player.y
   self.z = self.player.z
@@ -14,7 +13,6 @@ end
 
 function Sword:update(dt)
   self.direction = self.player.direction
-  self.w = self.player.w
   self.x = self.direction == 'left' and self.player.x - 15*4 or self.player.x + 15*4
   self.y = self.player.y
   self.z = self.player.z

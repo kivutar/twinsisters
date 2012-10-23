@@ -1,7 +1,6 @@
 Ice = class('Ice')
 
-function Ice:initialize(w, x, y, z)
-  self.w = w
+function Ice:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

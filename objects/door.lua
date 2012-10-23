@@ -1,7 +1,6 @@
 Door = class('Door')
 
-function Door:initialize(w, x, y, z, properties)
-  self.w = w
+function Door:initialize(x, y, z, properties)
   self.x = x
   self.y = y
   self.z = z

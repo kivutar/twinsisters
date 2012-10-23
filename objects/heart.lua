@@ -4,8 +4,7 @@ Heart:include(Blinking)
 Heart.image = love.graphics.newImage('sprites/heart.png')
 Heart.image:setFilter("nearest", "nearest")
 
-function Heart:initialize(w, x, y, z)
-  self.w = w
+function Heart:initialize(x, y, z)
   self.x = x + 4
   self.y = y + 4
   self.z = 8
@@ -35,9 +34,6 @@ end
 function Heart:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Player
   if o.class.name == 'Player' then

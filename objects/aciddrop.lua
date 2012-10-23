@@ -9,8 +9,7 @@ AcidDrop.image_particle:setFilter("nearest", "nearest")
 
 AcidDrop.instances = 0
 
-function AcidDrop:initialize(w, x, y, z)
-  self.w = w
+function AcidDrop:initialize(x, y, z)
   self.x = x + 8
   self.y = y + 8
   self.z = 8
@@ -56,9 +55,6 @@ end
 function AcidDrop:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with most objects
   if o.class.name == 'Wall'

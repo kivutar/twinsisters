@@ -7,8 +7,7 @@ Mountains.paralax = {
 }
 for _,bg in pairs(Mountains.paralax) do bg.img:setFilter("nearest", "nearest") end
 
-function Mountains:initialize(w, x, y, z)
-  self.w = w
+function Mountains:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

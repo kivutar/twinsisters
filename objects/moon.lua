@@ -3,8 +3,7 @@ Moon = class('Moon')
 img = love.graphics.newImage('backgrounds/moon.png')
 img:setFilter("nearest", "nearest")
 
-function Moon:initialize(w, x, y, z)
-  self.w = w
+function Moon:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

@@ -1,7 +1,6 @@
 Water = class('Water')
 
-function Water:initialize(w, x, y, z)
-  self.w = w
+function Water:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

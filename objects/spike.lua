@@ -3,8 +3,7 @@ Spike = class('Spike')
 Spike.image = love.graphics.newImage('sprites/spike.png')
 Spike.image:setFilter("nearest", "nearest")
 
-function Spike:initialize(w, x, y, z)
-  self.w = w
+function Spike:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
   self.z = 10

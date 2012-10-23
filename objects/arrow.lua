@@ -3,8 +3,7 @@ Arrow = class('Arrow')
 Arrow.image = love.graphics.newImage('sprites/arrow.png')
 Arrow.image:setFilter("nearest", "nearest")
 
-function Arrow:initialize(w, x, y, z)
-  self.w = w
+function Arrow:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
   self.z = 8

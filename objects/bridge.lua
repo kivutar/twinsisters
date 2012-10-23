@@ -1,7 +1,6 @@
 Bridge = class('Bridge')
 
-function Bridge:initialize(w, x, y, z)
-  self.w = w
+function Bridge:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

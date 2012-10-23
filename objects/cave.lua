@@ -7,8 +7,7 @@ Cave.paralax = {
 }
 for _,bg in pairs(Cave.paralax) do bg.img:setFilter("nearest", "nearest") end
 
-function Cave:initialize(w, x, y, z)
-  self.w = w
+function Cave:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

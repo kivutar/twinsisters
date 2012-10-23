@@ -7,37 +7,7 @@ require 'libs/camera' -- Camera to follow game objects
 CRON = require 'libs/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/AdvTiledLoader.Loader' -- Tiled map loader
-
--- Require mixins
-require 'mixins/gravity'
-require 'mixins/blinking'
-
--- Require game objects
-for _,v in pairs(love.filesystem.enumerate('objects')) do
-  require('objects/'..string.gsub(v, '.lua', ''))
-end
-
--- Instanciate a game object
-function addObject(o, w)
-  no = _G[o.type]:new(w, o.x, o.y, 0, o.properties)
-  if o.polygon then
-    no.body = Collider:addPolygon(unpack(o.polygon))
-    no.body.parent = no
-    dx, dy = no.body:center()
-    no.body:moveTo(o.x+dx, o.y+dy)
-  end
-  no.name = no.name or o.type..'_'..o.x..'_'..o.y..'_'..love.timer.getTime()
-  objects[no.name] = no
-end
-
--- Loop over tiled map object layers and instanciate game objects
-function addObjectsFromTiled(mapol)
-  for _, ol in pairs(mapol) do
-    for _, o in pairs(ol.objects) do
-      if ol and ol.properties then addObject(o, ol.properties.w) else addObject(o) end
-    end
-  end
-end
+require 'libs/gameobjects' -- Game objects
 
 function love.load()
 
@@ -74,13 +44,10 @@ function love.load()
 
   love.graphics.setFont(font)
 
-  objects = {}
-  addObjectsFromTiled(map.ol)
+  gameobjects.addObjectsFromTiled(map.ol)
 
-  current_world = 'oce'
-
-  objects.lolo = Player:new('lolo', 'lolo', current_world, 64, 200, 10)
-  --objects.oce  = Player:new('oce',  'oce',  current_world, 64, 200, 10)
+  gameobjects.list.lolo = Player:new('lolo', 'lolo', 64, 200, 10)
+  --objects.oce  = Player:new('oce',  'oce', 64, 200, 10)
   --objects.oce.left_btn   = loadstring("return love.keyboard.isDown('q')  or love.joystick.getAxis(2,1) == -1")
   --objects.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
   --objects.oce.down_btn   = loadstring("return love.keyboard.isDown('s')  or love.joystick.getAxis(2,2) ==  1")
@@ -104,14 +71,6 @@ function love.update(dt)
   dt = math.min(0.07, dt)
 
   if love.keyboard.isDown("escape") then love.event.push("quit") end
-  --if love.keyboard.isDown("r") then 
-  --  objects.oce.x, objects.oce.y = 64, 300
-  --  objects.oce.ondown = {}
-  --  objects.oce.inwater = {}
-  --  --objects.lolo.x, objects.lolo.y = 32, 400
-  --  --objects.lolo.ondown = {}
-  --  --objects.lolo.inwater = {}
-  --end
   if love.keyboard.isDown("p") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
     if not pausepressed then
       if gamestate == 'play' then
@@ -129,21 +88,16 @@ function love.update(dt)
   end
 
   if gamestate == 'play' then
-    for _,o in pairs(objects) do
+    for _,o in pairs(gameobjects.list) do
       if o.update then o:update(dt) end
     end
 
-    camera:follow({objects.lolo}, 10)
+    camera:follow({gameobjects.list.lolo}, 10)
 
-    --local physics_dt = dt
-    --while physics_dt > 0 do
-    --  Collider:update(math.min(0.1, physics_dt))
-    --  physics_dt = physics_dt - 0.1
-    --end
     Collider:update(dt)
     CRON.update(dt)
   elseif gamestate == 'dialog' then
-    objects.dialog:update(dt)
+    gameobjects.list.dialog:update(dt)
   end
 end
 
@@ -156,12 +110,12 @@ function love.draw()
     if type(layer) == "table" then
       layer.z = z
       layer.w = layer.properties and layer.properties.w or nil
-      objects[layer.name] = layer
+      gameobjects.list[layer.name] = layer
     end
   end
 
   for i=-15,15,1 do
-    for _,o in pairs(objects) do
+    for _,o in pairs(gameobjects.list) do
       if o.z == i then
         --if o.w == current_world or o.w == 'shared' or not o.w then
         --  love.graphics.setColor(255,255,255,255)
@@ -186,9 +140,9 @@ function love.draw()
 
   love.graphics.draw(ui, uix, uiy, 0, 1, 1, 0, 0)
 
-  local hp = objects.lolo.HP
+  local hp = gameobjects.list.lolo.HP
 
-  for i=1,objects.lolo.maxHP,4 do
+  for i=1,gameobjects.list.lolo.maxHP,4 do
 
     hp2 = (hp >= 4) and 4 or hp
     hp2 = (hp >= 0) and hp2 or 0
@@ -204,14 +158,14 @@ function love.draw()
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)
-  for _,o in pairs(objects) do
+  for _,o in pairs(gameobjects.list) do
     if shape_a == o.body and o.onCollision then o:onCollision(dt, shape_b, -dx, -dy) end
     if shape_b == o.body and o.onCollision then o:onCollision(dt, shape_a,  dx,  dy) end
   end
 end
 
 function onCollisionStop(dt, shape_a, shape_b, dx, dy)
-  for _,o in pairs(objects) do
+  for _,o in pairs(gameobjects.list) do
     if shape_a == o.body and o.onCollisionStop then o:onCollisionStop(dt, shape_b, -dx, -dy) end
     if shape_b == o.body and o.onCollisionStop then o:onCollisionStop(dt, shape_a,  dx,  dy) end
   end

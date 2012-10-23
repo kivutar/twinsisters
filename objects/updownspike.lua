@@ -3,8 +3,7 @@ UpDownSpike = class('UpDownSpike')
 UpDownSpike.image = love.graphics.newImage('sprites/spike.png')
 UpDownSpike.image:setFilter("nearest", "nearest")
 
-function UpDownSpike:initialize(w, x, y, z)
-  self.w = w
+function UpDownSpike:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
   self.z = 10
@@ -33,9 +32,6 @@ end
 function UpDownSpike:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  if o.w ~= nil and o.w ~= self.w and self.w ~= nil then return end
 
   -- Collision with Wall, FlyingWall or Bridge
   if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Bridge' or o.class.name == 'Slant' or o.class.name == 'Spike' then

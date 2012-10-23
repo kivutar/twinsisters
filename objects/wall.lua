@@ -1,7 +1,6 @@
 Wall = class('Wall')
 
-function Wall:initialize(w, x, y, z)
-  self.w = w
+function Wall:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z

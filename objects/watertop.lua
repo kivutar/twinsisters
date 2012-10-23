@@ -12,8 +12,7 @@ Watertop.img_bubble:setFilter("nearest","nearest")
 
 Watertop.instances = 0
 
-function Watertop:initialize(w, x, y, z)
-  self.w = w
+function Watertop:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
   self.z = 1
@@ -73,9 +72,6 @@ end
 function Watertop:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
-
-  -- Do nothing if the object belongs to another dimention
-  -- if o.w ~= nil and o.w ~= self.w then return end
 
   -- Collision with Player
   if o.class.name == 'Player' then

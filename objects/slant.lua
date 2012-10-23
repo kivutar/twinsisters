@@ -1,7 +1,6 @@
 Slant = class('Slant')
 
-function Slant:initialize(w, x, y, z)
-  self.w = w
+function Slant:initialize(x, y, z)
   self.x = x
   self.y = y
   self.z = z
