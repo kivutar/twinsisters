@@ -21,5 +21,5 @@ end
 
 function Sword:destroy()
   Collider:remove(self.body)
-  objects[self.name] = nil
+  gameobjects.list[self.name] = nil
 end

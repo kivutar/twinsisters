@@ -27,7 +27,7 @@ function Heart:draw()
 end
 
 function Heart:destroy()
-  objects[self.name] = nil
+  gameobjects.list[self.name] = nil
   Collider:remove(self.body)
 end
 

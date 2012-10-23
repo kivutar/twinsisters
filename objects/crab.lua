@@ -232,8 +232,8 @@ function Crab:onCollision(dt, shape, dx, dy)
       self.stance = 'hit'
       self.smoke:start()
       CRON.after(1, function()
-        addObject( { type='Heart', x=self.x, y=self.y, z=self.z } )
-        objects[self.name] = nil
+        gameobjects.addObject( { type='Heart', x=self.x, y=self.y, z=self.z } )
+        gameobjects.list[self.name] = nil
         Collider:remove(self.body)
         Crab.instances = Crab.instances - 1
       end)
@@ -254,3 +254,4 @@ function Crab:onCollision(dt, shape, dx, dy)
 
   end
 end
+

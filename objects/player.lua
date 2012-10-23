@@ -184,12 +184,12 @@ function Player:update(dt)
         self.attacking = true
         TEsound.play('sounds/sword2.wav')
         local name = 'sword_'..self.name
-        objects[name] = Sword:new(self)
-        objects[name].type = 'Sword'
-        objects[name].name = name
+        gameobjects.list[name] = Sword:new(self)
+        gameobjects.list[name].type = 'Sword'
+        gameobjects.list[name].name = name
         CRON.after(0.25, function()
           self.attacking = false
-          objects[name]:destroy()
+          gameobjects.list[name]:destroy()
         end)
       end
     end

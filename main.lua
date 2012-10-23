@@ -12,7 +12,7 @@ require 'libs/gameobjects' -- Game objects
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'doom1.tmx'
+  map = ATL.load 'testhd.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -117,11 +117,6 @@ function love.draw()
   for i=-15,15,1 do
     for _,o in pairs(gameobjects.list) do
       if o.z == i then
-        --if o.w == current_world or o.w == 'shared' or not o.w then
-        --  love.graphics.setColor(255,255,255,255)
-        --else
-        --  love.graphics.setColor(0,0,255,64)
-        --end
         if o.draw then o:draw() end
       end
     end

@@ -8,3 +8,9 @@ function count(dict)
   end
   return false
 end
+
+function requiredir(dir)
+  for _,v in pairs(love.filesystem.enumerate(dir)) do
+    require(dir..'/'..string.gsub(v, '.lua', ''))
+  end
+end

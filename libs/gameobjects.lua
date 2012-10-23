@@ -1,12 +1,5 @@
--- Require mixins
-for _,v in pairs(love.filesystem.enumerate('mixins')) do
-  require('mixins/'..string.gsub(v, '.lua', ''))
-end
-
--- Require game objects
-for _,v in pairs(love.filesystem.enumerate('objects')) do
-  require('objects/'..string.gsub(v, '.lua', ''))
-end
+requiredir('mixins') -- Require mixins
+requiredir('objects') -- Require game objects
 
 gameobjects = {}
 
