@@ -1,7 +1,7 @@
 Moon = class('Moon')
 
-img = love.graphics.newImage('backgrounds/moon.png')
-img:setFilter("nearest", "nearest")
+Moon.img = love.graphics.newImage('backgrounds/moon.png')
+Moon.img:setFilter("nearest", "nearest")
 
 function Moon:initialize(x, y, z)
   self.x = x
@@ -10,5 +10,5 @@ function Moon:initialize(x, y, z)
 end
 
 function Moon:draw()
-  love.graphics.draw(img, camera.x+250, camera.y-400, 0, 1, 1, 0, 0)
+  love.graphics.draw(Moon.img, camera.x+250, camera.y-400, 0, 1, 1, 0, 0)
 end
