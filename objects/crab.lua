@@ -200,6 +200,15 @@ function Crab:draw()
   love.graphics.draw(self.smoke, 0, 0)
 end
 
+function Crab:drawhallo()
+  --r = math.random(0, 5)
+  --love.graphics.setColor(128, 128, 128, 128)
+  --love.graphics.circle("fill", self.x, self.y, 200 + r)
+  --love.graphics.setColor(255, 255, 255)
+  --love.graphics.circle("fill", self.x, self.y, 150 + r)
+  love.graphics.draw(hallo, self.x, self.y, 0, 1, 1, 256, 256)
+end
+
 function Crab:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent

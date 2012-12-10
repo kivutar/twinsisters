@@ -158,5 +158,6 @@
   <object type="Wall" x="1344" y="768">
    <polygon points="0,0 64,0 64,448 0,448 0,384 -64,384 -64,320 0,320 0,128 -64,128 -64,64 0,64"/>
   </object>
+  <object type="Fountain" x="704" y="1664" width="64" height="64"/>
  </objectgroup>
 </map>

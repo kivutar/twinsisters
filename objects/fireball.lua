@@ -69,6 +69,15 @@ function FireBall:draw()
   self.animation:draw(self.x-16*4, self.y-16*4)
 end
 
+function FireBall:drawhallo()
+  --r = math.random(0, 5)
+  --love.graphics.setColor(128, 128, 128, 128)
+  --love.graphics.circle("fill", self.x, self.y, 200 + r)
+  --love.graphics.setColor(255, 255, 255)
+  --love.graphics.circle("fill", self.x, self.y, 150 + r)
+  love.graphics.draw(hallo, self.x, self.y, 0, 1, 1, 256, 256)
+end
+
 function FireBall:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent

@@ -5,12 +5,18 @@ camera.scaleX = 1
 camera.scaleY = 1
 camera.rotation = 0
 
+function camera:ox()
+  return self.x - love.graphics.getWidth()  / 2 * self.scaleX
+end
+
+function camera:oy()
+  return self.y - love.graphics.getHeight() / 2 * self.scaleY
+end
+
 function camera:set()
   love.graphics.push()
   love.graphics.scale(1 / self.scaleX, 1 / self.scaleY)
-  ftx = -self.x + love.graphics.getWidth()  / 2 * self.scaleX
-  fty = -self.y + love.graphics.getHeight() / 2 * self.scaleY
-  love.graphics.translate(ftx,fty)
+  love.graphics.translate(- self:ox(), - self:oy())
 end
 
 function camera:unset()

@@ -248,6 +248,8 @@ function Player:update(dt)
 
   self:applyGravity(dt)
 
+  print(self.y)
+
   self:applyBlinking()
 
   self.body:moveTo(self.x, self.y)
@@ -272,6 +274,15 @@ function Player:draw()
   -- Draw the animation
   self.animation:draw(self.x-32*4, self.y-23.5*4-32*4)
   self:blinkingPostDraw()
+end
+
+function Player:drawhallo()
+  r = math.random(0, 3)
+  --love.graphics.setColor(128, 128, 128, 128)
+  --love.graphics.circle("fill", self.x, self.y, 200 + r)
+  --love.graphics.setColor(255, 255, 255)
+  --love.graphics.circle("fill", self.x, self.y, 150 + r)
+  love.graphics.draw(hallo, self.x, self.y, 0, 1+r/100, 1+r/100, 256, 256)
 end
 
 function Player:onCollision(dt, shape, dx, dy)

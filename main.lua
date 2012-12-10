@@ -8,6 +8,7 @@ CRON = require 'libs/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/AdvTiledLoader.Loader' -- Tiled map loader
 require 'libs/gameobjects' -- Game objects
+requiredir('effects') -- Game Effects
 requiredir('fonts') -- Fonts
 
 function love.load()
@@ -52,6 +53,11 @@ function love.load()
     heart[i] = love.graphics.newImage('sprites/heart_'..i..'.png')
     heart[i]:setFilter("nearest", "nearest")
   end
+
+  effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
+
+  blendcanvas = love.graphics.newCanvas()
+  hallo = love.graphics.newImage('sprites/hallo.png')
 end
 
 function love.update(dt)
@@ -78,6 +84,9 @@ function love.update(dt)
     for _,o in pairs(gameobjects.list) do
       if o.update then o:update(dt) end
     end
+    for _,e in pairs(effects) do
+      if e.update then e:update(dt) end
+    end
 
     camera:follow({gameobjects.list.lolo}, 10)
 
@@ -86,11 +95,22 @@ function love.update(dt)
   elseif gamestate == 'dialog' then
     gameobjects.list.dialog:update(dt)
   end
+
+end
+
+function pipe( source, effect, destination )
+  love.graphics.setCanvas(destination)
+    if destination then destination:clear() end
+    love.graphics.setPixelEffect(effect)
+      love.graphics.draw(source, camera:ox(), camera:oy())
+    love.graphics.setPixelEffect()
+  love.graphics.setCanvas()
 end
 
 function love.draw()
   camera:set()
-  map:autoDrawRange(-camera.x + love.graphics.getWidth() / 2, -camera.y + love.graphics.getHeight() / 2, 1, 50)
+
+  map:autoDrawRange(-camera:ox(), -camera:oy(), 1, 50)
   map:_updateTileRange()
 
   for z,layer in pairs(map.drawList) do
@@ -101,26 +121,54 @@ function love.draw()
     end
   end
 
+  --love.graphics.setCanvas(effects.chromashift.canvas)
+  --effects.chromashift.canvas:clear()
+    for i=-15,15,1 do
+      for _,o in pairs(gameobjects.list) do
+        if o.z == i then
+          if o.draw then o:draw() end
+        end
+      end
+    end
+  --love.graphics.setCanvas()
+
+  --pipe(effects.chromashift.canvas, effects.chromashift.pe, effects.distortion.canvas)
+  --pipe(effects.distortion.canvas,  effects.distortion.pe,  nil)
+  --pipe(effects.chromashift.canvas, nil, nil)
+  --pipe(effects.chromashift.canvas, effects.blurh.pe, effects.blurh.canvas)
+  --pipe(effects.blurh.canvas,       effects.blurv.pe, nil)
+
+  love.graphics.setCanvas(blendcanvas)
+  blendcanvas:clear()
+  love.graphics.setBlendMode("alpha")
+  love.graphics.setColor(0, 0, 0)
+  love.graphics.rectangle('fill', camera:ox(), camera:oy(), love.graphics.getWidth(), love.graphics.getHeight())
+  love.graphics.setBlendMode("subtractive")
   for i=-15,15,1 do
     for _,o in pairs(gameobjects.list) do
       if o.z == i then
-        if o.draw then o:draw() end
+        if o.drawhallo then o:drawhallo() end
       end
     end
   end
+  love.graphics.setBlendMode("alpha")
+  love.graphics.setCanvas()
+  --love.graphics.draw(blendcanvas, camera:ox(), camera:oy())
+  pipe(blendcanvas, effects.posterization.pe, nil)
 
-  local uix = camera.x - love.graphics.getWidth()  / 2 * camera.scaleX
-  local uiy = camera.y - love.graphics.getHeight() / 2 * camera.scaleY
+  camera:unset()
 
   if gamestate == 'pause' then
     love.graphics.setColor(0, 0, 0, 255*3/4)
-    love.graphics.rectangle('fill', uix, uiy, love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
     if math.floor(love.timer.getTime()) % 2 == 0 then love.graphics.setColor(255, 255, 0, 255) else love.graphics.setColor(255, 255, 255, 255) end
-    love.graphics.printf("Pause", uix, camera.y, love.graphics.getWidth() * camera.scaleX, 'center')
+    love.graphics.printf("Pause", love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 - 32, 0, 'center')
     love.graphics.setColor(255, 255, 255, 255)
   end
 
-  love.graphics.draw(ui, uix, uiy, 0, 1, 1, 0, 0)
+  love.graphics.setColor(255, 255, 255, 255)
+
+  love.graphics.draw(ui, 0, 0, 0, 1, 1, 0, 0)
 
   local hp = gameobjects.list.lolo.HP
 
@@ -131,12 +179,11 @@ function love.draw()
 
     hp = hp - 4
 
-    love.graphics.draw(heart[hp2], (i/4)*16*4 + 36*4 + (uix), 16*4 + (uiy), 0, 1, 1, 0, 0)
+    love.graphics.draw(heart[hp2], (i/4)*16*4 + 36*4, 16*4, 0, 1, 1, 0, 0)
 
   end
 
-  camera:unset()
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
+  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)
