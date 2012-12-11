@@ -14,7 +14,7 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'testhd.tmx'
+  map = ATL.load 'dark.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -35,15 +35,15 @@ function love.load()
   gameobjects.addObjectsFromTiled(map.ol)
 
   gameobjects.list.lolo = Player:new('lolo', 'lolo', 64, 200, 10)
-  --objects.oce  = Player:new('oce',  'oce', 64, 200, 10)
-  --objects.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
-  --objects.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
-  --objects.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
-  --objects.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
-  --objects.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
-  --objects.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
-  --objects.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
-  --objects.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
+  gameobjects.list.oce  = Player:new('oce',  'oce', 64, 200, 10)
+  gameobjects.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
+  gameobjects.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
+  gameobjects.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
+  gameobjects.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
+  gameobjects.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
+  gameobjects.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
+  gameobjects.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
+  gameobjects.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
 
   ui = love.graphics.newImage('sprites/ui.png')
   ui:setFilter("nearest", "nearest")
