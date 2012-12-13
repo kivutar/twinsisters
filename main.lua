@@ -14,7 +14,7 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'dark.tmx'
+  map = ATL.load 'testhd.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -34,16 +34,17 @@ function love.load()
 
   gameobjects.addObjectsFromTiled(map.ol)
 
-  gameobjects.list.lolo = Player:new('lolo', 'lolo', 64, 200, 10)
-  gameobjects.list.oce  = Player:new('oce',  'oce', 64, 200, 10)
-  gameobjects.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
-  gameobjects.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
-  gameobjects.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
-  gameobjects.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
-  gameobjects.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
-  gameobjects.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
-  gameobjects.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
-  gameobjects.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
+  gameobjects.list.lolo = Player:new('lolo', 'lolo', 1100, 800, 10)
+  -- gameobjects.list.oce  = Player:new('oce',  'oce', 1100, 800, 10)
+  -- gameobjects.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
+  -- gameobjects.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
+  -- gameobjects.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
+  -- gameobjects.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
+  -- gameobjects.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
+  -- gameobjects.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
+  -- gameobjects.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
+  -- gameobjects.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
+  camera:follow({gameobjects.list.lolo}, 0)
 
   ui = love.graphics.newImage('sprites/ui.png')
   ui:setFilter("nearest", "nearest")
@@ -121,9 +122,19 @@ function love.draw()
     end
   end
 
+  --love.graphics.setCanvas(effects.distortion.canvas)
+  --effects.distortion.canvas:clear()
+  --    for _,o in pairs(gameobjects.list) do
+  --      if o.z == 1 then
+  --        if o.draw then o:draw() end
+  --      end
+  --    end
+  --love.graphics.setCanvas()
+  --pipe(effects.distortion.canvas, effects.distortion.pe, nil)
+
   --love.graphics.setCanvas(effects.chromashift.canvas)
   --effects.chromashift.canvas:clear()
-    for i=-15,15,1 do
+    for i=0,15,1 do
       for _,o in pairs(gameobjects.list) do
         if o.z == i then
           if o.draw then o:draw() end

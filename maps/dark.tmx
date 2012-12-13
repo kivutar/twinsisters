@@ -21,9 +21,14 @@
  <tileset firstgid="1152" name="hdwater" tilewidth="64" tileheight="64">
   <image source="hdwater.png" width="64" height="64"/>
  </tileset>
+ <layer name="distortion" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztkUsOgCAMRFn0SH4Sd7jkFN7/FJZEEmKwliq4cF4yYTU8WpwDAAAAAABfMFE5M9nuqu1d+S1uSzd1Rs5wnJb3WneX9+7cWn/tDjRzt/RrWKi/PzpjPGet8Gt3KXmTM2bjBOW8T2f3J2eeHv9c8kpveBvJHRr4/soOv+wf3g==
+  </data>
+ </layer>
  <layer name="bricks" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlVEKgDAIQP3YkVrd/2YxaiBiS5e6Pnwgscg9tWIASZKsZi8AR7muPdo60t8D36NspEYuLP3cDN5qsCKyf2k9kljh/OIf7RPhf/L80R/x/1F/RXtSP5dv6a9kv2i/5DnP+c+cAS1Xm+fRx0xevb9x+t6lNePQzADnSdwSv3YG0r69/FpGrj/4NbO09nvCnQHRrHQndpx4ujYU
+   eJztk0EKwCAMBHPwSbX9/89KEUGWtAYaVg87sIiimShoJoRYzVnMrtLGnmfO9PeMa8gBPXrJ9HtvMOshC+b9o/1EssL5x/9Vh+F/8+zoZ/w/9NehJvq985n+CvXY/sg+1v8XQgghsrgBYLUkcA==
   </data>
  </layer>
  <layer name="water" width="32" height="32">
@@ -51,7 +56,7 @@
    eJzt19cKwzAMhWF17z3Svfdu3//henxRUEoFKalsCjZ81/9FHCEHRBQ4loUc5GGuzDQKUGT9OjSgCUdlptGCNusPYAgj0j+mMYYJ6/egb6H9Oh3o+r7vk/37/6m/gjVsIMWkIWOhf4Er3KDCaH2X9740fxewtNCX5u8Jzhb6ru+f6//P96P3E5Ck8Jz4dmbE6ZegTOE5wVWhptifwozk/SrKzIjT38OB5P0qysz45/vn+77/677r94e0f2kwjS3sWF/avzSYxh0erO/SEwNZJpk=
   </data>
  </layer>
- <objectgroup name="objects" width="32" height="32">
+ <objectgroup name="objects" width="32" height="32" visible="0">
   <object type="Wall" x="768" y="1152">
    <polygon points="0,0 640,0 640,256 0,256"/>
   </object>
@@ -141,6 +146,9 @@
   <object type="Watertop" x="1856" y="1152" width="64" height="64"/>
   <object type="Bridge" x="704" y="1152">
    <polygon points="0,0 128,0 128,64 0,64"/>
+  </object>
+  <object type="Wall" x="0" y="0">
+   <polygon points="0,0 192,0 192,2048 0,2048"/>
   </object>
  </objectgroup>
 </map>
