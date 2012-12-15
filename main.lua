@@ -14,7 +14,7 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'testhd.tmx'
+  map = ATL.load 'dark.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -194,7 +194,9 @@ function love.draw()
 
   end
 
-  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
+  love.graphics.setColor(128, 128, 128, 255)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
+  love.graphics.setColor(255, 255, 255, 255)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)

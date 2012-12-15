@@ -200,20 +200,20 @@ function Player:update(dt)
 
   -- Fire
   if self.fire_btn() and not self.daft then
-    if not self.fire_pressed then
-      if not self.attacking then
-        self.attacking = true
+  --  if not self.fire_pressed then
+  --    if not self.attacking then
+  --      self.attacking = true
         TEsound.play('sounds/shoot.wav')
-        local name = 'FireBall_'..self.name..'_'..love.timer.getTime()
-        gameobjects.list[name] = FireBall:new(self)
-        gameobjects.list[name].type = 'FireBall'
+        local name = 'Bullet_'..self.name..'_'..love.timer.getTime()
+        gameobjects.list[name] = Bullet:new(self)
+        gameobjects.list[name].type = 'Bullet'
         gameobjects.list[name].name = name
-        CRON.after(0.25, function() self.attacking = false end)
-      end
-    end
-    self.fire_pressed = true
-  else
-    self.fire_pressed = false
+  --      CRON.after(0.25, function() self.attacking = false end)
+  --    end
+  --  end
+  --  self.fire_pressed = true
+  --else
+  --  self.fire_pressed = false
   end
 
   -- Openning doors
