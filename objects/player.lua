@@ -26,7 +26,7 @@ function Player:initialize(name, skin, x, y, z)
 
   self.type = "Player"
 
-  self.body = Collider:addPolygon(0,0, 0,12*4, 4*4,16*4, 12*4,16*4, 16*4,12*4, 16*4,0)
+  self.body = Collider:addPolygon(0,-4*4, 0,12*4, 4*4,16*4, 12*4,16*4, 16*4,12*4, 16*4,-4*4 ,12*4,-8*4, 4*4,-8*4)
   self.body.parent = self
 
   self.xspeed = 0
@@ -78,31 +78,33 @@ function Player:update(dt)
   self.onbridge = false
   self.inwater  = false
   self.onice = false
-  for n in self.body:neighbors() do
+  for _,n in pairs(self.body:neighbors()) do
     collides, dx, dy = self.body:collidesWith(n)
-    if collides and dy < 0 then
-      if n.parent.class.name == 'Wall'
-      or n.parent.class.name == 'Bridge'
-      or n.parent.class.name == 'Slant'
-      or n.parent.class.name == 'Ice'
-      or n.parent.class.name == 'FlyingWall' then
-        self.onground = true
-        self.swimming = false
-      end
-      if n.parent.class.name == 'Bridge' then
-        self.onbridge = true
-        self.swimming = false
-      end
-      if n.parent.class.name == 'Ice' then
-        self.onice = true
-        self.swimming = false
-      end
-    end
     if n.parent.class.name == 'Water' then
       self.inwater = true
     end
     if n.parent.class.name == 'Door' then
       self.ondoor = n.parent
+    end
+  end
+
+  for _,n in pairs(Collider:shapesAt(self.x, self.y+49)) do
+    print(n.parent.class.name)
+    if n.parent.class.name == 'Wall'
+      or n.parent.class.name == 'Bridge'
+      or n.parent.class.name == 'Slant'
+      or n.parent.class.name == 'Ice'
+      or n.parent.class.name == 'FlyingWall' then
+      self.onground = true
+      self.swimming = false
+    end
+    if n.parent.class.name == 'Bridge' then
+      self.onbridge = true
+      self.swimming = false
+    end
+    if n.parent.class.name == 'Ice' then
+      self.onice = true
+      self.swimming = false
     end
   end
 
@@ -166,6 +168,7 @@ function Player:update(dt)
       elseif self.onground and not self.down_btn() and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
         TEsound.play('sounds/jump.wav')
+      print('jump')
       -- Swimming
       elseif self.inwater then
         self.swimming = true
@@ -246,14 +249,19 @@ function Player:update(dt)
       self.open_pressed = false
   end
 
-  self:applyGravity(dt)
+  if not self.onground then self:applyGravity(dt) end
 
-  print(self.y)
+  local iwf = self.iwf or 1 -- In water factor
+  local max_yspeed = self.max_yspeed or 200*4
+  if self.yspeed > max_yspeed * iwf then self.yspeed = max_yspeed * iwf end
+  self.y = self.y + self.yspeed * dt * iwf
 
   self:applyBlinking()
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
+
+  print(self.onground)
 end
 
 function Player:draw()
@@ -272,8 +280,11 @@ function Player:draw()
     self.animation:seek(1)
   end
   -- Draw the animation
-  self.animation:draw(self.x-32*4, self.y-23.5*4-32*4)
+  self.animation:draw(self.x-32*4, self.y-20.5*4-32*4)
   self:blinkingPostDraw()
+
+  self.body:draw()
+  love.graphics.point(self.x, self.y+50)
 end
 
 function Player:drawhallo()
@@ -321,6 +332,8 @@ function Player:onCollision(dt, shape, dx, dy)
       TEsound.play('sounds/arrow.wav')
       self.yspeed = - 1.75 * self.jumpspeed
     end
+    if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+    if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
 
   -- Collision with an enemy
   elseif (o.class.name == 'Crab'

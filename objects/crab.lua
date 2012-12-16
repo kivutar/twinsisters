@@ -103,7 +103,7 @@ function Crab:update(dt)
   self.onbridge = false
   self.inwater  = false
   self.onice = false
-  for n in self.body:neighbors() do
+  for _,n in pairs(self.body:neighbors()) do
     collides, dx, dy = self.body:collidesWith(n)
     if collides and dy < 0 then
       if n.parent.class.name == 'Wall'
@@ -174,6 +174,11 @@ function Crab:update(dt)
   end
 
   self:applyGravity(dt)
+
+  local iwf = self.iwf or 1 -- In water factor
+  local max_yspeed = self.max_yspeed or 200*4
+  if self.yspeed > max_yspeed * iwf then self.yspeed = max_yspeed * iwf end
+  self.y = self.y + self.yspeed * dt * iwf
 
   self:applyBlinking()
 
