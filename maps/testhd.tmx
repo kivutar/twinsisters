@@ -116,7 +116,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="90" height="30">
-  <object type="Mountains" x="64" y="64"/>
+  <object type="VillageBackground" x="64" y="64"/>
   <object type="Water" x="3840" y="1600">
    <polygon points="0,-64 896,-64 896,192 0,192"/>
   </object>

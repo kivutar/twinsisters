@@ -70,11 +70,11 @@
    eJztlcsKwjAQRVMfK18rH91b6krR//84b7GBYUjatJlWxHvgbKSGZO5k4hwhhBBCCCGEEEIIIYQQ8h8UcAGXcAXX390OMWYDt3AH9/BguLbsnVzZe8Pwta/hDZ7hFVbOrpaydyysjPYVojBYu69H5+xPX/snfLlPvnf4cHb3+AhP7dq5+r1NlXFTj9wzp/RnzkwqXPq8k/dW6+9x7oy0zNcq46I9hz5Ls9cx+co3KGXvMu/YPYrlWLv0WSfvbcpeGmO5j+mhuTLWc9fPLV3blHxDM1y+QUPPEqtnLMeuzCxra9FDVhn3vXN67vqZcoGl+l3nG+oN/U3OjIrVc+ocf8GuXpMZpOYbyi7031J9I/N9A/TSI38=
   </data>
  </layer>
- <objectgroup name="Calque d'objets 1" width="120" height="20">
+ <objectgroup name="objects" width="120" height="20">
   <object type="Wall" x="0" y="960">
    <polygon points="0,0 576,0 576,64 896,64 896,192 1152,192 1152,128 1536,128 1536,64 2240,64 2240,-64 2368,-64 2368,-192 2688,-192 2688,-64 2816,-64 2816,64 3200,64 3200,128 3840,128 3840,320 0,320"/>
   </object>
-  <object type="Moon" x="64" y="64"/>
+  <object type="DoomBackground" x="64" y="64"/>
   <object type="Wall" x="3840" y="832">
    <polygon points="0,0 768,0 768,448 0,448"/>
   </object>

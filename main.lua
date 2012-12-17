@@ -109,6 +109,15 @@ function pipe( source, effect, destination )
 end
 
 function love.draw()
+
+  for i=0,15,1 do
+    for _,o in pairs(actors.list) do
+      if o.z == i then
+        if o.draw_before then o:draw_before() end
+      end
+    end
+  end
+
   camera:set()
 
   map:autoDrawRange(-camera:ox(), -camera:oy(), 1, 50)
@@ -128,7 +137,7 @@ function love.draw()
         if o.draw then o:draw() end
       end
     end
-  end 
+  end
 
       --  love.graphics.setCanvas(effects.distortion.canvas)
       --  effects.distortion.canvas:clear()
@@ -176,6 +185,14 @@ function love.draw()
       --  pipe(blendcanvas, effects.posterization.pe, nil)
 
   camera:unset()
+
+  for i=0,15,1 do
+    for _,o in pairs(actors.list) do
+      if o.z == i then
+        if o.draw_after then o:draw_after() end
+      end
+    end
+  end
 
   if gamestate == 'pause' then
     love.graphics.setColor(0, 0, 0, 255*3/4)
