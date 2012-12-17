@@ -44,7 +44,7 @@ function love.load()
   -- actors.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
   -- actors.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
   -- actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
-  camera:follow({actors.list.lolo}, 0)
+  camera:follow({actors.list.lolo}, 1)
 
   actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
 
@@ -75,12 +75,12 @@ function love.update(dt)
   end
 
   if gamestate == 'play' then
-    for _,o in pairs(actors.list) do
-      if o.update then o:update(dt) end
+    for _,a in pairs(actors.list) do
+      if a.update then a:update(dt) end
     end
-    for _,e in pairs(effects) do
-      if e.update then e:update(dt) end
-    end
+    --for _,e in pairs(effects) do
+    --  if e.update then e:update(dt) end
+    --end
 
     camera:follow({actors.list.lolo}, 10)
 

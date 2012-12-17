@@ -15,28 +15,24 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   inkscape:export-filename="/home/kivutar/Bureau/twinsisters/backgrounds/night.png"
+   inkscape:export-filename="/home/kivutar/Bureau/twinsisters/backgrounds/doomsky.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="Nouveau document 1">
+   sodipodi:docname="doomsky.svg">
   <defs
      id="defs4">
     <linearGradient
        id="linearGradient3757">
       <stop
-         id="stop3765"
+         style="stop-color:#1c1c32;stop-opacity:1;"
          offset="0"
-         style="stop-color:#000000;stop-opacity:1;" />
-      <stop
-         style="stop-color:#11113d;stop-opacity:1;"
-         offset="0.44656789"
          id="stop3790" />
       <stop
-         style="stop-color:#9a3030;stop-opacity:1;"
-         offset="0.83321226"
+         style="stop-color:#894141;stop-opacity:1;"
+         offset="0.60000002"
          id="stop3767" />
       <stop
-         style="stop-color:#ffda1d;stop-opacity:1;"
+         style="stop-color:#dfc63d;stop-opacity:1;"
          offset="1"
          id="stop3761" />
     </linearGradient>
@@ -58,7 +54,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="699.76292"
+     inkscape:cx="283.58007"
      inkscape:cy="402.84271"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
