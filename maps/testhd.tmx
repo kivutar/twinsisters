@@ -232,5 +232,11 @@
   <object type="Bridge" x="1152" y="1536">
    <polygon points="0,0 192,0 192,64 0,64"/>
   </object>
+  <object type="Wall" x="-64" y="0">
+   <polygon points="0,0 64,0 64,1600 0,1600"/>
+  </object>
+  <object type="Wall" x="5760" y="0">
+   <polygon points="0,0 64,0 64,1600 0,1600"/>
+  </object>
  </objectgroup>
 </map>

@@ -116,5 +116,11 @@
   <object type="Wall" x="7680" y="1024">
    <polygon points="0,0 -192,0 -192,256 0,256"/>
   </object>
+  <object type="Wall" x="-64" y="0">
+   <polygon points="0,0 64,0 64,1280 0,1280"/>
+  </object>
+  <object type="Wall" x="7680" y="0">
+   <polygon points="0,0 64,0 64,1280 0,1280"/>
+  </object>
  </objectgroup>
 </map>
