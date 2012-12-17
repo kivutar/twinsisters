@@ -12,7 +12,7 @@ function Generator:initialize(x, y, z, properties)
   CRON.after(self.offset, function()
     CRON.every(self.period, function()
       if self.max < 0 or loadstring("return "..self.type..".instances < "..self.max)() then
-        addObject( { type=self.type, x=self.x, y=self.y, z=self.z } )
+        actors.add( { type=self.type, x=self.x, y=self.y, z=self.z } )
       end
     end)
   end)

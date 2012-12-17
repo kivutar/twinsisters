@@ -66,7 +66,7 @@ function Bullet:drawhallo()
 end
 
 function Bullet:onCollision(dt, shape, dx, dy)
-  -- Get the other shape parent (its game object)
+  -- Get the other shape parent (its actor)
   local o = shape.parent
 
   -- Collision with most objects
@@ -91,5 +91,5 @@ end
 
 function Bullet:destroy()
   Collider:remove(self.body)
-  gameobjects.list[self.name] = nil
+  actors.list[self.name] = nil
 end

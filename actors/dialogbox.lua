@@ -28,8 +28,8 @@ function DialogBox:update(dt)
       self.old_display_len = math.floor(self.display_len)
     end
 
-    if (gameobjects.list.oce and gameobjects.list.oce.jump_btn())
-    or (gameobjects.list.lolo and gameobjects.list.lolo.jump_btn()) then
+    if (actors.list.oce and actors.list.oce.jump_btn())
+    or (actors.list.lolo and actors.list.lolo.jump_btn()) then
       if not self.btn_pressed then
         self.speed = 100
       end
@@ -42,15 +42,15 @@ function DialogBox:update(dt)
   else
     self.finished = true
 
-    if (gameobjects.list.oce and gameobjects.list.oce.jump_btn())
-    or (gameobjects.list.lolo and gameobjects.list.lolo.jump_btn()) then
+    if (actors.list.oce and actors.list.oce.jump_btn())
+    or (actors.list.lolo and actors.list.lolo.jump_btn()) then
       if not self.btn_pressed then
         --self:destroy()
         self.callback()
       end
       self.btn_pressed = true
-      if gameobjects.list.oce  then gameobjects.list.oce.jump_pressed = true end
-      if gameobjects.list.lolo then gameobjects.list.lolo.jump_pressed = true end
+      if actors.list.oce  then actors.list.oce.jump_pressed = true end
+      if actors.list.lolo then actors.list.lolo.jump_pressed = true end
     else
       self.btn_pressed = false
     end
@@ -80,6 +80,6 @@ function DialogBox:draw()
 end
 
 function DialogBox:destroy()
-  gameobjects.list.dialog = nil
+  actors.list.dialog = nil
   gamestate = 'play'
 end

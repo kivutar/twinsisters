@@ -102,6 +102,6 @@ end
 
 function FireBall:destroy()
   Collider:remove(self.body)
-  gameobjects.list[self.name] = nil
+  actors.list[self.name] = nil
   FireBall.instances = FireBall.instances - 1
 end

@@ -187,12 +187,12 @@ function Player:update(dt)
         self.attacking = true
         TEsound.play('sounds/sword2.wav')
         local name = 'sword_'..self.name
-        gameobjects.list[name] = Sword:new(self)
-        gameobjects.list[name].type = 'Sword'
-        gameobjects.list[name].name = name
+        actors.list[name] = Sword:new(self)
+        actors.list[name].type = 'Sword'
+        actors.list[name].name = name
         CRON.after(0.25, function()
           self.attacking = false
-          gameobjects.list[name]:destroy()
+          actors.list[name]:destroy()
         end)
       end
     end
@@ -208,9 +208,9 @@ function Player:update(dt)
   --      self.attacking = true
         TEsound.play('sounds/shoot.wav')
         local name = 'Bullet_'..self.name..'_'..love.timer.getTime()
-        gameobjects.list[name] = Bullet:new(self)
-        gameobjects.list[name].type = 'Bullet'
-        gameobjects.list[name].name = name
+        actors.list[name] = Bullet:new(self)
+        actors.list[name].type = 'Bullet'
+        actors.list[name].name = name
   --      CRON.after(0.25, function() self.attacking = false end)
   --    end
   --  end
@@ -223,23 +223,23 @@ function Player:update(dt)
   if self.up_btn() and self.ondoor and self.onground and not self.daft then
     if not self.open_pressed then
       if self.ondoor.locked then
-        gameobjects.list.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
-          gameobjects.list.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
+        actors.list.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
+          actors.list.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
         end)
       else
         TEsound.play('sounds/door.wav')
         map = ATL.load(self.ondoor.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
-        for k,o in pairs(gameobjects.list) do
+        for k,o in pairs(actors.list) do
           if not o.persistant then
             if o.body then Collider:remove(o.body) end
-            gameobjects.list[k] = nil
+            actors.list[k] = nil
           end
         end
         self.x = self.ondoor.tx*16*4
         self.y = self.ondoor.ty*16*4+8*4
-        gameobjects.addObjectsFromTiled(map.ol)
+        actors.addFromTiled(map.ol)
         camera:setScale(1)
         camera:move(-camera.x+self.x, -camera.y+self.y)
       end
@@ -260,8 +260,6 @@ function Player:update(dt)
 
   self.body:moveTo(self.x, self.y)
   self.animation:update(dt)
-
-  print(self.onground)
 end
 
 function Player:draw()
@@ -280,11 +278,8 @@ function Player:draw()
     self.animation:seek(1)
   end
   -- Draw the animation
-  self.animation:draw(self.x-32*4, self.y-20.5*4-32*4)
+  self.animation:draw(self.x-32*4, self.y-20*4-32*4)
   self:blinkingPostDraw()
-
-  self.body:draw()
-  love.graphics.point(self.x, self.y+50)
 end
 
 function Player:drawhallo()
@@ -349,7 +344,7 @@ function Player:onCollision(dt, shape, dx, dy)
         self.invincible = true
         self.stance = 'hit'
         CRON.after(1, function()
-          --gameobjects.list[self.name] = nil
+          --actors.list[self.name] = nil
           --Collider:remove(self.body)
           --Player.instances = Player.instances - 1
         end)
