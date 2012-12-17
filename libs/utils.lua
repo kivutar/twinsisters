@@ -16,3 +16,12 @@ function requiredir(dir)
     end
   end
 end
+
+function pipe( source, effect, destination )
+  love.graphics.setCanvas(destination)
+    if destination then destination:clear() end
+    love.graphics.setPixelEffect(effect)
+      love.graphics.draw(source, camera:ox(), camera:oy())
+    love.graphics.setPixelEffect()
+  love.graphics.setCanvas()
+end

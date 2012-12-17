@@ -57,9 +57,9 @@ function DialogBox:update(dt)
   end
 end
 
-function DialogBox:draw()
-  local uix = camera.x - love.graphics.getWidth()  / 2 * camera.scaleX
-  local uiy = camera.y - love.graphics.getHeight() / 2 * camera.scaleY
+function DialogBox:draw_after()
+  local uix = 0
+  local uiy = 0
 
   love.graphics.draw(DialogBox.background, uix, uiy, 0, 1, 1, 0, 0)
 

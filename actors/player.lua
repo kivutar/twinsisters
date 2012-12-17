@@ -89,7 +89,6 @@ function Player:update(dt)
   end
 
   for _,n in pairs(Collider:shapesAt(self.x, self.y+49)) do
-    print(n.parent.class.name)
     if n.parent.class.name == 'Wall'
       or n.parent.class.name == 'Bridge'
       or n.parent.class.name == 'Slant'
@@ -168,7 +167,6 @@ function Player:update(dt)
       elseif self.onground and not self.down_btn() and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
         TEsound.play('sounds/jump.wav')
-      print('jump')
       -- Swimming
       elseif self.inwater then
         self.swimming = true

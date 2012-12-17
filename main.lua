@@ -94,18 +94,10 @@ function love.update(dt)
     Collider:update(dt)
     CRON.update(dt)
   elseif gamestate == 'dialog' then
+    camera:follow({actors.list.lolo}, 10)
     actors.list.dialog:update(dt)
   end
 
-end
-
-function pipe( source, effect, destination )
-  love.graphics.setCanvas(destination)
-    if destination then destination:clear() end
-    love.graphics.setPixelEffect(effect)
-      love.graphics.draw(source, camera:ox(), camera:oy())
-    love.graphics.setPixelEffect()
-  love.graphics.setCanvas()
 end
 
 function love.draw()
