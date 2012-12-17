@@ -70,6 +70,8 @@ function Player:initialize(name, skin, x, y, z)
   self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
   self.sword_btn  = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
   self.fire_btn   = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
+
+  self.portrait = love.graphics.newImage('sprites/'..self.name..'_portrait.png')
 end
 
 function Player:update(dt)

@@ -51,7 +51,7 @@
  </layer>
  <layer name="1way" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt090KgCAMBWAvfOjMfl69DhgMUZdgjuB8MLyQHDss54iIxgm+fb8o9yOgRxC1porp/BL6bZUe54TZrWF+y/zBMn/u///2X+7sk1MuijzfvlXKv/Y9MtvvOnw5p57sevPXZppBm59I0v5XImq7AOk4IpA=
+   eJzt090KgCAMBeBd7KEt+3n1GjmQ0JaQreB8MLxS52ESAQA8Z2DvDogCH31ojaliWnuS+6bKHesHsulN3u+Zv/DM35r/8EIPmP82+cxqTmcxy/PuWaX8a/sls3mvhcs5tWT3t/yVvh/AYv1XALi2AehWIJQ=
   </data>
  </layer>
  <layer name="blocks" width="32" height="32">
@@ -64,7 +64,7 @@
    eJzt19cKwzAMhWF17z3Svfdu3//henxRUEoFKalsCjZ81/9FHCEHRBQ4loUc5GGuzDQKUGT9OjSgCUdlptGCNusPYAgj0j+mMYYJ6/egb6H9Oh3o+r7vk/37/6m/gjVsIMWkIWOhf4Er3KDCaH2X9740fxewtNCX5u8Jzhb6ru+f6//P96P3E5Ck8Jz4dmbE6ZegTOE5wVWhptifwozk/SrKzIjT38OB5P0qysz45/vn+77/677r94e0f2kwjS3sWF/avzSYxh0erO/SEwNZJpk=
   </data>
  </layer>
- <objectgroup name="objects" width="32" height="32">
+ <objectgroup name="objects" width="32" height="32" visible="0">
   <object type="Wall" x="768" y="1152">
    <polygon points="0,0 640,0 640,256 0,256"/>
   </object>
@@ -93,7 +93,7 @@
    <polygon points="0,0 64,0 128,64 448,64 448,192 0,192"/>
   </object>
   <object type="Slant" x="192" y="1728">
-   <polygon points="0,0 128,0 256,128 0,128"/>
+   <polygon points="0,0 128,0 320,192 0,192"/>
   </object>
   <object type="Water" x="128" y="1216">
    <polygon points="0,0 1792,0 1792,704 0,704"/>

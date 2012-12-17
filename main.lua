@@ -14,7 +14,7 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'testhd.tmx'
+  map = ATL.load 'doom1.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
@@ -46,16 +46,9 @@ function love.load()
   -- actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
   camera:follow({actors.list.lolo}, 0)
 
-  ui = love.graphics.newImage('sprites/ui.png')
-  ui:setFilter("nearest", "nearest")
+  actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
 
-  heart = {}
-  for i=0, 4 do
-    heart[i] = love.graphics.newImage('sprites/heart_'..i..'.png')
-    heart[i]:setFilter("nearest", "nearest")
-  end
-
-  effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
+  --effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
 
   blendcanvas = love.graphics.newCanvas()
   hallo = love.graphics.newImage('sprites/hallo.png')
@@ -178,14 +171,6 @@ function love.draw()
 
   camera:unset()
 
-  for i=0,15,1 do
-    for _,o in pairs(actors.list) do
-      if o.z == i then
-        if o.draw_after then o:draw_after() end
-      end
-    end
-  end
-
   if gamestate == 'pause' then
     love.graphics.setColor(0, 0, 0, 255*3/4)
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
@@ -194,26 +179,17 @@ function love.draw()
     love.graphics.setColor(255, 255, 255, 255)
   end
 
-  love.graphics.setColor(255, 255, 255, 255)
-
-  love.graphics.draw(ui, 0, 0, 0, 1, 1, 0, 0)
-
-  local hp = actors.list.lolo.HP
-
-  for i=1,actors.list.lolo.maxHP,4 do
-
-    hp2 = (hp >= 4) and 4 or hp
-    hp2 = (hp >= 0) and hp2 or 0
-
-    hp = hp - 4
-
-    love.graphics.draw(heart[hp2], (i/4)*16*4 + 36*4, 16*4, 0, 1, 1, 0, 0)
-
+  for i=0,15,1 do
+    for _,o in pairs(actors.list) do
+      if o.z == i then
+        if o.draw_after then o:draw_after() end
+      end
+    end
   end
 
-  love.graphics.setColor(128, 128, 128, 255)
+  --love.graphics.setColor(128, 128, 128, 255)
   --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
-  love.graphics.setColor(255, 255, 255, 255)
+  --love.graphics.setColor(255, 255, 255, 255)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)
