@@ -29,6 +29,12 @@
  <tileset firstgid="373" name="hdbrick" tilewidth="64" tileheight="64">
   <image source="hdbrick.png" width="128" height="128"/>
  </tileset>
+ <tileset firstgid="377" name="hd1way" tilewidth="64" tileheight="64">
+  <image source="hd1way.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="385" name="hdshadows" tilewidth="64" tileheight="64">
+  <image source="hdshadows.png" width="512" height="512"/>
+ </tileset>
  <layer name="water" width="90" height="30">
   <data encoding="base64" compression="zlib">
    eJzt0MEJAAAIxDB3dn9wBUG5VwJdoFUAAAAAAAAAAJDRx9jxOcPnDJ/hxwBCmBzB
@@ -41,12 +47,22 @@
  </layer>
  <layer name="bricks" width="90" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt10EKxCAQRUE9dMc5frKYkOwnvwNDFbiXh7Q6BgAAAPyu5hjrWJ/59k7+U33blr5Ra16LHI17nJ03rePcf3nmcw+NezjPfe6tzemMbV5/Qe+OnDIzWpjPfXTOc57zSuO4e2OdAZ6zA7/QF2Q=
+   eJzt1zEKgDAMQNH20LUeXwdBqTjZRJD3IHv4QyClAAAAwHutltL3WevXm/xTO9o2fUP1eg5xdM6hcw6dc+icQ+ccOue4dvanxBk7LzqHcDdy6JzjqbPuc+kcr9V7Z33nGhvrDDDHBh8pHQk=
+  </data>
+ </layer>
+ <layer name="shadows" width="90" height="30" opacity="0.46">
+  <data encoding="base64" compression="zlib">
+   eJzt1rEJgEAQRNGzdUMvtARje9QDAxvYUfE9uFw+y2BrAAAAwNtt09Nf8A/L2Xm+HnW6vhE6Z9iNDPecoXOG3ci43/OudRm7kWE3Mtxzhs4ZdqPe+L9Y9QXggw5jOw7K
+  </data>
+ </layer>
+ <layer name="1way" width="90" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKwDAIAEHz7Jak5Ok1D+jVgsyA9yCyiQAAAADguEbEnTPH3y/pbeV+n5xtzzSgG3SizzV0g06WOy6hGzX8g3SiGwDAlxc0mgwz
   </data>
  </layer>
  <layer name="ground" width="90" height="30">
   <data encoding="base64" compression="zlib">
-   eJztl8sKwkAMReNr5Wvla6/oStFv7weaLgbsEHQySacP74ELUihMDrdpJQIAAAAAAAAAAEAfqT6Sch3YkDwDf6roNzy3A/pchrjD8NwO6HMZsJ/LgD6XwdLhJWemyNZ62AFjcXzlrBW5kI/rKjF9QtrPv84aHD85L84hIXfOg/xcD41v/7slzzmOx+ha+8xI388htdMpNXdsrmPJdepen3MWipliJsIcmkjkeJbuD55X1NyxFsex69S9viFb/6U5NPF+v8c9rrt7I5tTjxw5J+UsNaHH1jm8OxD32KO7XXouMceZdDsw3sF96LHV846zL3A+zQ703sH/5Hks6drzG7mPV50=
+   eJztl7kOwkAMBc1VcVVcPQgqEHx7PhCniJSslmi9dpyDN9I0VOuRMYIIAAAAAAAAAAAAQ6SomfI50BHrDOxBZx/Q2Qd09gGdfUBnH9DZB03XNbsQuFe9dNzkdi4b39mtwBvZtC4SHRJt/wd/vbVq/GY/7CnBJ/siu9ZjQ9o5p/EUW0u/M22dy6Zzat7Y3Max1ql3fcmuBDOFzCJzSIxh3XlDzRuraRy2Tr3rO9Ltf2wOiV38vtf3uNzdB+maWnhmLxmzVHusnaOLHajvscXu9tnZY44ryW5geIOHsMfazgf26PA+yQ20vsH/1Hkq9t35C079Uf0=
   </data>
  </layer>
  <layer name="buissons" width="90" height="30">
@@ -144,17 +160,14 @@
    <polygon points="0,0 192,0 192,64 0,64"/>
   </object>
   <object type="Fountain" x="704" y="1664" width="64" height="64"/>
-  <object type="Wall" x="1280" y="1344">
-   <polygon points="0,0 320,0 320,64 0,64"/>
-  </object>
   <object type="Wall" x="1344" y="1408">
-   <polygon points="0,0 256,0 256,64 0,64"/>
+   <polygon points="0,-64 256,-64 256,64 0,64"/>
   </object>
   <object type="Wall" x="1344" y="1472">
    <polygon points="0,0 192,0 192,128 0,128"/>
   </object>
   <object type="Wall" x="1280" y="1600">
-   <polygon points="0,0 128,0 128,128 0,128"/>
+   <polygon points="64,0 128,0 128,128 64,128"/>
   </object>
   <object type="Wall" x="0" y="1600">
    <polygon points="0,0 576,0 576,128 0,128"/>
@@ -192,23 +205,8 @@
   <object type="Wall" x="1088" y="768">
    <polygon points="0,0 64,0 64,832 0,832"/>
   </object>
-  <object type="Wall" x="1152" y="1472">
-   <polygon points="0,0 64,0 64,64 0,64"/>
-  </object>
-  <object type="Wall" x="1152" y="1216">
-   <polygon points="0,0 64,0 64,64 0,64"/>
-  </object>
-  <object type="Wall" x="1152" y="960">
-   <polygon points="0,0 64,0 64,64 0,64"/>
-  </object>
   <object type="Wall" x="1344" y="768">
    <polygon points="0,0 64,0 64,448 0,448"/>
-  </object>
-  <object type="Wall" x="1280" y="1088">
-   <polygon points="0,0 64,0 64,64 0,64"/>
-  </object>
-  <object type="Wall" x="1280" y="832">
-   <polygon points="0,0 64,0 64,64 0,64"/>
   </object>
   <object type="Wall" x="3072" y="1472">
    <polygon points="0,0 768,0 768,448 0,448"/>
@@ -218,6 +216,21 @@
   </object>
   <object type="Wall" x="4736" y="1472">
    <polygon points="0,0 1024,0 1024,448 0,448"/>
+  </object>
+  <object type="Bridge" x="1152" y="768">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="1152" y="960">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="1152" y="1152">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="1152" y="1344">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="1152" y="1536">
+   <polygon points="0,0 192,0 192,64 0,64"/>
   </object>
  </objectgroup>
 </map>

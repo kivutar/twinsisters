@@ -9,12 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="256"
-   height="256"
+   width="512"
+   height="512"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="Nouveau document 1">
+   sodipodi:docname="shadows.svg"
+   inkscape:export-filename="/home/kivutar/Bureau/twinsisters/maps/hdshadows.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="-11.572614"
-     inkscape:cy="163.6668"
+     inkscape:cx="254.08158"
+     inkscape:cy="312.70115"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -61,13 +64,58 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-796.36218)">
+     transform="translate(0,-540.36218)">
     <rect
        style="fill:#000000;fill-opacity:1"
        id="rect2987"
-       width="64"
-       height="64"
-       x="64"
-       y="860.36218" />
+       width="128"
+       height="128"
+       x="32"
+       y="572.36218" />
+    <path
+       transform="translate(0,540.36218)"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       d="m 128,224 0,32 32,32 0,0 0,32 -32,0 -32,32 -32,0 0,-32 -32,-32 0,-32 32,0 32,-32 z"
+       id="rect3134"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       d="m 256,764.36218 0,32 -32,32 0,0 0,32 32,0 32,32 32,0 0,-32 32,-32 0,-32 -32,0 -32,-32 z"
+       id="rect3134-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccccccc" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3923"
+       width="32"
+       height="192"
+       x="192"
+       y="0"
+       transform="translate(0,540.36218)" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3925"
+       width="128"
+       height="32"
+       x="224"
+       y="160"
+       transform="translate(0,540.36218)" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3927"
+       width="32"
+       height="192"
+       x="352"
+       y="0"
+       transform="translate(0,540.36218)" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3929"
+       width="128"
+       height="32"
+       x="224"
+       y="0"
+       transform="translate(0,540.36218)" />
   </g>
 </svg>
