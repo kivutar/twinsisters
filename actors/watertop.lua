@@ -75,8 +75,14 @@ function Watertop:onCollision(dt, shape, dx, dy)
 
   -- Collision with Player
   if o.class.name == 'Player' then
-    if math.abs(o.yspeed) > 20 or math.abs(o.xspeed) > 0.5 then
+    if math.abs(o.yspeed) > 20*4 or math.abs(o.xspeed) > 0.5 then
       self.ps_drop:start()
+      local t = TEsound.findTag('splash_'..o.name)
+      if #t == 0 then TEsound.play('sounds/splash.wav', 'splash_'..o.name) end
+      CRON.after(1.5, function()
+        TEsound.stop('splash_'..o.name)
+        TEsound.cleanup()
+      end)
     end
     if math.abs(o.yspeed) > 20 then
       self.ps_bubble:start()
