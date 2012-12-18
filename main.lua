@@ -28,7 +28,6 @@ function love.load()
   --TEsound.play('bgm/game.mp3', 'bgm')
 
   gamestate = 'play'
-  pausepressed = false
 
   love.graphics.setFont(school)
 
@@ -48,6 +47,8 @@ function love.load()
 
   actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
 
+  actors.list.pause = Pause()
+
   --effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
 
   blendcanvas = love.graphics.newCanvas()
@@ -57,23 +58,6 @@ end
 function love.update(dt)
   dt = math.min(0.07, dt)
 
-  if love.keyboard.isDown("escape") then love.event.push("quit") end
-  if love.keyboard.isDown("p") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
-    if not pausepressed then
-      if gamestate == 'play' then
-        gamestate = 'pause'
-        TEsound.pause('bgm')
-        TEsound.play('sounds/pause.wav')
-      elseif gamestate == 'pause' then
-        gamestate = 'play'
-        TEsound.resume('bgm')
-      end
-    end
-    pausepressed = true
-  else
-    pausepressed = false
-  end
-
   if gamestate == 'play' then
     for _,a in pairs(actors.list) do
       if a.update then a:update(dt) end
@@ -81,11 +65,11 @@ function love.update(dt)
     --for _,e in pairs(effects) do
     --  if e.update then e:update(dt) end
     --end
-
     camera:follow({actors.list.lolo}, 10)
-
     Collider:update(dt)
     CRON.update(dt)
+  elseif gamestate == 'pause' then
+    actors.list.pause:update(dt)
   elseif gamestate == 'dialog' then
     camera:follow({actors.list.lolo}, 10)
     actors.list.dialog:update(dt)
@@ -170,14 +154,6 @@ function love.draw()
       --  pipe(blendcanvas, effects.posterization.pe, nil)
 
   camera:unset()
-
-  if gamestate == 'pause' then
-    love.graphics.setColor(0, 0, 0, 255*3/4)
-    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
-    if math.floor(love.timer.getTime()) % 2 == 0 then love.graphics.setColor(255, 255, 0, 255) else love.graphics.setColor(255, 255, 255, 255) end
-    love.graphics.printf("Pause", love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 - 32, 0, 'center')
-    love.graphics.setColor(255, 255, 255, 255)
-  end
 
   for i=0,15,1 do
     for _,o in pairs(actors.list) do

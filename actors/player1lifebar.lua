@@ -12,7 +12,7 @@ end
 function Player1LifeBar:initialize(character)
   self.character = character
   self.persistant = true
-  self.z = 0
+  self.z = 1
 end
 
 function Player1LifeBar:draw_after()
