@@ -241,7 +241,7 @@ function Player:update(dt)
         self.y = self.ondoor.ty*16*4+8*4
         actors.addFromTiled(map.ol)
         camera:setScale(1)
-        camera:move(-camera.x+self.x, -camera.y+self.y)
+        camera:follow({self}, 1)
       end
     end
       self.open_pressed = true
