@@ -1,6 +1,7 @@
 Pause = class('Pause')
 
 function Pause:initialize()
+  self.persistant = true
   self.z = 0
   self.menu = {
     { label='Return to game', callback=function ()
