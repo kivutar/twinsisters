@@ -140,10 +140,15 @@ function Player:update(dt)
     end
   -- Stop moving
   else
-    f = 0
+    local f = 0
     if self.onground then f = self.friction else f = self.airfriction end
-    if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt end
-    if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
+    if self.xspeed > 0 then
+      self.xspeed = self.xspeed - f * dt
+      if self.xspeed < 0 then self.xspeed = 0 end
+    elseif
+      self.xspeed < 0 then self.xspeed = self.xspeed + f * dt
+      if self.xspeed > 0 then self.xspeed = 0 end
+    end
     self.stance = 'stand'
   end
   -- Apply friction if the character is attacking and on ground
