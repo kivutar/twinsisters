@@ -74,6 +74,18 @@ function Player:initialize(name, skin, x, y, z)
   self.portrait = love.graphics.newImage('sprites/'..self.name..'_portrait.png')
 end
 
+function Player:applyFriction(dt)
+  local f = 0
+  if self.onground then f = self.friction else f = self.airfriction end
+  if self.xspeed > 0 then
+    self.xspeed = self.xspeed - f * dt
+    if self.xspeed < 0 then self.xspeed = 0 end
+  elseif
+    self.xspeed < 0 then self.xspeed = self.xspeed + f * dt
+    if self.xspeed > 0 then self.xspeed = 0 end
+  end
+end
+
 function Player:update(dt)
   self.ondoor = false
   self.onground = false
@@ -140,28 +152,14 @@ function Player:update(dt)
     end
   -- Stop moving
   else
-    local f = 0
-    if self.onground then f = self.friction else f = self.airfriction end
-    if self.xspeed > 0 then
-      self.xspeed = self.xspeed - f * dt
-      if self.xspeed < 0 then self.xspeed = 0 end
-    elseif
-      self.xspeed < 0 then self.xspeed = self.xspeed + f * dt
-      if self.xspeed > 0 then self.xspeed = 0 end
-    end
+    self:applyFriction(dt)
     self.stance = 'stand'
   end
   -- Apply friction if the character is attacking and on ground
-  if self.attacking and self.onground then
-    f = 0
-    if self.onground then f = self.friction else f = self.airfriction end
-    if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt * 2 end
-    if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt * 2 end
-  end
+  if self.attacking and self.onground then self:applyFriction(dt) end
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
-  -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) > 15*4 then self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf end
+  self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf
 
   -- Jumping and swimming
   if self.jump_btn() and not self.daft then

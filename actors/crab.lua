@@ -29,7 +29,7 @@ function Crab:initialize(x, y, z)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 0.5*4
+  self.max_xspeed = 3*4
   self.yspeed = 0
   self.friction = 10*4
   self.airfriction = 1*4
@@ -98,6 +98,18 @@ function solidAt(x, y)
   return false
 end
 
+function Crab:applyFriction(dt)
+  local f = 0
+  if self.onground then f = self.friction else f = self.airfriction end
+  if self.xspeed > 0 then
+    self.xspeed = self.xspeed - f * dt
+    if self.xspeed < 0 then self.xspeed = 0 end
+  elseif
+    self.xspeed < 0 then self.xspeed = self.xspeed + f * dt
+    if self.xspeed > 0 then self.xspeed = 0 end
+  end
+end
+
 function Crab:update(dt)
   self.onground = false
   self.onbridge = false
@@ -152,16 +164,13 @@ function Crab:update(dt)
     end
   -- Stop moving
   else
-    f = 0
-    if self.onground then f = self.friction else f = self.airfriction end
-    if self.xspeed >=  f * dt then self.xspeed = self.xspeed - f * dt end
-    if self.xspeed <= -f * dt then self.xspeed = self.xspeed + f * dt end
+    self:applyFriction(dt)
     self.stance = 'stand'
   end
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
-  if math.abs(self.xspeed + self.groundspeed) * self.iwf > 0.2*4 then self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf end
+  self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf
 
 
   -- AI
@@ -241,7 +250,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play('sounds/die.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 5*4 or -5*4
+      self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.invincible = true
       self.stance = 'hit'
       self.smoke:start()
@@ -254,7 +263,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     else
       TEsound.play('sounds/hit.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 5*4 or -5*4
+      self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.yspeed = -100*4
       self.invincible = true
       self.stance = 'hit'
