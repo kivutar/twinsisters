@@ -14,14 +14,14 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'doom1.tmx'
+  map = ATL.load 'village.tmx'
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1)--(map.properties.zoom or 2))
+  camera:setScale(1.25)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -34,15 +34,15 @@ function love.load()
   actors.addFromTiled(map.ol)
 
   actors.list.lolo = Player:new('lolo', 'lolo', 1100, 800, 10)
-  -- actors.list.oce  = Player:new('oce',  'oce', 1100, 800, 10)
-  -- actors.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
-  -- actors.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
-  -- actors.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
-  -- actors.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
-  -- actors.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
-  -- actors.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
-  -- actors.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
-  -- actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
+  --actors.list.oce  = Player:new('oce',  'oce', 1100, 800, 10)
+  --actors.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
+  --actors.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
+  --actors.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
+  --actors.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
+  --actors.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
+  --actors.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
+  --actors.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
+  --actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
   camera:follow({actors.list.lolo}, 1)
 
   actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
@@ -53,6 +53,8 @@ function love.load()
 
   blendcanvas = love.graphics.newCanvas()
   hallo = love.graphics.newImage('sprites/hallo.png')
+  cache = love.graphics.newImage('maps/village.png')
+  --cache:setFilter("nearest", "nearest")
 end
 
 function love.update(dt)
@@ -73,13 +75,13 @@ function love.update(dt)
   elseif gamestate == 'dialog' then
     camera:follow({actors.list.lolo}, 10)
     actors.list.dialog:update(dt)
-  end
+  end 
 
 end
 
 function love.draw()
 
-  for i=0,15,1 do
+  for i=0,4,1 do
     for _,o in pairs(actors.list) do
       if o.z == i then
         if o.draw_before then o:draw_before() end
@@ -89,24 +91,42 @@ function love.draw()
 
   camera:set()
 
-  map:autoDrawRange(-camera:ox(), -camera:oy(), 1, 50)
-  map:_updateTileRange()
-
-  for z,layer in pairs(map.drawList) do
-    if type(layer) == "table" then
-      layer.z = z
-      layer.w = layer.properties and layer.properties.w or nil
-      actors.list[layer.name] = layer
-    end
-  end
-
-  for i=0,15,1 do
+  for i=0,10,1 do
     for _,o in pairs(actors.list) do
       if o.z == i then
         if o.draw then o:draw() end
       end
     end
-  end
+  end  
+
+  love.graphics.draw(cache)
+
+  for i=10,15,1 do
+    for _,o in pairs(actors.list) do
+      if o.z == i then
+        if o.draw then o:draw() end
+      end
+    end
+  end  
+
+--  map:autoDrawRange(-camera:ox(), -camera:oy(), 1, 50)
+--  map:_updateTileRange()
+--
+--  for z,layer in pairs(map.drawList) do
+--    if type(layer) == "table" then
+--      layer.z = z
+--      layer.w = layer.properties and layer.properties.w or nil
+--      actors.list[layer.name] = layer
+--    end
+--  end
+--
+--  for i=0,4,1 do
+--    for _,o in pairs(actors.list) do
+--      if o.z == i then
+--        if o.draw then o:draw() end
+--      end
+--    end
+--  end
 
       --  love.graphics.setCanvas(effects.distortion.canvas)
       --  effects.distortion.canvas:clear()
@@ -120,7 +140,7 @@ function love.draw()
       --
       --  --love.graphics.setCanvas(effects.chromashift.canvas)
       --  --effects.chromashift.canvas:clear()
-      --    for i=2,15,1 do
+      --    for i=2,4,1 do
       --      for _,o in pairs(actors.list) do
       --        if o.z == i then
       --          if o.draw then o:draw() end
@@ -141,7 +161,7 @@ function love.draw()
       --  love.graphics.setColor(0, 0, 0)
       --  love.graphics.rectangle('fill', camera:ox(), camera:oy(), love.graphics.getWidth(), love.graphics.getHeight())
       --  love.graphics.setBlendMode("subtractive")
-      --  for i=-15,15,1 do
+      --  for i=-4,4,1 do
       --    for _,o in pairs(actors.list) do
       --      if o.z == i then
       --        if o.drawhallo then o:drawhallo() end
@@ -155,7 +175,7 @@ function love.draw()
 
   camera:unset()
 
-  for i=0,15,1 do
+  for i=0,4,1 do
     for _,o in pairs(actors.list) do
       if o.z == i then
         if o.draw_after then o:draw_after() end
@@ -163,9 +183,9 @@ function love.draw()
     end
   end
 
-  --love.graphics.setColor(128, 128, 128, 255)
-  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
-  --love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(128, 128, 128, 255)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
+  love.graphics.setColor(255, 255, 255, 255)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)

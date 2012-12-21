@@ -71,6 +71,7 @@ function animation:update(dt)
 	if self.timer > self.delays[self.position] then
 		self.timer = self.timer - self.delays[self.position]
 		self.position = self.position + 1 * self.direction
+		if self.position == 0 then self.position = #self.frames end
 		if self.position > #self.frames then
 			if self.mode == 1 then
 				self.position = 1

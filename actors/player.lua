@@ -169,7 +169,8 @@ function Player:update(dt)
         self.y = self.y + 20*4
         TEsound.play('sounds/jump.wav')
       -- Regular jump
-      elseif self.onground and not self.down_btn() and not self.attacking then
+      --elseif self.onground and not self.down_btn() and not self.attacking then
+      elseif not self.down_btn() and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
         TEsound.play('sounds/jump.wav')
       -- Swimming

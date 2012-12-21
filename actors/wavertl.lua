@@ -1,26 +1,26 @@
-Watertop = class('Watertop')
+WaveRTL = class('WaveRTL')
 
-Watertop.img = love.graphics.newImage('sprites/watertop.png')
-Watertop.img:setFilter("nearest","nearest")
-Watertop.anim = newAnimation(Watertop.img, 64, 64, 0.1, 0)
+WaveRTL.img = love.graphics.newImage('sprites/watertop.png')
+WaveRTL.img:setFilter("nearest","nearest")
+WaveRTL.anim = newAnimation(WaveRTL.img, 64, 64, 0.1, 0)
 
-Watertop.img_drop = love.graphics.newImage('sprites/drop.png')
-Watertop.img_drop:setFilter("nearest","nearest")
+WaveRTL.img_drop = love.graphics.newImage('sprites/drop.png')
+WaveRTL.img_drop:setFilter("nearest","nearest")
 
-Watertop.img_bubble = love.graphics.newImage('sprites/bubble.png')
-Watertop.img_bubble:setFilter("nearest","nearest")
+WaveRTL.img_bubble = love.graphics.newImage('sprites/bubble.png')
+WaveRTL.img_bubble:setFilter("nearest","nearest")
 
-Watertop.instances = 0
+WaveRTL.instances = 0
 
-function Watertop:initialize(x, y, z)
+function WaveRTL:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
-  self.z = 1
+  self.z = 10
 
   self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self
 
-  self.ps_drop = love.graphics.newParticleSystem(Watertop.img_drop, 50)
+  self.ps_drop = love.graphics.newParticleSystem(WaveRTL.img_drop, 50)
   self.ps_drop:setEmissionRate          (50)
   self.ps_drop:setLifetime              (0.1)
   self.ps_drop:setParticleLife          (0.35)
@@ -37,7 +37,7 @@ function Watertop:initialize(x, y, z)
   self.ps_drop:setPosition(x, y)
   self.ps_drop:stop()
 
-  self.ps_bubble = love.graphics.newParticleSystem(Watertop.img_bubble, 10)
+  self.ps_bubble = love.graphics.newParticleSystem(WaveRTL.img_bubble, 10)
   self.ps_bubble:setEmissionRate          (20)
   self.ps_bubble:setLifetime              (0.1)
   self.ps_bubble:setParticleLife          (1.5)
@@ -54,22 +54,22 @@ function Watertop:initialize(x, y, z)
   self.ps_bubble:setPosition(x, y)
   self.ps_bubble:stop()
 
-  Watertop.instances = Watertop.instances + 1
+  WaveRTL.instances = WaveRTL.instances + 1
 end
 
-function Watertop:update(dt)
-  Watertop.anim:update(dt / Watertop.instances)
+function WaveRTL:update(dt)
+  WaveRTL.anim:update(dt / WaveRTL.instances)
   self.ps_drop:update(dt)
   self.ps_bubble:update(dt)
 end
 
-function Watertop:draw()
-  Watertop.anim:draw(self.x-32, self.y-32)
+function WaveRTL:draw()
+  WaveRTL.anim:draw(self.x-32, self.y-32)
   love.graphics.draw(self.ps_drop, 0, 0)
   love.graphics.draw(self.ps_bubble, 0, 0)
 end
 
-function Watertop:onCollision(dt, shape, dx, dy)
+function WaveRTL:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
 
