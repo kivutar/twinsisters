@@ -21,7 +21,7 @@ function love.load()
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1.5)--(map.properties.zoom or 2))
+  camera:setScale(1920/1440)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -54,7 +54,7 @@ function love.load()
   blendcanvas = love.graphics.newCanvas()
   hallo = love.graphics.newImage('sprites/hallo.png')
   cache = love.graphics.newImage('maps/village.png')
-  --cache:setFilter("nearest", "nearest")
+  cache:setFilter("nearest", "linear")
 end
 
 function love.update(dt)
