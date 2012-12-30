@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="hdblock" tilewidth="64" tileheight="64">
+  <image source="hdblock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="2" name="hdgrass" tilewidth="64" tileheight="64">
+  <image source="hdgrass.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="66" name="rocksbrown" tilewidth="64" tileheight="64">
+  <image source="rocksbrown.png" width="256" height="256"/>
+ </tileset>
+ <layer name="rocks" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztx7kRgDAQwMCrDYMffvpvBhXg+CLtjAJFSJIkSdLcQoVW2hK/UqNOI/F3OuikK/FveuilL/F/gEEibQ==
+  </data>
+ </layer>
+ <layer name="blocks" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlFEOwCAIQ9n9L+2vIW3dZH6ofYkxiFIIaoQxxhizH083opsj2SP/rDaLg3TV/qru1/kPXVQb0sm1V3WRb0V/T0C9D+R7Y6v4WSOvsX5UeozyYXHV/UBnWb1Kn+Wo8pqNwepFvtF59mfd/oZuogG7ewBl
+  </data>
+ </layer>
+ <layer name="grass" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw7EJAAAIA7CCo///6xfqkEASAADguzraR9kx7LYBpQ==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="30" height="30">
+  <object type="Title" x="64" y="896"/>
+  <object type="VillageBackground" x="128" y="896"/>
+  <object type="Player" x="192" y="896"/>
+  <object type="Wall" x="0" y="1664">
+   <polygon points="0,0 1920,0 1920,256 0,256"/>
+  </object>
+  <object type="Wall" x="-64" y="0">
+   <polygon points="0,0 64,0 64,1920 0,1920"/>
+  </object>
+  <object type="Wall" x="1920" y="0">
+   <polygon points="0,0 64,0 64,1920 0,1920"/>
+  </object>
+ </objectgroup>
+</map>

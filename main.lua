@@ -15,14 +15,16 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  map = ATL.load 'village.tmx'
+  map = ATL.load('title.tmx')
+  cache = love.graphics.newImage('maps/title.png')
+  cache:setFilter("nearest", "linear")
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1920/1440)--(map.properties.zoom or 2))
+  camera:setScale(1)--1920/1440)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   
@@ -34,7 +36,7 @@ function love.load()
 
   actors.addFromTiled(map.ol)
 
-  actors.list.lolo = Player:new('lolo', 'lolo', 1100, 800, 10)
+  --actors.list.lolo = Player:new(1100, 800)
   --actors.list.oce  = Player:new('oce',  'oce', 1100, 800, 10)
   --actors.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
   --actors.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
@@ -44,18 +46,13 @@ function love.load()
   --actors.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
   --actors.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
   --actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
-  camera:follow({actors.list.lolo}, 1)
 
-  actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
+  --actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
 
-  actors.list.pause = Pause()
-
-  --effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
+  effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
 
   blendcanvas = love.graphics.newCanvas()
   hallo = love.graphics.newImage('sprites/hallo.png')
-  cache = love.graphics.newImage('maps/village.png')
-  cache:setFilter("nearest", "linear")
 end
 
 function love.update(dt)
@@ -76,6 +73,12 @@ function love.update(dt)
   elseif gamestate == 'dialog' then
     camera:follow({actors.list.lolo}, 10)
     actors.list.dialog:update(dt)
+  elseif gamestate == 'transition' then
+    camera:follow({actors.list.lolo}, 10)
+    actors.list.transition:update(dt)
+  elseif gamestate == 'title' then
+    camera:follow({actors.list.lolo}, 10)
+    actors.list.title:update(dt)
   end 
 
 end

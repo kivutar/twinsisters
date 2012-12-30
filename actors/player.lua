@@ -9,18 +9,18 @@ for _,skin in pairs({'lolo', 'oce'}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
-      img:setFilter("nearest", "linear")
+      img:setFilter("nearest", "nearest")
       Player.anim[skin][stance][direction] = newAnimation(img , 256, 256, speed, 0)
     end
   end
 end
 
-function Player:initialize(name, skin, x, y, z)
-  self.name = name
-  self.skin = skin
+function Player:initialize(x, y, z)
+  self.name = 'lolo'
+  self.skin = 'lolo'
   self.x = x
   self.y = y
-  self.z = z
+  self.z = 10
 
   self.persistant = true
 

@@ -285,5 +285,7 @@
   <object type="Wall" x="3136" y="512">
    <polygon points="0,0 128,0 128,128 0,128"/>
   </object>
+  <object type="Pause" x="128" y="64"/>
+  <object type="Player" x="640" y="1600" width="64" height="64"/>
  </objectgroup>
 </map>

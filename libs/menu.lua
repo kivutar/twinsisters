@@ -1,7 +1,6 @@
 Menu = class('Menu')
 
 function Menu:initialize(menu)
-  self.z = 0
   self.menu = menu
   self.cursor = 1
 end

@@ -1,6 +1,7 @@
 Pause = class('Pause')
 
 function Pause:initialize()
+  self.name = 'pause'
   self.persistant = true
   self.z = 0
   self.menu = Menu:new({
@@ -12,7 +13,9 @@ function Pause:initialize()
       print('Not implemented yet')
     end },
     { label='Quit without saving', callback=function ()
-      love.event.push("quit")
+      actors.list.transition = Transition:new(actors.list.lolo.x, actors.list.lolo.y, 15, function ()
+        love.event.push("quit")
+      end )
     end },
   })
 end
