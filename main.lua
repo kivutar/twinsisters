@@ -4,6 +4,7 @@ require 'libs/utils' -- Various utilities
 require 'libs/anal' -- Sprite animations
 require 'libs/TEsound' -- Play sounds
 require 'libs/camera' -- Camera to follow game objects
+require 'libs/menu' -- Menu to make choices
 CRON = require 'libs/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/AdvTiledLoader.Loader' -- Tiled map loader
