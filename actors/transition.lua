@@ -5,10 +5,10 @@ Transition.canvas = love.graphics.newCanvas()
 function Transition:initialize(callback)
   self.persistant = true
   self.name = 'transition'
-  self.x = actors.list.lolo.x
-  self.y = actors.list.lolo.y
+  self.x = actors.list.lolo and actors.list.lolo.x or camera.x
+  self.y = actors.list.lolo and actors.list.lolo.y or camera.y
   self.z = 15
-  self.r = love.graphics.getWidth() / 2
+  self.r = 1920 / 2
   self.callback = callback
   gamestate = 'transition'
 end
@@ -17,11 +17,11 @@ function Transition:update(dt)
 
     if self.r == 0 then
       self.callback()
-      self.x = actors.list.lolo.x
-      self.y = actors.list.lolo.y
+      self.x = actors.list.lolo and actors.list.lolo.x or camera.x
+      self.y = actors.list.lolo and actors.list.lolo.y or camera.y
     end
 
-    if self.r == - love.graphics.getWidth() / 2 then
+    if self.r == - 1920 / 2 then
       gamestate = 'play'
       self:destroy()
     end
@@ -35,12 +35,12 @@ function Transition:draw()
     Transition.canvas:clear()
     love.graphics.setBlendMode("alpha")
     love.graphics.setColor(0, 0, 0)
-    love.graphics.rectangle('fill', camera:ox(), camera:oy(), love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.rectangle('fill', camera:ox(), camera:oy(), 1920, 1200)
     love.graphics.setBlendMode("subtractive")
     love.graphics.circle('fill', self.x, self.y, math.abs(self.r))
     love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
-    love.graphics.draw(Transition.canvas, camera:ox(), camera:oy())
+    love.graphics.draw(Transition.canvas, camera:ox(), camera:oy(), 0, camera.scaleX, camera.scaleY)
   end
 end
 

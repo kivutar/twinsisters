@@ -18,8 +18,8 @@ end
 function Player:initialize(x, y, z)
   self.name = 'lolo'
   self.skin = 'lolo'
-  self.x = x
-  self.y = y
+  self.x = x + 32
+  self.y = y + 16
   self.z = 10
 
   self.persistant = true
@@ -87,6 +87,7 @@ function Player:applyFriction(dt)
 end
 
 function Player:update(dt)
+  print(self.y)
   self.ondoor = false
   self.onground = false
   self.onbridge = false

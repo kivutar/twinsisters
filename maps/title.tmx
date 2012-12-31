@@ -24,8 +24,7 @@
    eJxjYBgFo2AUjILhAQAE0AAB
   </data>
  </layer>
- <objectgroup name="objects" width="22" height="14" visible="0">
+ <objectgroup name="objects" width="22" height="14">
   <object type="Title" x="768" y="448"/>
-  <object type="Player" x="704" y="448"/>
  </objectgroup>
 </map>

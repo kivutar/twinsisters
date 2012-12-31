@@ -17,14 +17,14 @@ function love.load()
   ATL.path = 'maps/'
   map = ATL.load('title.tmx')
   cache = love.graphics.newImage('maps/title.png')
-  cache:setFilter("nearest", "linear")
+  cache:setFilter("nearest", "nearest")
   map.drawObjects = false
 
   Collider = HC(30, onCollision, onCollisionStop)
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
-  camera:setScale(1)--1920/1440)--(map.properties.zoom or 2))
+  camera:setScale(1920/1440)--(map.properties.zoom or 2))
 
   love.mouse.setVisible(false)
   

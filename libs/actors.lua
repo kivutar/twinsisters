@@ -41,7 +41,7 @@ function actors.switchMap(mapname)
   map.drawObjects = false
 
   cache = love.graphics.newImage('maps/'..mapname..'.png')
-  cache:setFilter("nearest", "linear")
+  cache:setFilter("nearest", "nearest")
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
