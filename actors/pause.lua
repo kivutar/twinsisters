@@ -5,18 +5,20 @@ function Pause:initialize()
   self.persistant = true
   self.z = 0
   self.menu = Menu:new({
-    { label='Return to game', callback=function ()
+
+    { label = 'Return to game', callback = function ()
       gamestate = 'play'
       TEsound.resume('bgm')
     end },
-    { label='Load a game state', callback=function ()
+
+    { label = 'Load a game state', callback = function ()
       print('Not implemented yet')
     end },
-    { label='Quit without saving', callback=function ()
-      actors.list.transition = Transition:new(actors.list.lolo.x, actors.list.lolo.y, 15, function ()
-        love.event.push("quit")
-      end )
+
+    { label = 'Quit without saving', callback = function ()
+      actors.list.transition = Transition:new(function () love.event.push("quit") end )
     end },
+
   })
 end
 
