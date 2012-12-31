@@ -16,7 +16,7 @@ function Pause:initialize()
     end },
 
     { label = 'Quit without saving', callback = function ()
-      actors.list.transition = Transition:new(function () love.event.push("quit") end )
+      actors.list.transition = CircleTransition:new(function () love.event.push("quit") end )
     end },
 
   })

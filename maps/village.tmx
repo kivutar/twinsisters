@@ -287,5 +287,17 @@
   </object>
   <object type="Pause" x="128" y="64"/>
   <object type="Player" x="640" y="1600" width="64" height="64"/>
+  <object type="Wall" x="-64" y="0">
+   <polygon points="0,0 64,0 64,3200 0,3200"/>
+  </object>
+  <object type="Wall" x="6400" y="0">
+   <polygon points="0,0 64,0 64,3200 0,3200"/>
+  </object>
+  <object type="Wall" x="0" y="3200">
+   <polygon points="0,0 6400,0 6400,64 64,64"/>
+  </object>
+  <object type="Wall" x="0" y="-64">
+   <polygon points="0,0 6400,0 6400,64 64,64"/>
+  </object>
  </objectgroup>
 </map>

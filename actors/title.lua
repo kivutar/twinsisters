@@ -8,7 +8,7 @@ function Title:initialize()
   self.menu = Menu:new({
 
     { label = 'New game', callback = function ()
-      actors.list.transition = Transition:new( function () actors.switchMap('village') end )
+      actors.list.transition = FadeTransition:new( function () actors.switchMap('village') end )
     end },
 
     { label = 'Load a game state', callback = function ()
@@ -16,7 +16,7 @@ function Title:initialize()
     end },
 
     { label = 'Quit without saving', callback = function ()
-      actors.list.transition = Transition:new( function () love.event.push("quit") end )
+      actors.list.transition = CircleTransition:new( function () love.event.push("quit") end )
     end },
 
   })

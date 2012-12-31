@@ -74,7 +74,6 @@ function love.update(dt)
     camera:follow({actors.list.lolo}, 10)
     actors.list.dialog:update(dt)
   elseif gamestate == 'transition' then
-    camera:follow({actors.list.lolo}, 10)
     actors.list.transition:update(dt)
   elseif gamestate == 'title' then
     camera:follow({actors.list.lolo}, 10)

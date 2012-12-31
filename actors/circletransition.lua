@@ -1,8 +1,8 @@
-Transition = class('Transition')
+CircleTransition = class('CircleTransition')
 
-Transition.canvas = love.graphics.newCanvas()
+CircleTransition.canvas = love.graphics.newCanvas()
 
-function Transition:initialize(callback)
+function CircleTransition:initialize(callback)
   self.persistant = true
   self.name = 'transition'
   self.x = actors.list.lolo and actors.list.lolo.x or camera.x
@@ -13,7 +13,7 @@ function Transition:initialize(callback)
   gamestate = 'transition'
 end
 
-function Transition:update(dt)
+function CircleTransition:update(dt)
 
     if self.r == 0 then
       self.callback()
@@ -26,13 +26,13 @@ function Transition:update(dt)
       self:destroy()
     end
 
-    self.r = self.r - 16
+    self.r = self.r - 32
 end
 
-function Transition:draw()
+function CircleTransition:draw()
   if gamestate == 'transition' then
-    love.graphics.setCanvas(Transition.canvas)
-    Transition.canvas:clear()
+    love.graphics.setCanvas(CircleTransition.canvas)
+    CircleTransition.canvas:clear()
     love.graphics.setBlendMode("alpha")
     love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', camera:ox(), camera:oy(), 1920, 1200)
@@ -40,10 +40,10 @@ function Transition:draw()
     love.graphics.circle('fill', self.x, self.y, math.abs(self.r))
     love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
-    love.graphics.draw(Transition.canvas, camera:ox(), camera:oy(), 0, camera.scaleX, camera.scaleY)
+    love.graphics.draw(CircleTransition.canvas, camera:ox(), camera:oy(), 0, camera.scaleX, camera.scaleY)
   end
 end
 
-function Transition:destroy()
+function CircleTransition:destroy()
   actors.list[self.name] = nil
 end

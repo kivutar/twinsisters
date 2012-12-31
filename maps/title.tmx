@@ -25,6 +25,6 @@
   </data>
  </layer>
  <objectgroup name="objects" width="22" height="14">
-  <object type="Title" x="768" y="448"/>
+  <object type="Title" x="128" y="128" width="64" height="64"/>
  </objectgroup>
 </map>

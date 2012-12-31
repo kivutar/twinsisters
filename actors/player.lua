@@ -87,7 +87,6 @@ function Player:applyFriction(dt)
 end
 
 function Player:update(dt)
-  print(self.y)
   self.ondoor = false
   self.onground = false
   self.onbridge = false
