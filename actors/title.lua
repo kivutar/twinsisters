@@ -3,7 +3,6 @@ Title = class('Title')
 function Title:initialize()
   self.z = 0
   self.name = 'title'
-  gamestate = 'title'
 
   self.menu = Menu:new({
 
@@ -27,7 +26,5 @@ function Title:update(dt)
 end
 
 function Title:draw_after()
-  if gamestate == 'title' then
     self.menu:draw()
-  end
 end
