@@ -3,7 +3,7 @@ Pause = class('Pause')
 function Pause:initialize()
   self.name = 'pause'
   self.persistant = true
-  self.z = 0
+  self.z = 15
   self.menu = Menu:new({
 
     { label = 'Return to game', callback = function ()
@@ -44,10 +44,15 @@ function Pause:update(dt)
   end
 end
 
-function Pause:draw_after()
+function Pause:draw()
   if gamestate == 'pause' then
     love.graphics.setColor(0, 0, 0, 255*3/4)
-    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+    love.graphics.rectangle('fill', camera:ox(), camera:oy(), 1920, 1200)
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.rectangle('fill', camera:ox() + 64*11, camera:oy() + 64*12 + 32, 64*8, 64*4)
+    love.graphics.setLine(8, "smooth")
+    love.graphics.setColor(0, 0, 255, 255)
+    love.graphics.rectangle('line', camera:ox() + 64*11, camera:oy() + 64*12 + 32, 64*8, 64*4)
     self.menu:draw()
   end
 end

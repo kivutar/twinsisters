@@ -15,7 +15,7 @@ requiredir('fonts') -- Fonts
 function love.load()
 
   ATL.path = 'maps/'
-  actors.switchMap('start')
+  actors.switchMap('title')
 
   Collider = HC(30, onCollision, onCollisionStop)
 

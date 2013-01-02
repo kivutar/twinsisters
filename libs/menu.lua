@@ -37,11 +37,11 @@ end
 function Menu:draw()
   for i=1,#self.menu,1 do
     if self.cursor == i then
-      love.graphics.setColor(255, 255, 0, 255)
+      love.graphics.setColor(255, 0, 0, 255)
     else
-      love.graphics.setColor(255, 255, 255, 128)
+      love.graphics.setColor(0, 0, 0, 255)
     end
-    love.graphics.print(self.menu[i].label, 64, 208 + (i-1)*64)
+    love.graphics.print(self.menu[i].label, camera:ox() + 64*12, camera:oy() + 64*13 + (i-1)*64)
   end
   love.graphics.setColor(255, 255, 255, 255)
 end

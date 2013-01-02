@@ -1,7 +1,7 @@
 Title = class('Title')
 
 function Title:initialize()
-  self.z = 0
+  self.z = 15
   self.name = 'title'
 
   self.menu = Menu:new({
@@ -25,6 +25,10 @@ function Title:update(dt)
   self.menu:update(dt)
 end
 
-function Title:draw_after()
-    self.menu:draw()
+function Title:draw()
+  love.graphics.rectangle('fill', camera:ox() + 64*11, camera:oy() + 64*12 + 32, 64*8, 64*4)
+  love.graphics.setLine(8, "smooth")
+  love.graphics.setColor(0, 0, 255, 255)
+  love.graphics.rectangle('line', camera:ox() + 64*11, camera:oy() + 64*12 + 32, 64*8, 64*4)
+  self.menu:draw()
 end
