@@ -14,10 +14,10 @@ requiredir('fonts') -- Fonts
 
 function love.load()
 
-  ATL.path = 'maps/'
-  actors.switchMap('title')
-
   Collider = HC(30, onCollision, onCollisionStop)
+
+  ATL.path = 'maps/'
+  actors.switchMap('start')
 
   camera:setScale(1920/1440)
 
@@ -167,14 +167,6 @@ function love.draw()
       --  pipe(blendcanvas, effects.posterization.pe, nil)
 
   camera:unset()
-
-  for i=0,4,1 do
-    for _,o in pairs(actors.list) do
-      if o.z == i then
-        if o.draw_after then o:draw_after() end
-      end
-    end
-  end
 
   love.graphics.setColor(128, 128, 128, 255)
   --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)

@@ -1,7 +1,7 @@
 DialogBox = class('DialogBox')
 
-DialogBox.background = love.graphics.newImage('sprites/dialogbox.png')
-DialogBox.background:setFilter("nearest", "nearest")
+--DialogBox.background = love.graphics.newImage('sprites/dialogbox.png')
+--DialogBox.background:setFilter("nearest", "nearest")
 
 DialogBox.press_button = love.graphics.newImage('sprites/press_button.png')
 DialogBox.press_button:setFilter("nearest", "nearest")
@@ -12,7 +12,7 @@ function DialogBox:initialize(message, speed, callback)
   self.callback = callback
   self.display_len = 0
   self.old_display_len = 0
-  self.z = 10
+  self.z = 15
   self.finished = false
   self.btn_pressed = false
   gamestate = 'dialog'
@@ -57,25 +57,25 @@ function DialogBox:update(dt)
   end
 end
 
-function DialogBox:draw_after()
-  local uix = 0
-  local uiy = 0
+function DialogBox:draw()
 
-  love.graphics.draw(DialogBox.background, uix, uiy, 0, 1, 1, 0, 0)
-
-  love.graphics.setFont(school)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.rectangle('fill', camera:ox() + 64*7, camera:oy() + 64*12 + 32, 64*14, 64*4)
+  love.graphics.setLine(8, "smooth")
+  love.graphics.setColor(0, 0, 255, 255)
+  love.graphics.rectangle('line', camera:ox() + 64*7, camera:oy() + 64*12 + 32, 64*14, 64*4)
 
   love.graphics.setColor(37, 82, 113, 255)
-  love.graphics.printf("LAURIANE:", uix + 90*4, uiy + (192-16-40)*4, 180*4, 'left')
+  love.graphics.printf("LAURIANE:", camera:ox() + 64*8, camera:oy() + 64*13, 180*4, 'left')
 
   love.graphics.setColor(0, 0, 0, 255)
   local message = string.sub(self.message, 1, math.floor(self.display_len))
-  love.graphics.printf(message, uix + 90*4, uiy + (192-40)*4, 180*4, 'left')
+  love.graphics.printf(message, camera:ox() + 64*8, camera:oy() + 64*14, 180*4, 'left')
   
   love.graphics.setColor(255, 255, 255, 255)
 
   if self.finished then
-    love.graphics.draw(DialogBox.press_button, uix + 16*16*4, uiy+(16*13-40)*4, 0, 1, 1, 0, 0)
+    love.graphics.draw(DialogBox.press_button, camera:ox() + 64*19.5, camera:oy() + 64*15, 0, 1, 1, 0, 0)
   end
 end
 
