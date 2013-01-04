@@ -10,11 +10,11 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1440"
-   height="900"
+   width="1920"
+   height="1080"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    inkscape:export-filename="/home/kivutar/Bureau/twinsisters/backgrounds/villagesky.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
@@ -64,7 +64,7 @@
        fx="720"
        fy="-471.23788"
        r="720"
-       gradientTransform="matrix(-1.4444444,0,0,-1.2444443,1759.9999,17.932895)"
+       gradientTransform="matrix(-1.9259259,0,0,-1.4933332,2346.6665,-188.95296)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -74,16 +74,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="553.04407"
-     inkscape:cy="564.46712"
+     inkscape:zoom="0.35"
+     inkscape:cx="999.05027"
+     inkscape:cy="439.32045"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1440"
-     inkscape:window-height="845"
+     inkscape:window-height="823"
      inkscape:window-x="0"
-     inkscape:window-y="27"
+     inkscape:window-y="24"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -103,7 +103,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -111,14 +111,14 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-152.36218)">
+     transform="translate(0,27.63782)">
     <rect
        style="fill:url(#radialGradient3764);fill-opacity:1;stroke:none"
        id="rect2987"
-       width="1440"
-       height="900"
+       width="1920"
+       height="1080"
        x="0"
-       y="152.36218"
+       y="-27.637817"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>

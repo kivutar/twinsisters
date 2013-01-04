@@ -5,17 +5,17 @@ WaveRTL.img:setFilter("nearest","nearest")
 WaveRTL.anim = newAnimation(WaveRTL.img, 64, 64, 0.1, 0)
 
 WaveRTL.img_drop = love.graphics.newImage('sprites/drop.png')
-WaveRTL.img_drop:setFilter("nearest","nearest")
+--WaveRTL.img_drop:setFilter("nearest","nearest")
 
 WaveRTL.img_bubble = love.graphics.newImage('sprites/bubble.png')
-WaveRTL.img_bubble:setFilter("nearest","nearest")
+--WaveRTL.img_bubble:setFilter("nearest","nearest")
 
 WaveRTL.instances = 0
 
 function WaveRTL:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
-  self.z = 10
+  self.z = 30
 
   self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self

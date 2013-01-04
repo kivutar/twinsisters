@@ -305,5 +305,6 @@
    </properties>
    <polygon points="0,0 128,0 128,128 0,128"/>
   </object>
+  <object type="Player1LifeBar" x="192" y="64"/>
  </objectgroup>
 </map>

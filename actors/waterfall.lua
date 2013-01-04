@@ -1,12 +1,12 @@
 WaterFall = class('WaterFall')
 
 WaterFall.img_drop = love.graphics.newImage('sprites/drop.png')
-WaterFall.img_drop:setFilter("nearest","nearest")
+--WaterFall.img_drop:setFilter("nearest","nearest")
 
 function WaterFall:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
-  self.z = 11
+  self.z = 30
 
   self.ps_drop = love.graphics.newParticleSystem(WaterFall.img_drop, 75)
   self.ps_drop:setEmissionRate          (50)

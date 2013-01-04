@@ -1,15 +1,15 @@
 WaterFallBubbles = class('WaterFallBubbles')
 
 WaterFallBubbles.img_drop = love.graphics.newImage('sprites/drop.png')
-WaterFallBubbles.img_drop:setFilter("nearest","nearest")
+--WaterFallBubbles.img_drop:setFilter("nearest","nearest")
 
 WaterFallBubbles.img_bubble = love.graphics.newImage('sprites/bubble.png')
-WaterFallBubbles.img_bubble:setFilter("nearest","nearest")
+--WaterFallBubbles.img_bubble:setFilter("nearest","nearest")
 
 function WaterFallBubbles:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
-  self.z = 11
+  self.z = 30
 
   self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self

@@ -3,7 +3,7 @@ Pause = class('Pause')
 function Pause:initialize()
   self.name = 'pause'
   self.persistant = true
-  self.z = 15
+  self.z = 31
   self.menu = Menu:new({
 
     { label = 'Return to game', callback = function ()

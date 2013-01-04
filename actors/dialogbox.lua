@@ -12,7 +12,7 @@ function DialogBox:initialize(message, speed, callback)
   self.callback = callback
   self.display_len = 0
   self.old_display_len = 0
-  self.z = 15
+  self.z = 31
   self.finished = false
   self.btn_pressed = false
   gamestate = 'dialog'

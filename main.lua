@@ -74,52 +74,25 @@ end
 
 function love.draw()
 
-  for i=0,4,1 do
-    for _,o in pairs(actors.list) do
-      if o.z == i then
-        if o.draw_before then o:draw_before() end
-      end
+  camera:set()
+
+  map:autoDrawRange(-camera:ox(), -camera:oy(), 1/camera.scaleX, 50)
+  map:_updateTileRange()
+
+  for z,layer in pairs(map.drawList) do
+    if type(layer) == "table" then
+      layer.z = z
+      actors.list[layer.name] = layer
     end
   end
 
-  camera:set()
-
-  for i=0,10,1 do
+  for i=0,32,1 do
     for _,o in pairs(actors.list) do
       if o.z == i then
         if o.draw then o:draw() end
       end
     end
-  end  
-
-  love.graphics.draw(cache)
-
-  for i=10,15,1 do
-    for _,o in pairs(actors.list) do
-      if o.z == i then
-        if o.draw then o:draw() end
-      end
-    end
-  end  
-
---  map:autoDrawRange(-camera:ox(), -camera:oy(), 1, 50)
---  map:_updateTileRange()
---
---  for z,layer in pairs(map.drawList) do
---    if type(layer) == "table" then
---      layer.z = z
---      layer.w = layer.properties and layer.properties.w or nil
---      actors.list[layer.name] = layer
---    end
---  end
---
---  for i=0,4,1 do
---    for _,o in pairs(actors.list) do
---      if o.z == i then
---        if o.draw then o:draw() end
---      end
---    end
---  end
+  end
 
       --  love.graphics.setCanvas(effects.distortion.canvas)
       --  effects.distortion.canvas:clear()
@@ -169,7 +142,7 @@ function love.draw()
   camera:unset()
 
   love.graphics.setColor(128, 128, 128, 255)
-  --love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
   love.graphics.setColor(255, 255, 255, 255)
 end
 

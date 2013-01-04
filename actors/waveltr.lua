@@ -6,17 +6,17 @@ WaveLTR.anim = newAnimation(WaveLTR.img, 64, 64, 0.1, 0)
 WaveLTR.anim.direction = -1
 
 WaveLTR.img_drop = love.graphics.newImage('sprites/drop.png')
-WaveLTR.img_drop:setFilter("nearest","nearest")
+--WaveLTR.img_drop:setFilter("nearest","nearest")
 
 WaveLTR.img_bubble = love.graphics.newImage('sprites/bubble.png')
-WaveLTR.img_bubble:setFilter("nearest","nearest")
+--WaveLTR.img_bubble:setFilter("nearest","nearest")
 
 WaveLTR.instances = 0
 
 function WaveLTR:initialize(x, y, z)
   self.x = x + 32
   self.y = y + 32
-  self.z = 10
+  self.z = 30
 
   self.body = Collider:addCircle(self.x, self.y, 24)
   self.body.parent = self

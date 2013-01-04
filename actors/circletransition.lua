@@ -7,7 +7,7 @@ function CircleTransition:initialize(callback)
   self.name = 'transition'
   self.x = actors.list.lolo and actors.list.lolo.x or camera.x
   self.y = actors.list.lolo and actors.list.lolo.y or camera.y
-  self.z = 15
+  self.z = 32
   self.r = 1920 / 2
   self.callback = callback
   gamestate = 'transition'
@@ -41,6 +41,7 @@ function CircleTransition:draw()
     love.graphics.setBlendMode("alpha")
     love.graphics.setCanvas()
     love.graphics.draw(CircleTransition.canvas, camera:ox(), camera:oy(), 0, camera.scaleX, camera.scaleY)
+    love.graphics.setColor(255, 255, 255, 255)
   end
 end
 

@@ -18,7 +18,7 @@ function TEsound.play(sound, tags, volume, pitch, func)
 		error("You must specify a sound - a filepath as a string, a SoundData, or a table of them. Not a Source!")
 	end
 	
-	table.insert(TEsound.channels, { love.audio.newSource(sound, 'static'), func, {volume or 1, pitch or 1}, tags=(type(tags) == "table" and tags or {tags}) })
+	table.insert(TEsound.channels, { love.audio.newSource(sound), func, {volume or 1, pitch or 1}, tags=(type(tags) == "table" and tags or {tags}) })
 	local s = TEsound.channels[#TEsound.channels]
 	s[1]:play()
 	s[1]:setVolume( (volume or 1) * TEsound.findVolume(tags) * (TEsound.volumeLevels.all or 1) )
