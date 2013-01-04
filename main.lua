@@ -19,8 +19,10 @@ function love.load()
   ATL.path = 'maps/'
   actors.switchMap('start')
 
-  camera:setScale(1920/1440)
-
+  screen_width = love.graphics.getWidth()
+  screen_height = love.graphics.getHeight()
+  love.graphics.setMode(screen_width, screen_height, true)
+  camera:setScale(1920/screen_width)
   love.mouse.setVisible(false)
   
   --TEsound.play('bgm/game.mp3', 'bgm')
@@ -141,7 +143,7 @@ function love.draw()
 
   camera:unset()
 
-  love.graphics.setColor(128, 128, 128, 255)
+  love.graphics.setColor(0, 255, 0, 255)
   love.graphics.print("Current FPS: "..tostring(love.timer.getFPS()), 5, 5)
   love.graphics.setColor(255, 255, 255, 255)
 end
