@@ -23,13 +23,13 @@ Crab.smoke_particle:setFilter("nearest","nearest")
 function Crab:initialize(x, y, z)
   self.x = x + 16
   self.y = y + 24
-  self.z = 10
+  self.z = 30
 
   self.body = Collider:addPolygon(0,16*4, 32*4,16*4, 32*4,32*4, 0,32*4)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 3*4
+  self.max_xspeed = 4
   self.yspeed = 0
   self.friction = 10*4
   self.airfriction = 1*4
@@ -168,7 +168,7 @@ function Crab:update(dt)
     self.stance = 'stand'
   end
   -- Apply maximum xspeed
-  if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
+  if math.abs(self.xspeed) > self.max_xspeed * self.iwf and not self.invincible then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   -- Apply minimum xspeed, to prevent bugs
   self.x = self.x + (self.xspeed + self.groundspeed) * self.iwf
 
@@ -250,8 +250,8 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play('sounds/die.wav')
       self.want_to_go = nil
-      self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.invincible = true
+      self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.stance = 'hit'
       self.smoke:start()
       CRON.after(1, function()
