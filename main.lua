@@ -17,7 +17,7 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('start')
+  actors.switchMap('neige')
 
   screen_width = love.graphics.getWidth()
   screen_height = love.graphics.getHeight()

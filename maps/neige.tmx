@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="1000" height="20" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="snow" tilewidth="64" tileheight="64">
+  <image source="snow.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="65" name="rocksblue" tilewidth="64" tileheight="64">
+  <image source="rocksblue.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="81" name="hdhouse" tilewidth="64" tileheight="64">
+  <image source="hdhouse.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="209" name="snowroof" tilewidth="64" tileheight="64">
+  <image source="snowroof.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="337" name="hdtree" tilewidth="64" tileheight="64">
+  <image source="hdtree.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="401" name="sapin" tilewidth="64" tileheight="64">
+  <image source="sapin.png" width="512" height="512"/>
+ </tileset>
+ <layer name="sol" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3UluwzAMAMB8LVvbLF2erKeVOeiiRlWc2HFgzQCERfhgXgmC8moFAAAAAAAAAHCbdcQmYhuxm7kWAAAA6NU+4i3iPeJj5loAAACgV4eIY8Qp4jxzLQAAANCrz4iviO+In5lrAQAAgF6U++bRk6fozVP06Cl69VTmsxYLAAAAC1Xum5+jBz9FHCMOEWU+a7EAAADQUM6hc14+X025bx49eopePUXPnqJ3T2U+a7EAAADQUM6hc355rov3r6TcN99FD76N2ERE3anMZy0WAAAAKvLcuZxD5/zy3F95/wy1mX4rH7qT3spb3x27fv9uBwAA6E+eO5dz6Jxfnocr75/RP9Zm+q186E56K299d+z6/bsdAABguR6d5dbyKdVm+rfM/IfspLfy1nfHrt+/2wEAAJbr0Vnuf/lUajP9W2b+Q3bSW3nru2PX79/tAAAAy5FnsPfObs16AQAA4HF5Bnvv7NasFwAAAP6aan+8l3zIne21c+1u97FrBQAA4HVNuT/eQz7kzvbauXa3+9i1AgAA8Lqm3h9fej7kzvbauXa3u11+AACAfky9P770fMid7bVz7W53u/wAAAD9+AXuUJQp
+  </data>
+ </layer>
+ <layer name="maisons" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3bdyFEEYhdFdARLu5UBUYTK8ybACMjwow5sMYQRkwgnI8PA4eKeAG24RTTLTtOacqi/Z5P55V+0MBgAAAEAfrElr02RaN/L7+rQhbSxxFAAAAPTM5rQlbU3b0va0I+1Mu9LucqcBAABAb3xKn9OX9DV9S9/Tj/Qz/Uq/05+00PItTd7yN1WwUWILAACAug2Hg8FYWpKWpmVpPE2k5WlFWplWpdXDdm9p8pa/p4KNElsAAADU7Xy6kC6mS+lyupKupmvpeoe37E370v50IB1Mh9JUOpyOpKMVbJTYAgAAoG4300y6lW6nO+lumk330v0ObzmWjqcT6WQ6lU6nM+lsOpemK9gosQUAAEDd5tLD9Cg9Tk/S0zSfnqXnHd7S5C3/RgUbJbYAAACo28v0Kr1Ob9Lb9C69Tx/Sxw5vafKW/6CCjRJbAAAAtG/0f8BHLbZvlDd5y39RwUaJLQAAANo3+j/g//KNcgAAAAAAAAAAAAAAAAAAAAAAAAAAAACgT/6nb5QDAAAAAAAAAAAAAAAAAADQvb+imqCA
+  </data>
+ </layer>
+ <layer name="troncs" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3LGKwkAUBdDkt9VKrdRmXVS0ULRw2WrZaj9g1e/yFRYSjBAShiGcA48wA5N5M91tpigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6NKgLIph1KjMb6+UvQEAAEDXPiLPLqM+H7l2Fd911OZFzh3H3CRqmiADN90rZW8AAADQtW3k2V0l0+5jfHiRc2cxN49ayMAAAADQqWNk7VMlb59j/CWDAwAAQDLfNTn8Rz4HAACAZH5rcviffA4AAEAiub753aSvNmd4tzbXuwEAAKB/cn3zu0lfbc7wvPY/6hJ1jbqV+d4NAAAA/ZPre+RN+mpzhue11f/kejcAAAAAAAAAAAAAAAAAAABt3AEqrjHd
+  </data>
+ </layer>
+ <layer name="feuillage" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3LdqBDEUhtHZ1m/vjDPOOOOMM86v5b9wLRgL1trhHPiqQXA13W3UdQAAAAAAAAAAAAAAwKSbHnXdTJpNc2k+LaTF0X9PBgAAAJNj6re/WsoevpxW0mpaS+tpw34OAAAAY7OZPXwrbaedtJv20r79HAAAAMbmIHv4YTpKx+kknaYz+zkAAACMzXn28It0ma7SdbpJt/ZzAAAAGJu77OH36SE9pqf0nF7s5wAAAFRo9T3yPnPV3KF0tvTtPX2kz/SVvu3nAAAAVGj1PfI+c9XcoXS21X8DAADA8LT6HnmfuWruUDrb6r8BAABgeFp9j7zPXDV3KJ1t9d8AAAAwPK2+R95nrpo7lM62+m8AAAAYnlbfI+8zV80dSmdb/TcAAAAMz2t2zbdRe++R95mr5g6ls63+GwAAAAAAAAAAAAAAAAAAAAAAAGAYfgC05MU+
+  </data>
+ </layer>
+ <layer name="neige" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3clOAkEARVEGJ3TlrP//c7p01p1vAUkvWqA7VNEt5yQ3YWGktuTRxWQCAAAAHJrpslma7/ks21qdt9lYzg4AAABtFsvO08Wez7Kt1XmbjeXsAAAAsPKSXtNbek8f6TN9pe/0s6dzTRuvS+3hze299OZe870AAAAYn2k+OM7SPB2l43SSTtNZWkw3/48SFo3Xpfbw5vZeenOv+V4AAACMz2U+f1+l63STbtNduk8P6XFPn8//0va8+abs1QAAALBbbc+bb8peDQAAwFB12aHtzwAAAFBGlx3a/gwAAAC71ece8Vq/id7n2fJS+c4AAAAAXTyl5w5/3+ce8Vq/id7n2fJS+c4AAAAAu7Bui+67Ddfa0QEAAOC/WLdF992Ga+3oAAAAMFZte3mpnduODgAAAO3a9vJSO7cdHQAAgEMy5DvHh3TXeu0AAAA4LEO+c3xId63XDgAAAAAAAAAAAAAAAAAAoLZfPYcUFQ==
+  </data>
+ </layer>
+ <layer name="neige2" width="1000" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt3bdOxFAQhlF7l7RLRQ7v/2LkUKxEDhW/KGmxmGt8jvTJ5dx2NIW7DgAAAJiaPs3SvPohAAAAMGGLtEzb1Q8BAAAAAAAAgAk7S+fpIl2mq3SdbtJtukv3I5hRMQsAAACG8pAe01N6Ti/pNb2l9/SRPkcwo2IWAAAADKXvu26W5mktraeNtJm20iIt+/ZnVMwCAACAoexkV91Ne2k/HaTDdJSO00k6/eU++xczKmYBAADwv/nnGgAAANTzzzUAAABohzs6AAAA1HNHBwAAgHa4owMAAEA9d3QAAACgdavqBwAAAADf+7kdHQAAAOqsfnwBAACAWu7oAAAA0AY7OgAAALTBfg4AADB+X2R6RO0=
+  </data>
+ </layer>
+ <objectgroup name="objets" width="1000" height="20">
+  <object type="Wall" x="0" y="1024">
+   <polygon points="0,0 3840,0 3840,256 0,256"/>
+  </object>
+  <object type="Wall" x="768" y="896">
+   <polygon points="0,0 1792,0 1792,128 0,128"/>
+  </object>
+  <object type="Wall" x="1024" y="768">
+   <polygon points="0,0 1408,0 1408,128 0,128"/>
+  </object>
+  <object type="Wall" x="1408" y="640">
+   <polygon points="0,0 896,0 896,128 0,128"/>
+  </object>
+  <object type="Wall" x="1536" y="512">
+   <polygon points="0,0 640,0 640,128 0,128"/>
+  </object>
+  <object type="Player" x="192" y="960" width="64" height="64"/>
+  <object type="Pause" x="64" y="64"/>
+  <object type="SnowBackground" x="128" y="64"/>
+  <object type="Wall" x="2176" y="576">
+   <polygon points="0,0 64,0 64,64 0,64"/>
+  </object>
+  <object type="Wall" x="2304" y="704">
+   <polygon points="0,0 64,0 64,64 0,64"/>
+  </object>
+  <object type="Wall" x="2432" y="832">
+   <polygon points="0,0 64,0 64,64 0,64"/>
+  </object>
+ </objectgroup>
+</map>

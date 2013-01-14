@@ -9,7 +9,7 @@ for _,skin in pairs({'lolo', 'oce'}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
-      --img:setFilter("nearest", "nearest")
+      img:setFilter("nearest", "nearest")
       Player.anim[skin][stance][direction] = newAnimation(img , 256, 256, speed, 0)
     end
   end

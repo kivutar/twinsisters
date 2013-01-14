@@ -122,5 +122,9 @@
   <object type="Wall" x="7680" y="0">
    <polygon points="0,0 64,0 64,1280 0,1280"/>
   </object>
+  <object type="Pause" x="384" y="128"/>
+  <object type="Pause" x="384" y="128"/>
+  <object type="Player" x="192" y="896" width="64" height="64"/>
+  <object type="Zombie" x="768" y="960" width="64" height="64"/>
  </objectgroup>
 </map>

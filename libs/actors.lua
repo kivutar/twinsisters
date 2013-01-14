@@ -40,7 +40,7 @@ function actors.switchMap(mapname)
   map = ATL.load(mapname..'.tmx')
   map.drawObjects = false
 
-  cache = love.graphics.newImage('maps/'..mapname..'.png')
+  --cache = love.graphics.newImage('maps/'..mapname..'.png')
 
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
