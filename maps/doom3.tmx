@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="14" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="hdground" tilewidth="64" tileheight="64">
+  <image source="hdground.png" width="640" height="320"/>
+ </tileset>
+ <tileset firstgid="51" name="hdtreeblack" tilewidth="64" tileheight="64">
+  <image source="hdtreeblack.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="115" name="ronces" tilewidth="64" tileheight="64">
+  <image source="ronces.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="1139" name="hdblock" tilewidth="64" tileheight="64">
+  <image source="hdblock.png" width="64" height="64"/>
+ </tileset>
+ <layer name="ronces" width="30" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzt0rdOA0EQxvHdZwAaoAVMbDAdLRncAI9AMqFxILYkExqDyTnHhoxt8hsQCpsnAQr/kXViDyEsG23HSL/idnXzjW5OiPgrQwqRiSxYkI0c5CIP+SiQCTSOUSX0LEUZylGBSlShGjWwachtoGcjmtCMFtjRija0o0NDbj89BzCIIQzDgxGMYgzjGnI36LmJLWxjB7vYwz4OcKgh97/irx70ou+HOxc7cmva0yzmMK/M4IATk2T6/pCbxLvJSIGLZ7dydwk/AsoMXkx85sKXeKwoJM+KIhntVazchRDGqzLDEY5xglN0ogvd4ve9fK9a8upQL796GfWGd3woMzziCc94wRSmMSPMe1nAIpawjBWsYg3rcJDnlNH/xOhlVCpnaUiX5hnUOsM5LoR5L0Fc4Ro3uMUd7vEQ41tEAEykUbQ=
+  </data>
+ </layer>
+ <layer name="troncs" width="30" height="14">
+  <data encoding="base64" compression="zlib">
+   eJy90FcSgjAUheGgbsPuNuwuA7AhT8irdR/WrVp+ZnD04eIQ2hm+h2SGc5MoFT8PPPEKFgYfSiijYmgUaaZKdw11NNBEC210cpzbpbuHPgYYYoQxJjnOtei2McUMcyywhKM51wz6QkVnFbILnht1Xyujs0S95ee+vzGFvaSJest/981qrpS850o9jvq+syvsu8I/upF6PKxDvrDvq3TJomeDLXbY44BjynPFyQlnXHDFDfeEXW/p2yC+
+  </data>
+ </layer>
+ <layer name="feuillage" width="30" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzlk7EOwjAMRP1PwAQpAw0MpDBAYer//wZG+CQrNU7CgJA46YYqtl9ySSMRxQrv2YHdq+8DzZWkzpuF9aGSHVX9yWCu2ZuGOVMjbzSYT+0kj96ZoWdNYpw77yvxoCO9ci7ll88aMqa+y469LXChUfjW2a37QT32qzN49448JZrn1hl1F/ZV8dGLnM+NXPST9Ceyz2sJ+7ix7x9wf0EL9pK9+jIX/3cQdos91fTjfYdGe6rpB/ff9ABmpjW7
+  </data>
+ </layer>
+ <layer name="sol" width="30" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztzbcNADAQQlHHyqly2n9Rs8BZoudLrwXnlFJK/YqEBNnY8RCIrUboMIzfApXY2oQD1/idsIitB9PfA9A=
+  </data>
+ </layer>
+ <layer name="rocks" width="30" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRQE1QzIIbjwLcAADWzQNC
+  </data>
+ </layer>
+ <objectgroup name="objects" width="30" height="14">
+  <object type="Player" x="64" y="640" width="64" height="64"/>
+  <object type="Pause" x="64" y="64" width="64" height="64"/>
+  <object type="Wall" x="-32" y="640">
+   <polygon points="32,64 864,64 864,256 32,256"/>
+  </object>
+  <object type="Wall" x="1088" y="640">
+   <polygon points="64,64 832,64 832,256 64,256"/>
+  </object>
+  <object type="DoomBackground" x="192" y="64" width="64" height="64"/>
+  <object type="Bridge" x="768" y="704">
+   <polygon points="0,0 448,0 448,64 0,64"/>
+  </object>
+ </objectgroup>
+</map>

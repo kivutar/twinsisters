@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="19" height="14" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="hdground" tilewidth="64" tileheight="64">
+  <image source="hdground.png" width="640" height="320"/>
+ </tileset>
+ <tileset firstgid="51" name="hdtreeblack" tilewidth="64" tileheight="64">
+  <image source="hdtreeblack.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="115" name="ronces" tilewidth="64" tileheight="64">
+  <image source="ronces.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="1139" name="rocks" tilewidth="64" tileheight="64">
+  <image source="rocks.png" width="256" height="256"/>
+ </tileset>
+ <layer name="fond" width="19" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzt0LERgCAQBdEL7PgEEUSBytkefuTMBS/YdP0wO5GQ4UJfKLhRxW540PGK/WFgYomt/Ilf8euvvzaDoILF
+  </data>
+ </layer>
+ <layer name="ronces" width="19" height="14">
+  <data encoding="base64" compression="zlib">
+   eJy100cyRFEUBuBu7ABVct4BhrIdYC7tQHcP5R1oPZR3IAzFJQgllbgJmU+ZqFd9XynFqfcN7rnn/G90E4mveuWN989D0kcBhRRxqn3GORdcJsJVbb6GWuqop4FGmngw88gTz7zEZLWZb6eDTrropodeyiingkqqkuGslLs0GQYZYpgRRvPsFeuVUJrnLqs3Ty7mf9+r2VwLrT+cj6s+Gf0M/EHWf9c4E0wyxTQzzP4ia4FFllhmhVXWAvNjpEiTidxts8Mue+xzELMzR5Z5cpGsK6654ZY77mN21tlgk61IVugNhnYOOeKYk0hW6A3G7YTqA65DP9E=
+  </data>
+ </layer>
+ <layer name="feuillage" width="19" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF5ABXILYDYnsqmeUGxO5UMssPiP2pYNZAAWMgNgFiUyA2A2JzLGpMiVRnDcQ2QGzLgDu+YHKE1DkDsQsD4fiyRVNnB3UjMmaAyhMLXKHYFgumBwAAvGAM1w==
+  </data>
+ </layer>
+ <layer name="sol" width="19" height="14">
+  <data encoding="base64" compression="zlib">
+   eJzt0skKwjAURuHbhePKCQoWrThXHKrv/3CeQgIx5McWt174djeHEJKbWR5ZorD0rLBOnFF+bfUxwBBb7ESrxMbtjTBOdCaYYoYrbqJV4eL25lhEPd9R59VUQa/N+3yb+P3+rW6tPQ7odexkOOEctO54uN6xRTNze03niZd9/lffq4Om4u+S6qimohpvECoQ3w==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="19" height="14">
+  <object type="Wall" x="0" y="0">
+   <polygon points="0,0 448,0 448,256 256,256 256,320 192,320 192,640 256,640 256,704 384,704 384,768 832,768 832,704 960,704 960,640 1024,640 1024,320 960,320 960,256 768,256 768,0 1216,0 1216,896 0,896"/>
+  </object>
+  <object type="Player" x="576" y="-128" width="64" height="64"/>
+  <object type="Pause" x="64" y="64" width="64" height="64"/>
+ </objectgroup>
+</map>

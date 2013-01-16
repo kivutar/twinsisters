@@ -17,7 +17,7 @@ end
 
 function Player:initialize(x, y, z)
   self.name = 'lolo'
-  self.skin = 'lolo'
+  self.skin = 'oce'
   self.x = x + 32
   self.y = y + 16
   self.z = 30

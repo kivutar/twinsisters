@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="14" tilewidth="64" tileheight="64">
+ <tileset firstgid="1" name="rocksblue" tilewidth="64" tileheight="64">
+  <image source="rocksblue.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="17" name="snow" tilewidth="64" tileheight="64">
+  <image source="snow.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="81" name="rocksbrown" tilewidth="64" tileheight="64">
+  <image source="rocksbrown.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="97" name="sapin" tilewidth="64" tileheight="64">
+  <image source="sapin.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="161" name="hdtree" tilewidth="64" tileheight="64">
+  <image source="hdtree.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="225" name="hd1way" tilewidth="64" tileheight="64">
+  <image source="hd1way.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="233" name="waterfall" tilewidth="64" tileheight="64">
+  <image source="waterfall.png" width="64" height="256"/>
+ </tileset>
+ <tileset firstgid="237" name="hdblock" tilewidth="64" tileheight="64">
+  <image source="hdblock.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="238" name="hdbrick" tilewidth="64" tileheight="64">
+  <image source="hdbrick.png" width="128" height="128"/>
+ </tileset>
+ <layer name="trunks" width="60" height="14">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGAb3BaSA+g0X8FB45egF8biDXfZeB+AoW8Ut45PCBSySqJ2QWtd13G4jvQNm3kPi42PQE+OwdKDeNglEwmAAAVG4hKw==
+  </data>
+ </layer>
+ <layer name="leaves" width="60" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztz8kKg1AMQFF/1dqBznSy2JHOdP7l3k1AJKbP2pW8C2djgsYg8PmqUx0NNNFCiBoiZSbJTjrZiZRnYcGbrBtc7rPqoY8Bhmijg64yk2QnXXZHnv2SdYPLfVZTzBBjjhHGmCgzSXbSxQX/ycq6weU+qxXW2GCLBAsslZmU3flW4nhL3vuL3md1xAlnXLDDHgdlJrnslMl6f9lvP/DEC29cccNdmUl5O//KusHlPp/P56tCH+MCVlE=
+  </data>
+ </layer>
+ <layer name="ground" width="60" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztlYcKwzAMRN29x6917/HrbdNN/6FXqKgIFoljldKQg4c5sCUbdNiYTJn+RwMwBD3Qt/i0aQKmYATGFp82LcASzMCc+QZo/vBe39IGbMEKrJnvgG7CmlI2yO9AYFmjzmlIqp0D+YQ1pWyQf71vDw5sDWKc05BUuwTKjrXCmZCycgQncGbrxbKP+8cbX0l3qoG6Y61wJqSsxD3PvdZ7pTu1QNt85roAip4+Koc8U5p9XTzNdQVUPT1l5SrAM6XZ18XTXNP/5OMpKzcBninNvi6e5pr+Jx9PWbkL8Exp9nXxT3NjWtA=
+  </data>
+ </layer>
+ <layer name="snow" width="60" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztlEsKACAIBb1Ctaruf89augg00b4OvK0owxPAuZXQE4m8RO4pRH4Ae/8B7H0WTkekSdKDDOF0RJq68A6KkVctH3j2KY5HXrV84NnWjnf0z/IHULvt6J/lD7jhNziOFg1wWxB/
+  </data>
+ </layer>
+ <objectgroup name="objects" width="60" height="14">
+  <object type="Player" x="192" y="576" width="64" height="64"/>
+  <object type="Wall" x="0" y="640">
+   <polygon points="0,0 1216,0 1216,256 0,256"/>
+  </object>
+  <object type="Bridge" x="832" y="384">
+   <polygon points="0,0 1408,0 1408,64 0,64"/>
+  </object>
+  <object type="Bridge" x="704" y="512">
+   <polygon points="0,0 256,0 256,64 0,64"/>
+  </object>
+  <object type="Pause" x="192" y="256" width="64" height="64"/>
+  <object type="Wall" x="1920" y="640">
+   <polygon points="0,0 1920,0 1920,256 0,256"/>
+  </object>
+  <object type="Wall" x="3712" y="256">
+   <polygon points="0,0 128,0 128,384 0,384"/>
+  </object>
+  <object type="Bridge" x="2176" y="512">
+   <polygon points="0,0 128,0 128,64 0,64"/>
+  </object>
+  <object type="SnowBackground" x="192" y="128" width="64" height="64"/>
+ </objectgroup>
+</map>

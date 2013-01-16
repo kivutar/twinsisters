@@ -17,12 +17,12 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('neige')
+  actors.switchMap('doom4')
 
   screen_width = love.graphics.getWidth()
   screen_height = love.graphics.getHeight()
   love.graphics.setMode(screen_width, screen_height, true)
-  camera:setScale(1920/screen_width)
+  --camera:setScale(1920/screen_width)
   love.mouse.setVisible(false)
   
   --TEsound.play('bgm/game.mp3', 'bgm')

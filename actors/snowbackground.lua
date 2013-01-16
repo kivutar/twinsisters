@@ -60,8 +60,8 @@ end
 
 function SnowBackground:draw()
   love.graphics.draw(SnowBackground.sky, camera:ox(), camera:oy())
-  love.graphics.draw(self.ps_flake1, camera:ox() - camera:ox()/99 + 1920/2, camera:oy()-1080)
-  love.graphics.draw(self.ps_flake2, camera:ox() - camera:ox()/ 4 + 1920/2, camera:oy()-1080)
-  love.graphics.draw(self.ps_flake3, camera:ox() - camera:ox()/ 2 + 1920/2, camera:oy()-1080)
+  love.graphics.draw(self.ps_flake1, 1920/2 +camera:ox()/100, camera:oy()-1080)
+  love.graphics.draw(self.ps_flake2, 1920/2 +camera:ox()/ 66, camera:oy()-1080)
+  love.graphics.draw(self.ps_flake3, 1920/2 +camera:ox()/ 33, camera:oy()-1080)
 end
   

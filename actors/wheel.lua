@@ -6,7 +6,7 @@ Wheel.image:setFilter("nearest", "nearest")
 function Wheel:initialize(x, y, z)
   self.x = x
   self.y = y
-  self.z = 11
+  self.z = 31
   self.r = 0
 end
 
