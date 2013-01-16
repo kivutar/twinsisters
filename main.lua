@@ -2,6 +2,7 @@
 require 'libs/middleclass' -- POO
 require 'libs/utils' -- Various utilities
 require 'libs/anal' -- Sprite animations
+require 'libs/controls' -- Inputs
 require 'libs/TEsound' -- Play sounds
 require 'libs/camera' -- Camera to follow game objects
 require 'libs/menu' -- Menu to make choices
@@ -17,12 +18,12 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('doom4')
+  actors.switchMap('start')
 
   screen_width = love.graphics.getWidth()
   screen_height = love.graphics.getHeight()
   love.graphics.setMode(screen_width, screen_height, true)
-  --camera:setScale(1920/screen_width)
+  camera:setScale(1920/screen_width)
   love.mouse.setVisible(false)
   
   --TEsound.play('bgm/game.mp3', 'bgm')
@@ -31,19 +32,6 @@ function love.load()
 
   love.graphics.setFont(school)
 
-  --actors.list.lolo = Player:new(1100, 800)
-  --actors.list.oce  = Player:new('oce',  'oce', 1100, 800, 10)
-  --actors.list.oce.left_btn   = loadstring("return love.keyboard.isDown('q') or love.joystick.getAxis(2,1) == -1")
-  --actors.list.oce.right_btn  = loadstring("return love.keyboard.isDown('d') or love.joystick.getAxis(2,1) ==  1")
-  --actors.list.oce.down_btn   = loadstring("return love.keyboard.isDown('s') or love.joystick.getAxis(2,2) ==  1")
-  --actors.list.oce.up_btn     = loadstring("return love.keyboard.isDown('z') or love.joystick.getAxis(2,2) == -1")
-  --actors.list.oce.jump_btn   = loadstring("return love.keyboard.isDown(' ') or love.joystick.isDown(2,2)")
-  --actors.list.oce.switch_btn = loadstring("return love.keyboard.isDown('v') or love.joystick.isDown(2,4)")
-  --actors.list.oce.sword_btn  = loadstring("return love.keyboard.isDown('b') or love.joystick.isDown(2,3)")
-  --actors.list.oce.fire_btn   = loadstring("return love.keyboard.isDown('c') or love.joystick.isDown(2,1)")
-
-  --actors.list.player1lifebar = Player1LifeBar(actors.list.lolo)
-
   --effects = { distortion=Distortion(), chromashift=Chromashift(), blurh=BlurH(), blurv=BlurV(), posterization=Posterization() }
 
   --blendcanvas = love.graphics.newCanvas()
@@ -51,6 +39,8 @@ function love.load()
 end
 
 function love.update(dt)
+  controls:update()
+
   dt = math.min(0.07, dt)
 
   if gamestate == 'play' then

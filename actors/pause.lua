@@ -23,7 +23,7 @@ function Pause:initialize()
 end
 
 function Pause:update(dt)
-  if love.keyboard.isDown("escape") or love.joystick.isDown(1,10) or love.joystick.isDown(2,10) then
+  if controls.p1.start then
     if not self.pausepressed then
       if gamestate == 'play' then
         gamestate = 'pause'

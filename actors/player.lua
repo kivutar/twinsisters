@@ -62,16 +62,9 @@ function Player:initialize(x, y, z)
   self.maxHP = 6*4
   self.HP = self.maxHP
 
-  self.left_btn   = loadstring("return love.keyboard.isDown('left')  or love.joystick.getAxis(1,1) == -1")
-  self.right_btn  = loadstring("return love.keyboard.isDown('right') or love.joystick.getAxis(1,1) ==  1")
-  self.down_btn   = loadstring("return love.keyboard.isDown('down')  or love.joystick.getAxis(1,2) ==  1")
-  self.up_btn     = loadstring("return love.keyboard.isDown('up')    or love.joystick.getAxis(1,2) == -1")
-  self.jump_btn   = loadstring("return love.keyboard.isDown(' ')     or love.joystick.isDown(1,2)")
-  self.switch_btn = loadstring("return love.keyboard.isDown('v')     or love.joystick.isDown(1,4)")
-  self.sword_btn  = loadstring("return love.keyboard.isDown('b')     or love.joystick.isDown(1,3)")
-  self.fire_btn   = loadstring("return love.keyboard.isDown('c')     or love.joystick.isDown(1,1)")
-
   self.portrait = love.graphics.newImage('sprites/'..self.name..'_portrait.png')
+
+  self.controls = controls.p1
 end
 
 function Player:applyFriction(dt)
@@ -87,6 +80,8 @@ function Player:applyFriction(dt)
 end
 
 function Player:update(dt)
+  self.controls = controls.p1
+
   self.ondoor = false
   self.onground = false
   self.onbridge = false
@@ -131,11 +126,9 @@ function Player:update(dt)
     self.max_xspeed = 150*4
   end
 
-  --if self.run_btn() then self.max_xspeed = 2 else self.max_xspeed = 1 end
-  
   -- Moving on x axis
   -- Moving right
-  if self.right_btn() and not self.daft then
+  if self.controls.right and not self.daft then
     if not (self.direction == 'left' and self.attacking) then
       self.direction = 'right'
       self.stance = 'run'
@@ -143,7 +136,7 @@ function Player:update(dt)
       self.xspeed = self.xspeed + self.acceleration * dt * self.iwf
     end
   -- Moving left
-  elseif self.left_btn() and not self.daft then
+  elseif self.controls.left and not self.daft then
     if not (self.direction == 'right' and self.attacking) then
       self.direction = 'left'
       self.stance = 'run'
@@ -162,15 +155,14 @@ function Player:update(dt)
   self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf
 
   -- Jumping and swimming
-  if self.jump_btn() and not self.daft then
+  if self.controls.cross and not self.daft then
     if not self.jump_pressed then
       -- Jump from bridge
-      if self.onbridge and self.down_btn() then
+      if self.onbridge and self.controls.down then
         self.y = self.y + 20*4
         TEsound.play('sounds/jump.wav')
       -- Regular jump
-      --elseif self.onground and not self.down_btn() and not self.attacking then
-      elseif not self.down_btn() and not self.attacking then
+      elseif self.onground and not self.controls.down and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
         TEsound.play('sounds/jump.wav')
       -- Swimming
@@ -185,7 +177,7 @@ function Player:update(dt)
   end
 
   -- Attacking
-  if self.sword_btn() and not self.daft then
+  if self.controls.circle and not self.daft then
     if not self.sword_pressed then
       if not self.attacking then
         self.attacking = true
@@ -206,25 +198,25 @@ function Player:update(dt)
   end
 
   -- Fire
-  if self.fire_btn() and not self.daft then
+  --if self.fire_btn() and not self.daft then
   --  if not self.fire_pressed then
   --    if not self.attacking then
   --      self.attacking = true
-        TEsound.play('sounds/shoot.wav')
-        local name = 'Bullet_'..self.name..'_'..love.timer.getTime()
-        actors.list[name] = Bullet:new(self)
-        actors.list[name].type = 'Bullet'
-        actors.list[name].name = name
+  --      TEsound.play('sounds/shoot.wav')
+  --      local name = 'Bullet_'..self.name..'_'..love.timer.getTime()
+  --      actors.list[name] = Bullet:new(self)
+  --      actors.list[name].type = 'Bullet'
+  --      actors.list[name].name = name
   --      CRON.after(0.25, function() self.attacking = false end)
   --    end
   --  end
   --  self.fire_pressed = true
   --else
   --  self.fire_pressed = false
-  end
+  --end
 
   -- Openning doors
-  if self.up_btn() and self.ondoor and self.onground and not self.daft then
+  if self.controls.up and self.ondoor and self.onground and not self.daft then
     if not self.open_pressed then
       if self.ondoor.locked then
         actors.list.dialog = DialogBox:new("This door is locked!\nLet's see if we can find a key...", 30, function ()
@@ -271,7 +263,7 @@ function Player:draw()
   -- Choose the character stance to display
   if self.yspeed > 0 then self.stance = 'fall' end
   if self.yspeed < 0 then self.stance = 'jump' end
-  if not self.right_btn() and not self.left_btn() and self.xspeed ~= 0 and self.onice then self.stance = 'surf' end
+  if not self.controls.right and not self.controls.left and self.xspeed ~= 0 and self.onice then self.stance = 'surf' end
   if self.inwater and not self.onground and self.swimming then self.stance = 'swim' end
   if self.attacking then self.stance = 'sword' end
   if self.daft then self.stance = 'hit' end

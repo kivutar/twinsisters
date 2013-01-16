@@ -6,7 +6,7 @@ function Menu:initialize(menu)
 end
 
 function Menu:update(dt)
-  if love.keyboard.isDown('down') and self.cursor < #self.menu then
+  if controls.p1.down and self.cursor < #self.menu then
     if not self.downpressed then
       self.cursor = self.cursor + 1
       self.callback = self.menu[self.cursor].callback
@@ -17,7 +17,7 @@ function Menu:update(dt)
     self.downpressed = false
   end
 
-  if love.keyboard.isDown('up') and self.cursor > 1 then
+  if controls.p1.up and self.cursor > 1 then
     if not self.uppressed then
       self.cursor = self.cursor - 1
       self.callback = self.menu[self.cursor].callback
@@ -28,7 +28,7 @@ function Menu:update(dt)
     self.uppressed = false
   end
 
-  if love.keyboard.isDown('return') then
+  if controls.p1.circle then
     TEsound.play('sounds/pause.wav')
     self.menu[self.cursor].callback()
   end
