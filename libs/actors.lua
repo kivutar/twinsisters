@@ -19,10 +19,12 @@ function actors.add(o)
 end
 
 -- Loop over tiled map object layers and instanciate game objects
-function actors.addFromTiled(mapol)
-  for _, ol in pairs(mapol) do
-    for _, o in pairs(ol.objects) do
-      actors.add(o)
+function actors.addFromTiled(map)
+  for _, l in pairs(map.layers) do
+    if l.class == 'ObjectLayer' then
+      for _, o in pairs(l.objects) do
+        actors.add(o)
+      end
     end
   end
 end
@@ -45,7 +47,7 @@ function actors.switchMap(mapname)
   love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
 
   actors.removeAll()
-  actors.addFromTiled(map.ol)
+  actors.addFromTiled(map)
 
   camera:follow({actors.list.lolo}, 1)
 end

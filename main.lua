@@ -8,7 +8,7 @@ require 'libs/camera' -- Camera to follow game objects
 require 'libs/menu' -- Menu to make choices
 CRON = require 'libs/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
-ATL = require 'libs/AdvTiledLoader.Loader' -- Tiled map loader
+ATL = require 'libs/Advanced-Tiled-Loader.Loader' -- Tiled map loader
 require 'libs/actors' -- Game Actors
 requiredir('effects') -- Game Effects
 requiredir('fonts') -- Fonts
@@ -71,11 +71,10 @@ function love.draw()
   map:autoDrawRange(-camera:ox(), -camera:oy(), 1/camera.scaleX, 50)
   map:_updateTileRange()
 
-  for z,layer in pairs(map.drawList) do
-    if type(layer) == "table" then
-      layer.z = z
-      actors.list[layer.name] = layer
-    end
+  for z = 1, #map.layerOrder do
+    layer = map.layerOrder[z]
+    layer.z = z
+    actors.list[layer.name] = layer
   end
 
   for i=0,32,1 do

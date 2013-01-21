@@ -1,0 +1,3 @@
+[submodule "libs/Advanced-Tiled-Loader"]
+	path = libs/Advanced-Tiled-Loader
+	url = https://github.com/Kadoba/Advanced-Tiled-Loader
