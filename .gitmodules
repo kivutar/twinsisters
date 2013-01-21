@@ -7,3 +7,6 @@
 [submodule "libs/HardonCollider"]
 	path = libs/HardonCollider
 	url = https://github.com/vrld/HardonCollider.git
+[submodule "libs/cron"]
+	path = libs/cron
+	url = https://github.com/kikito/cron.lua.git

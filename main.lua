@@ -6,7 +6,7 @@ require 'libs/controls' -- Inputs
 require 'libs/TEsound' -- Play sounds
 require 'libs/camera' -- Camera to follow game objects
 require 'libs/menu' -- Menu to make choices
-CRON = require 'libs/cron' -- Scheduler
+CRON = require 'libs/cron/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/Advanced-Tiled-Loader.Loader' -- Tiled map loader
 require 'libs/actors' -- Game Actors
