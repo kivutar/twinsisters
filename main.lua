@@ -1,5 +1,5 @@
 -- Require libraries
-require 'libs/middleclass' -- POO
+require 'libs/middleclass/middleclass' -- POO
 require 'libs/utils' -- Various utilities
 require 'libs/anal' -- Sprite animations
 require 'libs/controls' -- Inputs
