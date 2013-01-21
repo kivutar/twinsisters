@@ -48,7 +48,12 @@
   </data>
  </layer>
  <objectgroup name="objects" width="60" height="14">
-  <object type="Player" x="192" y="576" width="64" height="64"/>
+  <object type="Player" x="192" y="576" width="64" height="64">
+   <properties>
+    <property name="name" value="lolo"/>
+    <property name="skin" value="lolo"/>
+   </properties>
+  </object>
   <object type="Wall" x="0" y="640">
    <polygon points="0,0 1216,0 1216,256 0,256"/>
   </object>
@@ -69,5 +74,11 @@
    <polygon points="0,0 128,0 128,64 0,64"/>
   </object>
   <object type="SnowBackground" x="192" y="128" width="64" height="64"/>
+  <object type="Player" x="320" y="576" width="64" height="64">
+   <properties>
+    <property name="name" value="oce"/>
+    <property name="skin" value="oce"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

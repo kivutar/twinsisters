@@ -76,5 +76,11 @@
   <object type="Wall" x="2432" y="832">
    <polygon points="0,0 64,0 64,64 0,64"/>
   </object>
+  <object type="Player" x="320" y="960" width="64" height="64">
+   <properties>
+    <property name="name" value="oce"/>
+    <property name="skin" value="oce"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
