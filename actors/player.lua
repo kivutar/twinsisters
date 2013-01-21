@@ -9,15 +9,14 @@ for _,skin in pairs({'lolo', 'oce'}) do
     Player.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
-      img:setFilter("nearest", "nearest")
       Player.anim[skin][stance][direction] = newAnimation(img , 256, 256, speed, 0)
     end
   end
 end
 
-function Player:initialize(x, y, z)
-  self.name = 'lolo'
-  self.skin = 'oce'
+function Player:initialize(x, y, z, properties)
+  self.name = properties.name or 'lolo'
+  self.skin = properties.skin or 'lolo'
   self.x = x + 32
   self.y = y + 16
   self.z = 30
@@ -64,7 +63,7 @@ function Player:initialize(x, y, z)
 
   self.portrait = love.graphics.newImage('sprites/'..self.name..'_portrait.png')
 
-  self.controls = controls.p1
+  if self.name == 'lolo' then self.controls = controls.p1 else self.controls = controls.p2 end
 end
 
 function Player:applyFriction(dt)
@@ -80,7 +79,7 @@ function Player:applyFriction(dt)
 end
 
 function Player:update(dt)
-  self.controls = controls.p1
+  if self.name == 'lolo' then self.controls = controls.p1 else self.controls = controls.p2 end
 
   self.ondoor = false
   self.onground = false
@@ -160,11 +159,11 @@ function Player:update(dt)
       -- Jump from bridge
       if self.onbridge and self.controls.down then
         self.y = self.y + 20*4
-        TEsound.play('sounds/jump.wav')
+        --TEsound.play('sounds/jump.wav')
       -- Regular jump
       elseif self.onground and not self.controls.down and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
-        TEsound.play('sounds/jump.wav')
+        --TEsound.play('sounds/jump.wav')
       -- Swimming
       elseif self.inwater then
         self.swimming = true
@@ -181,7 +180,7 @@ function Player:update(dt)
     if not self.sword_pressed then
       if not self.attacking then
         self.attacking = true
-        TEsound.play('sounds/sword2.wav')
+        --TEsound.play('sounds/sword2.wav')
         local name = 'sword_'..self.name
         actors.list[name] = Sword:new(self)
         actors.list[name].type = 'Sword'
