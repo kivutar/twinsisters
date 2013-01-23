@@ -1,10 +1,7 @@
 WaterFallBubbles = class('WaterFallBubbles')
 
 WaterFallBubbles.img_drop = love.graphics.newImage('sprites/drop.png')
---WaterFallBubbles.img_drop:setFilter("nearest","nearest")
-
 WaterFallBubbles.img_bubble = love.graphics.newImage('sprites/bubble.png')
---WaterFallBubbles.img_bubble:setFilter("nearest","nearest")
 
 function WaterFallBubbles:initialize(x, y, z)
   self.x = x + 32
@@ -48,22 +45,4 @@ end
 function WaterFallBubbles:draw()
   love.graphics.draw(self.ps_drop, 0, 0)
   love.graphics.draw(self.ps_bubble, 0, 0)
-end
-
-function WaterFallBubbles:onCollision(dt, shape, dx, dy)
-  -- Get the other shape parent (its game object)
-  local o = shape.parent
-
-  -- Collision with Player
-  if o.class.name == 'Player' then
-    if math.abs(o.yspeed) > 20*4 or math.abs(o.xspeed) > 0.5 then
-      local t = TEsound.findTag('splash_'..o.name)
-      if #t == 0 then TEsound.play('sounds/splash.wav', 'splash_'..o.name) end
-      CRON.after(1.5, function()
-        TEsound.stop('splash_'..o.name)
-        TEsound.cleanup()
-      end)
-    end
-  end
-
 end
