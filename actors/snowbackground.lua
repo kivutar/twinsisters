@@ -45,11 +45,6 @@ function SnowBackground:initialize(x, y, z)
   self.ps_flake3:setSizes                 (3)
   self.ps_flake3:setSpin                  (3)
   self.ps_flake3:start()
-
-
-  self.ps_flake1:update(1000)
-  self.ps_flake2:update(1000)
-  self.ps_flake3:update(1000)
 end
 
 function SnowBackground:update(dt)
