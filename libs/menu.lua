@@ -10,7 +10,7 @@ function Menu:update(dt)
     if not self.downpressed then
       self.cursor = self.cursor + 1
       self.callback = self.menu[self.cursor].callback
-      TEsound.play('sounds/cursor.wav')
+      TEsound.play(sfx.cursor)
     end
     self.downpressed = true
   else
@@ -21,7 +21,7 @@ function Menu:update(dt)
     if not self.uppressed then
       self.cursor = self.cursor - 1
       self.callback = self.menu[self.cursor].callback
-      TEsound.play('sounds/cursor.wav')
+      TEsound.play(sfx.cursor)
     end
     self.uppressed = true
   else
@@ -29,7 +29,7 @@ function Menu:update(dt)
   end
 
   if controls.p1.circle then
-    TEsound.play('sounds/pause.wav')
+    TEsound.play(sfx.pause)
     self.menu[self.cursor].callback()
   end
 end

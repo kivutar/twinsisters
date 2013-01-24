@@ -28,7 +28,7 @@ function Pause:update(dt)
       if gamestate == 'play' then
         gamestate = 'pause'
         TEsound.pause('bgm')
-        TEsound.play('sounds/pause.wav')
+        TEsound.play(sfx.pause)
       elseif gamestate == 'pause' then
         gamestate = 'play'
         TEsound.resume('bgm')

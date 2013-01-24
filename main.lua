@@ -10,7 +10,8 @@ CRON = require 'libs/cron/cron' -- Scheduler
 HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/Advanced-Tiled-Loader.Loader' -- Tiled map loader
 require 'libs/actors' -- Game Actors
-requiredir('effects') -- Game Effects
+require 'libs/sfx' -- Game sound effects
+requiredir('effects') -- Game pixel effects
 requiredir('fonts') -- Fonts
 
 function love.load()

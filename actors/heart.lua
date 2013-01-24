@@ -2,7 +2,6 @@ Heart = class('Heart')
 Heart:include(Blinking)
 
 Heart.image = love.graphics.newImage('sprites/heart.png')
-Heart.image:setFilter("nearest", "nearest")
 
 function Heart:initialize(x, y, z)
   self.x = x + 4
@@ -39,7 +38,7 @@ function Heart:onCollision(dt, shape, dx, dy)
   if o.class.name == 'Player' then
     o.HP = o.HP + 1
     if o.HP > o.maxHP then o.HP = o.maxHP end
-    TEsound.play('sounds/heart.wav')
+    TEsound.play(sfx.heart)
     self:destroy()
 
   end

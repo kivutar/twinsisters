@@ -5,10 +5,7 @@ WaveRTL.img:setFilter("nearest","nearest")
 WaveRTL.anim = newAnimation(WaveRTL.img, 64, 64, 0.1, 0)
 
 WaveRTL.img_drop = love.graphics.newImage('sprites/drop.png')
---WaveRTL.img_drop:setFilter("nearest","nearest")
-
 WaveRTL.img_bubble = love.graphics.newImage('sprites/bubble.png')
---WaveRTL.img_bubble:setFilter("nearest","nearest")
 
 WaveRTL.instances = 0
 
@@ -69,7 +66,7 @@ function WaveRTL:onCollision(dt, shape, dx, dy)
     if math.abs(o.yspeed) > 20*4 or math.abs(o.xspeed) > 0.5 then
       self.ps_drop:start()
       local t = TEsound.findTag('splash_'..o.name)
-      if #t == 0 then TEsound.play('sounds/splash.wav', 'splash_'..o.name) end
+      if #t == 0 then TEsound.play(sfx.splash, 'splash_'..o.name) end
       CRON.after(1.5, function()
         TEsound.stop('splash_'..o.name)
         TEsound.cleanup()

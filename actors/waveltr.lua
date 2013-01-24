@@ -6,10 +6,7 @@ WaveLTR.anim = newAnimation(WaveLTR.img, 64, 64, 0.1, 0)
 WaveLTR.anim.direction = -1
 
 WaveLTR.img_drop = love.graphics.newImage('sprites/drop.png')
---WaveLTR.img_drop:setFilter("nearest","nearest")
-
 WaveLTR.img_bubble = love.graphics.newImage('sprites/bubble.png')
---WaveLTR.img_bubble:setFilter("nearest","nearest")
 
 WaveLTR.instances = 0
 
@@ -70,7 +67,7 @@ function WaveLTR:onCollision(dt, shape, dx, dy)
     if math.abs(o.yspeed) > 20*4 or math.abs(o.xspeed) > 0.5 then
       self.ps_drop:start()
       local t = TEsound.findTag('splash_'..o.name)
-      if #t == 0 then TEsound.play('sounds/splash.wav', 'splash_'..o.name) end
+      if #t == 0 then TEsound.play(sfx.splash, 'splash_'..o.name) end
       CRON.after(1.5, function()
         TEsound.stop('splash_'..o.name)
         TEsound.cleanup()

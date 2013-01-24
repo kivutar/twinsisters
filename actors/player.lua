@@ -159,11 +159,11 @@ function Player:update(dt)
       -- Jump from bridge
       if self.onbridge and self.controls.down then
         self.y = self.y + 20*4
-        --TEsound.play('sounds/jump.wav')
+        TEsound.play(sfx.jump)
       -- Regular jump
       elseif self.onground and not self.controls.down and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
-        --TEsound.play('sounds/jump.wav')
+        TEsound.play(sfx.jump)
       -- Swimming
       elseif self.inwater then
         self.swimming = true
@@ -180,7 +180,7 @@ function Player:update(dt)
     if not self.sword_pressed then
       if not self.attacking then
         self.attacking = true
-        --TEsound.play('sounds/sword2.wav')
+        TEsound.play(sfx.sword2)
         local name = 'sword_'..self.name
         actors.list[name] = Sword:new(self)
         actors.list[name].type = 'Sword'
@@ -222,7 +222,7 @@ function Player:update(dt)
           actors.list.dialog = DialogBox:new("Or maybe I should wait for something else to happen.", 30, DialogBox.destroy)
         end)
       else
-        TEsound.play('sounds/door.wav')
+        TEsound.play(sfx.door)
         map = ATL.load(self.ondoor.map..'.tmx')
         map.drawObjects = false
         love.graphics.setBackgroundColor(map.properties.r or 0, map.properties.g or 0, map.properties.b or 0)
@@ -319,7 +319,7 @@ function Player:onCollision(dt, shape, dx, dy)
   elseif o.class.name == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
     if dy > 0 and self.yspeed > 0 then
-      TEsound.play('sounds/arrow.wav')
+      TEsound.play(sfx.arrow)
       self.yspeed = - 1.75 * self.jumpspeed
     end
     if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
@@ -334,7 +334,7 @@ function Player:onCollision(dt, shape, dx, dy)
     if not o.HP or o.HP > 0 then
       self.HP = self.HP - 1
       if self.HP <= 0 then
-        TEsound.play('sounds/die.wav')
+        TEsound.play(sfx.die)
         self.daft = true
         self.invincible = true
         self.stance = 'hit'
@@ -344,7 +344,7 @@ function Player:onCollision(dt, shape, dx, dy)
           --Player.instances = Player.instances - 1
         end)
       else
-        TEsound.play('sounds/hit.wav')
+        TEsound.play(sfx.hit)
         if dx < -0.1 then self.xspeed = 3 elseif dx > 0.1 then self.xspeed = -3 end
         self.yspeed = -50
         self.invincible = true

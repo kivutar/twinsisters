@@ -1,10 +1,6 @@
 DialogBox = class('DialogBox')
 
---DialogBox.background = love.graphics.newImage('sprites/dialogbox.png')
---DialogBox.background:setFilter("nearest", "nearest")
-
 DialogBox.press_button = love.graphics.newImage('sprites/press_button.png')
-DialogBox.press_button:setFilter("nearest", "nearest")
 
 function DialogBox:initialize(message, speed, callback)
   self.message = message
@@ -24,12 +20,11 @@ function DialogBox:update(dt)
     self.display_len = self.display_len + self.speed * dt
 
     if math.floor(self.display_len) > math.floor(self.old_display_len) then
-      TEsound.play('sounds/type'..math.random(3)..'.wav')
+      TEsound.play({sfx.type1, sfx.type2, sfx.type3})
       self.old_display_len = math.floor(self.display_len)
     end
 
-    if (actors.list.oce and actors.list.oce.jump_btn())
-    or (actors.list.lolo and actors.list.lolo.jump_btn()) then
+    if controls.p1.cross or controls.p2.cross then
       if not self.btn_pressed then
         self.speed = 100
       end
@@ -42,8 +37,7 @@ function DialogBox:update(dt)
   else
     self.finished = true
 
-    if (actors.list.oce and actors.list.oce.jump_btn())
-    or (actors.list.lolo and actors.list.lolo.jump_btn()) then
+    if controls.p1.cross or controls.p2.cross then
       if not self.btn_pressed then
         --self:destroy()
         self.callback()

@@ -248,7 +248,7 @@ function Crab:onCollision(dt, shape, dx, dy)
   elseif (o.class.name == 'Sword' or o.class.name == 'FireBall') and not self.invincible then
     self.HP = self.HP - 1
     if self.HP <= 0 then
-      TEsound.play('sounds/die.wav')
+      TEsound.play(sfx.die)
       self.want_to_go = nil
       self.invincible = true
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
@@ -261,7 +261,7 @@ function Crab:onCollision(dt, shape, dx, dy)
         Crab.instances = Crab.instances - 1
       end)
     else
-      TEsound.play('sounds/hit.wav')
+      TEsound.play(sfx.hit)
       self.want_to_go = nil
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.yspeed = -100*4
