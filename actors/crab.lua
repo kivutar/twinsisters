@@ -29,7 +29,7 @@ function Crab:initialize(x, y, z)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 4
+  self.max_xspeed = 3
   self.yspeed = 0
   self.friction = 10*4
   self.airfriction = 1*4
@@ -37,6 +37,7 @@ function Crab:initialize(x, y, z)
   self.groundspeed = 0
 
   self.want_to_go = 'left'
+  self.acting = false
 
   self.stance = 'run'
   self.direction = self.want_to_go
@@ -174,12 +175,15 @@ function Crab:update(dt)
 
 
   -- AI
-  if self.want_to_go and math.random(10000) == 10000 then
-    if self.want_to_go == 'left' then
-      self.want_to_go = 'right'
+  if not self.acting then
+    if self.want_to_go then
+      self.want_to_go = nil
+      CRON.after(2, function() self.acting = false end)
     else
-      self.want_to_go = 'left'
+      self.want_to_go = math.random(2) == 2 and 'left' or 'right'
+      CRON.after(math.random(4), function() self.acting = false end)
     end
+    self.acting = true
   end
 
   self:applyGravity(dt)
@@ -250,6 +254,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play(sfx.die)
       self.want_to_go = nil
+      self.acting = true
       self.invincible = true
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.stance = 'hit'
@@ -263,6 +268,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     else
       TEsound.play(sfx.hit)
       self.want_to_go = nil
+      self.acting = true
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.yspeed = -100*4
       self.invincible = true
@@ -270,6 +276,7 @@ function Crab:onCollision(dt, shape, dx, dy)
       self.blood:start()
       CRON.after(1, function()
         self.want_to_go = math.random(2) == 2 and 'left' or 'right'
+        self.acting = false
         self.invincible = false
         self.stance = 'run'
       end)
