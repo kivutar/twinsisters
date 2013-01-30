@@ -36,11 +36,12 @@ function Crab:initialize(x, y, z)
   self.acceleration = 5*4
   self.groundspeed = 0
 
-  self.want_to_go = 'left'
+  self.want_to_go = nil
   self.acting = false
+  self.nextmove = nil
 
   self.stance = 'run'
-  self.direction = self.want_to_go
+  self.direction = 'left'
   self.animation = Crab.anim[self.stance][self.direction]
 
   self.onice = false
@@ -178,10 +179,10 @@ function Crab:update(dt)
   if not self.acting then
     if self.want_to_go then
       self.want_to_go = nil
-      CRON.after(2, function() self.acting = false end)
+      self.nextmove = CRON.after(2, function() self.acting = false end)
     else
       self.want_to_go = math.random(2) == 2 and 'left' or 'right'
-      CRON.after(math.random(4), function() self.acting = false end)
+      self.nextmove = CRON.after(math.random(4), function() self.acting = false end)
     end
     self.acting = true
   end
@@ -254,7 +255,7 @@ function Crab:onCollision(dt, shape, dx, dy)
     if self.HP <= 0 then
       TEsound.play(sfx.die)
       self.want_to_go = nil
-      self.acting = true
+      CRON.cancel(self.nextmove)
       self.invincible = true
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
       self.stance = 'hit'
@@ -268,15 +269,14 @@ function Crab:onCollision(dt, shape, dx, dy)
     else
       TEsound.play(sfx.hit)
       self.want_to_go = nil
-      self.acting = true
+      CRON.cancel(self.nextmove)
       self.xspeed = o.direction == 'right' and 3*4 or -3*4
-      self.yspeed = -100*4
+      self.yspeed = -80*4
       self.invincible = true
       self.stance = 'hit'
       self.blood:start()
       CRON.after(1, function()
         self.want_to_go = math.random(2) == 2 and 'left' or 'right'
-        self.acting = false
         self.invincible = false
         self.stance = 'run'
       end)
