@@ -29,12 +29,12 @@ function Player:initialize(x, y, z, properties)
   self.body.parent = self
 
   self.xspeed = 0
-  self.max_xspeed = 150*4
+  self.max_xspeed = 100*4
   self.yspeed = 0
   self.jumpspeed = 200*4
   self.friction = 750*4
   self.airfriction = 75*4
-  self.acceleration = 375*4
+  self.acceleration = 200*4
   self.groundspeed = 0
   self.iwf = 1
 
@@ -61,7 +61,7 @@ function Player:initialize(x, y, z, properties)
   self.maxHP = 6*4
   self.HP = self.maxHP
 
-  self.portrait = love.graphics.newImage('sprites/'..self.name..'_portrait.png')
+  self.portrait = love.graphics.newImage('sprites/'..self.skin..'_portrait.png')
 
   if self.name == 'lolo' then self.controls = controls.p1 else self.controls = controls.p2 end
 end
@@ -119,10 +119,10 @@ function Player:update(dt)
 
   if self.onice then
     self.friction = 0
-    self.max_xspeed = 300*4
+    self.max_xspeed = 200*4
   else
     self.friction = 750*4
-    self.max_xspeed = 150*4
+    self.max_xspeed = 100*4
   end
 
   -- Moving on x axis
