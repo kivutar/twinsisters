@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="36" tilewidth="64" tileheight="64">
+ <layer name="Calque de Tile 1" width="30" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAvg0Q4AAB
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="30" height="36">
+  <object type="Gap" x="1920" y="1600">
+   <properties>
+    <property name="newx" value="1"/>
+    <property name="plusy" value="-18"/>
+    <property name="target" value="testdj3"/>
+   </properties>
+   <polygon points="0,64 64,64 64,384 0,384"/>
+  </object>
+  <object type="Wall" x="0" y="640">
+   <polygon points="0,0 192,0 192,1024 0,1024"/>
+  </object>
+  <object type="Wall" x="1920" y="1664">
+   <polygon points="0,0 -192,0 -192,-1152 0,-1152"/>
+  </object>
+  <object type="Bridge" x="1344" y="1984">
+   <polygon points="0,0 0,-64 192,-64 192,0"/>
+  </object>
+  <object type="Bridge" x="1344" y="1856">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="1536" y="1728">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="1728" y="1600">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="1536" y="1472">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="576" y="960">
+   <polygon points="0,0 192,0 192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="576" y="1088">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="192" y="704">
+   <polygon points="0,0 192,0 192,-64 0,-64"/>
+  </object>
+  <object type="Wall" x="1920" y="1984">
+   <polygon points="0,0 -192,0 -192,64 -384,64 -384,128 -576,128 -576,192 -1344,192 -1344,128 -1536,128 -1536,64 -1728,64 -1728,0 -1920,0 -1920,320 0,320"/>
+  </object>
+  <object type="Wall" x="768" y="1280">
+   <polygon points="0,0 384,0 384,576 0,576"/>
+  </object>
+  <object type="Wall" x="768" y="448">
+   <polygon points="0,0 384,0 384,128 0,128"/>
+  </object>
+  <object type="Bridge" x="384" y="1216">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Bridge" x="576" y="832">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Wall" x="256" y="1280">
+   <polygon points="-64,0 512,0 512,128 -64,128"/>
+  </object>
+  <object type="Wall" x="512" y="1728">
+   <polygon points="0,0 256,0 256,128 64,128 0,64"/>
+  </object>
+  <object type="Wall" x="1152" y="1024">
+   <polygon points="-384,0 -384,-128 576,-128 576,0"/>
+  </object>
+  <object type="Bridge" x="1152" y="512">
+   <polygon points="0,0 576,0 576,64 0,64"/>
+  </object>
+  <object type="Wall" x="0" y="320">
+   <polygon points="0,0 640,0 768,128 1152,128 1152,-320 0,-320"/>
+  </object>
+  <object type="Wall" x="1920" y="192">
+   <polygon points="0,0 -768,0 -768,-192 0,-192"/>
+  </object>
+  <object type="Wall" x="960" y="576">
+   <polygon points="0,0 64,64 64,256 0,320 -64,256 -64,64"/>
+  </object>
+  <object type="Bridge" x="1344" y="1344">
+   <polygon points="0,0 -192,0 -192,-64 0,-64"/>
+  </object>
+  <object type="Gap" x="-64" y="1664">
+   <properties>
+    <property name="newx" value="29"/>
+    <property name="plusy" value="-18"/>
+    <property name="target" value="testdj7"/>
+   </properties>
+   <polygon points="0,0 64,0 64,320 0,320"/>
+  </object>
+ </objectgroup>
+</map>

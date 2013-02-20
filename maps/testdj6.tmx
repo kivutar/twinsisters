@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="18" tilewidth="64" tileheight="64">
+ <layer name="Calque de Tile 1" width="60" height="18">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAvg0Q4AAB
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="60" height="18">
+  <object type="Wall" x="0" y="1152">
+   <polygon points="0,0 0,-320 1408,-320 1408,-384 1600,-384 1600,-448 2432,-448 2432,-384 2624,-384 2624,-320 3840,-320 3840,0"/>
+  </object>
+  <object type="Wall" x="0" y="0">
+   <polygon points="0,0 0,512 1024,512 1024,192 1152,64 2944,64 3072,192 3072,576 3328,576 3328,192 3456,64 3840,64 3840,0"/>
+  </object>
+  <object type="Gap" x="-64" y="512">
+   <properties>
+    <property name="newx" value="29"/>
+    <property name="plusy" value="0"/>
+    <property name="target" value="testdj"/>
+   </properties>
+   <polygon points="0,0 64,0 64,320 0,320"/>
+  </object>
+ </objectgroup>
+</map>

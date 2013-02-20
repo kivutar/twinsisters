@@ -19,12 +19,12 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('testsnow')
+  actors.switchMap('testdj')
 
-  screen_width = love.graphics.getWidth()
-  screen_height = love.graphics.getHeight()
-  love.graphics.setMode(screen_width, screen_height, true)
-  camera:setScale(1920/screen_width)
+  --screen_width = love.graphics.getWidth()
+  --screen_height = love.graphics.getHeight()
+  --love.graphics.setMode(screen_width, screen_height, true)
+  camera:setScale(1920/1440, (18*64)/900)
   love.mouse.setVisible(false)
   
   --TEsound.play('bgm/game.mp3', 'bgm')

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="18" tilewidth="64" tileheight="64">
+ <layer name="Calque de Tile 1" width="30" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSigLQAACHAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="objects" width="30" height="18">
+  <object type="Pause" x="640" y="256"/>
+  <object type="Wall" x="0" y="512">
+   <polygon points="0,-64 256,-64 256,-512 0,-512"/>
+  </object>
+  <object type="Wall" x="1664" y="576">
+   <polygon points="0,-128 256,-128 256,-576 0,-576"/>
+  </object>
+  <object type="Gap" x="1920" y="512">
+   <properties>
+    <property name="newx" value="1"/>
+    <property name="plusy" value="0"/>
+    <property name="target" value="testdj6"/>
+   </properties>
+   <polygon points="0,-64 64,-64 64,320 0,320"/>
+  </object>
+  <object type="Gap" x="-64" y="512">
+   <properties>
+    <property name="newx" value="29"/>
+    <property name="target" value="testdj3"/>
+   </properties>
+   <polygon points="0,-64 64,-64 64,320 0,320"/>
+  </object>
+  <object type="Bridge" x="896" y="128">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Wall" x="256" y="0">
+   <polygon points="0,0 512,0 512,64 0,64"/>
+  </object>
+  <object type="Wall" x="1216" y="0">
+   <polygon points="0,0 0,64 448,64 448,0"/>
+  </object>
+  <object type="Wall" x="0" y="832">
+   <polygon points="0,0 256,0 256,64 320,64 320,128 384,128 384,192 768,192 768,320 0,320"/>
+  </object>
+  <object type="Wall" x="1920" y="832">
+   <polygon points="0,0 -256,0 -256,64 -320,64 -320,128 -384,128 -384,192 -704,192 -704,320 0,320"/>
+  </object>
+  <object type="Gap" x="768" y="-64">
+   <properties>
+    <property name="newy" value="17"/>
+   </properties>
+   <polygon points="0,0 448,0 448,64 0,64"/>
+  </object>
+  <object type="Gap" x="768" y="1152">
+   <properties>
+    <property name="newy" value="1"/>
+   </properties>
+   <polygon points="0,0 448,0 448,64 0,64"/>
+  </object>
+  <object type="Singleton" x="960" y="576" width="64" height="64"/>
+  <object type="Bridge" x="1216" y="256">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="896" y="384">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="576" y="512">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="896" y="640">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="1216" y="768">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+  <object type="Bridge" x="896" y="896">
+   <polygon points="0,0 192,0 192,64 0,64"/>
+  </object>
+ </objectgroup>
+</map>

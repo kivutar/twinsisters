@@ -10,6 +10,7 @@ function actors.add(o)
   a = _G[o.type]:new(o.x, o.y, 0, o.properties)
   if o.polygon then
     a.body = Collider:addPolygon(unpack(o.polygon))
+    Collider:setPassive(a.body)
     a.body.parent = a
     dx, dy = a.body:center()
     a.body:moveTo(o.x+dx, o.y+dy)

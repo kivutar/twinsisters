@@ -315,6 +315,14 @@ function Player:onCollision(dt, shape, dx, dy)
       self.x = self.x - dx
     end
 
+  -- Collision with Gap
+  elseif o.class.name == 'Gap' then
+    if o.newx  ~= nil then self.x = o.newx*64 end
+    if o.newy  ~= nil then self.y = o.newy*64 end
+    if o.plusx ~= nil then self.x = self.x + o.plusx*64 end
+    if o.plusy ~= nil then self.y = self.y + o.plusy*64 end
+    actors.switchMap(o.target)
+
   -- Collision with Arrow
   elseif o.class.name == 'Arrow' then
     self.x, self.y = self.x - dx, self.y - dy
