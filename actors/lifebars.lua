@@ -33,7 +33,7 @@ function LifeBars:draw()
   end
 
   if self.character2 then
-    love.graphics.draw(LifeBars.player2lifebar, camera:ox() + 1440 - LifeBars.player2lifebar:getWidth(), camera:oy())
-    love.graphics.draw(self.character2.portrait, camera:ox() + 1440 - self.character2.portrait:getWidth(), camera:oy())
+    love.graphics.draw(LifeBars.player2lifebar, camera:ox() + 1920 - LifeBars.player2lifebar:getWidth(), camera:oy())
+    love.graphics.draw(self.character2.portrait, camera:ox() + 1920 - self.character2.portrait:getWidth(), camera:oy())
   end
 end
