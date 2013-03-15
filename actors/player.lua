@@ -25,16 +25,24 @@ function Player:initialize(x, y, z, properties)
 
   self.type = "Player"
 
-  self.body = Collider:addPolygon(0,-4*4, 0,12*4, 4*4,16*4, 12*4,16*4, 16*4,12*4, 16*4,-4*4 ,12*4,-8*4, 4*4,-8*4)
+  self.body = Collider:addPolygon(-16,-48, -16,48, 16,48, 16,-48)
   self.body.parent = self
+  self.feet = Collider:addPolygon(-15,0, 15,0, 15,1, -15,1)
+  self.feet.parent = self
+  self.left = Collider:addPolygon(0,-20, 0,20, 1,20, 1,-20)
+  self.left.parent = self
+  self.right = Collider:addPolygon(0,-20, 0,20, 1,20, 1,-20)
+  self.right.parent = self
+  self.underfeet = Collider:addPolygon(-15,0, 15,0, 15,8, -15,8)
+  self.underfeet.parent = self
 
   self.xspeed = 0
   self.max_xspeed = 100*4
   self.yspeed = 0
   self.jumpspeed = 200*4
   self.friction = 750*4
-  self.airfriction = 75*4
-  self.acceleration = 200*4
+  self.airfriction = 75*4*0
+  self.acceleration = 200
   self.groundspeed = 0
   self.iwf = 1
 
@@ -96,23 +104,66 @@ function Player:update(dt)
     end
   end
 
-  for _,n in pairs(Collider:shapesAt(self.x, self.y+49)) do
-    if n.parent.class.name == 'Wall'
+  for _,n in pairs(Collider:shapesInRange(self.x-38,self.y-50, self.x+38,self.y+50)) do
+
+    if n:collidesWith(self.underfeet) then
+      if n.parent.class.name == 'Wall'
+        or n.parent.class.name == 'Bridge'
+        or n.parent.class.name == 'Slant'
+        or n.parent.class.name == 'Ice'
+        or n.parent.class.name == 'FlyingWall' then
+
+          x, y = self.body:center()
+          self.body:moveTo(x, y + 8)
+          self.y = self.y + 8
+
+          collides, dx, dy = n:collidesWith(self.body)
+
+          if n:collidesWith(self.body) then
+            if n.parent.class.name == 'Wall'
+            or n.parent.class.name == 'Bridge'
+            or n.parent.class.name == 'Slant'
+            or n.parent.class.name == 'Ice'
+            or n.parent.class.name == 'FlyingWall' then
+              self.onground = true
+              self.swimming = false
+              self.yspeed = 0
+              
+              self.body:moveTo(x, y + 8 - dy)
+              self.y = self.y - dy
+            end
+          end
+      end
+    end
+
+    collides, dx, dy = n:collidesWith(self.body)
+
+    if n:collidesWith(self.feet) then
+      if n.parent.class.name == 'Wall'
       or n.parent.class.name == 'Bridge'
       or n.parent.class.name == 'Slant'
       or n.parent.class.name == 'Ice'
       or n.parent.class.name == 'FlyingWall' then
-      self.onground = true
-      self.swimming = false
+        self.onground = true
+        self.swimming = false
+        self.yspeed = 0
+        self.y = self.y - dy
+      end
+      if n.parent.class.name == 'Bridge' then
+        self.onbridge = true
+      end
+      if n.parent.class.name == 'Ice' then
+        self.onice = true
+      end
     end
-    if n.parent.class.name == 'Bridge' then
-      self.onbridge = true
-      self.swimming = false
+
+    if n:collidesWith(self.left) or n:collidesWith(self.right) then
+      if n.parent.class.name == 'Wall' then
+        self.xspeed = 0
+        self.x = self.x - dx
+      end
     end
-    if n.parent.class.name == 'Ice' then
-      self.onice = true
-      self.swimming = false
-    end
+
   end
 
   self.iwf = self.inwater and 0.5 or 1
@@ -152,6 +203,8 @@ function Player:update(dt)
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf
+
+  print(self.xspeed)
 
   -- Jumping and swimming
   if self.controls.cross and not self.daft then
@@ -254,6 +307,10 @@ function Player:update(dt)
   self:applyBlinking()
 
   self.body:moveTo(self.x, self.y)
+  self.feet:moveTo(self.x, self.y+48)
+  self.left:moveTo(self.x-16, self.y)
+  self.right:moveTo(self.x+16, self.y)
+  self.underfeet:moveTo(self.x, self.y+48+4)
   self.animation:update(dt)
 end
 
@@ -275,6 +332,16 @@ function Player:draw()
   -- Draw the animation
   self.animation:draw(self.x-32*4, self.y-20*4-32*4)
   self:blinkingPostDraw()
+
+  love.graphics.setColor(255,   0, 255, 128)
+  self.body:draw('fill')
+  love.graphics.setColor(  0, 255, 255, 128)
+  self.feet:draw('fill')
+  self.left:draw('fill')
+  self.right:draw('fill')
+  love.graphics.setColor(  0, 0, 255, 128)
+  self.underfeet:draw('fill')
+  love.graphics.setColor(255, 255, 255, 255)
 end
 
 function Player:drawhallo()
@@ -290,22 +357,23 @@ function Player:onCollision(dt, shape, dx, dy)
   -- Get the other shape parent (its game object)
   local o = shape.parent
 
-  -- Collision with Wall or FlyingWall or Ice
+  ---- Collision with Wall or FlyingWall or Ice
   if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Ice' then
-    if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
-    if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
-    self.x, self.y = self.x - dx, self.y - dy
-
-  -- Collision with Slant
-  elseif o.class.name == 'Slant' then
-    if dy > 0 and self.yspeed > 0 then
-      self.yspeed = 0
-      self.y = self.y - dy
-    end
-    if dx ~= 0 then
-      self.x = self.x - dx
-      --if (dx < 1 or dx > 1) and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
-    end
+  --  if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+  --  if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
+  --  self.x, self.y = self.x - dx, self.y - dy
+--
+  ---- Collision with Slant
+  --elseif o.class.name == 'Slant' then
+  -- --if self.yspeed > 0 then self.yspeed = 0 end
+  -- --self.y = self.y - dy
+  -- --if dx ~= 0 then
+  -- --  self.x = self.x - dx
+  -- --  --if (dx < 1 or dx > 1) and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+  -- --end
+  --  if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+  --  if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
+  --  self.x, self.y = self.x - dx, self.y - dy
 
   -- Collision with Bridge
   elseif o.class.name == 'Bridge' then
