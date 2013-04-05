@@ -7,7 +7,7 @@ function Wall:initialize(x, y, z)
 end
 
 function Wall:draw()
-  love.graphics.setColor(255, 255, 255, 255)
-  self.body:draw('fill')
+  love.graphics.setColor(255, 255, 255, 128)
+  --self.body:draw('fill')
   love.graphics.setColor(255, 255, 255, 255)
 end

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+ <objectgroup name="Calque d'objets 2" width="20" height="15">
+  <object type="StateLoader" x="160" y="112" width="16" height="16"/>
+  <object type="Player" x="192" y="160" width="16" height="16"/>
+ </objectgroup>
+</map>

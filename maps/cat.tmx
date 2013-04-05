@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="220" height="15" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="b" value="195"/>
+  <property name="g" value="225"/>
+  <property name="r" value="101"/>
+ </properties>
+ <tileset firstgid="1" name="melo_ground" tilewidth="16" tileheight="16">
+  <image source="melo_ground.png" width="48" height="32"/>
+ </tileset>
+ <tileset firstgid="7" name="melo_water" tilewidth="16" tileheight="16">
+  <image source="melo_water.png" width="16" height="32"/>
+ </tileset>
+ <tileset firstgid="9" name="melo_mushroom" tilewidth="16" tileheight="16">
+  <image source="melo_mushroom.png" width="48" height="48"/>
+ </tileset>
+ <layer name="mushrooms" width="220" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt1jsKgEAMBcC0/vX+l1UQwULEhcUtMgOpXpMiDxIBAAAAQDbdMf1thrbrQApT6wUgkbX1AvCT66d7+uXespr0jSzGOP+5uTCrSd/IYonz3rfCrCZ9AwAAAL7YAY35AWo=
+  </data>
+ </layer>
+ <layer name="ground" width="220" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt2DkOwCAMBMDc/39ySB1RgIGIaEbansIrCy8LAAAAALytKVsg+/gnw7SOlDOQa/yTobnSvVO7Z/QNyntQO/f6BvoGI+kbf9L6Jhe98/VO7n+nb4zQesaic9s7uV7oGzP6uk/6BsDjBp71Bgc=
+  </data>
+ </layer>
+ <layer name="water" width="220" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztw7EJAAAIA7Bu+v/FXuFQSCAJAAAAAAAAAAAAAMCPsSrd1qp0O9JeBlU=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="220" height="15">
+  <object type="Girl" x="48" y="96" width="16" height="16"/>
+  <object type="Pause" x="16" y="0" width="16" height="16"/>
+  <object type="Bridge" x="320" y="176">
+   <polygon points="0,0 656,0 656,16 0,16"/>
+  </object>
+  <object type="Wall" x="1056" y="160">
+   <polygon points="0,-64 0,-80 272,-80 272,-64"/>
+  </object>
+  <object type="Bridge" x="640" y="112">
+   <polygon points="0,0 208,0 208,16 0,16"/>
+  </object>
+  <object type="Wall" x="-16" y="0">
+   <polygon points="0,0 16,0 16,240 0,240"/>
+  </object>
+  <object type="Bridge" x="992" y="80">
+   <polygon points="0,0 0,16 -80,16 -80,0"/>
+  </object>
+  <object type="Bridge" x="576" y="144">
+   <polygon points="0,0 -48,0 -48,-16 0,-16"/>
+  </object>
+  <object type="Bridge" x="416" y="144">
+   <polygon points="0,0 48,0 48,-16 0,-16"/>
+  </object>
+  <object type="Bridge" x="240" y="176">
+   <polygon points="16,0 16,16 -240,16 -240,0"/>
+  </object>
+  <object type="MeloBackground" x="48" y="0" width="16" height="16"/>
+ </objectgroup>
+</map>

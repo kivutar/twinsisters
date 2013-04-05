@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="foresttrees" tilewidth="16" tileheight="16">
+  <image source="foresttrees.png" width="768" height="512"/>
+ </tileset>
+ <tileset firstgid="1537" name="forestground" tilewidth="16" tileheight="16">
+  <image source="forestground.png" width="368" height="160"/>
+ </tileset>
+ <tileset firstgid="1767" name="forestpagode" tilewidth="16" tileheight="16">
+  <image source="forestpagode.png" width="208" height="208"/>
+ </tileset>
+ <layer name="pagode" width="100" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt0WdXDmAcx/HburMyyqooiey9R5OQTXaZRchIMiKUmf0yjRBJVujjBXh4nc7pXN9zPs//5/dPJGL/63UykXjDW97Rzns+8JEOPvGZTr4k+/ri/l2Xfb/SzTe+84Of/KKH3/zh779fpPT1xf27AfYdyCAGM4QkKQxlGMMZwUhS4z+CNsq+oxnDWNJIZxzjmcBEJpFBZvxH0LLsO5kpZJPDVHKZRh7TmUE+M+M/gjbLvrOZw1zmMZ8FLGQRi1nCUpbFfwRtuX1XsJJVrGYNa1lHAYUUUUxJ/EfQSu27ng2UsZFNbKacLWxlG9vZEf8RtJ323cVu9lDBXvaxnwMc5BCHqYz/CFqVfY9wlGMc5wQnqaaGU5ymljPxH0E7a99z1HGeC1zkEvVcpoErNHI1/iNo1+x7nRs0cZNbNHObO9ylhVbuxX8E7b59H/CQRzymjSc85RnPecFLXsV/xGJB6wXL+0R6
+  </data>
+ </layer>
+ <layer name="ground" width="100" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztlUdOA0EQRWfVJJNhRc4gWJGz2ZIz3pNBhksAlwBuwQV5C48oNdWNNWAhWfWkt5hqjbtb/2ucJIZhGIZhGIZh/ESrS5I2bMcO7HT/fSIjZZIspn6RRxfvdmMd1mMD5rARW9xX9kZlSXOYxhnsxwEcxCEcxjEcx4kqzUbrYBM2V+i+jt+qwVql/2kOm7iFC7iIS7iMK7iOedzwsqkWtA6O4Kh331BmsTw1epj3Yp/S/zSHIj7go+IpnmHBy0ZDnk3D71z63/eXyP6Vs5fWwVVc8+4byiyWp8Ys8zmcV/pfDGTxIgxloyHPpuF3LtatrGuyf+V8a/d43scDPMQjPMYT776hzGJ5amwz38Fd933vp5LPXgbvQjmX2WnIs2n4nYt1K+ua7F/oWyvzu8JrvMFbvMN75TmfQY1z5hd4qez9WvLNy+BDKOcyOw2Zt4bfuVi3sq7J/oW+tTK/TxLqXDw=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="100" height="15">
+  <object type="Pause" x="336" y="16" width="32" height="32"/>
+  <object type="ForestBackground" x="272" y="32"/>
+  <object type="Wall" x="448" y="240">
+   <polygon points="0,0 0,-48 48,-64 112,-64 176,-96 256,-96 352,-64 352,0"/>
+  </object>
+  <object type="Wall" x="880" y="240">
+   <polygon points="0,0 0,-48 48,-48 48,0"/>
+  </object>
+  <object type="Wall" x="1008" y="240">
+   <polygon points="0,0 0,-48 16,-48 64,-32 400,-32 448,-48 544,-16 592,-16 592,0"/>
+  </object>
+  <object type="Wall" x="368" y="240">
+   <polygon points="0,0 0,-48 -208,-48 -256,-64 -368,-64 -368,0"/>
+  </object>
+  <object type="Girl" x="64" y="0"/>
+  <object type="Wall" x="1168" y="208">
+   <polygon points="0,0 0,-16 144,-16 144,0"/>
+  </object>
+ </objectgroup>
+</map>

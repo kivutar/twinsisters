@@ -11,6 +11,7 @@ HC  = require 'libs/HardonCollider' -- Collision detection
 ATL = require 'libs/Advanced-Tiled-Loader.Loader' -- Tiled map loader
 require 'libs/actors' -- Game Actors
 require 'libs/sfx' -- Game sound effects
+--require 'libs/bgm' -- Background musics
 requiredir('effects') -- Game pixel effects
 requiredir('fonts') -- Fonts
 
@@ -19,15 +20,15 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('testdj')
+  actors.switchMap('pagode')
 
   --screen_width = love.graphics.getWidth()
   --screen_height = love.graphics.getHeight()
   --love.graphics.setMode(screen_width, screen_height, true)
-  camera:setScale(1920/1440, (18*64)/900)
+  camera:setScale(1/3)
   love.mouse.setVisible(false)
   
-  --TEsound.play('bgm/game.mp3', 'bgm')
+  --TEsound.play(bgm.verger, 'bgm')
 
   gamestate = 'play'
 
@@ -51,13 +52,13 @@ function love.update(dt)
     --for _,e in pairs(effects) do
     --  if e.update then e:update(dt) end
     --end
-    camera:follow({actors.list.lolo}, 10)
+    camera:follow({actors.list.lolo}, 1)
     Collider:update(dt)
     CRON.update(dt)
   elseif gamestate == 'pause' then
     actors.list.pause:update(dt)
   elseif gamestate == 'dialog' then
-    camera:follow({actors.list.lolo}, 10)
+    camera:follow({actors.list.lolo}, 1)
     actors.list.dialog:update(dt)
   elseif gamestate == 'transition' then
     actors.list.transition:update(dt)
@@ -134,7 +135,7 @@ function love.draw()
   camera:unset()
 
   love.graphics.setColor(0, 255, 0, 255)
-  love.graphics.print(tostring(love.timer.getFPS()), 5, 5)
+  --love.graphics.print(tostring(love.timer.getFPS()), 5, 5)
   love.graphics.setColor(255, 255, 255, 255)
 end
 

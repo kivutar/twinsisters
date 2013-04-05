@@ -204,8 +204,6 @@ function Player:update(dt)
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf
 
-  print(self.xspeed)
-
   -- Jumping and swimming
   if self.controls.cross and not self.daft then
     if not self.jump_pressed then

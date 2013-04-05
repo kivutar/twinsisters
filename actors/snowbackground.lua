@@ -48,9 +48,9 @@ function SnowBackground:initialize(x, y, z)
 end
 
 function SnowBackground:update(dt)
-  self.ps_flake1:update(dt)
-  self.ps_flake2:update(dt)
-  self.ps_flake3:update(dt)
+--  self.ps_flake1:update(dt)
+--  self.ps_flake2:update(dt)
+--  self.ps_flake3:update(dt)
 end
 
 function SnowBackground:draw()

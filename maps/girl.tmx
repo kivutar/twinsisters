@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tech-outside" tilewidth="16" tileheight="16">
+  <image source="tech-outside.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="tech-inside" tilewidth="16" tileheight="16">
+  <image source="tech-inside.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="129" name="tech-background" tilewidth="16" tileheight="16">
+  <image source="tech-background.png" width="256" height="256"/>
+ </tileset>
+ <layer name="background" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzdlsdrVFEUh9+VDMaGgrqyd2LvLqLu7O4UQRAhf4I7l8bejWIv2EjEQiyICi5UVFRCwDYRSxaWoCKzCBpNDBG/w/1dch3iOEhAcPFxZs4779zvnXunNCZJ0vifsA7WwwbYCJtgM2yBrXlcD3EbbIcdUJbHuqWwGtbA2qx17Po+2A97YG/0/gAchENwOI/rIZr3ZRH7/857J+xS/e6sdex6J5ckJ4lXoQIqIaXcGTgN1yNOKVeu2iLVnlUPyxU6v17sf0QOR+FY5HccTsDLxPcp1zq31cv8rhHvQR1k5PeOmIYSXlcRRznfI+TSqjW/K8QaeA+18gvPZ2ud01of4DxciPwuwiX4BEO574VczSEjv57O965T//twB+5CPTRHfIcmxRa9/qI9sx7V8itw3rlK7v30/gbclNsjuKW5mp95lGqdr/Aj6v8NVjqfs/hZsSnLz/qu0vy6OT+/p9qzeH7mV6e5j4Yx8rP8w8RTobNSKb8hXHtA7EPs6/wz2fxsriOiXEprmsNH1QfSSSvBr5dr9ctk+dn8XsFM+YWzbvveoGetlt8k+cXP1B5+Ba7t+cX7a36PiU/gmc5Yg85F7R/8bN/tnpBLyXkYPFeveH/L2vCr1xlpyeH3hvhWz2E+vcmtcP6eZp0zm2cxTIcZ8rNe06Kc+U2GKc5/P4XPbrHmZ7MKtUWqdeqRyeFXo8+A1XWB2bAQljvvu4i4DBZEefOz/Jwol1JuFixVfWC+cnNVW6TaeephuULlFuueJcp3iNayvO3FIOJg5z8bYc+G67yF76COUf5vfhs7ax5d1cP6dYceEa+p608cAANhvNaaQJzo/NkLezZVM26v3+6R7tczPRbGySGQnf/X/zfCvuS6/hNweW6v
+  </data>
+ </layer>
+ <layer name="ground" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt0ckKwjAQBuDBFVzB9QV6UwT3vW7gCm4XPfj+z+EfOocYqrGB6KUDH5206fSncYjI0ahbovuuzgOW0IYOdKEn9fJ9lW6feL6B7Rc5FpxjpeQQ7+9hDBOY8nUGI+W+zP2wz5Wc4K7kX/vk3nGOgzJHzJ+TvRr65D9y7jNna8AFrhZzBK0bef+1Rt459mHw10Sv1YQWeef+i3MMWvK5hxVWWO8rAlGIQ4L7mMFa9EkL81KQhizkuM8YrEWftzCvAEUoQ4X7ksFa9FUL855vjiYk
+  </data>
+ </layer>
+ <objectgroup name="objects" width="40" height="15" visible="0">
+  <object type="Wall" x="0" y="240">
+   <polygon points="0,0 0,-48 640,-48 640,0"/>
+  </object>
+  <object type="Gap" x="640" y="112">
+   <properties>
+    <property name="newx" value="1"/>
+    <property name="target" value="girl"/>
+   </properties>
+   <polygon points="0,0 0,80 16,80 16,0"/>
+  </object>
+  <object type="Gap" x="-16" y="112">
+   <properties>
+    <property name="" value=""/>
+    <property name="newx" value="39"/>
+   </properties>
+   <polygon points="0,0 0,80 16,80 16,0"/>
+  </object>
+  <object type="Singleton" x="384" y="176" width="16" height="16"/>
+  <object type="Gap" x="640" y="112">
+   <properties>
+    <property name="" value=""/>
+    <property name="newx" value="1"/>
+   </properties>
+   <polygon points="0,0 0,80 16,80 16,0"/>
+  </object>
+  <object type="Pause" x="192" y="80" width="16" height="16"/>
+  <object type="Wall" x="640" y="112">
+   <polygon points="0,0 -48,0 -48,-48 -144,-48 -144,-64 -496,-64 -496,-48 -592,-48 -592,0 -640,0 -640,-112 0,-112"/>
+  </object>
+ </objectgroup>
+</map>

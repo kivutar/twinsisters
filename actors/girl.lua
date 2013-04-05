@@ -3,9 +3,9 @@ Girl:include(Gravity)
 Girl:include(Blinking)
 
 Girl.anim = {}
-for _,skin in pairs({'girl'}) do
+for _,skin in pairs({'ninja'}) do
   Girl.anim[skin] = {}
-  for stance, speed in pairs({stand=1, run=1, jump=1, fall=1}) do
+  for stance, speed in pairs({stand=3, run=1, jump=1, fall=1, jump2=1, duck=1}) do
     Girl.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -17,7 +17,7 @@ end
 
 function Girl:initialize(x, y, z, properties)
   self.name = properties.name or 'lolo'
-  self.skin = properties.skin or 'girl'
+  self.skin = properties.skin or 'ninja'
   self.x = x
   self.y = y
   self.z = 30
@@ -30,6 +30,12 @@ function Girl:initialize(x, y, z, properties)
   self.body.parent = self
   self.feet = Collider:addPolygon(-7,0, 7,0, 7,1, -7,1)
   self.feet.parent = self
+  self.left = Collider:addPolygon(0,-8, 0,8, 1,8, 1,-8)
+  self.left.parent = self
+  self.right = Collider:addPolygon(0,-8, 0,8, 1,8, 1,-8)
+  self.right.parent = self
+  self.underfeet = Collider:addPolygon(-7,0, 7,0, 7,2, -7,2)
+  self.underfeet.parent = self
 
   self.xspeed = 0
   self.max_xspeed = 100
@@ -42,7 +48,7 @@ function Girl:initialize(x, y, z, properties)
   self.iwf = 1
 
   self.stance = 'stand'
-  self.direction = 'left'
+  self.direction = 'right'
   self.animation = Girl.anim[self.skin][self.stance][self.direction]
 
   self.ondoor = false
@@ -99,6 +105,37 @@ function Girl:update(dt)
 
   for _,n in pairs(Collider:shapesInRange(self.x-38,self.y-50, self.x+38,self.y+50)) do
 
+    if n:collidesWith(self.underfeet) then
+      if n.parent.class.name == 'Wall'
+        or n.parent.class.name == 'Bridge'
+        or n.parent.class.name == 'Slant'
+        or n.parent.class.name == 'Ice'
+        or n.parent.class.name == 'FlyingWall' then
+
+          x, y = self.body:center()
+          self.body:moveTo(x, y + 2)
+          self.y = self.y + 2
+
+          collides, dx, dy = n:collidesWith(self.body)
+
+          if n:collidesWith(self.body) then
+            if n.parent.class.name == 'Wall'
+            or n.parent.class.name == 'Bridge'
+            or n.parent.class.name == 'Slant'
+            or n.parent.class.name == 'Ice'
+            or n.parent.class.name == 'FlyingWall' then
+              self.onground = true
+              self.swimming = false
+              self.yspeed = 0
+              
+              self.body:moveTo(x, y + 2 - dy)
+              self.y = self.y - dy
+              self.max_xspeed = 120 - (dy-2)*25
+            end
+          end
+      end
+    end
+
     collides, dx, dy = n:collidesWith(self.body)
 
     if n:collidesWith(self.feet) then
@@ -118,6 +155,13 @@ function Girl:update(dt)
       end
     end
 
+    if n:collidesWith(self.left) or n:collidesWith(self.right) then
+      if n.parent.class.name == 'Wall' then
+        self.xspeed = 0
+        if dx then self.x = self.x - dx end
+      end
+    end
+
   end
 
   self.iwf = self.inwater and 0.5 or 1
@@ -126,25 +170,25 @@ function Girl:update(dt)
     self.friction = 0
     self.max_xspeed = 200*4
   else
-    self.friction = 750
-    self.max_xspeed = 120
+    self.friction = 240
+    --self.max_xspeed = 120
   end
 
   -- Moving on x axis
   -- Moving right
-  if self.controls.right and not self.daft then
+  if self.controls.right and not self.daft and not self.controls.down then
     if not (self.direction == 'left' and self.attacking) then
       self.direction = 'right'
       self.stance = 'run'
-      --if self.xspeed < 0 and not self.onice then self.xspeed = 0 end
+      if self.xspeed < 0 and not self.onice then self:applyFriction(dt) end
       self.xspeed = self.xspeed + self.acceleration * dt * self.iwf
     end
   -- Moving left
-  elseif self.controls.left and not self.daft then
+  elseif self.controls.left and not self.daft and not self.controls.down then
     if not (self.direction == 'right' and self.attacking) then
       self.direction = 'left'
       self.stance = 'run'
-      --if self.xspeed > 0 and not self.onice then self.xspeed = 0 end
+      if self.xspeed > 0 and not self.onice then self:applyFriction(dt) end
       self.xspeed = self.xspeed - self.acceleration * dt * self.iwf
     end
   -- Stop moving
@@ -154,14 +198,35 @@ function Girl:update(dt)
   end
   -- Apply friction if the character is attacking and on ground
   if self.attacking and self.onground then self:applyFriction(dt) end
+  if self.controls.down and self.onground then self:applyFriction(dt) end
   -- Apply maximum xspeed
   if math.abs(self.xspeed) > self.max_xspeed * self.iwf then self.xspeed = sign(self.xspeed) * self.max_xspeed * self.iwf end
   self.x = self.x + (self.xspeed + self.groundspeed) * dt * self.iwf
 
-  Girl.anim[self.skin]['run']['left']:setSpeed(math.abs(self.xspeed)/13)
-  Girl.anim[self.skin]['run']['right']:setSpeed(math.abs(self.xspeed)/13)
+  Girl.anim[self.skin]['run']['left']:setSpeed(math.abs(self.xspeed)/7.5)
+  Girl.anim[self.skin]['run']['right']:setSpeed(math.abs(self.xspeed)/7.5)
 
-  print(self.xspeed)
+  if (self.animation == Girl.anim[self.skin].run.left or self.animation == Girl.anim[self.skin].run.right) 
+  and (self.animation.position == 5 or self.animation.position == 11) then
+    local tt = TEsound.findTag('step')
+    if #tt == 0 then
+        TEsound.play(sfx.step, 'step')
+        CRON.after(0.1, function()
+          TEsound.stop('step')
+          TEsound.cleanup()
+        end)
+        local name = 'step_'..math.random(1000)
+        actors.list[name] = Step:new(self.x-8, self.y, self.z, self.direction)
+        actors.list[name].type = 'Step'
+        actors.list[name].name = name
+    else
+      TEsound.cleanup()
+    end
+  end
+
+  if self.controls.down and not self.daft then
+    self.stance = 'duck'
+  end
 
   -- Jumping and swimming
   if self.controls.cross and not self.daft then
@@ -169,11 +234,15 @@ function Girl:update(dt)
       -- Jump from bridge
       if self.onbridge and self.controls.down then
         self.y = self.y + 20*4
-        TEsound.play(sfx.jump)
+        TEsound.play(sfx.jump2)
       -- Regular jump
       elseif self.onground and not self.controls.down and not self.attacking then
         self.yspeed = - self.jumpspeed -- - math.abs(self.xspeed*30*self.iwf)
-        TEsound.play(sfx.jump)
+        TEsound.play(sfx.jump2)
+        local name = 'jump_'..self.name
+        actors.list[name] = Land:new(self.x-8-16, self.y, self.z)
+        actors.list[name].type = 'Land'
+        actors.list[name].name = name
       -- Swimming
       elseif self.inwater then
         self.swimming = true
@@ -265,14 +334,18 @@ function Girl:update(dt)
 
   self.body:moveTo(self.x, self.y)
   self.feet:moveTo(self.x, self.y+16)
+  self.left:moveTo(self.x-8, self.y)
+  self.right:moveTo(self.x+8, self.y)
+  self.underfeet:moveTo(self.x, self.y+16+1)
   self.animation:update(dt)
 end
 
 function Girl:draw()
   self:blinkingPreDraw()
   -- Choose the character stance to display
-  if self.yspeed > 0 then self.stance = 'fall' end
-  if self.yspeed < 0 then self.stance = 'jump' end
+  if not self.onground and self.yspeed > 0 then self.stance = 'fall' end
+  if not self.onground and self.yspeed < 0 then self.stance = 'jump' end
+  if not self.onground and self.yspeed > -10 and self.yspeed < 10 then self.stance = 'jump2' end
 
   if not self.controls.right and not self.controls.left and self.xspeed ~= 0 and self.onice then self.stance = 'surf' end
   if not self.controls.right and not self.controls.left and (self.xspeed >  10 or self.xspeed < - 10) and self.onground then self.stance = 'run' end
@@ -290,11 +363,15 @@ function Girl:draw()
   self.animation:draw(math.floor(self.x-24), math.floor(self.y-31.5))
   self:blinkingPostDraw()
 
-  --love.graphics.setColor(255,   0, 255, 128)
-  --self.body:draw('fill')
-  --love.graphics.setColor(  0, 255, 255, 128)
-  --self.feet:draw('fill')
-  --love.graphics.setColor(255, 255, 255, 255)
+  -- love.graphics.setColor(255,   0, 255, 128)
+  -- self.body:draw('fill')
+  -- love.graphics.setColor(  0, 255, 255, 128)
+  -- self.feet:draw('fill')
+  -- self.left:draw('fill')
+  -- self.right:draw('fill')
+  -- love.graphics.setColor(255, 255, 0, 128)
+  -- self.underfeet:draw('fill')
+  -- love.graphics.setColor(255, 255, 255, 255)
 end
 
 function Girl:drawhallo()
@@ -312,9 +389,17 @@ function Girl:onCollision(dt, shape, dx, dy)
 
   ---- Collision with Wall or FlyingWall or Ice
   if o.class.name == 'Wall' or o.class.name == 'FlyingWall' or o.class.name == 'Ice' then
-  if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
-  if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
-  self.x, self.y = self.x - dx, self.y - dy
+  --if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
+  --if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
+  --self.x, self.y = self.x - dx, self.y - dy
+  if not self.onground then
+    local name = 'land_'..self.name
+    actors.list[name] = Land:new(self.x-16-8, self.y, self.z)
+    actors.list[name].type = 'Land'
+    actors.list[name].name = name
+    TEsound.play(sfx.land)
+  end
+  if self.yspeed > 400 and self.xspeed == 0 then self.stance = 'duck' end
 --
   ---- Collision with Slant
   --elseif o.class.name == 'Slant' then
