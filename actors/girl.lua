@@ -400,18 +400,12 @@ function Girl:onCollision(dt, shape, dx, dy)
     TEsound.play(sfx.land)
   end
   if self.yspeed > 400 and self.xspeed == 0 then self.stance = 'duck' end
---
-  ---- Collision with Slant
-  --elseif o.class.name == 'Slant' then
-  -- --if self.yspeed > 0 then self.yspeed = 0 end
-  -- --self.y = self.y - dy
-  -- --if dx ~= 0 then
-  -- --  self.x = self.x - dx
-  -- --  --if (dx < 1 or dx > 1) and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
-  -- --end
-  --  if dx ~= 0 and sign(self.xspeed) == sign(dx) then self.xspeed = 0 end
-  --  if dy ~= 0 and sign(self.yspeed) == sign(dy) then self.yspeed = 0 end
-  --  self.x, self.y = self.x - dx, self.y - dy
+
+  elseif o.class.name == 'Spikes' then
+    self.HP = 0
+    actors.list.transition = CircleTransition:new( function () actors.switchMap('game-over') end )
+    actors.list[self.name] = nil
+
 
   -- Collision with Bridge
   elseif o.class.name == 'Bridge' then

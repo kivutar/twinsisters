@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="8" height="4" tilewidth="64" tileheight="64">
- <tileset firstgid="1" name="hdlovelogo" tilewidth="64" tileheight="64">
-  <image source="hdlovelogo.png" width="512" height="256"/>
+<map version="1.0" orientation="orthogonal" width="8" height="4" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="lovelogo" tilewidth="16" tileheight="16">
+  <image source="lovelogo.png" width="128" height="64"/>
  </tileset>
- <layer name="logo" width="8" height="4">
+ <layer name="Calque de Tile 1" width="8" height="4">
   <data encoding="base64" compression="zlib">
    eJwNwwcOgkAAALBjyJa9FfH/r6RNGoUQYhNTX2bmFpZW1ja+be3sHRydnF1c3dw9PP349fLn7d8HXgACEQ==
   </data>
  </layer>
- <objectgroup name="objects" width="8" height="4">
-  <object type="LoveLogo" x="0" y="0" width="64" height="64"/>
+ <objectgroup name="Calque d'objets 1" width="8" height="4">
+  <object type="LoveLogo" x="16" y="16">
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

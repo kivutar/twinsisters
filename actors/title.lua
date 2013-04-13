@@ -7,7 +7,7 @@ function Title:initialize()
   self.menu = Menu:new({
 
     { label = 'New game', callback = function ()
-      actors.list.transition = FadeTransition:new( function () actors.switchMap('village') end )
+      actors.list.transition = FadeTransition:new( function () actors.switchMap('pagode') end )
     end },
 
     { label = 'Load a game state', callback = function ()

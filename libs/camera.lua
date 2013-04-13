@@ -43,16 +43,20 @@ function camera:setScale(sx, sy)
 end
 
 function camera:follow(tofollow, latency)
-  tfx = 0
-  tfy = 0
+  if #tofollow > 0 then
+    tfx = 0
+    tfy = 0
 
-  for _,o in pairs(tofollow) do
-    tfx = tfx + o.x
-    tfy = tfy + o.y
+    for _,o in pairs(tofollow) do
+      tfx = tfx + o.x
+      tfy = tfy + o.y
+    end
+
+    camera:move(
+      math.floor((-camera.x + tfx / #tofollow) / latency),
+      math.floor((-camera.y + tfy / #tofollow) / latency)
+    )
+  else
+    camera:move(-camera.x, -camera.y)
   end
-
-  camera:move(
-    math.floor((-camera.x + tfx / #tofollow) / latency),
-    math.floor((-camera.y + tfy / #tofollow) / latency)
-  )
 end

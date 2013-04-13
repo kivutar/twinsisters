@@ -9,6 +9,9 @@
  <tileset firstgid="1767" name="forestpagode" tilewidth="16" tileheight="16">
   <image source="forestpagode.png" width="208" height="208"/>
  </tileset>
+ <tileset firstgid="1936" name="ronces2" tilewidth="16" tileheight="16">
+  <image source="ronces2.png" width="64" height="64"/>
+ </tileset>
  <layer name="pagode" width="100" height="15">
   <data encoding="base64" compression="zlib">
    eJzt0WdXDmAcx/HburMyyqooiey9R5OQTXaZRchIMiKUmf0yjRBJVujjBXh4nc7pXN9zPs//5/dPJGL/63UykXjDW97Rzns+8JEOPvGZTr4k+/ri/l2Xfb/SzTe+84Of/KKH3/zh779fpPT1xf27AfYdyCAGM4QkKQxlGMMZwUhS4z+CNsq+oxnDWNJIZxzjmcBEJpFBZvxH0LLsO5kpZJPDVHKZRh7TmUE+M+M/gjbLvrOZw1zmMZ8FLGQRi1nCUpbFfwRtuX1XsJJVrGYNa1lHAYUUUUxJ/EfQSu27ng2UsZFNbKacLWxlG9vZEf8RtJ323cVu9lDBXvaxnwMc5BCHqYz/CFqVfY9wlGMc5wQnqaaGU5ymljPxH0E7a99z1HGeC1zkEvVcpoErNHI1/iNo1+x7nRs0cZNbNHObO9ylhVbuxX8E7b59H/CQRzymjSc85RnPecFLXsV/xGJB6wXL+0R6
@@ -16,7 +19,7 @@
  </layer>
  <layer name="ground" width="100" height="15">
   <data encoding="base64" compression="zlib">
-   eJztlUdOA0EQRWfVJJNhRc4gWJGz2ZIz3pNBhksAlwBuwQV5C48oNdWNNWAhWfWkt5hqjbtb/2ucJIZhGIZhGIZh/ESrS5I2bMcO7HT/fSIjZZIspn6RRxfvdmMd1mMD5rARW9xX9kZlSXOYxhnsxwEcxCEcxjEcx4kqzUbrYBM2V+i+jt+qwVql/2kOm7iFC7iIS7iMK7iOedzwsqkWtA6O4Kh331BmsTw1epj3Yp/S/zSHIj7go+IpnmHBy0ZDnk3D71z63/eXyP6Vs5fWwVVc8+4byiyWp8Ys8zmcV/pfDGTxIgxloyHPpuF3LtatrGuyf+V8a/d43scDPMQjPMYT776hzGJ5amwz38Fd933vp5LPXgbvQjmX2WnIs2n4nYt1K+ua7F/oWyvzu8JrvMFbvMN75TmfQY1z5hd4qez9WvLNy+BDKOcyOw2Zt4bfuVi3sq7J/oW+tTK/TxLqXDw=
+   eJzt1cdOw0AUhWGvbHpnRe8gWNF72NI77OmgwEsAe3pJeAtekD9KLK6GOyYyREhojvQtZqwwHp0r43kuLi4uLi4uLi4uLt+l2ve8GtSiDvX+X7+RS5h+uhj4QR8N/LYRxShBKcpQjir/s3uXwibsYRBDaEUb2tGBTvSgF33/tBttBitQWaD7+vytAEXK/Ic9zGMBYxjHBCYxhVkkMGd081+izWAXuo372jqL6lNLE/vNaFHmP+whiXNcKLaxg12jGy3y3bSYMxf+7/vNyPnL5yxtBqcxY9zX1llUnzeB593iDvdBdj3M/ghGlflPWrq4FmzdaGfJdzOfZdbmzEXNVtxncv7y+dausF7FGtaxgU1sGfe1dRbV5wN3fsQTnoPsepH9JSz7X8++zLkyOngT5L7sTjtLvpv5LLM2Zy5qtuI+k/Nn+9bK/g5xhGOc4BRnyjoRwwt3fkUK6SC73mN/HwfK2amctNHBuyD3ZXfaWbJv81lmbc5c1GzFfSbnz/atlf19AJaad7Q=
   </data>
  </layer>
  <objectgroup name="objects" width="100" height="15">
@@ -37,6 +40,9 @@
   <object type="Girl" x="64" y="0"/>
   <object type="Wall" x="1168" y="208">
    <polygon points="0,0 0,-16 144,-16 144,0"/>
+  </object>
+  <object type="Spikes" x="368" y="208">
+   <polygon points="0,16 80,16 80,32 0,32"/>
   </object>
  </objectgroup>
 </map>

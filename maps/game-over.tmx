@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="game-over" tilewidth="16" tileheight="16">
+  <image source="game-over.png" width="320" height="240"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwNwwVwEAQAAMCNGowe22jYGAzGRomElEhIp3RLCIigdIeoNNLdqaJ0pwLSoTRIKo10N/zdf2BAQEA845vAhCYyyMQmMdikJjO5KUxpKlMbYhpDDTPctKYzvRnMaCYzm8WsRhhpNqPMbg6jzWkuY8xtrHHmMa/5zG8BP7CgH1rIwhaxqB9ZzOKWsKSl/NjSfmIZy1rO8n5qBStaycpWsarVrG4Na1rL2n5mHetaz/o2sKGNbGwTm9rM5rbwc1vayta28Qvb2s72fmkHv7Kjnfzab+xsF7vaze72sKe97G0f+9rP/g5woIP81sF+5/f+4BCHOszhjnCkoxztj45xrOMc7wQnOsnJTnGq05zuDGc6y9nOca7znO8CF7rIxf7kz/7iEn/1N5e6zOWucKWrXO0a17rO9W5wo5vc7Ba3us3f/cPt7nCnf7rL3e5xr/vc7wEPesjD/uXfHvGoxzzuCU96ytOe8R/Pes7zXvCil/zX/7zsFa96zeve8Ka3/N/b3vGu97zvAx/6yMc+8anPfO4LX/rK177xre8MCMR4xjeBCU1kkIlNYrBJTWZyU5jSVKY2xDSGGma4aU1nejOY0UxmNotZjTDSbEaZ3RxGm9NcxpjbWON8D2Eqg4w=
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="20" height="15">
+  <object type="GameOver" x="16" y="16">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>
