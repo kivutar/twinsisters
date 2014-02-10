@@ -10,7 +10,7 @@ function count(dict)
 end
 
 function requiredir(dir)
-  for _,v in pairs(love.filesystem.enumerate(dir)) do
+  for _,v in pairs(love.filesystem.getDirectoryItems(dir)) do
     if (string.find(v, ".lua")) then
       require(dir..'/'..string.gsub(v, '.lua', ''))
     end

@@ -20,7 +20,7 @@ function love.load()
   Collider = HC(30, onCollision, onCollisionStop)
 
   ATL.path = 'maps/'
-  actors.switchMap('start')
+  actors.switchMap('pagode')
 
   --screen_width = love.graphics.getWidth()
   --screen_height = love.graphics.getHeight()
@@ -134,9 +134,9 @@ function love.draw()
 
   camera:unset()
 
-  love.graphics.setColor(0, 255, 0, 255)
+  --love.graphics.setColor(0, 255, 0, 255)
   --love.graphics.print(tostring(love.timer.getFPS()), 5, 5)
-  love.graphics.setColor(255, 255, 255, 255)
+  --love.graphics.setColor(255, 255, 255, 255)
 end
 
 function onCollision(dt, shape_a, shape_b, dx, dy)

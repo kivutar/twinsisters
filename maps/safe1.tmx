@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="16" tileheight="16">
+ <layer name="Calque de Tile 1" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhAQAEsAAB
+  </data>
+ </layer>
+ <objectgroup name="Calque d'objets 1" width="20" height="15">
+  <object type="Wall" x="0" y="240">
+   <polygon points="0,0 0,-64 32,-64 64,-32 256,-32 288,-64 288,-176 256,-208 64,-208 32,-176 0,-176 0,-240 320,-240 320,0"/>
+  </object>
+  <object type="Girl" x="192" y="192" width="16" height="16"/>
+  <object type="Pause" x="96" y="80">
+   <ellipse/>
+  </object>
+  <object type="Metroid" x="128" y="96" width="16" height="16"/>
+  <object type="Wall" x="80" y="176">
+   <polygon points="0,0 80,0 80,-16 64,-16 64,-48 96,-48 96,-64 32,-64 32,-80 0,-80"/>
+  </object>
+ </objectgroup>
+</map>

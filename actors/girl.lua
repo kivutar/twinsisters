@@ -5,7 +5,7 @@ Girl:include(Blinking)
 Girl.anim = {}
 for _,skin in pairs({'ninja'}) do
   Girl.anim[skin] = {}
-  for stance, speed in pairs({stand=3, run=1, jump=1, fall=1, jump2=1, duck=1}) do
+  for stance, speed in pairs({stand=3, run=1, jump=1, fall=1, jump2=1, duck=1, hit=1}) do
     Girl.anim[skin][stance] = {}
     for _,direction in pairs({'left', 'right'}) do
       img = love.graphics.newImage('sprites/'..skin..'_'..stance..'_'..direction..'.png')
@@ -206,7 +206,7 @@ function Girl:update(dt)
   Girl.anim[self.skin]['run']['left']:setSpeed(math.abs(self.xspeed)/7.5)
   Girl.anim[self.skin]['run']['right']:setSpeed(math.abs(self.xspeed)/7.5)
 
-  if (self.animation == Girl.anim[self.skin].run.left or self.animation == Girl.anim[self.skin].run.right) 
+  if self.onground and (self.animation == Girl.anim[self.skin].run.left or self.animation == Girl.anim[self.skin].run.right) 
   and (self.animation.position == 5 or self.animation.position == 11) then
     local tt = TEsound.findTag('step')
     if #tt == 0 then
@@ -402,6 +402,7 @@ function Girl:onCollision(dt, shape, dx, dy)
   if self.yspeed > 400 and self.xspeed == 0 then self.stance = 'duck' end
 
   elseif o.class.name == 'Spikes' then
+    self.stance = 'hit'
     self.HP = 0
     actors.list.transition = CircleTransition:new( function () actors.switchMap('game-over') end )
     actors.list[self.name] = nil
